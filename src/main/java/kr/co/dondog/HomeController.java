@@ -1,4 +1,4 @@
-package kr.co.jojo;
+package kr.co.dondog;
 
 import java.text.DateFormat;
 import java.util.Date;
