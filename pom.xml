@@ -125,7 +125,7 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
-		</dependency>
+		</dependency> 
 		
 		<!-- mybatis 관련 부분  -->
 		<dependency>
