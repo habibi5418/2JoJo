@@ -129,7 +129,7 @@
 		
 		<!-- mybatis 관련 부분  -->
 		<dependency>
-			<groupId>org.mybatis</groupId>
+			<groupId>org.mybatis</groupId> 
 			<artifactId>mybatis</artifactId>
 			<version>3.1.0</version>
 		</dependency>
