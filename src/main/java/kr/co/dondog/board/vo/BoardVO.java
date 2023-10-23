@@ -1,5 +1,8 @@
 package kr.co.dondog.board.vo;
 
-public class BoardVO {
+import lombok.Data;
 
+@Data
+public class BoardVO {
+	private int bnum;
 }
