@@ -7,5 +7,8 @@
 		<typeAlias type="kr.co.dondog.member.vo.MemberVO"  alias="Member" />
 		<typeAlias type="kr.co.dondog.board.vo.BoardVO"  alias="Board" />
 		<typeAlias type="kr.co.dondog.dog.vo.DogVO"  alias="Dog" />
+		
+		<typeAlias type="kr.co.dondog.board.vo.ParkVO"  alias="Park" />
+		<typeAlias type="kr.co.dondog.board.vo.TestVO"  alias="Test" />
 	</typeAliases>
 </configuration>
