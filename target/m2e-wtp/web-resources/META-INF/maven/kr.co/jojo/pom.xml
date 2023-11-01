@@ -14,6 +14,16 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version> 
 	</properties>
 	<dependencies>
+		<!-- webSocket  -->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-websocket</artifactId>
+	    <version>5.0.6.RELEASE</version>
+	</dependency>
+		
+	
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
