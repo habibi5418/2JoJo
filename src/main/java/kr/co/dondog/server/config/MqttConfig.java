@@ -1,4 +1,4 @@
-package kr.co.dondog.board.config;
+package kr.co.dondog.server.config;
 
 import java.util.UUID;
 

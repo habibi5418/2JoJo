@@ -15,14 +15,12 @@
 	</properties>
 	<dependencies>
 		<!-- webSocket  -->
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
-	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-websocket</artifactId>
-	    <version>5.0.6.RELEASE</version>
-	</dependency>
-		
-	
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>5.0.6.RELEASE</version>
+		</dependency>
 	
 		<!-- Spring -->
 		<dependency>
