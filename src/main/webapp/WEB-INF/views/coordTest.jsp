@@ -31,9 +31,15 @@
 		    날짜 선택
 		  </button>
 		  <ul id="date" class="dropdown-menu dropdown-menu-dark">
-		    <li><a class="dropdown-item" href="#" data-date="2023-10-26">2023-10-26</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-10-27">2023-10-27</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-10-28">2023-10-28</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-02">2023-11-02</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-03">2023-11-03</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-04">2023-11-04</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-05">2023-11-05</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-06">2023-11-06</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-07">2023-11-07</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-08">2023-11-08</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-09">2023-11-09</a></li>
+		    <li><a class="dropdown-item" href="#" data-date="2023-11-10">2023-11-10</a></li>
 		  </ul>
 		</div>
 		<div id="walkList">

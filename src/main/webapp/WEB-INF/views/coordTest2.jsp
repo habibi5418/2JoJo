@@ -102,16 +102,16 @@
 // 			}
 	
 		    //MQTT info host, port, topic 을 설정.
-		    const mqtt_host = "www.masungil.shop";
-		    const mqtt_port = 9090; //websocket port : mosquitt.conf 파일에 설정됨  
-		    const mqtt_topic = "/team1/sub/" + roomId;
+		    const mqtt_host = "www.dondog.site";
+		    const mqtt_port = 9001; //websocket port : mosquitt.conf 파일에 설정됨  
+		    const mqtt_topic = "/gps/" + roomId;
 // 		    const mqtt_topic2 = "/team1/sub/" + roomId2;
 	
 		    const options = {
-		    		  hostname : 'www.masungil.shop',
-		          port: 9090,
-		          username : 'team1',
-		          password : '1004team1',
+		    		  hostname : 'www.dondog.site',
+		          port: 9001,
+		          username : 'kong',
+		          password : '1234',
 		          clean: true,
 		    }
 		    console.log('Connecting mqtt client ');
