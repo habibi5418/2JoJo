@@ -41,9 +41,9 @@ public class MqttConfig {
 	 * -P 1004team1 -m "메시지"
 	 */
 
-	private final String topic = "/gps/";
-	private static final String USERNAME = "kong";
-	private static final String PASSWORD = "1234";
+	private final String topic = "/team1/sub/";
+	private static final String USERNAME = "team1";
+	private static final String PASSWORD = "1004team1";
 
 	@Bean
 	public MqttConnectOptions getReceiverMqttConnectOptions() {
@@ -55,7 +55,7 @@ public class MqttConfig {
 		mqttConnectOptions.setUserName(USERNAME);
 		mqttConnectOptions.setPassword(PASSWORD.toCharArray());
 
-		String hostUrl = "tcp://www.dondog.site:1883";
+		String hostUrl = "tcp://www.masungil.shop:51883";
 		mqttConnectOptions.setServerURIs(new String[] { hostUrl });
 		return mqttConnectOptions;
 	}
