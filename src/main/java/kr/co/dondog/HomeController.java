@@ -60,5 +60,6 @@ public class HomeController {
 		return boardService.getWnum(test).toString();
 	}
 	
+	
 }
 

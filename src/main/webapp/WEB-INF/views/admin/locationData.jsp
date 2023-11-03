@@ -1,6 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
     <meta charset="utf-8">
@@ -9,16 +11,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Animation Utilities</title>
+    <title>location</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/resources/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<c:url value='/resources/css/sb-admin-2.css'/>" rel="stylesheet">
 
 </head>
 
@@ -31,19 +33,20 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="mainDashBoard">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">DonDog <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+			<!-- 상단 대시보드 부분 글씨  -->
+  			<!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="mainDashBoard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -56,91 +59,94 @@
                 Interface
             </div>
 
+           <!-- 회원 데이터 관련 -->
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="memberData" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>회원관리</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="memberData">memberData</a>
+                        <a class="collapse-item" href="#">memberData2</a> <!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
                     </div>
                 </div>
             </li>
 
+            <!-- 산책 데이터 관련 -->
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="locationData" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <span>산책</span>
                 </a>
-                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item active" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <a class="collapse-item" href="locationData">locationData</a> 
+                        <a class="collapse-item" href="#">locationData2</a><!-- 위치 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
                     </div>
                 </div>
             </li>
-
+			
+			
+			<!-- 일단 사용하지 않을것 같은 부분 -->
             <!-- Divider -->
-            <hr class="sidebar-divider">
+<!--             <hr class="sidebar-divider"> -->
 
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
+<!--             <div class="sidebar-heading"> -->
+<!--                 Addons -->
+<!--             </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
+<!--             <li class="nav-item active"> -->
+<!--                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" -->
+<!--                     aria-controls="collapsePages"> -->
+<!--                     <i class="fas fa-fw fa-folder"></i> -->
+<!--                     <span>Pages</span> -->
+<!--                 </a> -->
+<!--                 <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" -->
+<!--                     data-parent="#accordionSidebar"> -->
+<!--                     <div class="bg-white py-2 collapse-inner rounded"> -->
+<!--                         <h6 class="collapse-header">Login Screens:</h6> -->
+<!--                         <a class="collapse-item" href="login.html">Login</a> -->
+<!--                         <a class="collapse-item" href="register.html">Register</a> -->
+<!--                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a> -->
+<!--                         <div class="collapse-divider"></div> -->
+<!--                         <h6 class="collapse-header">Other Pages:</h6> -->
+<!--                         <a class="collapse-item" href="404.html">404 Page</a> -->
+<!--                         <a class="collapse-item active" href="blank.html">Blank Page</a> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </li> -->
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
+<!--             <li class="nav-item"> -->
+<!--                 <a class="nav-link" href="charts.html"> -->
+<!--                     <i class="fas fa-fw fa-chart-area"></i> -->
+<!--                     <span>Charts</span></a> -->
+<!--             </li> -->
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
+<!--             <li class="nav-item"> -->
+<!--                 <a class="nav-link" href="tables.html"> -->
+<!--                     <i class="fas fa-fw fa-table"></i> -->
+<!--                     <span>Tables</span></a> -->
+<!--             </li> -->
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+<!--             <hr class="sidebar-divider d-none d-md-block"> -->
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+<!--             <div class="text-center d-none d-md-inline"> -->
+<!--                 <button class="rounded-circle border-0" id="sidebarToggle"></button> -->
+<!--             </div> -->
 
         </ul>
         <!-- End of Sidebar -->
@@ -267,7 +273,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="<c:url value='resources/img/undraw_profile_2.svg'/>"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -279,7 +285,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" src="<c:url value='/resources/img/undraw_profile_2.svg'/>"
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -291,7 +297,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" src="<c:url value='/resources/img/undraw_profile_3.svg'/>"
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -318,15 +324,17 @@
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
+                        
+						<!-- 회원프로필 -->
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="<c:url value='/resources/img/undraw_profile.svg'/>">
                             </a>
+                            <!-- 회원버튼 눌렀을때 내려오는 부분 -->
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -356,115 +364,36 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+<!--                 <div class="container-fluid"> -->
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Animation Utilities</h1>
-                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
-                            href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
-                        below were created to extend this theme past the default utility classes built into Bootstrap's
-                        framework.</p>
+<!--                     Page Heading -->
+<!--                     <h1 class="h3 mb-4 text-gray-800">Blank Page</h1> -->
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-6">
-
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Grow In Animation Utilty</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <code>.animated--grow-in</code>
-                                    </div>
-                                    <div class="small mb-1">Navbar Dropdown Example:</div>
-                                    <nav class="navbar navbar-expand navbar-light bg-light mb-4">
-                                        <a class="navbar-brand" href="#">Navbar</a>
-                                        <ul class="navbar-nav ml-auto">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Dropdown
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right animated--grow-in"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <p class="mb-0 small">Note: This utility animates the CSS transform property,
-                                        meaning it will override any existing transforms on an element being animated!
-                                        In this theme, the grow in animation is only being used on dropdowns within the
-                                        navbar.</p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Fade In Utility -->
-                        <div class="col-lg-6">
-
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Fade In Animation Utilty</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <code>.animated--fade-in</code>
-                                    </div>
-                                    <div class="small mb-1">Navbar Dropdown Example:</div>
-                                    <nav class="navbar navbar-expand navbar-light bg-light mb-4">
-                                        <a class="navbar-brand" href="#">Navbar</a>
-                                        <ul class="navbar-nav ml-auto">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Dropdown
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right animated--fade-in"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    <div class="small mb-1">Dropdown Button Example:</div>
-                                    <div class="dropdown mb-4">
-                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Dropdown
-                                        </button>
-                                        <div class="dropdown-menu animated--fade-in"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning
-                                        it will override any existing opacity on an element being animated!</p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+<!--                 </div> -->
+                
                 <!-- /.container-fluid -->
-
+				<!-- 탭 본문  -->
+				<div class="tab_menu">
+				  <ul class="list">
+				    <li class="is_on">
+				      <a href="#tab1" class="btn"  id="tab1_title">회원등급관리</a>
+				      <div id="tab1" class="cont">Tab Content1 여기에 목록을 출력하면 됩니다 
+				           <div id="memberList">
+				                 바로 이안에 출력하면 됩니다~~
+				           </div> 
+				      </div>
+				    </li>
+				    <li>
+				      <a href="#tab2" class="btn" id="tab2_title">멤버리스트</a>
+				      <div id="tab2" class="cont">Tab Content2 여기에 목록을 출력하면 됩니다
+				            <div id="blackMemberList">
+				               블랙멤버여기
+				            </div>
+				      </div>
+				    </li>
+				  </ul>
+				</div>
+				
             </div>
             <!-- End of Main Content -->
 
@@ -510,15 +439,34 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<c:url value='/resources/vendor/jquery/jquery.min.js'/>"></script>
+    <script src="<c:url value='/resources/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+     <!-- Core plugin JavaScript-->
+   	<script src="<c:url value='resources/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+   <!-- Custom scripts for all pages-->
+    <script src="<c:url value='resources/js/sb-admin-2.min.js'/>"></script>
 
 </body>
+<!-- 탭 스크립트  -->
+<script>
+	const tabList = document.querySelectorAll('.tab_menu .list li'); //div안에 list안에 li들 전부를 탭 리스트라 정의
+	
+	   for(var i = 0; i < tabList.length; i++){ // 탭 리스트안의 버튼(탭)을 클릭했을 때
+	     tabList[i].querySelector('.btn').addEventListener('click', function(e){
+	       e.preventDefault();
+	       
+	       for(var j = 0; j < tabList.length; j++){
+	         tabList[j].classList.remove('is_on'); 
+	       }
+	       
+	   this.parentNode.classList.add('is_on');
+	   
+	  });
+	}
+
+
+  </script>
 
 </html>

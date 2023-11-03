@@ -9898,10 +9898,11 @@ a:focus {
   -webkit-animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
   animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
-
+/* 왼쪽 사이드바 컬러 부분  */
 .bg-gradient-primary {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  background-color: #d8c089;
+  /* 추가 이미지..? */
+  /* background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%); */
   background-size: cover;
 }
 
@@ -11279,3 +11280,30 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+
+/* 탭 관련 css */
+*{margin:0; padding:0;}
+ul{list-style:none;}
+a{text-decoration:none; color:#333;}
+.wrap{padding:15px; letter-spacing:-0.5px;}   /*이 부분의 CSS건드리면 잡혀있는 디스플레이 수정 가능 됨*/
+
+
+  .tab_menu{position:relative; }
+  .tab_menu .list{overflow:hidden;}
+  .tab_menu .list li{float:left;}
+  .tab_menu .list .btn{font-size:13px; margin-right:14px;}
+  
+  
+  /*이 부분의 CSS건드리면 잡혀있는 디스플레이 수정 가능 됨*/
+  div#tab2 {left: 0;} /*tab 2를 tab1과 동일한 위치에 출력되도록 left값 줌 (개발자모드로 검사해서 맞추기) */
+  .tab_menu .list .cont{display:none; position:absolute; background:#555; color:#fff; text-align:center;}
+  .cont {
+     width: 800px;
+     height: 700px;
+  }
+   /* end */
+
+
+  .tab_menu .list li.is_on .btn{font-weight:bold; color:green;}
+  .tab_menu .list li.is_on .cont{display:block;}
