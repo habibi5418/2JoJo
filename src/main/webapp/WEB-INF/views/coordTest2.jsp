@@ -15,6 +15,7 @@
   gtag('config', 'G-CMBGRHC3KW');
 </script>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>Insert title here</title>
 </head>
 <link

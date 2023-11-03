@@ -20,28 +20,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9gy0xhxny4&submodules=geocoder"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>	
 <body>
 	<div id="map" style="width:100%;height:750px;"></div>
 	<div>
 		<input id="userId" type="text">
 		<button id="startBtn" type="button" class="btn btn-warning">출발</button>
 		<button id="endBtn" type="button" class="btn btn-secondary">도착</button><br>
-		<div class="dropdown">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<!-- 		<div class="dropdown"> -->
+<!-- 		  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
+<!-- 		    날짜 선택 -->
+<!-- 		  </button> -->
+<!-- 		  <ul id="date" class="dropdown-menu dropdown-menu-dark"> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-02">2023-11-02</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-03">2023-11-03</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-04">2023-11-04</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-05">2023-11-05</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-06">2023-11-06</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-07">2023-11-07</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-08">2023-11-08</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-09">2023-11-09</a></li> -->
+<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-10">2023-11-10</a></li> -->
+<!-- 		  </ul> -->
+<!-- 		</div> -->
+		<button id="openCal" class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">
 		    날짜 선택
-		  </button>
-		  <ul id="date" class="dropdown-menu dropdown-menu-dark">
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-02">2023-11-02</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-03">2023-11-03</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-04">2023-11-04</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-05">2023-11-05</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-06">2023-11-06</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-07">2023-11-07</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-08">2023-11-08</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-09">2023-11-09</a></li>
-		    <li><a class="dropdown-item" href="#" data-date="2023-11-10">2023-11-10</a></li>
-		  </ul>
-		</div>
+		</button>
+    	<div id='calendar' style="width: 500px;"></div>
 		<div id="walkList">
 			일자별 산책 목록
 		</div>
@@ -52,6 +57,21 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			height: 500,
+			initialView: 'dayGridMonth'
+		});
+		
+		$("#openCal").on("click", () => {
+// 			$("#calendar").css("display", "block");
+			calendar.render();
+		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			
+	    });
+	
 		var mapOptions = {
 		    center: new naver.maps.LatLng(37.483664, 126.899998),
 		    zoom: 16
