@@ -60,6 +60,7 @@ public class TimestampHandler {
 		return formatTimestamp(previousYearTimestamp, "yyyy.MM.dd.HH:mm");
 	}
 
+	
 	/*
 	 * 시간 출력 방법 : 해당 시간을 문자열로 출력 1분전: 방금, 1~59분전: 분 전
 	 */
