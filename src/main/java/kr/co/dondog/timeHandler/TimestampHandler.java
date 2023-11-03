@@ -3,11 +3,17 @@ package kr.co.dondog.timeHandler;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+
+
+/*
+ *  TimestampVO
+ *  DB : DONDOG_TIMESTAMP
+ *
+ * 	기능: TIMESTAMP 기능을 이용하여 시간에 따라 화면에 출력되는 데이터 처리
+ * */
+
 public class TimestampHandler {
 
-	/*
-	 * * 기능: timestamp 기능을 이용하여 시간에 따라 화면에 출력되는 데이터 처리
-	 */
 
 	public static String formatTimestamp(Timestamp timestamp, String format) {
 		SimpleDateFormat formatter = new SimpleDateFormat(format);
