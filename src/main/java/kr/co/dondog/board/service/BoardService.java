@@ -15,6 +15,17 @@ public class BoardService {
 	@Autowired
 	BoardDAO boardDAO;
 	
+	public List<> sendCoord(TestVO test) {
+		JSONObject result = new JSONObject();
+		if (boardDAO.sendCoord(test) > 0) {
+			result.put("status", true);
+		} else {
+			result.put("status", false);
+		}
+		
+		return result;
+	}
+	
 	public JSONObject sendCoord(TestVO test) {
 		JSONObject result = new JSONObject();
 		if (boardDAO.sendCoord(test) > 0) {

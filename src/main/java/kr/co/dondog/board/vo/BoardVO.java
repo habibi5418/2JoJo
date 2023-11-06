@@ -15,6 +15,7 @@ public class BoardVO {
 	private String category; // 일반게시글 G 당일만남 T 
 	private int viewCount;
 	private String deleteStatus; //default 'N'
+	private String loc2;
 
 	/* 좋아요 */
 	private int heart;
