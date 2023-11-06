@@ -157,8 +157,8 @@
           <li><a href="#">CHAT</a></li> 
           <li><a href="#">MYPAGE</a></li>
           <!-- <li><a href="#">알림</a></li>
-          <li><a href="#">실시간위치</a></li>
-          <li><a href="#">로그인</a></li> -->
+          <li><a href="#">실시간위치</a></li> -->
+          <li><a href="<c:url value='/login'/>">로그인</a></li> 
         </ul>
         <div class="burger">
           <div class="linel"></div> 

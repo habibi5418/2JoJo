@@ -180,6 +180,21 @@
 	        <artifactId>ojdbc8</artifactId>
 	        <version>21.5.0.0</version>
 	    </dependency>
+	    
+		<dependency>
+			<groupId>jdbc.oracle</groupId>
+			<artifactId>OracleDriver</artifactId>
+			<version>12.1.0.2.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc8.jar</systemPath>
+		</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-jdbc</artifactId> -->
+<!-- 		<version>5.0.6.RELEASE</version> -->
+<!-- 	</dependency> -->
 	
 	    <dependency>
 	        <groupId>com.oracle.database.security</groupId>
@@ -235,11 +250,11 @@
 		</dependency>
 		
 		<!-- JSON  --> 
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.3</version>
-		</dependency>
+<!--		<dependency>
+ 		    <groupId>com.fasterxml.jackson.core</groupId> 
+ 		    <artifactId>jackson-databind</artifactId> 
+ 		    <version>2.9.3</version> 
+ 		</dependency> -->
 		
 		<dependency>
 		    <groupId>org.codehaus.jackson</groupId>
