@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.board.vo.ParkVO;
 import kr.co.dondog.board.vo.TestVO;
 
@@ -14,6 +15,12 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	@Autowired
 	SqlSession sqlSession;
+
+	@Override
+	public List<BoardVO> getMatchList() {
+		return sqlSession.selectList("mapper.board.getMatchList");
+	}
+	
 	
 	@Override
 	public int sendCoord(TestVO test) {

@@ -20,7 +20,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/matchList")
 	public String matchList(Locale locale, Model model) {
-		model.addAllAttributes("matchList", boardService.getMatchList());
+		model.addAttribute("matchList", boardService.getMatchList());
 		return "match/matchList";
 	}
 	

@@ -34,47 +34,30 @@
 	    	
 			<table class="table">
 <%-- 				<caption>ALL NOTICE - 최신순</caption> --%>
-					<tr id="noticeTemp" style="display: none;">
-						<td id="noticeidTemp"></td>
-						<td>
-							<a onclick="detailNotice(this.getAttribute('data-noticeid'))" href="#" id="title" data-noticeid="{noticeid}"></a>
-						</td>
-						<td id="writer_uid"></td>
-						<td id="reg_date"></td>
-						<td id="view_count"></td>
-					</tr> 
-					<tr>
-						<th width="8%">글번호</th>
-	  			   		<th width="50%">글제목</th>
-						<th width="20%">작성자</th>
-						<th width="15%">작성일자</th>
-						<th width="7%">조회</th>
-					</tr>
-					<c:forEach var="fixedNotice" items="${result.fixedNoticeList }">
-						<tr class='fixed'>
-							<td id="noticeid">${fixedNotice.getNoticeid() }</td>
-							<td><a onclick="detailNotice(this.getAttribute('data-noticeid'))" href="#" data-noticeid="${fixedNotice.noticeid}">${fixedNotice.title }</a></td>
-							<td>${fixedNotice.getWriter_uid() }</td>
-							<td>${fixedNotice.getReg_date() }</td>
-							<td>${fixedNotice.getView_count() }</td>
-						</tr>
-					</c:forEach>
-					<tbody id="noticeTbody">
-						<c:forEach var="notice" items="${result.noticeList }">
-							<tr>
-								<td id="noticeid">${notice.getNoticeid() }</td>
-								<td>
-									<a onclick="detailNotice(this.getAttribute('data-noticeid'))" href="#" data-noticeid="${notice.noticeid}">
-										<c:if test="${notice.getFixed_yn() == 'Y' }">
-											<img id="fixedImg" src="<c:url value='/resources/images/fixed.png'/>">
-										</c:if>
-										${notice.title }
-									</a>
-								</td>
-								<td>${notice.getWriter_uid() }</td>
-								<td>${notice.getReg_date() }</td>
-								<td>${notice.getView_count() }</td>
-							</tr>
+<!-- 					<tr id="noticeTemp" style="display: none;"> -->
+<!-- 						<td id="noticeidTemp"></td> -->
+<!-- 						<td> -->
+<!-- 							<a onclick="detailNotice(this.getAttribute('data-noticeid'))" href="#" id="title" data-noticeid="{noticeid}"></a> -->
+<!-- 						</td> -->
+<!-- 						<td id="writer_uid"></td> -->
+<!-- 						<td id="reg_date"></td> -->
+<!-- 						<td id="view_count"></td> -->
+<!-- 					</tr>  -->
+<!-- 					<tr> -->
+<!-- 						<th width="8%">글번호</th> -->
+<!-- 	  			   		<th width="50%">글제목</th> -->
+<!-- 						<th width="20%">작성자</th> -->
+<!-- 						<th width="15%">작성일자</th> -->
+<!-- 						<th width="7%">조회</th> -->
+<!-- 					</tr> -->
+					<tbody id="matchTbody">
+						<c:forEach var="match" items="${matchList }" varStatus="cnt">
+							<c:if test="${cnt.index % 2 == 0 }">
+								홀수 : ${match.title }
+							</c:if>
+							<c:if test="${cnt.index % 2 == 1 }">
+								짝수 : ${match.title }
+							</c:if>
 						</c:forEach>
 					</tbody>
 			</table>
