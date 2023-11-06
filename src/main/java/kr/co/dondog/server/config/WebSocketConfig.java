@@ -11,15 +11,19 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSocket
 @RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer{
-	
-
-	private WebSocketHandler webSocketHandler;
-
-	@Override
+public class WebSocketConfig implements WebSocketConfigurer{@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(webSocketHandler, "ws/chat").setAllowedOrigins("*");
-		
+		// TODO Auto-generated method stub
 		
 	}
+	
+//
+//	private WebSocketHandler webSocketHandler;
+//
+//	@Override
+//	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+//		registry.addHandler(webSocketHandler, "ws/chat").setAllowedOrigins("*");
+//		
+//		
+//	}
 }
