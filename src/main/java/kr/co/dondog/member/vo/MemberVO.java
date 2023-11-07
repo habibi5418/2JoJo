@@ -12,25 +12,26 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//로그인
 public class MemberVO {
 
-   private String email;
-   private String mname;
-   private String pwd;
-   private String nickname;
-   private String address;
-   private String birth;
-   private LocalDateTime joinDate;
-   private String grade;
-   private String report;
-   private LocalDateTime recentLog;
-   private String gender;
-   private String oauth;
-   private String accountExpired;
-   private String accountLocked;
-   private int loginCount;
-   private LocalDateTime updateTime;
-   private String cancel;
+   private String email; 			 // 아이디
+   private String mname; 			 // 실제 이름
+   private String pwd;   			 // 비밀번호
+   private String nickname; 		 // 별명
+   private String address; 			 // 주소
+   private String birth;  			 // 생일 
+   private LocalDateTime joinDate; 	 // 가입일
+   private String grade; 			 // 회원등급
+   private String report; 			 // 신고누적횟수
+   private LocalDateTime recentLog;  // 로그인기록
+   private String gender;  			 // 성별
+   private String oauth;			 // 관리자, 회원 구분
+   private String accountExpired;    // 휴먼계정
+   private String accountLocked; 	 // 블랙계정
+   private int loginCount; 			 // 로그인 횟수
+   private LocalDateTime updateTime; // 수정날짜
+   private String cancel; 			 // 탈퇴여부
 
    @Builder
    public MemberVO(String email, String pwd, String nickname, String address, String birth,
@@ -54,6 +55,8 @@ public class MemberVO {
       this.cancel = cancel;
    }
 
+   
+//   시큐리티 관련 아직 주석 처리가 맞음 11/7_10:08확인
 //   @Override
 //   public String getPassword() {
 //      return this.getPwd();

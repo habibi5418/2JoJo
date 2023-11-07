@@ -12,7 +12,7 @@ public class MemberService {
 	 @Autowired
 	 private MemberDao memberDAO;
 
-
+	 // 로그인
 	public MemberVO login(MemberVO member) throws Exception {
 		System.out.println("MemberService.login()");
 		return memberDAO.login(member);

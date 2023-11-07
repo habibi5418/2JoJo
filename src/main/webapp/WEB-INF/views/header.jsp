@@ -158,6 +158,8 @@
           <li><a href="#">MYPAGE</a></li>
           <!-- <li><a href="#">알림</a></li>
           <li><a href="#">실시간위치</a></li> -->
+          
+          <!-- 로그인 / 비로그인 확인  -->
           <c:choose>
 			  <c:when test="${not empty sessionScope.loggedInMember}">
 			    <!-- 세션에 loginMember가 있는 경우 -->

@@ -3,6 +3,7 @@ package kr.co.dondog.member.vo;
 import lombok.Data;
 
 @Data
+//카카오 프로필 부분( 아직 확인중..)
 public class KakaoProfile {
 	public Long id;
 	public String connected_at;
