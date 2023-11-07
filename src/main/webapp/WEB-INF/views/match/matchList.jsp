@@ -50,7 +50,7 @@
 			<div style="background-color: violet; width: 40%; margin: 0px 0px 20px 60px; display: inline-block;">
 				<img src="<c:url value="/resources/img/11kong.jpg"/>" style="width: 100%; margin-bottom: 5px; border-radius: 8%;">
 				제목 : ${match.title } <br>
-				내용 : ${match.contents }
+				내용 : ${match.contents } ${cnt.index + 1 }
 			</div>
 		</c:forEach>
 	</div>
