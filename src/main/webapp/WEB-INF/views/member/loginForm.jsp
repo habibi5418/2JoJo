@@ -34,7 +34,9 @@
 			<input type="submit" value="login">
 		</form>
 		</div>
-
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=88702279be16f8493befbe0e0178ea8e&redirect_uri=http://localhost:8090/kakao_callback&response_type=code">
+<img src="${pageContext.request.contextPath}/resources/img/kakao_login_medium_wide.png" /></a>
+		
 	<div class="membership-benefits">
 		<h2>가입설명</h2>
 	</div>
@@ -51,8 +53,9 @@
 </body>
 
 
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
+<script type="text/javascript">
 
- <script type="text/javascript">
  document.querySelector("#loginForm").addEventListener("submit", e => {
 		e.preventDefault();
 		const email = document.querySelector("#username").value; // "username"으로 설정
@@ -79,6 +82,11 @@
 		
 	});
 
-</script> 
+ 
+ <!-- 카카오 로그인 -->
+
+
+ </script>
+ 
 
 </html>

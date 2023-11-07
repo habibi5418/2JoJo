@@ -56,6 +56,20 @@ public class MemberController {
 		 }
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/logout", produces = "application/json; charset=utf8")
+	public String logout(HttpSession session) throws Exception {
+		System.out.println("logout()");
+
+		session.invalidate();
+
+		JSONObject result = new JSONObject();
+		result.put("status", true);
+		result.put("message", "로그아웃 되었습니다");
+		
+		return result.toString();
+	}
+	
 	
 	
 }
