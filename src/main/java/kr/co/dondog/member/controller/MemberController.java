@@ -26,14 +26,14 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	
+	//로그인페이지이동
 	@RequestMapping(value = "/login", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public String loginForm(Locale locale, Model model) {
         return "member/loginForm";
     }
 
 	
-
+	//로그인기능
 	@RequestMapping(value="/login" , method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String login(@RequestBody MemberVO member, HttpSession session) throws Exception {
@@ -56,6 +56,7 @@ public class MemberController {
 		 }
 	}
 	
+	//로그아웃
 	@ResponseBody
 	@RequestMapping(value="/logout", produces = "application/json; charset=utf8")
 	public String logout(HttpSession session) throws Exception {
