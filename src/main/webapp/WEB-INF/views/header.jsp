@@ -157,8 +157,17 @@
           <li><a href="#">CHAT</a></li> 
           <li><a href="#">MYPAGE</a></li>
           <!-- <li><a href="#">알림</a></li>
-          <li><a href="#">실시간위치</a></li>
-          <li><a href="#">로그인</a></li> -->
+          <li><a href="#">실시간위치</a></li> -->
+          <c:choose>
+			  <c:when test="${not empty sessionScope.loggedInMember}">
+			    <!-- 세션에 loginMember가 있는 경우 -->
+			    <li><a href="<c:url value='/logout'/>">LOGOUT</a></li>
+			  </c:when>
+			  <c:otherwise>
+			    <!-- 세션에 loginMember가 없는 경우 -->
+			    <li><a href="<c:url value='/login'/>">LOGIN</a></li>
+			  </c:otherwise>
+		</c:choose>
         </ul>
         <div class="burger">
           <div class="linel"></div> 
@@ -168,7 +177,10 @@
       </nav>
     </header>
 </body>
+
 <script>
+
+
 
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav-links");

@@ -5,5 +5,9 @@
 
 <mapper namespace="mapper.member">
 
+	<select id="login" resultType="Member" parameterType="Member">
+        SELECT * FROM dondog_member
+        		WHERE email = #{email} AND pwd = #{pwd}
+    </select>
     
 </mapper>

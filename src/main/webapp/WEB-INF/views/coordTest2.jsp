@@ -15,7 +15,7 @@
   gtag('config', 'G-CMBGRHC3KW');
 </script>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 <title>Insert title here</title>
 </head>
 <link
@@ -102,19 +102,33 @@
 // 			    roomId2 = "kong1"
 // 			}
 	
-		    //MQTT info host, port, topic 을 설정.
-		    const mqtt_host = "www.masungil.shop";
-		    const mqtt_port = 9090; //websocket port : mosquitt.conf 파일에 설정됨  
-		    const mqtt_topic = "/team1/sub/" + roomId;
-// 		    const mqtt_topic2 = "/team1/sub/" + roomId2;
+		    //MQTT info host, port, topic 을 설정. - 교수님 사이트
+// 		    const mqtt_host = "www.masungil.shop";
+// 		    const mqtt_port = 9090; //websocket port : mosquitt.conf 파일에 설정됨  
+// 		    const mqtt_topic = "/team1/sub/" + roomId;
 	
+// 		    const options = {
+// 				hostname : 'www.masungil.shop',
+// 				port: 9090,
+// 				username : 'team1',
+// 				password : '1004team1',
+// 				clean: true,
+// 		    }
+
+			// dondog
+			const mqtt_host = "www.dondog.site";
+		    const mqtt_port = 8883; //websocket ssl port : mosquitt.conf 파일에 설정됨  
+		    const mqtt_topic = "/test/sub/" + roomId;
+			
 		    const options = {
-		    		  hostname : 'www.masungil.shop',
-		          port: 9090,
-		          username : 'team1',
-		          password : '1004team1',
+	    		  protocol : 'wss',
+	    		  hostname : mqtt_host,
+		          port: mqtt_port,
+		          username : 'kong',
+		          password : '1234',
 		          clean: true,
 		    }
+
 		    console.log('Connecting mqtt client ');
 		    console.log('mqtt_topic -> ', mqtt_topic);
 		      

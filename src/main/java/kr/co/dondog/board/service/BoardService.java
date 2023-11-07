@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.dondog.board.dao.BoardDAO;
+import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.board.vo.TestVO;
 
 @Service
@@ -14,6 +15,10 @@ public class BoardService {
 
 	@Autowired
 	BoardDAO boardDAO;
+	
+	public List<BoardVO> getMatchList() {
+		return boardDAO.getMatchList();
+	}
 	
 	public JSONObject sendCoord(TestVO test) {
 		JSONObject result = new JSONObject();
