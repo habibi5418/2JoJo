@@ -6,6 +6,7 @@ import lombok.Data;
 public class ChatMessageVO {
 	/* *
 	 * * 기능: 1:1 채팅방 페이지 
+	 * 
 	 * */
 	private int cnum; //채팅방 식별
 	private int bnum; //게시글 식별 
