@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMBGRHC3KW"></script>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=G-CMBGRHC3KW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -16,62 +17,107 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9gy0xhxny4&submodules=geocoder"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>	
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9gy0xhxny4&submodules=geocoder"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
 <body>
-	<div id="map" style="width:100%;height:750px;"></div>
+	<div id='modalCalendar' class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+<!-- 						<div class="modal-header"> -->
+<!-- 							<h5 class="modal-title">날짜 선택</h5> -->
+<!-- 							<button id="closeCal" type="button" class="btn-close" data-bs-dismiss="modal" -->
+<!-- 								aria-label="Close"></button> -->
+<!-- 						</div> -->
+				<div class="modal-body">
+					<div id='calendar'></div>
+				</div>
+<!-- 						<div class="modal-footer"> -->
+<!-- 							<button type="button" class="btn btn-secondary" -->
+<!-- 								data-bs-dismiss="modal">Close</button> -->
+<!-- 							<button type="button" class="btn btn-primary">Save -->
+<!-- 								changes</button> -->
+<!-- 						</div> -->
+			</div>
+		</div>
+	</div>
+	<div id="map" style="width: 100%; height: 750px;"></div>
 	<div>
 		<input id="userId" type="text">
 		<button id="startBtn" type="button" class="btn btn-warning">출발</button>
-		<button id="endBtn" type="button" class="btn btn-secondary">도착</button><br>
-<!-- 		<div class="dropdown"> -->
-<!-- 		  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
-<!-- 		    날짜 선택 -->
-<!-- 		  </button> -->
-<!-- 		  <ul id="date" class="dropdown-menu dropdown-menu-dark"> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-02">2023-11-02</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-03">2023-11-03</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-04">2023-11-04</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-05">2023-11-05</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-06">2023-11-06</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-07">2023-11-07</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-08">2023-11-08</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-09">2023-11-09</a></li> -->
-<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-10">2023-11-10</a></li> -->
-<!-- 		  </ul> -->
-<!-- 		</div> -->
-		<button id="openCal" class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">
-		    날짜 선택
-		</button>
-    	<div id='calendar' style="width: 500px;"></div>
-		<div id="walkList">
-			일자별 산책 목록
-		</div>
+		<button id="endBtn" type="button" class="btn btn-secondary">도착</button>
+		<br>
+		<!-- 		<div class="dropdown"> -->
+		<!-- 		  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
+		<!-- 		    날짜 선택 -->
+		<!-- 		  </button> -->
+		<!-- 		  <ul id="date" class="dropdown-menu dropdown-menu-dark"> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-02">2023-11-02</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-03">2023-11-03</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-04">2023-11-04</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-05">2023-11-05</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-06">2023-11-06</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-07">2023-11-07</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-08">2023-11-08</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-09">2023-11-09</a></li> -->
+		<!-- 		    <li><a class="dropdown-item" href="#" data-date="2023-11-10">2023-11-10</a></li> -->
+		<!-- 		  </ul> -->
+		<!-- 		</div> -->
 		<div>
-			<img id="img1" src="<c:url value="/resources/img/11kong.jpg"/>" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 10px; top: 10px; border-radius: 70%;">
-			<img id="img2" src="<c:url value="/resources/img/11siru.jpg"/>" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 70px; top: 10px; border-radius: 70%;">
-			<img id="img3" src="<c:url value="/resources/img/11hani.jpg"/>" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 130px; top: 10px; border-radius: 70%;">
+			<button id="openCal" class="btn btn-secondary dropdown-toggle"
+				type="button" aria-expanded="false">날짜 선택</button>
+		</div>
+		<div id="walkList">일자별 산책 목록</div>
+		<div>
+			<img id="img1" src="<c:url value="/resources/img/11kong.jpg"/>"
+				alt=""
+				style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 10px; top: 10px; border-radius: 70%;">
+			<img id="img2" src="<c:url value="/resources/img/11siru.jpg"/>"
+				alt=""
+				style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 70px; top: 10px; border-radius: 70%;">
+			<img id="img3" src="<c:url value="/resources/img/11hani.jpg"/>"
+				alt=""
+				style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 130px; top: 10px; border-radius: 70%;">
 		</div>
 	</div>
 	<script type="text/javascript">
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
+			locale: "ko",
 			height: 500,
-			initialView: 'dayGridMonth'
+			initialView: 'dayGridMonth',
+// 			dateClick: function() {
+// 				var date = $("#calendar").fullCalendar("getDate");
+// 				alert(date);
+// 			},
 		});
-		
+		calendar.on('dateClick', function(info) {
+			$("#walkList").text("");
+
+			selectDate = info.dateStr;
+			getWnum("append", selectDate);
+			
+			$("#modalCalendar").hide();
+		});
+
 		$("#openCal").on("click", () => {
 // 			$("#calendar").css("display", "block");
+			$("#modalCalendar").show();
 			calendar.render();
 		});
-		
-		document.addEventListener('DOMContentLoaded', function() {
-			
-	    });
-	
+
 		var mapOptions = {
 		    center: new naver.maps.LatLng(37.483664, 126.899998),
 		    zoom: 16
@@ -459,6 +505,7 @@
 			.then((json) => {
 				wnum = json.wnum + 1;
 				if (flag == "append") {
+					console.log("getWnum -> append");
 					for (var i = 1; i < wnum; i++) {
 						$("#walkList").append("<input type='text' value='" + selectDate + " - " + i + "'>");
 						$("#walkList").append("<button type='button' onclick='drawRoute(" + i + ")' class='btn btn-secondary'>경로보기</button>");

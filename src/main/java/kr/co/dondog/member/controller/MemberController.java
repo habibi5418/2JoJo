@@ -5,12 +5,15 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.dondog.member.service.MemberService;
 import kr.co.dondog.member.vo.MemberVO;
@@ -31,19 +34,40 @@ public class MemberController {
 
 	
 
-	@RequestMapping(value="/login" , method = RequestMethod.POST)
-	public String login(MemberVO member, HttpSession session) throws Exception {
+	@RequestMapping(value="/login" , method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String login(@RequestBody MemberVO member, HttpSession session) throws Exception {
 		System.out.println("MemberController.login()");
 		System.out.println("멤버확인"+member);
 		// 아이디와 비밀번호 값을 로그로 출력
-
+		
+		JSONObject result = new JSONObject();
+		
 		 MemberVO loggedInMember = memberService.login(member);
 		 if (loggedInMember != null && loggedInMember.getPwd().equals(member.getPwd())) {
 			 session.setAttribute("loggedInMember", loggedInMember);
-			 return "redirect:/home";
+			 result.put("status", true);
+			 result.put("message", "로그인 성공");
+			 return result.toString();
 		 } else {
-			 return "redirect:/login";
+			 result.put("status", false);
+			 result.put("message", "로그인 실패");
+			 return result.toString();
 		 }
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/logout", produces = "application/json; charset=utf8")
+	public String logout(HttpSession session) throws Exception {
+		System.out.println("logout()");
+
+		session.invalidate();
+
+		JSONObject result = new JSONObject();
+		result.put("status", true);
+		result.put("message", "로그아웃 되었습니다");
+		
+		return result.toString();
 	}
 	
 	

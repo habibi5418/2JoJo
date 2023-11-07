@@ -13,7 +13,7 @@ public class ChatRoomVO {
 	private String senderId; // 송신인(상대)
 	private String receiverId; //수신인(게시글작성자)
 	private int isRead;//default1 안읽음1 읽음0
-	private Timestamp sendTime; 
+	private Timestamp sendTime;
 	
 	/*  이부분은 나중에 합쳐도 될지도
 	 * * 기능: 사용자가 게시글을 보고 채팅을 요청했을 시, 요청여부(승낙/거절)에 따라 채팅방 목록에 새 채팅방 생성
