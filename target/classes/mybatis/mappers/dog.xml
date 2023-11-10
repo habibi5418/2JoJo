@@ -5,5 +5,74 @@
 
 <mapper namespace="mapper.dog">
 	
+	<resultMap type="Dog" id="DogMap">
+		<result property="regDate" column="reg_date"/>
+		<result property="modDate" column="mod_date"/>
+	</resultMap>
+	
+	<select id="getList" resultMap="DogMap">
+		select * 		 
+		from dondog_dog
+		where email = #{email} 
+		order by dnum 
+	</select>
+	
+	<select id="getRecent" resultMap="DogMap">
+		select * 		 
+		from dondog_dog
+		where email = #{email} 
+		order by dnum desc
+	</select>
+
+	<select id="getProfile" resultMap="DogMap">
+		select * 		 
+		from dondog_dog
+		where dnum = #{dnum} 
+	</select>
+
+	<insert id="add" >
+		insert into dondog_dog (
+			  dnum			
+			, email 
+			, dname 	
+			, age 	
+			, dtype 				
+			, gender 
+			, weight 
+<!-- 			, matter 			 -->
+			, fname 
+			, sname 
+			, length 
+			, ftype 
+		) values (
+			  SEQ_DNUM.nextval
+			, #{email}
+			, #{dname}
+			, #{age}
+			, #{dtype}
+			, #{gender}
+			, #{weight}
+<!-- 			, #{matter} -->
+			, #{fname}
+			, #{sname}
+			, #{length}
+			, #{ftype}	
+		)
+	</insert>
+	
+	<delete id="delete">
+		delete from dondog_dog
+		where dnum = #{dnum}
+	</delete>
+	
+	<select id="getBoardDogList" resultMap="DogMap">
+		select *
+		from dondog_dog
+		where dnum in 
+		<foreach collection="boardDogList" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>	
+		order by dnum
+	</select>
 	
 </mapper>

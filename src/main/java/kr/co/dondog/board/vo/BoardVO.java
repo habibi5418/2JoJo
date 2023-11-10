@@ -1,10 +1,15 @@
 package kr.co.dondog.board.vo;
 
 import java.sql.Date;
+import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BoardVO {
 	private int bnum; // 게시글 번호
 	private String nickname; // 닉네임
@@ -16,6 +21,10 @@ public class BoardVO {
 	private int heart; // 좋아요
 	private int viewCount; // 조회수
 	private String deleteStatus; // 삭제상태 default 'N'
-	private String loc2; // 동 b이름
+	private String loc2; // 동 이름
 
+	private String email; // 작성자 이메일
+	
+	private List<String> boardDogList;
+	private List<BoardImgVO> boardImgList;
 }
