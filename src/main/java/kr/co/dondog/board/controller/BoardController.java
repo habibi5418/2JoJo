@@ -19,7 +19,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +29,6 @@ import kr.co.dondog.board.service.BoardService;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.dog.service.DogService;
-import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.service.MemberService;
 import kr.co.dondog.member.vo.MemberVO;
 

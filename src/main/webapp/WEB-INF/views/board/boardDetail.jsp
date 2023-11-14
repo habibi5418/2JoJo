@@ -22,29 +22,39 @@
 <body>
 	
 	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h5 class="modal-title">댕댕이 선택</h5>
-	      </div>
-	      <div class="modal-body">
-	        <p>댕댕이 현황</p><br>
-	        <div id="currentDogList">
-		        <c:forEach var="dog" items="${dogList }">
-		        	<div class="currentDogDiv" id="currentDogDiv${dog.dnum }">
-		        		<a href="#" class="commonAnchor" onclick="addDogToForm(this)" data-dnum="${dog.dnum }" data-dname="${dog.dname }">
-			        		<img src="<c:url value='/dogProfile/download?dnum=${dog.dnum }'/>" class='currentDogImg'><br/>
-			        		<p>${dog.dname }</p>
-		        		</a>
-		        	</div>
-		        </c:forEach>
+	  <div class="modal-dialog detailModal" role="document">
+	    <div class="modal-content detailModalContent">
+	      <div style="height: 14px;"></div>
+	      <div class="modal-body detailModalScroll">
+	        <div id="detailModalDogInfo">
+       			<img id="detailModalDogImg"><br/>
+	        	<h2 id="detailModalDogDname"></h2>
+	        	<div id="detailModalDiv1">
+		        	<ul id="detailModalUl">
+		        		<li class="detailModalLi">
+		        			<h3>견종</h3>
+		        			<p id="detailModalDogDtype"></p>
+		        		</li>
+		        		<li class="detailModalLi">
+		        			<h3>나이</h3>
+		        			<p id="detailModalDogAge"></p>
+		        		</li>
+		        		<li class="detailModalLi">
+		        			<h3>성별</h3>
+		        			<p id="detailModalDogGender"></p>
+		        		</li>
+		        		<li class="detailModalLi">
+		        			<h3>체중</h3>
+		        			<p id="detailModalDogWeight"></p>
+		        		</li>
+		        	</ul>
+	        	</div>
+	        	<h3>About</h3>
+	        	<p id="detailModalDogAbout">문제점1<br>문제점2<br>문제점3<br>문제점4<br>~~~~<br>~~~~<br>~~~~<br>~~~~<br>~~~~<br></p>
         	</div>
 	      </div>
-	      <div class="modal-footer">
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">추가</button>
-<!-- 			<button id="addNewDogBtn" type="button" class="btn btn-warning">추가</button> -->
-	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	      <div id="detailModalFooter" class="modal-footer">
+	        <button type="button" id="detailModalCancelBtn" class="btn btn-default" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>
@@ -59,6 +69,9 @@
 			<button type="button" id="backBtn" class="btn btn-secondary">뒤로</button>
 			<div id="detailImgDiv">
 				<c:choose>
+					<c:when test="${board.boardImgList.size() == 0 }">
+   						<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='detailImg0'><br/>
+					</c:when>
 					<c:when test="${board.boardImgList.size() == 1 }">
 						<c:forEach var="boardImg" items="${board.boardImgList }" varStatus="cnt">
 			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" class='detailImg1'><br/>
@@ -76,17 +89,44 @@
 					</c:when>
 				</c:choose>
    			</div>
-   			<p>
-   				${board.loc2} <br>
-				${board.title }  ${board.regDate }
-			</p>
+			<div id="boardTitleDiv">
+	   			<p>
+	   				${board.loc2} <br>
+					${board.title }  ${board.regDate }
+				</p>
+				<a href="#" id="heartAnchor">
+       				<img src="<c:url value='/resources/images/board/lightning.png'/>" id='heartImg'>
+				</a>
+			</div>
 			<div id="boardDogDiv">
+				<ul id="boardDogUl">
 				<c:forEach var="boardDogInfo" items="${boardDogInfoList }">
-					<div class="boardDogBox">
-						<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
-						<p>${boardDogInfo.dname }</p>
-					</div>
+					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
+						<li class="boardDogLi">
+							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
+							<p>${boardDogInfo.dname }</p>
+						</li>
+					</a>
+					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
+						<li class="boardDogLi">
+							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
+							<p>${boardDogInfo.dname }</p>
+						</li>
+					</a>
+					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
+						<li class="boardDogLi">
+							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
+							<p>${boardDogInfo.dname }</p>
+						</li>
+					</a>
+					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
+						<li class="boardDogLi">
+							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
+							<p>${boardDogInfo.dname }</p>
+						</li>
+					</a>
 				</c:forEach>
+				</ul>
 			</div>
 			<div id="boardContentsDiv">
 				<p>
@@ -110,6 +150,21 @@
 			location.href = "<c:url value='/board/list'/>";
 		});
     	
+	    function setModal(dnum, dname, dtype, age, gender, weight, matter) {
+	    	$("#detailModalDogImg").remove();
+	    	
+	    	const imgPath = "<c:url value='/dogProfile/download?dnum=" + dnum + "'/>";
+       		$("#detailModalDogInfo").prepend(
+				"<img src='" + imgPath + "' id='detailModalDogImg' class='detailModalDogImg'>"
+       		); 
+			
+       		$("#detailModalDogDname").text(dname);
+       		$("#detailModalDogDtype").text(dtype);
+       		$("#detailModalDogAge").text(age);
+       		$("#detailModalDogGender").text(gender);
+       		$("#detailModalDogWeight").text(weight);
+//        		$("#detailModalDogAbout").text(matter);
+	    }
     </script>
     
 </body>

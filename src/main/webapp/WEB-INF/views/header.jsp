@@ -21,7 +21,7 @@
 	<meta name="twitter:card" content="" />
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="<c:url value='/resources/images/main/11kong.jpg'/>">
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="<c:url value='/resources/css/animate.css'/>">
@@ -77,7 +77,7 @@
 									</button>
 								</li>
 								<li class="navbar-right-li">
-									<button onclick="location.href=' <c:url value='' />';">
+									<button onclick="location.href=' <c:url value='/login' />';">
 										<img src="<c:url value='/resources/images/main/login2.png'/>">
 									</button>
 								</li>
@@ -133,9 +133,9 @@
             	$("#headerGoBoard").on("click", () => {
             		location.href = "<c:url value='/board/list'/>";
             	});
-//             	$("#headerGoGps").on("click", () => {
-//             		location.href = "<c:url value='/board/list'/>";
-//             	});
+            	$("#headerGoGps").on("click", () => {
+            		location.href = "<c:url value='/gps/walk'/>";
+            	});
 //             	$("#headerGoProfile").on("click", () => {
 //             		location.href = "<c:url value='/board/list'/>";
 //             	});

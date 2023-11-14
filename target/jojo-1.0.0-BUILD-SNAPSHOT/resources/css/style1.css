@@ -1,0 +1,543 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0 auto;
+}
+
+.commonAnchor {
+	text-decoration: none;
+	color: black;
+}
+
+.commonAnchor:hover {
+	color: black;
+}
+
+.commonAnchor:visit {
+	color: black;
+}
+
+/* desktop 규격 */
+@media screen and (min-width: 769px){
+	#container {
+		width: 60%;
+		margin: 200px auto 0 auto;
+	}
+	
+	#writeContainer {
+		width: 50%;
+		margin: 120px auto 0 auto;
+	}
+	
+	.detailModalContent {
+		max-height: 840px;
+		border-radius: 20px !important;
+	}
+}
+
+/* tablet 규격 */
+@media screen and (max-width: 768px){
+	#container {
+		width: 80%;
+		margin: 150px auto 0 auto;
+	}
+	
+	#writeContainer {
+		width: 80%;
+		margin: 120px auto 0 auto;
+	}
+	
+	.detailModalContent {
+		max-height: 750px;
+		border-radius: 20px !important;
+	}
+
+}
+
+/* mobile 규격 */
+@media screen and (max-width: 480px){
+	#container {
+		width: 100%;
+		margin: 150px auto 0 auto;
+	}
+	
+	#writeContainer {
+		width: 100%;
+		margin: 120px auto 0 auto;
+	}
+	
+	.detailModalContent {
+		max-height: 750px;
+		border-radius: 20px !important;
+	}
+
+}
+            
+/* 게시판 목록 */
+#listContainer {
+}
+
+#listHeader {
+	position: relative;
+	padding-bottom: 80px;
+}
+
+#listLoc2 {
+	position: absolute;
+	top: 0;
+	left: 8%;
+	margin-top: 0 !important;
+}
+
+#writeFormBtn {
+	position: absolute;
+	top: 0;
+	right: 9%;
+}
+
+#boardDiv {
+	width: 33%; 
+	margin: 0 8% 40px 8%; 
+	display: inline-block;
+}
+
+#boardBox {
+	position: relative;
+	width: 100%;
+}
+
+#boardBox:after {
+	display: block;
+	content: "";
+	padding-bottom: 100%;
+}
+
+.boardImg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%; 
+	height: 80%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-radius: 8%;
+}
+
+.boardInfo {
+	position: absolute;
+	top: 80%;
+}
+
+.boardInfoRight {
+	position: absolute;
+	top: 80%;
+	right: 0;
+	text-align: right;
+}
+
+.lightningImg {
+	width: 18px;
+	height: 18px;
+	margin-bottom: 5px;
+	margin-right: -5px;
+}
+
+
+/* 글 작성 폼 */
+#formContainer {
+	width: 80%;
+	margin: 0px 10% 0px 10%; 
+	background-color: #ECE0B4;
+	padding: 30px 30px 40px 30px;
+	position: relative;
+}
+
+#writeForm {
+	margin: 10px 0;
+}
+
+#writeForm > div > label {
+	font-size: 18px;
+}
+
+#lightningDiv {
+	position: relative;
+}
+
+#lightningLabel {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	font-size: 14px !important;
+	font-weight: 600;
+}
+
+#lightningLabel > p {
+	font-size: 14px !important;
+	padding-top: 3px;
+}
+
+#lightningLabel > input[type="checkbox"] {
+	margin-left: 7px;
+	padding-bottom: 7px;
+	width: 24px;
+	height: 24px;
+	background: url("../../resources/images/board/no_lightning.png") no-repeat 0 0px / contain;
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	border-radius: 50%;
+}
+
+#lightningLabel > input[type="checkbox"]:checked {
+/* 	margin-left: 7px; */
+/* 	width: 18px; */
+/* 	height: 18px; */
+	background: url("../../resources/images/board/lightning.png") no-repeat 0 0px / contain;
+/* 	cursor: pointer; */
+/* 	outline: none; */
+/* 	appearance: none; */
+/* 	border-radius: 50%; */
+}
+
+#writeTitle {
+	margin: 5px 0;
+}
+
+#detailTextarea {
+	height: 400px;
+	resize: none;
+}
+
+#writeBtn {
+	position: absolute;
+	right: 110px;
+	bottom: 10px;
+}
+
+#writeCancelBtn {
+	position: absolute;
+	right: 30px;
+	bottom: 10px;
+}
+
+#addedDogDiv {
+	display: inline-block;
+	width: 85%;
+}
+
+#addedDogList {
+	display: inline-block;
+	max-width: 85%;
+}
+
+.commonAnchor > p {
+	margin-bottom: 0px !important;
+}
+
+#addDogLabelDiv {
+}
+
+#addDogLabel {
+	font-size: 18px;
+}
+
+#writeDogAddBtn {
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	transform: translateY(-50%);	 */
+/* 	left: 10px; */
+	margin-left: 10px;
+}
+
+.currentDogDiv {
+	display: inline-block;
+	text-align: center;
+	width: 18%;
+	margin: 5px 5px;
+}
+
+.addedDogDiv {
+	display: inline-block;
+	text-align: center;
+	width: 93px;
+	margin: 5px 10px;
+}
+
+.currentDogImg {
+	width: 100%; 
+	height: 93px; 
+	margin: 0 auto;
+	border-radius: 70%;
+	object-fit: cover;
+}
+	
+.filebox {
+	margin-top: 5px;
+}
+	
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 40%;
+    color: #999999;
+    font-size: 16px;
+}
+
+.filebox label {
+    display: inline-block;
+    padding: 4px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    font-size: 16px;
+    margin-bottom: 0 !important;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#w_file {
+	margin-bottom: 10px;
+}
+
+#btnDiv {
+	margin-bottom: 20px;
+}
+
+/* 상세보기 */
+#detailContainer {
+	border: 1px solid #dddddd;
+	background-color: white;
+	border-radius: 30px;
+	margin-top: -30px;
+	margin-bottom: 50px;
+	padding: 30px;
+}
+
+#detailImgDiv {
+	position: relative;
+	width: 100%;
+	margin-top: 15px;
+	padding-bottom: 48%;
+}
+
+.detailImg1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%; 
+	height: 100%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-radius: 30px;
+}
+
+.detailImg2_1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%; 
+	height: 100%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+}
+
+.detailImg2_2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%; 
+	height: 100%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-top-right-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+
+.detailImg3_1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 70%; 
+	height: 100%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+}
+
+.detailImg3_2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30%; 
+	height: 50%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-top-right-radius: 30px;
+}
+
+.detailImg3_3 {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	width: 30%; 
+	height: 50%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-bottom-right-radius: 30px;
+}
+
+#boardDogDiv {
+	max-width: 70%;
+	margin: 0 auto;
+}
+
+#boardDogUl {
+	list-style: none;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+#boardDogUl a {
+	margin: 0 5px;
+}
+
+.boardDogLi {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+.boardDogBox {
+	width: 19%;
+	display: inline-block;
+}
+
+.detailDogImg {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 70%;
+}
+
+.detailModal {
+	width: 450px !important;
+}
+
+.detailModalScroll {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* 임의의 영역 생성 */
+/* .scrollBar {  */
+/*   width: 200px; */
+/*   height: 200px; */
+/*   overflow-y: scroll; */
+/* } */
+
+/* 아래의 모든 코드는 영역::코드로 사용 */
+.detailModalScroll::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+    height: 500px;
+}
+
+.detailModalScroll::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background-color: #D8C089; /* 스크롤바의 색상 */
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
+
+.detailModalScroll::-webkit-scrollbar-track {
+/*     background: rgba(33, 122, 244, .1);  스크롤바 뒷 배경 색상 */
+}
+
+/* 반응형 */
+/* .detailModalContent { */
+/* 	height: 840px; */
+/* 	border-radius: 20px !important; */
+/* } */
+
+#detailModalDogImg {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 30px;
+}
+
+#detailModalDiv1 {
+	max-width: 70%;
+	margin: 0 auto;
+}
+
+#detailModalUl {
+	list-style: none;
+	margin: 0 auto;
+}
+
+.detailModalLi {
+	display: inline-block;
+	width: 22%;
+	text-align: center;
+	margin-left: 2%;
+}
+
+#detailModalFooter {
+	margin: 0 auto;
+}
+
+#detailModalCancelBtn {
+	
+}
+
+#boardContentsDiv {
+	
+}
+
+#detailFooter {
+	position: relative;
+	padding-bottom: 60px;	
+}
+
+#detailMemberProfile {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#detailFooterRight {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+
+/* gps */
+#gpsWalkMap {
+	width: 100%; 
+	height: 750px;
+}
+
+#calendar * {
+	font-size: 16px;
+}

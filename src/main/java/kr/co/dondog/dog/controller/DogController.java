@@ -37,8 +37,6 @@ public class DogController {
 	@ResponseBody
 	@RequestMapping(value = "/add", produces = "application/text; charset=UTF-8")
 	public String add(DogVO dog, MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("dogAdd() : " + dog);
-
 		multipartRequest.setCharacterEncoding("UTF-8");
 		
 		Map<String, Object> map = new HashMap<String, Object>();

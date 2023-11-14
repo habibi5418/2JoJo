@@ -27,10 +27,21 @@ body {
 		width: 60%;
 		margin: 200px auto 0 auto;
 	}
+
+	#boardDiv {
+		width: 33%; 
+		margin: 0 8% 40px 8%; 
+		display: inline-block;
+	}
 	
 	#writeContainer {
 		width: 50%;
 		margin: 120px auto 0 auto;
+	}
+	
+	.detailModalContent {
+		max-height: 840px;
+		border-radius: 20px !important;
 	}
 }
 
@@ -40,10 +51,21 @@ body {
 		width: 80%;
 		margin: 150px auto 0 auto;
 	}
+
+	#boardDiv {
+		width: 39%; 
+		margin: 0 5% 40px 5%; 
+		display: inline-block;
+	}
 	
 	#writeContainer {
 		width: 80%;
 		margin: 120px auto 0 auto;
+	}
+	
+	.detailModalContent {
+		max-height: 750px;
+		border-radius: 20px !important;
 	}
 
 }
@@ -54,10 +76,21 @@ body {
 		width: 100%;
 		margin: 150px auto 0 auto;
 	}
+
+	#boardDiv {
+		width: 70%; 
+		margin: 0 15% 40px 15%; 
+		display: inline-block;
+	}
 	
 	#writeContainer {
 		width: 100%;
 		margin: 120px auto 0 auto;
+	}
+	
+	.detailModalContent {
+		max-height: 750px;
+		border-radius: 20px !important;
 	}
 
 }
@@ -84,11 +117,12 @@ body {
 	right: 9%;
 }
 
-#boardDiv {
-	width: 33%; 
-	margin: 0 8% 40px 8%; 
-	display: inline-block;
-}
+/* 반응형 */
+/* #boardDiv { */
+/* 	width: 33%;  */
+/* 	margin: 0 8% 40px 8%;  */
+/* 	display: inline-block; */
+/* } */
 
 #boardBox {
 	position: relative;
@@ -113,8 +147,12 @@ body {
 }
 
 .boardInfo {
-	position: absolute;
-	top: 80%;
+    position: absolute;
+    top: 80%;
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .boardInfoRight {
@@ -323,6 +361,17 @@ body {
 	padding-bottom: 48%;
 }
 
+.detailImg0 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%; 
+	height: 100%;
+	object-fit: cover;
+	margin-bottom: 5px; 
+	border-radius: 30px;
+}
+
 .detailImg1 {
 	position: absolute;
 	top: 0;
@@ -392,8 +441,41 @@ body {
 	border-bottom-right-radius: 30px;
 }
 
+#boardTitleDiv {
+	position: relative;
+}
+
+#heartAnchor {
+	position: absolute;
+	right: 0;
+	top: 14px;
+}
+
+#heartImg {
+	width: 30px;
+	height: 30px;
+}
+
 #boardDogDiv {
-	
+	max-width: 70%;
+	margin: 0 auto;
+}
+
+#boardDogUl {
+	list-style: none;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+#boardDogUl a {
+	margin: 0 5px;
+}
+
+.boardDogLi {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
 }
 
 .boardDogBox {
@@ -403,6 +485,78 @@ body {
 
 .detailDogImg {
 	width: 100%;
+	object-fit: cover;
+	border-radius: 70%;
+}
+
+.detailModal {
+	width: 450px !important;
+}
+
+.detailModalScroll {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* 임의의 영역 생성 */
+/* .scrollBar {  */
+/*   width: 200px; */
+/*   height: 200px; */
+/*   overflow-y: scroll; */
+/* } */
+
+/* 아래의 모든 코드는 영역::코드로 사용 */
+.detailModalScroll::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+    height: 500px;
+}
+
+.detailModalScroll::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background-color: #D8C089; /* 스크롤바의 색상 */
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
+
+.detailModalScroll::-webkit-scrollbar-track {
+/*     background: rgba(33, 122, 244, .1);  스크롤바 뒷 배경 색상 */
+}
+
+/* 반응형 */
+/* .detailModalContent { */
+/* 	height: 840px; */
+/* 	border-radius: 20px !important; */
+/* } */
+
+#detailModalDogImg {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 30px;
+}
+
+#detailModalDiv1 {
+	max-width: 70%;
+	margin: 0 auto;
+}
+
+#detailModalUl {
+	list-style: none;
+	margin: 0 auto;
+}
+
+.detailModalLi {
+	display: inline-block;
+	width: 22%;
+	text-align: center;
+	margin-left: 2%;
+}
+
+#detailModalFooter {
+	margin: 0 auto;
+}
+
+#detailModalCancelBtn {
+	
 }
 
 #boardContentsDiv {
@@ -424,4 +578,15 @@ body {
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+
+
+/* gps */
+#gpsWalkMap {
+	width: 100%; 
+	height: 750px;
+}
+
+#calendar * {
+	font-size: 16px;
 }
