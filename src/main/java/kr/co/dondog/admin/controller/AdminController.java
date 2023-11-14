@@ -1,20 +1,37 @@
 package kr.co.dondog.admin.controller;
 
+import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lombok.RequiredArgsConstructor;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import kr.co.dondog.admin.service.AdminService;
+import kr.co.dondog.dog.vo.DogVO;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
-
+	 @Autowired
+	  private AdminService adminservice;
+	 
+	// 메인 대시보드 이동 ( 일일 가입자, 일일 게시글수)
     @RequestMapping(value = "/mainDashBoard")
-    public String admin(Locale locale, Model model) {
-        // 뷰 이름을 반환하도록 수정
+    public String admin(HttpServletRequest request, HttpServletResponse res) {
+    	 System.out.println("AdminController.mainDashBoard");
+    	 int dayJoinMemberCount = adminservice.dayJoinMemberCount();
+    	 int dayRegBoerdCount = adminservice.dayRegBoerdCount();
+    	 request.setAttribute("dayJoinMemberCount", dayJoinMemberCount);
+    	 request.setAttribute("dayRegBoerdCount", dayRegBoerdCount);
+    	 
         return "admin/mainDashBoard";
     }
 	

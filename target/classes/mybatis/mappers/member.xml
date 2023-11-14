@@ -5,9 +5,85 @@
 
 <mapper namespace="mapper.member">
 
-	<select id="login" resultType="Member" parameterType="Member">
-        SELECT * FROM dondog_member
-        		WHERE email = #{email} AND pwd = #{pwd}
-    </select>
+
+	<resultMap id="memberResultMap" type="Member">
+	    <result property="recentLog" column="recent_log" />
+	    <result property="loginCount" column="LOGIN_COUNT" />
+	    <result property="accountExpired" column="ACCOUNT_EXPIRED" />
+	    <result property="accountLocked" column="ACCOUNT_LOCKED" />
+	</resultMap>
+
+
+<!-- 	<select id="login" resultType="Member" parameterType="Member"> -->
+<!--         SELECT * FROM dondog_member -->
+<!--         		WHERE email = #{email} AND pwd = #{pwd} -->
+<!--     </select> -->
     
+
+
+	<update id="updateMemberLastLogin" >
+		update dondog_member set 
+			recent_log = sysdate
+		where email = #{email}  
+	</update>
+	
+	<select id="findByEmail" resultType="Member">
+		select 
+			*
+		from dondog_member
+		where email = #{email} 
+	</select> 
+   
+   	<insert id="insert" >
+		insert into dondog_member (
+			email, pwd
+		) values (
+			#{email}, #{pwd}
+		) 
+	</insert>
+	
+	<update id="loginCountInc">
+		update dondog_member set 
+			login_count = login_Count + 1
+			<choose>
+				<when test="loginCount > 2">
+					, account_locked = 'Y'
+				</when>
+				<otherwise>
+					, account_locked = 'N'
+				</otherwise>
+			</choose>
+		where email = #{email} 
+	</update> 
+
+	 
+	<update id="loginCountClear">
+		update dondog_member set 
+			 login_count = 0 
+			,account_locked = 'N'
+		where email = #{email} 
+	</update> 
+   
+    <insert id="insertMember" >
+    insert into dondog_member (
+       email
+      ,pwd
+      ,oauth
+    ) values (
+       #{email}
+      ,#{pwd}
+      ,#{oauth}
+    ) 
+  </insert>
+   
+    <update id="updateMember" >
+    update dondog_member set 
+       pwd = #{pwd}
+      <if test="roles != null and roles != '' ">
+        ,roles = #{roles}
+      </if>
+    where email = #{email}
+  </update>
+     
+   
 </mapper>

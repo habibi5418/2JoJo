@@ -1,6 +1,13 @@
 package kr.co.dondog.member.vo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +19,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 //로그인
-public class MemberVO {
+public class MemberVO implements UserDetails {
 
+private static final long serialVersionUID = 1L;
+	
    private String email; 			 // 아이디
    private String mname; 			 // 실제 이름
    private String pwd;   			 // 비밀번호
@@ -26,84 +36,76 @@ public class MemberVO {
    private String report; 			 // 신고누적횟수
    private LocalDateTime recentLog;  // 로그인기록
    private String gender;  			 // 성별
-   private String oauth;			 // 관리자, 회원 구분
+   private String oauth;			 // 가입구분(카카오, 구글, 네이버, 자사몰 구분)
    private String accountExpired;    // 휴먼계정
-   private String accountLocked; 	 // 블랙계정
+   private String accountLocked; 	 // 로그인 여러번 시도해서 차단
    private int loginCount; 			 // 로그인 횟수
    private LocalDateTime updateTime; // 수정날짜
    private String cancel; 			 // 탈퇴여부
+   private String roles; 			 // 회원, 관리자 구분 user, admin 으로 구분
 
-   @Builder
-   public MemberVO(String email, String pwd, String nickname, String address, String birth,
-         LocalDateTime joinDate, String grade, String report, LocalDateTime recentLog, String gender, String oauth,
-         String accountExpired, String accountLocked, int loginCount, LocalDateTime updateTime, String cancel) {
-      this.email = email;
-      this.pwd = pwd;
-      this.nickname = nickname;
-      this.address = address;
-      this.birth = birth;
-      this.joinDate = joinDate;
-      this.grade = grade;
-      this.report = report;
-      this.recentLog = recentLog;
-      this.gender = gender;
-      this.oauth = oauth;
-      this.accountExpired = accountExpired;
-      this.accountLocked = accountLocked;
-      this.loginCount = loginCount;
-      this.updateTime = updateTime;
-      this.cancel = cancel;
+   
+   
+   
+   @Override
+   public String getPassword() {
+      return this.getPwd();
+   }
+
+   @Override
+   public String getUsername() {
+      return this.getEmail();
+   }
+
+   // 계정이 갖고있는 권한 목록은 리턴
+   @Override
+   public Collection<? extends GrantedAuthority> getAuthorities() {
+
+      Collection<GrantedAuthority> collectors = new ArrayList<>();
+      collectors.add(() -> {
+         return "계정별 등록할 권한";
+      });
+
+      // collectors.add(new SimpleGrantedAuthority("user"));
+
+      return collectors;
    }
 
    
-//   시큐리티 관련 아직 주석 처리가 맞음 11/7_10:08확인
-//   @Override
-//   public String getPassword() {
-//      return this.getPwd();
-//   }
-//
-//   @Override
-//   public String getUsername() {
-//      return this.getEmail();
-//   }
-//
-//   // 계정이 갖고있는 권한 목록은 리턴
-//   @Override
-//   public Collection<? extends GrantedAuthority> getAuthorities() {
-//
-//      Collection<GrantedAuthority> collectors = new ArrayList<>();
-//      collectors.add(() -> {
-//         return "계정별 등록할 권한";
-//      });
-//
-//      // collectors.add(new SimpleGrantedAuthority("user"));
-//
-//      return collectors;
-//   }
-//
-////계정이 만료되지 않았는지 리턴 (true: 만료 안됨)
-//   @Override
-//   public boolean isAccountNonExpired() {
-//      return "N".equalsIgnoreCase(accountExpired);
-//      // return true;
-//   }
-//
-////계정이 잠겨있는지 않았는지 리턴. (true: 잠기지 않음)
-//   @Override
-//   public boolean isAccountNonLocked() {
-//      return "N".equalsIgnoreCase(accountLocked);
-//      // return true;
-//   }
-//
-////비밀번호가 만료되지 않았는지 리턴한다. (true: 만료 안됨)
-//   @Override
-//   public boolean isCredentialsNonExpired() {
-//      return true;
-//   }
-//
-////계정이 활성화(사용가능)인지 리턴 (true: 활성화)
-//   @Override
-//   public boolean isEnabled() {
-//      return true;
-//   }
+   
+	// ENUM으로 안하고 ,로 해서 구분해서 ROLE을 입력 -> 그걸 파싱!!
+	// 예제 ROLL 값 : "ROLE_USER","ROLE_MANAGER","ROLE_ADMIN"  
+	public List<String> getRoleList() {
+	    if (this.roles.length() > 0) {
+	        return Arrays.asList(this.roles.split(","));
+	    }
+	    return new ArrayList<>();
+	}
+	
+	
+//계정이 만료되지 않았는지 리턴 (true: 만료 안됨)
+   @Override
+   public boolean isAccountNonExpired() {
+      return "N".equalsIgnoreCase(accountExpired);
+      // return true;
+   }
+
+//계정이 잠겨있는지 않았는지 리턴. (true: 잠기지 않음)
+   @Override
+   public boolean isAccountNonLocked() {
+      return "N".equalsIgnoreCase(accountLocked);
+      // return true;
+   }
+
+//비밀번호가 만료되지 않았는지 리턴한다. (true: 만료 안됨)
+   @Override
+   public boolean isCredentialsNonExpired() {
+      return true;
+   }
+
+//계정이 활성화(사용가능)인지 리턴 (true: 활성화)
+   @Override
+   public boolean isEnabled() {
+      return true;
+   }
 }
