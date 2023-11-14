@@ -4,13 +4,95 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.board">
+	<resultMap type="Board" id="BoardMap">
+		<result property="regDate" column="reg_date"/>
+		<result property="modDate" column="mod_date"/>
+		<result property="viewCount" column="view_count"/>
+		<result property="deleteStatus" column="delete_status"/>
+	</resultMap>
+	
 	<resultMap type="Test" id="TestMap">
 		<result property="userId" column="user_id"/>
-		<result property="wnum" column="wnum"/>
 		<result property="walkDate" column="walk_date"/>
 		<result property="lat" column="x"/>
 		<result property="lng" column="y"/>
 	</resultMap>
+	
+	
+	<select id="getBoardList" resultMap="BoardMap">
+		select * 
+		from dondog_board
+		order by bnum desc
+	</select>
+	
+	<select id="getBoardImgList" resultType="BoardImg">
+		select * 
+		from dondog_board_img
+		where bnum = #{bnum}
+		order by inum
+	</select>	
+
+	<select id="getImg" resultType="BoardImg">
+		select * 		 
+		from dondog_board_img
+		where inum = #{inum} 
+	</select>
+	
+	<select id="getBoardDogList" resultType="String">
+		select to_char(dnum) 
+		from dondog_board_dog
+		where bnum = #{bnum}
+		order by bdnum
+	</select>	
+	
+	<select id="getDogList" resultType="Dog">
+		select * 
+		from dondog_dog 
+		where email = #{email}
+		ordey by dnum
+	</select>	
+	
+	<insert id="write">
+		insert into dondog_board(bnum, title, contents, category, nickname, loc2, email)
+		values(seq_board.nextval, #{title}, #{contents}, #{category}, #{nickname}, #{loc2}, #{email})
+	</insert>
+	
+	<select id="getWriteBnum" resultType="Board">
+		select bnum 
+		from dondog_board 
+		order by bnum desc
+	</select>
+	
+	<insert id="writeBoardDog">
+		insert into dondog_board_dog(bdnum, bnum, dnum)
+		values(seq_board_dog.nextval, #{bnum}, #{dnum})
+	</insert>
+	
+	<insert id="writeBoardImg">
+		insert into dondog_board_img (
+			  inum			
+			, bnum 
+			, fname 
+			, sname 
+			, length 
+			, ftype 
+		) values (
+			  SEQ_BOARD_IMG.nextval
+			, #{bnum}
+			, #{fname}
+			, #{sname}
+			, #{length}
+			, #{ftype}	
+		)
+	</insert>
+	
+	<select id="getBoard" resultMap="BoardMap">
+		select * 
+		from dondog_board
+		where bnum = #{bnum}
+	</select>
+	
+	
 	
 	<insert id="sendCoord">
 		insert into test_coord(user_id, wnum, walk_date, x, y) 
