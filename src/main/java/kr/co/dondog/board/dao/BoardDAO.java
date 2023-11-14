@@ -5,8 +5,6 @@ import java.util.List;
 import kr.co.dondog.board.vo.BoardDogVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
-import kr.co.dondog.board.vo.ParkVO;
-import kr.co.dondog.board.vo.TestVO;
 import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.vo.MemberVO;
 
@@ -24,8 +22,4 @@ public interface BoardDAO {
 	int deleteBoard(BoardVO board);
 	BoardVO getBoard(int bnum);
 	
-	int sendCoord(TestVO test);
-	List<ParkVO> loadPark();
-	List<TestVO> getRoute(TestVO test);
-	List<TestVO> getWnum(TestVO test);
 }

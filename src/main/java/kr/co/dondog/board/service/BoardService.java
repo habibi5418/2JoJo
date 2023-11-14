@@ -1,5 +1,9 @@
 package kr.co.dondog.board.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -10,8 +14,6 @@ import kr.co.dondog.board.dao.BoardDAO;
 import kr.co.dondog.board.vo.BoardDogVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
-import kr.co.dondog.board.vo.TestVO;
-import kr.co.dondog.dog.vo.DogVO;
 
 @Service
 public class BoardService {
@@ -22,8 +24,34 @@ public class BoardService {
 	// 전체 게시글 가져오기
 	public List<BoardVO> getBoardList() {
 		List<BoardVO> list = boardDAO.getBoardList();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		list.stream().forEach(board -> {
 			board.setBoardImgList(boardDAO.getBoardImgList(board));
+
+			try {
+				long regDate = formatter.parse(board.getRegDate()).getTime();
+				long now = Calendar.getInstance().getTime().getTime();
+				long diff = now - regDate;
+				
+				if (diff / (3600000 * 24) == 0) {
+					if (diff / (60000 * 3) == 0) {
+						board.setRegDate("방금 전");
+					} else if (diff / (3600000) == 0) {
+						long minute = diff / (60000);
+						board.setRegDate(minute + "분 전");
+					} else {
+						long hour = diff / (3600000);
+						board.setRegDate(hour + "시간 전");
+					}
+				} else {
+					String monthDay = board.getRegDate().substring(5, board.getRegDate().length() - 3);
+					board.setRegDate(monthDay);
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 		return list;
 	}
@@ -73,41 +101,4 @@ public class BoardService {
 		return board;
 	}
 
-
-	
-	
-	public JSONObject sendCoord(TestVO test) {
-		JSONObject result = new JSONObject();
-		if (boardDAO.sendCoord(test) > 0) {
-			result.put("status", true);
-		} else {
-			result.put("status", false);
-		}
-		
-		return result;
-	}
-	
-	public JSONObject loadPark() {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("parkList", boardDAO.loadPark());
-		
-		return jsonObject;
-	}
-	
-	public JSONObject getRoute(TestVO test) {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("routeList", boardDAO.getRoute(test));
-		System.out.println("getRoute 받은 데이터 : " + jsonObject);
-		
-		return jsonObject;
-	}
-	
-	public JSONObject getWnum(TestVO test) {
-		JSONObject jsonObject = new JSONObject();
-		List<TestVO> testList = boardDAO.getWnum(test);
-		jsonObject.put("wnum", testList.size() == 0 ? 0 : testList.get(0).getWnum());
-		System.out.println(jsonObject);
-		
-		return jsonObject;
-	}
 }

@@ -41,7 +41,6 @@ public class DogService {
 				dogProfile.setGender(dog.getGender());
 				dogProfile.setWeight(dog.getWeight());
 				dogProfile.setMatter(dog.getMatter());
-				System.out.println("DogService.add -> dogProfileList : " + dogProfileList);
 				if (dogDAO.add(dogProfile) > 0) {
 					result.put("message", "추가가 완료되었습니다.");
 					result.put("status", true);

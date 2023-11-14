@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 import kr.co.dondog.board.vo.BoardDogVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
-import kr.co.dondog.board.vo.ParkVO;
-import kr.co.dondog.board.vo.TestVO;
 import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.vo.MemberVO;
 
@@ -93,27 +91,4 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.getBoard", bnum);
 	}
 
-	
-	
-	
-	@Override
-	public int sendCoord(TestVO test) {
-		return sqlSession.insert("mapper.board.sendCoord", test);
-	}
-
-	@Override
-	public List<ParkVO> loadPark() {
-		return sqlSession.selectList("mapper.board.loadPark");
-	}
-
-	@Override
-	public List<TestVO> getRoute(TestVO test) {
-		System.out.println(test);
-		return sqlSession.selectList("mapper.board.getRoute", test);
-	}
-
-	@Override
-	public List<TestVO> getWnum(TestVO test) {
-		return sqlSession.selectList("mapper.board.getWnum", test);
-	}
 }
