@@ -1,238 +1,166 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<sec:authorize access="isAuthenticated()"> <!-- 인증이 됐는지안됐는지 확인하는 구문 -->
+   <sec:authentication property="principal" var="principal"/> <!-- property로 가져와서 var 데이터타입으로 대입하겠다는뜻 -->
+</sec:authorize>
+
+<html class="no-js">
+
 <head>
-<meta charset="utf-8">
-<title>title</title>
-<!-- header.css : navigation bar -->
-<!-- <link rel="stylesheet" href="/css/header_test.css">  -->
-<style>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="Chrome">
+   <title>ëëí ì°ë¦¬ ì¬ì´, ëë</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Facebook and Twitter integration -->
+   <meta property="og:title" content="" />
+   <meta property="og:image" content="" />
+   <meta property="og:url" content="" />
+   <meta property="og:site_name" content="" />
+   <meta property="og:description" content="" />
+   <meta name="twitter:title" content="" />
+   <meta name="twitter:image" content="" />
+   <meta name="twitter:url" content="" />
+   <meta name="twitter:card" content="" />
+
+   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+   <link rel="shortcut icon" href="<c:url value='/resources/images/main/11kong.jpg'/>">
+
+   <!-- Animate.css -->
+   <link rel="stylesheet" href="<c:url value='/resources/css/animate.css'/>">
+
+   <!-- Icomoon Icon Fonts-->
+   <link rel="stylesheet" href="<c:url value='/resources/css/icomoon.css'/>">
+
+   <!-- Simple Line Icons -->
+   <link rel="stylesheet" href="<c:url value='/resources/css/simple-line-icons.css'/>">
+
+   <!-- Bootstrap  -->
+   <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+
+   <!-- Style -->
+    <link rel="stylesheet" href="<c:url value='/resources/css/header.css'/>"> 
+
+   <!-- fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 
-*{
-  margin: 0px; 
-  padding: 0px; 
-  box-sizing: border-box;
-}
+   <!--weight : 200-->
+   <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet"> -->
+   <!--weight : 700 ê°ì¡°-->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;700&display=swap" rel="stylesheet">
   
-  
- nav {
-    display: flex; justify-content: space-around;
-    align-items: center;
-    /* 요소의 최소 너비 지정, height 속성 무시
-    vh 단위는 브라우저 안쪽 높이(window. innerHeight)을 기준으로 설정된다. 하지만 태블릿이나, 모바일의 경우에는 뷰 포트에 따라 맞춰짐*/
-    min-height: 8vh; 
-    background-color: #504954; 
-    /* font-family: "Poppins", sans-serif; */
- }
+<!-- Modernizr JS -->
+   <script src="<c:url value='/resources/js/modernizr-2.6.2.min.js'/>"></script>
 
 
-.logo {
-  color: rgb(226, 226, 226); 
-  text-transform: uppercase;
-  letter-spacing: 2px; /* 각 글자 2px씩 간격을 줌*/
-  font-size: 18px;
-  }
 
-.nav-links {
-    width: 40%;
-    display: flex; 
-    justify-content: space-around;
-  }
-  
-  .nav-links li {
-  list-style: none;
-  }
-
-  .nav-links a {
-  color: rgb(226, 226, 226); 
-  text-decoration: none; 
-  letter-spacing: 3px; 
-  font-weight: bold; 
-  font-size: 14px;
-  }
-
-.burger {
-  display: none; 
-  cursor: pointer;
-}
-
-.burger div { 
-  width: 25px; 
-  height: 3px;
-  background-color: rgb(226, 226, 226); 
-  margin: 5px;
-  transition: all 0.3s ease;
-}
-
-@media screen and (max-width: 1024px) {
-  .nav-links {
-    width: 60%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  body {
-    overflow-x: hidden;
-  }
-
-  /* .nav-links {
-    position: absolute;
-    top: 8vh;
-    right: 0;
-    height: 92vh;
-    background-color: #504954;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    transform: translateX(100%);
-  }
-
-  .nav-links li {
-    opacity: 0;
-  }
-
-  .burger {
-    display: block;
-  }
-
-  .nav-active {
-    transform: translateX(0%);
-  } */
-  .nav-links {
-    position: absolute;
-    top: 8vh;
-    right: 0;
-    width: 100%; /* 전체 너비 사용 */
-    transform: translateY(-100%); /* 수직 이동 대신 수평 이동 */
-  }
-
-  .nav-links li {
-    opacity: 0;
-  }
-
-  .burger {
-    display: block;
-  }
-
-  .nav-active {
-    transform: translateY(0%); /* 수직 이동 대신 수평 이동 */
-  }
-  
-  @keyframes navLinkFade {
-    from {
-      opacity: 0;
-      transform: translateX(5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-}
-
-.toggle .linel {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-.toggle .line2 {
-  opacity: 0;
-}
-.toggle .line3 {
-  transform: rotate(45deg) translate(-5px, -6px);
-}
-
-
-</style>
+    <!-- <style.css> -->
 </head>
 <body>
-    <header>
-      <nav>
-        <div class="logo"> 
-            <h4>The Nav</h4>
-        </div>
-        <ul class="nav-links">
-          <li><a href="#">Home</a></li> 
-          <li><a href="#">MATCH</a></li> 
-          <li><a href="#">CHAT</a></li> 
-          <li><a href="#">MYPAGE</a></li>
-          <!-- <li><a href="#">알림</a></li>
-          <li><a href="#">실시간위치</a></li> -->
-          
-          <!-- 로그인 / 비로그인 확인  -->
-          <c:choose>
-			  <c:when test="${not empty sessionScope.loggedInMember}">
-			    <!-- 세션에 loginMember가 있는 경우 -->
-			    <li><a href="<c:url value='/logout'/>">LOGOUT</a></li>
-			  </c:when>
+   <header role="banner" id="fh5co-header">
+        <header role="banner" id="fh5co-header">
+   
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div class="navbar-btn">
+                            <ul class="navbar-right-btn">
+                        <li class="navbar-right-li">
+                            <button onclick="headerGoChat()">
+                              <img src="<c:url value='/resources/images/main/chat1.png'/>">
+                           </button>
+                        </li>
+                        <li class="navbar-right-li">
+                           <button onclick="location.href=' <c:url value='' />';">
+                              <img src="<c:url value='/resources/images/main/alram.png'/>">
+                           </button>
+                        </li>
+                       <c:choose>
+			  <c:when test="${empty principal}"> 
+                        <li class="navbar-right-li">
+                           <button onclick="location.href=' <c:url value='/loginForm' />';">
+                              <img src="<c:url value='/resources/images/main/login2.png'/>">
+                           </button>
+                        </li>
+                        </c:when>
 			  <c:otherwise>
-			    <!-- 세션에 loginMember가 없는 경우 -->
-			    <li><a href="<c:url value='/login'/>">LOGIN</a></li>
-			  </c:otherwise>
-		</c:choose>
-        </ul>
-        <div class="burger">
-          <div class="linel"></div> 
-          <div class="line2"></div> 
-          <div class="line3"></div>
-        </div>
-      </nav>
-    </header>
+                        
+                        <li class="navbar-right-li">
+                           <button onclick="location.href=' <c:url value='/logout' />';">
+                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                              <img src="<c:url value='resources/images/main/logout1.png'/>">
+                           </button>
+                        </li>
+                         </c:otherwise>
+					</c:choose>
+                            </ul>
+                            </div><!-- navbar-right-btn -->
+                            <div class="navbar-header">
+                                <!-- Mobile Toggle Menu Button -->
+                               <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+                                   data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+                               <a class="navbar-brand" href="<c:url value='/'/>" style="font-weight: 700; font-size: 24px;" > dondog </a> 
+                             </div>
+
+                        <!-- PC Toggle  -->
+                           <div id="navbar" class="navbar-collapse collapse">
+                               <ul class="nav navbar-nav navbar-right">
+                           <li><a href="#" id="headerGoHome">home</a></li>
+                           <li><a href="#" id="headerGoBoard">match</a></li>
+                           <li><a href="#" id="headerGoGps">gps</a></li>
+                           <li><a href="#" id="headerGoProfile">profile</a></li>
+                           <li><a href="#" id="headerGoOur">our</a></li>
+                               </ul>
+                           </div>
+                     </div>
+                    </nav>
+                </div>
+            </div>
+            
+            <!— jQuery —>
+         <script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+         <!— jQuery Easing —>
+         <script src="<c:url value='/resources/js/jquery.easing.1.3.js'/>"></script>
+         <!— Bootstrap —>
+         <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+         <!— Waypoints —>
+         <script src="<c:url value='/resources/js/jquery.waypoints.min.js'/>"></script>
+         <!— Stellar Parallax —>
+         <script src="<c:url value='/resources/js/jquery.stellar.min.js'/>"></script>
+         <!— Counters —>
+         <script src="<c:url value='/resources/js/jquery.countTo.js'/>"></script>
+         <!— Main JS (Do not remove) —>
+         <script src="<c:url value='/resources/js/main.js'/>"></script>
+            <script type="text/javascript">
+               $("#headerGoHome").on("click", () => {
+                  location.href = "<c:url value='/'/>";
+               });
+               $("#headerGoBoard").on("click", () => {
+                  location.href = "<c:url value='/board/list'/>";
+               });
+               
+               function headerGoChat() {
+					location.href="<c:url value='/chat/roomList'/>";
+				}
+               
+               
+//                $("#headerGoGps").on("click", () => {
+//                   location.href = "<c:url value='/board/list'/>";
+//                });
+//                $("#headerGoProfile").on("click", () => {
+//                   location.href = "<c:url value='/board/list'/>";
+//                });
+//                $("#headerGoOur").on("click", () => {
+//                   location.href = "<c:url value='/board/list'/>";
+//                });
+            </script>
+   </header>
 </body>
-
-<script>
-
-
-
-const burger = document.querySelector(".burger");
-const nav = document.querySelector(".nav-links");
-const navlinks = document.querySelectorAll(".nav-links li");
-
-const navAnimation = () => {
-  navlinks.forEach((link, index) => {
-    // 애니메이션이 있을 때
-    if (link.style.animation) {
-      // 애니메이션 비움
-      link.style.animation = '';
-    } else {
-      // 애니메이션 없을 때 애니메이션을 추가 1/ 딜레이 간격을 줘서 하나씩 차례대로 나타나도록 설정
-      link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
-    }
-  });
-};
-
-
-const handleNav = () => {
-  nav.classList.toggle("nav-active");
-  //nav Animation
-  navAnimation();
-  //burger Animation
-  burger.classList.toggle("toggle");
-  };
-
-  const navSlide = () => {
-    burger.addEventListener("click", handleNav);
-  };
-
-  const setNavTransition = (width) => {
-    if (width > 768) {
-      nav.style.transition = "";
-    } else {
-      nav.style.transition = "transform 0.5s ease-in";
-    }
-  };
-
-const handleResize = (event) => { // event 매개변수를 추가
-  const width = event.target.innerWidth;
-  setNavTransition(width);
-};
-
-const init = () => {
-  // Toggle Nav
-  window.addEventListener("resize", handleResize); // event 매개변수가 필요합니다.
-  navSlide();
-};
-init();
-
-</script>
 </html>

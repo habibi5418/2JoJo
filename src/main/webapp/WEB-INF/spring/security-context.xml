@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:security="http://www.springframework.org/schema/security"
+  xsi:schemaLocation="http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 로그인 실패  -->
+    <bean id="customAccessDenied" class="kr.co.dondog.member.security.handler.CustomAccessDeniedHandler"/>
+    <!-- 로그인 성공  -->
+    <bean id="customLoginSuccess" class="kr.co.dondog.member.security.handler.CustomLoginSuccessHandler"/>
+    <!-- 비밀번호 입력 -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <!-- 로그인 시도시 이동 -->
+    <bean id="userDetailsService" class="kr.co.dondog.member.security.auth.PrincipalDetailsService"/>
+      
+      
+      <!-- 권한설정 -->
+    <security:http>
+      <security:intercept-url pattern="/" access="permitAll"/>
+      <security:intercept-url pattern="/auth/**" access="permitAll"/>
+      <security:intercept-url pattern="/member/**" access="hasRole('ROLE_USER')" />
+      <security:intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')"/>
+      <security:csrf disabled="true"/>
+      <security:form-login login-page="/loginForm"  authentication-success-handler-ref="customLoginSuccess"/>
+      <security:access-denied-handler ref="customAccessDenied"/>  
+      <security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true" delete-cookies="JSESSIONID"/>   
+    </security:http>
+  
+  <!-- 여기서 선언하고 위에서 사용  -->
+    <security:authentication-manager>
+    <!-- 사용자 정보  -->
+      <security:authentication-provider user-service-ref="userDetailsService">
+      <!-- 비밀번호 -->
+          <security:password-encoder ref="passwordEncoder"/>
+      </security:authentication-provider>
+    </security:authentication-manager>  
+</beans>
