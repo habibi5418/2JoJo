@@ -41,4 +41,11 @@
 		order by wnum desc
 	</select>
 	
+	<select id="getTotalRouteList" resultType="Test" resultMap="TestMap">
+		select * 
+		from test_coord 
+		where walk_date like #{walkDate} || '%' 
+		order by walk_date 
+	</select>
+	
 </mapper>
