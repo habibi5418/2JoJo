@@ -533,7 +533,7 @@
 // 		.then((response) => response.json())
 // 		.then((json) => {
 // 			const totalDistanceList = json.totalDistanceList;
-			
+
 // 			totalDistanceList.forEach(totalDistance => {
 // 				console.log("날짜 : " + totalDistance.walkDate);
 // 				console.log("총 산책량(미터) : " + totalDistance.totalDistance);
