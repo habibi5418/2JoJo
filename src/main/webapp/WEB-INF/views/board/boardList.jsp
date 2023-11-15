@@ -26,8 +26,10 @@
 		<div id="container">
 			<div id="listContainer">
 				<div id="listHeader">
-					<button type="button" id="writeFormBtn" class="btn btn-warning">글작성</button>
 					<h2 id="listLoc2">혜화동</h2>
+					<c:if test="${not empty principal}">
+						<button type="button" id="writeFormBtn" class="btn-warning">글작성</button>
+					</c:if>
 				</div>
 				<c:forEach var="board" items="${boardList }">
 					<a href="<c:url value='/board/detail?bnum=${board.bnum }'/>" class="commonAnchor">
@@ -59,10 +61,12 @@
 	</section>
 	
     <script>
-		$("#writeFormBtn").on("click", () =>{
-			location.href = "<c:url value='/board/writeForm'/>";
-		});
-		
+    	if (${principal != null}) {
+			$("#writeFormBtn").on("click", () =>{
+				location.href = "<c:url value='/board/writeForm'/>";
+			});
+    	}
+    	
 	    $(document).ready(function() {	
 	    });
     </script>

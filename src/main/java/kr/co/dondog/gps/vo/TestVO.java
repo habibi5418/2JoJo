@@ -15,4 +15,8 @@ public class TestVO {
 	private Date walkDate;
 	private double lat;
 	private double lng;
+	
+	public TestVO(Date walkDate) {
+		this.walkDate = walkDate;
+	}
 }

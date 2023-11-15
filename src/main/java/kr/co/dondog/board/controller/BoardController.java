@@ -13,10 +13,10 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,23 +29,20 @@ import kr.co.dondog.board.service.BoardService;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.dog.service.DogService;
-import kr.co.dondog.member.service.MemberService;
+import kr.co.dondog.member.security.auth.PrincipalDetails;
 import kr.co.dondog.member.vo.MemberVO;
 
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
 	
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\dondog_file";
+	private static final String CURR_IMAGE_REPO_PATH = "/dondog_file";
 	
 	@Autowired
 	private BoardService boardService;
 	
 	@Autowired
 	private DogService dogService;
-	
-	@Autowired
-	private MemberService memberService;
 	
 	// 게시판 이동
 	@RequestMapping(value = "/list")
@@ -56,15 +53,13 @@ public class BoardController {
 
 	// 게시글 작성 폼 이동
 	@RequestMapping(value = "/writeForm")
-	public String writeForm(Model model, HttpSession session) throws Exception {
-//		MemberVO loggedInMember = (MemberVO) session.getAttribute("loggedInMember");
-//		model.addAttribute("dogList", dogService.getList(loggedInMember.getEmail()));
-		MemberVO member = new MemberVO();
-		member.setEmail("cjfalswoals2@naver.com");
-		member.setPwd("1234");
-		MemberVO loggedInMember = memberService.login(member);
-		session.setAttribute("loggedInMember", loggedInMember);
-		model.addAttribute("dogList", dogService.getList(loggedInMember.getEmail()));
+	public String writeForm(Model model, Authentication authentication) throws Exception {
+		if (authentication.getPrincipal() instanceof PrincipalDetails) {
+	         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+	         MemberVO member= (MemberVO) userDetails.getUser();
+	         model.addAttribute("dogList", dogService.getList(member.getEmail()));
+	         model.addAttribute("loggedInMember", member);
+		}
 		return "board/boardWriteForm";
 	}
 
@@ -94,7 +89,7 @@ public class BoardController {
 		List<BoardImgVO> fileList = new ArrayList<>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		Calendar now = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("\\yyyy\\MM\\dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd");
 		
 		while (fileNames.hasNext()) {
 			String fileName = fileNames.next();
@@ -115,7 +110,7 @@ public class BoardController {
 			fileList.add(
 					BoardImgVO.builder()
 					.fname(fileNameOrg)
-					.sname(realFolder + "\\" + fileNameReal)
+					.sname(realFolder + "/" + fileNameReal)
 					.length((int) mFile.getSize())
 					.ftype(mFile.getContentType())
 					.build()

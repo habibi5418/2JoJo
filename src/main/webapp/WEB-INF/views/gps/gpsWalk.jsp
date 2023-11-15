@@ -120,7 +120,7 @@
 		});
 		
 		var interval2;
-		var senderEmail = "${loggedInMember.email}";
+		var senderEmail = "${principal.username}";
 		console.log("sender : " + senderEmail);
 		
 // 		$("#connectBtn").on("click", () => {
@@ -642,7 +642,7 @@
 			polyline.setMap(null);
 			
 			const param = {
-					userId: $("#userId").val(),
+					userId: senderEmail,
 					wnum: n,
 					walkDate: selectDate
 			}
@@ -667,6 +667,23 @@
 				polyline.setMap(map);
 			});
 		}
+		
+		fetch("<c:url value='/gps/getTotalDistance'/>", {
+			method: "POST",
+			headers: {
+			    "Content-Type": "application/json; charset=UTF-8",
+			},
+			body: JSON.stringify(),
+		})
+		.then((response) => response.json())
+		.then((json) => {
+			const totalDistanceList = json.totalDistanceList;
+			
+			totalDistanceList.forEach(totalDistance => {
+				console.log("날짜 : " + totalDistance.walkDate);
+				console.log("총 산책량(미터) : " + totalDistance.totalDistance);
+			});
+		});
 		
 		$("#startBtn").on("click", e => {
 			alert("시작");

@@ -30,19 +30,26 @@ body {
 
 	#boardDiv {
 		width: 33%; 
-		margin: 0 8% 40px 8%; 
+		margin: 0 7% 40px 9%; 
 		display: inline-block;
 	}
 	
 	#writeContainer {
 		width: 50%;
-		margin: 120px auto 0 auto;
+		margin: 160px auto 0 auto;
 	}
 	
 	.detailModalContent {
 		max-height: 840px;
 		border-radius: 20px !important;
 	}
+	
+	#listHeader {
+		position: relative;
+		padding-bottom: 80px;
+		margin: 0 8.8% 0 8.8%;
+	}
+	
 }
 
 /* tablet 규격 */
@@ -54,7 +61,7 @@ body {
 
 	#boardDiv {
 		width: 39%; 
-		margin: 0 5% 40px 5%; 
+		margin: 0 4% 40px 6%; 
 		display: inline-block;
 	}
 	
@@ -66,6 +73,12 @@ body {
 	.detailModalContent {
 		max-height: 750px;
 		border-radius: 20px !important;
+	}
+	
+	#listHeader {
+		position: relative;
+		padding-bottom: 80px;
+		margin: 0 6%;
 	}
 
 }
@@ -92,6 +105,12 @@ body {
 		max-height: 750px;
 		border-radius: 20px !important;
 	}
+	
+	#listHeader {
+		position: relative;
+		padding-bottom: 80px;
+		margin: 0 15%;
+	}
 
 }
             
@@ -99,22 +118,42 @@ body {
 #listContainer {
 }
 
-#listHeader {
-	position: relative;
-	padding-bottom: 80px;
-}
+/* 반응형 */
+/* #listHeader { */
+/* 	position: relative; */
+/* 	padding-bottom: 80px; */
+/* } */
 
 #listLoc2 {
 	position: absolute;
 	top: 0;
-	left: 8%;
+	left: 0%;
 	margin-top: 0 !important;
 }
 
 #writeFormBtn {
 	position: absolute;
-	top: 0;
-	right: 9%;
+	top: 3px;
+	right: 0%;
+    padding: 7px 15px;
+    font-size: 16px;
+    
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1.42857;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* 반응형 */
@@ -149,7 +188,7 @@ body {
 .boardInfo {
     position: absolute;
     top: 80%;
-    width: 70%;
+    width: 60%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -172,11 +211,12 @@ body {
 
 /* 글 작성 폼 */
 #formContainer {
-	width: 80%;
-	margin: 0px 10% 0px 10%; 
+	width: 100%;
+	margin-bottom: 50px; 
 	background-color: #ECE0B4;
 	padding: 30px 30px 40px 30px;
 	position: relative;
+	border-radius: 30px;
 }
 
 #writeForm {
@@ -193,8 +233,8 @@ body {
 
 #lightningLabel {
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: 1px;
+	right: -7px;
 	display: flex;
 	font-size: 14px !important;
 	font-weight: 600;
@@ -271,11 +311,26 @@ body {
 }
 
 #writeDogAddBtn {
-/* 	position: absolute; */
-/* 	top: 50%; */
-/* 	transform: translateY(-50%);	 */
-/* 	left: 10px; */
+    color: #fff;
+    background-color: #337ab7;
 	margin-left: 10px;
+    display: inline-block;
+    margin-bottom: 9px;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 5px 12px;
+    font-size: 16px;
+    line-height: 1.42857;
+    border-radius: 20px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .currentDogDiv {

@@ -27,10 +27,10 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h5 class="modal-title">댕댕이 선택</h5>
+	        <h4 class="modal-title">반려견 선택</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>댕댕이 현황</p><br>
+<!-- 	        <p>댕댕이 현황</p><br> -->
 	        <div id="currentDogList">
 		        <c:forEach var="dog" items="${dogList }">
 		        	<div class="currentDogDiv" id="currentDogDiv${dog.dnum }">
@@ -110,7 +110,7 @@
 		        
 	        	<div id="addDogLabelDiv">
 		            <label id="addDogLabel">산책갈 강아지</label>
-					<button id="writeDogAddBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">+</button>
+					<button id="writeDogAddBtn" type="button" class="" data-toggle="modal" data-target="#myModal1">+</button>
 	<!-- 				<button type="button" id="writeDogAddBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button> -->
 	        	</div>
 				<div id="addedDogList">
@@ -131,9 +131,6 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="<c:url value='/resources/js/summernote/summernote-lite.min.js'/>"></script>
-	<script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
-	<script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
 	<script type="text/javascript">
 		var currentDogList = $("#currentDogList");
 		var addedDogList = $("#addedDogList");
@@ -312,34 +309,6 @@
 			});
 		});
         
-		// 작성 실행
-// 		$("#writeBtn").on("click", () => {
-// 			const contents = $("#summernote").summernote("code");
-// 			const param = {
-// 				title: $("#writeTitle").val(),
-// 				contents: contents,
-// 				nickname: "${loggedInMember.nickname}",
-// 				loc2: "${loggedInMember.address}",
-// 				email: "${loggedInMember.email}",
-// 				boardDogList: addedDodArray
-// 			};
-			
-// 			fetch("<c:url value='/board/write'/>", {
-// 				method: "POST",
-// 				headers: {
-// 				    "Content-Type": "application/json; charset=UTF-8",
-// 				},
-// 				body: JSON.stringify(param),
-// 			})
-// 			.then((response) => response.json())
-// 			.then((json) => {
-// 				if (json.status) {
-// 					alert(json.message);
-// 					location.href = "<c:url value='/board/list'/>";
-// 				}
-// 			});
-// 		});
-	
 		// 작성 취소
 		$("#writeCancelBtn").on("click", () => {
 			location.href = "<c:url value='/board/list'/>";

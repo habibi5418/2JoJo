@@ -90,7 +90,7 @@
                                       <li class="navbar-right-li">
                                          <button onclick="location.href=' <c:url value='/logout' />';">
                                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                            <img src="<c:url value='resources/images/main/logout1.png'/>">
+                                            <img src="<c:url value='/resources/images/main/logout1.png'/>">
                                          </button>
                                       </li>
                                    </c:otherwise>

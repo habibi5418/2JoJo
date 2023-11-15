@@ -18,7 +18,7 @@ import kr.co.dondog.file.service.FileService;
 
 @Controller
 public class FileDownloadController {
-	private static String CURR_IMAGE_REPO_PATH = "C:\\dondog_file";
+	private static String CURR_IMAGE_REPO_PATH = "/dondog_file";
 
 	@Autowired
 	FileService fileService;

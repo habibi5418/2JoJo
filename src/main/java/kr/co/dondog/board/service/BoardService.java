@@ -3,7 +3,6 @@ package kr.co.dondog.board.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -45,7 +44,7 @@ public class BoardService {
 						board.setRegDate(hour + "시간 전");
 					}
 				} else {
-					String monthDay = board.getRegDate().substring(5, board.getRegDate().length() - 3);
+					String monthDay = board.getRegDate().substring(5, 10);
 					board.setRegDate(monthDay);
 				}
 			} catch (ParseException e) {

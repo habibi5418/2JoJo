@@ -1,5 +1,8 @@
 package kr.co.dondog.gps.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.dondog.gps.dao.GpsDAO;
 import kr.co.dondog.gps.vo.TestVO;
+import kr.co.dondog.gps.vo.TotalDistanceVO;
 
 @Service
 public class GpsService {
@@ -35,8 +39,9 @@ public class GpsService {
 	
 	public JSONObject getRoute(TestVO test) {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("routeList", gpsDAO.getRoute(test));
-		System.out.println("getRoute 받은 데이터 : " + jsonObject);
+		List<TestVO> routeList = gpsDAO.getRoute(test);
+		jsonObject.put("routeList", routeList);
+		jsonObject.put("totalDistance", getTotalDistance(routeList));
 		
 		return jsonObject;
 	}
@@ -48,5 +53,53 @@ public class GpsService {
 		System.out.println(jsonObject);
 		
 		return jsonObject;
+	}
+	
+	public JSONObject getTotalDistance() {
+		JSONObject jsonObject = new JSONObject();
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat();
+		format.applyPattern("yyyy-MM-dd");
+		List<TotalDistanceVO> totalDistanceList = new ArrayList<TotalDistanceVO>();
+
+		putTotalDistance(-6, calendar, totalDistanceList, format);
+		putTotalDistance(1, calendar, totalDistanceList, format);
+		putTotalDistance(1, calendar, totalDistanceList, format);
+		putTotalDistance(1, calendar, totalDistanceList, format);
+		putTotalDistance(1, calendar, totalDistanceList, format);
+		putTotalDistance(1, calendar, totalDistanceList, format);
+		putTotalDistance(1, calendar, totalDistanceList, format);
+		
+		jsonObject.put("totalDistanceList", totalDistanceList);
+		
+		return jsonObject;
+	}
+	
+	public void putTotalDistance(int day, Calendar calendar, List<TotalDistanceVO> totalDistanceList, SimpleDateFormat format) {
+		calendar.add(Calendar.DAY_OF_MONTH, day);
+		TotalDistanceVO totalDistance = new TotalDistanceVO();
+		totalDistance.setWalkDate(format.format(calendar.getTime()));
+		totalDistance.setTotalDistance(getTotalDistance(gpsDAO.getTotalRouteList(format.format(calendar.getTime()))));
+		totalDistanceList.add(totalDistance);
+	}
+	
+	public long getTotalDistance(List<TestVO> routeList) {
+		double EARTH_R = 6371000.0;
+	    double rad = Math.PI / 180;
+	    long totalDistance = 0;
+	    
+	    for (int i = 0; i < routeList.size() - 1; i++) {
+	    	double radLat1 = rad * routeList.get(i).getLat();
+	    	double radLat2 = rad * routeList.get(i + 1).getLat();
+	    	double radDist = rad * (routeList.get(i).getLng() - routeList.get(i + 1).getLng());
+	    	
+	    	double distance = Math.sin(radLat1) * Math.sin(radLat2);
+			distance = distance + Math.cos(radLat1) * Math.cos(radLat2) * Math.cos(radDist);
+			double ret = EARTH_R * Math.acos(distance);
+	    			
+			totalDistance += Math.round(ret); // 미터 단위
+	    }
+	    
+		return totalDistance;
 	}
 }
