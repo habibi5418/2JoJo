@@ -12,6 +12,8 @@
       <org.springframework-version>5.0.6.RELEASE</org.springframework-version>
       <org.aspectj-version>1.6.10</org.aspectj-version>
       <org.slf4j-version>1.6.6</org.slf4j-version> 
+     <!-- 추가 -->
+ 	  <spring.security.version>5.0.6.RELEASE</spring.security.version>
    </properties>
    <dependencies>
 
@@ -221,6 +223,40 @@
            <version>21.5.0.0</version>
        </dependency>
 
+		<!-- 내가 추가한 시큐리티 커밋전에 전달 후 삭제하기  -->
+		<dependency>
+	      <groupId>org.springframework.security</groupId>
+	      <artifactId>spring-security-web</artifactId>
+	      <version>${spring.security.version}</version>
+	    </dependency>
+	
+	    <dependency>
+	      <groupId>org.springframework.security</groupId>
+	      <artifactId>spring-security-config</artifactId>
+	      <version>${spring.security.version}</version>
+	    </dependency>
+	  
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-core</artifactId>
+	      <version>${spring.security.version}</version>
+	    </dependency>
+	        
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-taglibs</artifactId>
+	        <version>${spring.security.version}</version>
+	    </dependency>
+	
+		<!-- 차트  -->		
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		
+		<!-- 여기까지  -->
+
       <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
       <dependency>
          <groupId>org.projectlombok</groupId>
@@ -255,6 +291,7 @@
         <artifactId>json-simple</artifactId>
         <version>1.1</version>
       </dependency>
+      
       
       <!-- JSON  --> 
       <dependency>

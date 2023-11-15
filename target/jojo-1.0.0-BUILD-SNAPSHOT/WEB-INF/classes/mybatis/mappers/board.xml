@@ -20,7 +20,19 @@
 	
 	
 	<select id="getBoardList" resultMap="BoardMap">
-		select * 
+		select 
+			bnum
+			, title
+			, contents
+			, nickname
+			, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') as "reg_date"
+			, to_char(mod_date, 'YYYY-MM-DD HH24:MI:SS') as "mod_date"
+			, category
+			, heart
+			, view_count
+			, delete_status
+			, loc2
+			, email
 		from dondog_board
 		order by bnum desc
 	</select>
@@ -53,8 +65,8 @@
 	</select>	
 	
 	<insert id="write">
-		insert into dondog_board(bnum, title, contents, category, nickname, loc2, email)
-		values(seq_board.nextval, #{title}, #{contents}, #{category}, #{nickname}, #{loc2}, #{email})
+		insert into dondog_board(bnum, title, contents, category, nickname, reg_date, loc2, email)
+		values(seq_board.nextval, #{title}, #{contents}, #{category}, #{nickname}, sysdate + (9/24), #{loc2}, #{email})
 	</insert>
 	
 	<select id="getWriteBnum" resultType="Board">
@@ -87,40 +99,21 @@
 	</insert>
 	
 	<select id="getBoard" resultMap="BoardMap">
-		select * 
+		select 
+			bnum
+			, title
+			, contents
+			, nickname
+			, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') as reg_date
+			, to_char(mod_date, 'YYYY-MM-DD HH24:MI:SS') as mod_date
+			, category
+			, heart
+			, view_count
+			, delete_status
+			, loc2
+			, email
 		from dondog_board
 		where bnum = #{bnum}
-	</select>
-	
-	
-	
-	<insert id="sendCoord">
-		insert into test_coord(user_id, wnum, walk_date, x, y) 
-		values(#{userId}, #{wnum}, sysdate + (9/24), #{lat}, #{lng})
-	</insert>
-	
-	<select id="loadPark" resultType="Park">
-		select * 
-		from data_park
-	</select>
-	
-	<select id="getRoute" resultType="Test" resultMap="TestMap">
-		select * 
-		from test_coord 
-		where user_id = #{userId} 
-		and wnum = #{wnum} 
-		and walk_date like #{walkDate} || '%' 
-		order by walk_date
-	</select>
-	
-	<select id="getWnum" resultType="Test" resultMap="TestMap">
-		select * 
-		from test_coord 
-		where user_id = #{userId}
-    	<if test="walkDate != '' and walkDate != null">
-			and walk_date like #{walkDate} || '%' 
-		</if>
-		order by wnum desc
 	</select>
 	
 </mapper>

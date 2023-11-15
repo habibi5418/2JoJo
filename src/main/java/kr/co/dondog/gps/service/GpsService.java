@@ -74,12 +74,37 @@ public class GpsService {
 		
 		return jsonObject;
 	}
+
+	int maxWnum = 0;
+	int wnum = 0;
 	
 	public void putTotalDistance(int day, Calendar calendar, List<TotalDistanceVO> totalDistanceList, SimpleDateFormat format) {
 		calendar.add(Calendar.DAY_OF_MONTH, day);
 		TotalDistanceVO totalDistance = new TotalDistanceVO();
+		List<TestVO> totalRouteList = gpsDAO.getTotalRouteList(format.format(calendar.getTime()));
+		long sum = 0;
+		maxWnum = 0;
+
+		totalRouteList.forEach(totalRouteByWnum -> {
+			maxWnum = maxWnum < totalRouteByWnum.getWnum() ? totalRouteByWnum.getWnum() : maxWnum; 
+		});
+			
+		for (int i = 1; i <= maxWnum; i++) {
+			List<TestVO> totalRouteListByWnum = new ArrayList<TestVO>();
+			wnum = i;
+			
+			totalRouteList.forEach(totalRouteByWnum -> {
+				if (totalRouteByWnum.getWnum() == wnum) {
+					totalRouteListByWnum.add(totalRouteByWnum);
+				}
+			});
+			
+			sum += getTotalDistance(totalRouteListByWnum);
+		}
+		
 		totalDistance.setWalkDate(format.format(calendar.getTime()));
-		totalDistance.setTotalDistance(getTotalDistance(gpsDAO.getTotalRouteList(format.format(calendar.getTime()))));
+		totalDistance.setTotalDistance(sum);
+		
 		totalDistanceList.add(totalDistance);
 	}
 	

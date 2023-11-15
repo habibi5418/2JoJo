@@ -30,7 +30,6 @@
 	        <h4 class="modal-title">반려견 선택</h4>
 	      </div>
 	      <div class="modal-body">
-<!-- 	        <p>댕댕이 현황</p><br> -->
 	        <div id="currentDogList">
 		        <c:forEach var="dog" items="${dogList }">
 		        	<div class="currentDogDiv" id="currentDogDiv${dog.dnum }">
@@ -43,9 +42,8 @@
         	</div>
 	      </div>
 	      <div class="modal-footer">
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">추가</button>
-<!-- 			<button id="addNewDogBtn" type="button" class="btn btn-warning">추가</button> -->
-	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			<button type="button" id="writeModalAddDogBtn" class="" data-toggle="modal" data-target="#myModal2">추가</button>
+	        <button type="button" class="writeCancelBtn" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>
@@ -56,7 +54,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h5 class="modal-title">댕댕이 추가</h5>
+	        <h4 class="modal-title">반려견 추가</h4>
 	      </div>
 	      <div class="modal-body">
 			<form id="newDogAddForm" autocomplete="off" enctype="multipart/form-data">
@@ -77,13 +75,17 @@
 				</fieldset>
 				<label>프로필 사진 선택</label>
 				<div id="d_file">
-					<input type='file' name='file' />
+					<div class='filebox'>
+	       				<label for='file'>파일찾기</label>
+		       			<input type='file' id='file' class='file btn btn-success' name='file' />
+		       			<input id='upload-name' class='upload-name' value='이미지파일' readonly>
+	       			</div>
 				</div>
 			</form>
 	      </div>
 	      <div class="modal-footer">
-	        <button id="saveNewDogBtn" type="button" class="btn btn-primary">추가</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	        <button id="saveNewDogBtn" type="button" class="">저장</button>
+	        <button type="button" class="writeCancelBtn" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>
@@ -111,22 +113,21 @@
 	        	<div id="addDogLabelDiv">
 		            <label id="addDogLabel">산책갈 강아지</label>
 					<button id="writeDogAddBtn" type="button" class="" data-toggle="modal" data-target="#myModal1">+</button>
-	<!-- 				<button type="button" id="writeDogAddBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button> -->
 	        	</div>
 				<div id="addedDogList">
 					
 				</div>
 				<br>
 				
-				<input type="button" value="이미지 추가" class="btn btn-info" onClick="w_addFile()"/><br>
+				<input type="button" value="이미지 추가" id="addImgBtn" class="" onClick="w_addFile()"/><br>
 				<div id="w_file">
 					
 				</div>
 	        </form>
 			
 			<div id="btnDiv">
-				<button type="button" id="writeBtn" class="btn btn-warning">작성</button>
-				<button type="button" id="writeCancelBtn" class="btn btn-secondary">취소</button>
+				<button type="button" id="writeBtn" class="">작성</button>
+				<button type="button" id="writeCancelBtn" class="writeCancelBtn">취소</button>
 			</div>
 		</div>
 	</div>
@@ -140,7 +141,7 @@
 		// 추가할 강아지 없을 경우
 		function noDog() {
 			if (currentDogList.children().length == 0) {
-				currentDogList.append("추가할 반려견이 없습니다.");
+				currentDogList.append("<p>더 이상 추가할 반려견이 없습니다.</p>");
 				noDogFlag = true;
 			}
 		}
@@ -156,7 +157,7 @@
 			addedDogList.append(
 				"<div class='addedDogDiv' id='addedDogDiv" + dnum + "'>"
 				+ "<a href='#' class='commonAnchor' onclick='" + func + "' data-dnum='" + dnum + "' data-dname='" + dname + "'>"
-				+ "<img src='" + path + "' class='currentDogImg'><br/>" 
+				+ "<img src='" + path + "' class='currentDogImg2'><br/>" 
 				+ "<p>" + dname + "</p>" 
 				+ "</a>"
 				+ "</div>"
@@ -199,7 +200,19 @@
 			
 			$("#addedDogDiv" + dnum).remove();
 		};
-
+		
+		// 강아지 이미지 이름 가져오기
+		$("#file").on('change', function(file) {	
+   			const fileName = file.target.files[0].name;
+   			const extension = fileName.split(".")[1];
+   			
+   			if (extension === "jpg" || extension === "jpeg" || extension === "png") {
+   				$("#upload-name").val(fileName);
+   			} else {
+   				alert("이미지 파일(jpg, jpeg, png)만 업로드 가능합니다.");
+   			}
+   		});
+		
 		// 강아지 추가 저장
 		$("#saveNewDogBtn").on("click", () => {
 			const form = $("#newDogAddForm")[0];

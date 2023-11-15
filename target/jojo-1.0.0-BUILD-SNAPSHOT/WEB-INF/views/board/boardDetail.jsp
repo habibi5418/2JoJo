@@ -69,6 +69,9 @@
 			<button type="button" id="backBtn" class="btn btn-secondary">뒤로</button>
 			<div id="detailImgDiv">
 				<c:choose>
+					<c:when test="${board.boardImgList.size() == 0 }">
+   						<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='detailImg0'><br/>
+					</c:when>
 					<c:when test="${board.boardImgList.size() == 1 }">
 						<c:forEach var="boardImg" items="${board.boardImgList }" varStatus="cnt">
 			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" class='detailImg1'><br/>
@@ -86,10 +89,15 @@
 					</c:when>
 				</c:choose>
    			</div>
-   			<p>
-   				${board.loc2} <br>
-				${board.title }  ${board.regDate }
-			</p>
+			<div id="boardTitleDiv">
+	   			<p>
+	   				${board.loc2} <br>
+					${board.title }  ${board.regDate }
+				</p>
+				<a href="#" id="heartAnchor">
+       				<img src="<c:url value='/resources/images/board/lightning.png'/>" id='heartImg'>
+				</a>
+			</div>
 			<div id="boardDogDiv">
 				<ul id="boardDogUl">
 				<c:forEach var="boardDogInfo" items="${boardDogInfoList }">
@@ -131,7 +139,7 @@
 				</div>
 				<div id="detailFooterRight">
 					꼬숩도<br>
-					채팅 버튼
+					<button type="button" id="chatFormBtn" class="btn btn-primary">채팅</button>
 				</div>
 			</div>
 		</div>
@@ -140,6 +148,10 @@
     <script>
 	    $("#backBtn").on("click", () =>{
 			location.href = "<c:url value='/board/list'/>";
+		});
+	    
+	    $("#chatFormBtn").on("click", () =>{
+			location.href = "<c:url value='/chat/roomList?bnum=" + ${board.bnum} + "'/>";
 		});
     	
 	    function setModal(dnum, dname, dtype, age, gender, weight, matter) {
