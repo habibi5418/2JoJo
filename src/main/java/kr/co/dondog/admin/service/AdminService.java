@@ -1,10 +1,12 @@
 package kr.co.dondog.admin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.dondog.admin.dao.AdminDAO;
-import kr.co.dondog.member.vo.MemberVO;
+import kr.co.dondog.dog.vo.DogVO;
 
 @Service
 public class AdminService {
@@ -25,5 +27,20 @@ public class AdminService {
 	public int dtypeCount() {
 		System.out.println("AdminService.dtypeCount");
 		return adminDAO.dtypeCount();
+	}
+	
+	public int totalDogCounts() {
+		System.out.println("AdminService.totalDogCounts");
+		return adminDAO.totalDogCounts();
+	}
+
+//	public List<Map<String, Object>> topDogCounts() {
+//		System.out.println("AdminService.topDogCounts");
+//		return adminDAO.topDogCounts();
+//	}
+	
+	public List<DogVO> topDogCounts() {
+		System.out.println("AdminService.topDogCounts");
+		return adminDAO.topDogCounts();
 	}
 }

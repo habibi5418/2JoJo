@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -369,7 +370,6 @@
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
-
                     <!-- Content Row -->
                     <div class="row">
 						<!-- 가입자수 (일별) -->
@@ -417,7 +417,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">매칭
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">매칭률(일일)
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
@@ -441,7 +441,7 @@
                         </div>
                         
 
-<!--채팅  -->
+						<!--채팅  -->
 <!--                         Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
@@ -449,7 +449,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                           	     채팅</div>
+                                           	     신고(일일)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                         </div>
                                         <div class="col-auto">
@@ -466,14 +466,14 @@
                     <div class="row">
 
 
-<!-- 누적산책km -->
+						<!-- 실시간 산책 이용자 -->
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">누적산책량</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">실시간 산책 이용자</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -504,7 +504,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">누적견종</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">등록된강아지</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -526,15 +526,35 @@
                                         <canvas id="myPieChart"></canvas>
                                     </div>
                                     <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
+
+<!-- 기존 출력부분  -->
+<!--                                         <span class="mr-2"> -->
+<!--                                             <i class="fas fa-circle text-primary"></i> 푸들 -->
+<!--                                         </span> -->
+<!--                                         <span class="mr-2"> -->
+<!--                                             <i class="fas fa-circle text-success"></i> Social -->
+<!--                                         </span> -->
+<!--                                         <span class="mr-2"> -->
+<!--                                             <i class="fas fa-circle text-info"></i> Referral -->
+<!--                                         </span> -->
+<!--                                         <span class="mr-2"> -->
+<!--                                             <i class="fas fa-circle text-warning"></i> Referral -->
+<!--                                         </span> -->
+<!--                                         <span class="mr-2"> -->
+<!--                                             <i class="fas fa-circle text-secondary"></i> Referral -->
+<!--                                         </span> -->
+										
+										<!-- 강아지타입 누적량 확인 하는 컬럼 부분 컬러 체크 강아지종류차트컬러  -->
+										<div class="mt-4 text-center small">
+										    <c:forEach var="dogCount" items="${topDogCounts}" varStatus="iterStat">
+										        <c:set var="colorIndex" value="${iterStat.index % 5}" />
+										        <c:set var="colorClass" value="${colors[colorIndex]}" />
+										       <span class="mr-2">
+										        <i class="fas fa-circle text-${colorClass}"></i>
+										       <c:out value="${dogCount.dtype}" /></span>
+										    </c:forEach>
+										    <i class="fas fa-circle text-secondary"></i> 기타 
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -740,6 +760,13 @@
             </div>
         </div>
     </div>
+    
+    <!-- 강아지종류차트컬러 -->
+<!--     <script>
+    	var colors = ['primary', 'success', 'info', 'warning', 'secondary'];
+	</script> -->
+	
+	
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value='/resources/vendor/jquery/jquery.min.js'/>"></script>
     <script src="<c:url value='/resources/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
@@ -752,10 +779,12 @@
 
     <!-- Page level plugins -->
     <script src="<c:url value='/resources/vendor/chart.js/Chart.min.js'/>"></script>
+    
 
     <!-- Page level custom scripts -->
     <script src="<c:url value='/resources/js/demo/chart-area-demo.js'/>"></script>
     <script src="<c:url value='/resources/js/demo/chart-pie-demo.js'/>"></script>
+
 
 </body>
 

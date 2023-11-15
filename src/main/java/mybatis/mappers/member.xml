@@ -23,7 +23,7 @@
 
 	<update id="updateMemberLastLogin" >
 		update dondog_member set 
-			recent_log = sysdate
+			recent_log = sysdate+(9/24)
 		where email = #{email}  
 	</update>
 	
@@ -44,7 +44,7 @@
 	
 	<update id="loginCountInc">
 		update dondog_member set 
-			login_count = login_Count + 1
+			login_count = login_count + 1
 			<choose>
 				<when test="loginCount > 2">
 					, account_locked = 'Y'

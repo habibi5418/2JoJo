@@ -16,10 +16,28 @@
 		FROM dondog_board
 		WHERE TRUNC(reg_date) = TRUNC(SYSDATE)
 	</select>
-   
-	<select id="dtypeCount" resultType="int">
-		SELECT dtype, COUNT(*) AS dog_count
+
+	<select id="totalDogCounts" resultType="int">
+		SELECT COUNT(*) AS total_dog_count
+		FROM dondog_dog
+	</select>
+	
+	<select id="topDogCounts" resultType="kr.co.dondog.dog.vo.DogVO">
+		SELECT dtype, COUNT(*) AS dogCount
 		FROM dondog_dog
 		GROUP BY dtype
+		ORDER BY dogCount desc
+		FETCH FIRST 4 ROWS ONLY	
 	</select>
+	
+	
+	<update id="reportCountInc">
+	    update dondog_member set 
+	        report = report + 1,
+	        black = CASE
+	            WHEN report > 2 THEN 'Y'
+	            ELSE 'N'
+	        END
+	    where email = #{email} 
+	</update>
 </mapper>
