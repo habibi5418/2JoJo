@@ -1,10 +1,14 @@
 package kr.co.dondog.gps.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.dondog.gps.service.GpsService;
@@ -16,6 +20,8 @@ public class GpsController {
 	
 	@Autowired
 	private GpsService gpsService;
+	
+	int totalWalkCnt = 0;
 	
 	// 게시판 이동
 	@RequestMapping(value = "/walk")
@@ -51,6 +57,22 @@ public class GpsController {
 	@ResponseBody
 	public String getTotalDistance() {
 		return gpsService.getTotalDistance().toString();
+	}
+
+	@RequestMapping(value = "/modTotalWalkCnt", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String modTotalWalkCnt(@RequestParam("check") String check) {
+		JSONObject result = new JSONObject();
+		
+		if (check.equalsIgnoreCase("plus")) {
+			++totalWalkCnt;
+		}
+		else {
+			if (totalWalkCnt > 0) --totalWalkCnt;
+		}
+		
+		result.put("totalWalkCnt", totalWalkCnt);
+		return result.toString();
 	}
 	
 }

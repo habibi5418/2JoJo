@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin">
+
+	<select id="dayJoinMemberCount" resultType="int">
+		SELECT COUNT(*) AS member_count
+		FROM dondog_member
+		WHERE TRUNC(join_date) = TRUNC(SYSDATE)
+	</select>
+
+	<select id="dayRegBoerdCount" resultType="int">
+		SELECT COUNT(*) AS board_count
+		FROM dondog_board
+		WHERE TRUNC(reg_date) = TRUNC(SYSDATE)
+	</select>
+   
+	<select id="dtypeCount" resultType="int">
+		SELECT dtype, COUNT(*) AS dog_count
+		FROM dondog_dog
+		GROUP BY dtype
+	</select>
+</mapper>

@@ -33,7 +33,12 @@
 					<a href="<c:url value='/board/detail?bnum=${board.bnum }'/>" class="commonAnchor">
 						<div id="boardDiv">
 							<div id="boardBox">
+								<c:if test="${board.boardImgList[0] == null }">
+				        			<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='boardImg'><br/>
+				        		</c:if>
+								<c:if test="${board.boardImgList[0] != null }">
 				        			<img src="<c:url value='/boardImg/download?inum=${board.boardImgList[0].inum }'/>" class='boardImg'><br/>
+				        		</c:if>
 								<p class="boardInfo">
 									${board.loc2 }<br>
 									<c:if test="${board.category == 'B' }">
