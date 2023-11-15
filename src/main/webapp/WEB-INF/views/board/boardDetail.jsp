@@ -139,7 +139,7 @@
 				</div>
 				<div id="detailFooterRight">
 					꼬숩도<br>
-					채팅 버튼
+					<button type="button" id="chatFormBtn" class="btn btn-primary">채팅</button>
 				</div>
 			</div>
 		</div>
@@ -148,6 +148,10 @@
     <script>
 	    $("#backBtn").on("click", () =>{
 			location.href = "<c:url value='/board/list'/>";
+		});
+	    
+	    $("#chatFormBtn").on("click", () =>{
+			location.href = "<c:url value='/chat/roomList?bnum=" + ${board.bnum} + "'/>";
 		});
     	
 	    function setModal(dnum, dname, dtype, age, gender, weight, matter) {

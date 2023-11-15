@@ -11,4 +11,5 @@ public interface GpsDAO {
 	List<ParkVO> loadPark();
 	List<TestVO> getRoute(TestVO test);
 	List<TestVO> getWnum(TestVO test);
+	List<TestVO> getTotalRouteList(String walkDate);
 }

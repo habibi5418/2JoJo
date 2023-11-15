@@ -1,6 +1,5 @@
 package kr.co.dondog.board.vo;
 
-import java.sql.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;

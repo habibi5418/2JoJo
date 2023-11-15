@@ -57,7 +57,7 @@ public class DogController {
 		List<DogVO> fileList = new ArrayList<>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		Calendar now = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("\\yyyy\\MM\\dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd");
 		
 		while (fileNames.hasNext()) {
 			String fileName = fileNames.next();
@@ -78,7 +78,7 @@ public class DogController {
 			fileList.add(
 					DogVO.builder()
 					.fname(fileNameOrg)
-					.sname(realFolder + "\\" + fileNameReal)
+					.sname(realFolder + "/" + fileNameReal)
 					.length((int) mFile.getSize())
 					.ftype(mFile.getContentType())
 					.build()

@@ -1,5 +1,6 @@
 package kr.co.dondog.gps.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,12 +28,17 @@ public class GpsDAOImpl implements GpsDAO {
 
 	@Override
 	public List<TestVO> getRoute(TestVO test) {
-		System.out.println(test);
 		return sqlSession.selectList("mapper.gps.getRoute", test);
 	}
 
 	@Override
 	public List<TestVO> getWnum(TestVO test) {
 		return sqlSession.selectList("mapper.gps.getWnum", test);
+	}
+
+	@Override
+	public List<TestVO> getTotalRouteList(String walkDate) {
+		TestVO test = new TestVO(Date.valueOf(walkDate));
+		return sqlSession.selectList("mapper.gps.getTotalRouteList", test);
 	}
 }
