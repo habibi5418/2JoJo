@@ -2,6 +2,43 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+//배열 초기화
+var labels2 = [];
+var data2 = [];
+
+function getTotalDistance(url) {
+	fetch(url, {
+	    method: "POST",
+	    headers: {
+	        "Content-Type": "application/json; charset=UTF-8",
+	    },
+	    body: JSON.stringify(),
+	})
+	.then((response) => response.json())
+	.then((json) => {
+	    var totalDistanceList = json.totalDistanceList;
+	
+	    totalDistanceList.forEach((totalDistance) => {
+	        // 날짜와 산책량을 배열에 추가
+	        labels2.push(totalDistance.walkDate);
+	        data2.push(totalDistance.totalDistance);
+	
+	        // 그 외 로직 처리
+	    });
+	
+	    // 차트 업데이트 함수 호출
+	    updateChart(labels2, data2);
+	});
+}
+	
+// 차트 업데이트 함수
+function updateChart(labels, data) {
+    // 기존 차트 데이터 업데이트
+    myBarChart.data.labels = labels;
+    myBarChart.data.datasets[0].data = data;
+    myBarChart.update(); // 차트 업데이트
+}
+
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -28,17 +65,17 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
+var ctx2 = document.getElementById("myBarChart");
+var myBarChart = new Chart(ctx2, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: labels,
     datasets: [{
-      label: "Revenue",
+      label: "산책량",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
+      data: data,
     }],
   },
   options: {
@@ -54,7 +91,7 @@ var myBarChart = new Chart(ctx, {
     scales: {
       xAxes: [{
         time: {
-          unit: 'month'
+          unit: 'week'
         },
         gridLines: {
           display: false,
@@ -73,7 +110,7 @@ var myBarChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return  number_format(value)+'m';
           }
         },
         gridLines: {
@@ -103,7 +140,7 @@ var myBarChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + number_format(tooltipItem.yLabel)+ 'm';
         }
       }
     },

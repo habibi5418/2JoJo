@@ -461,6 +461,8 @@
                         </div>
                     </div>
 
+
+					<!-- 차트 시작  -->
                     <!-- Content Row -->
 
                     <div class="row">
@@ -497,7 +499,7 @@
                                 </div>
                             </div>
                         </div>
-
+	                    
                         <!-- Pie Chart -->
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
@@ -561,6 +563,20 @@
                         </div>
                     </div>
 
+					<!-- 누적산책량 -->
+					<!-- Bar Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">산책량</h6>
+                        </div>
+                        <div class="card-body">
+                           <div class="chart-bar">
+                               <canvas id="myBarChart"></canvas>
+                           </div>
+                        </div>
+                   	</div>
+                   	
+                </div>
                     <!-- Content Row -->
                     <div class="row">
 
@@ -784,8 +800,12 @@
     <!-- Page level custom scripts -->
     <script src="<c:url value='/resources/js/demo/chart-area-demo.js'/>"></script>
     <script src="<c:url value='/resources/js/demo/chart-pie-demo.js'/>"></script>
+    <script src="<c:url value='/resources/js/demo/chart-bar-demo.js'/>"></script>
 
-
+	<script type="text/javascript">
+		var getTotalDistanceUrl = "<c:url value='/gps/getTotalDistance'/>";
+		getTotalDistance(getTotalDistanceUrl);
+	</script>
 </body>
 
 </html>

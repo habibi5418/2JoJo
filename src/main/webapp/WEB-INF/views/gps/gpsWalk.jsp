@@ -667,7 +667,7 @@
 				polyline.setMap(map);
 			});
 		}
-		
+		// 일일 산책량
 		fetch("<c:url value='/gps/getTotalDistance'/>", {
 			method: "POST",
 			headers: {
