@@ -33,6 +33,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.co.dondog.member.dao.MemberDAO;
 import kr.co.dondog.member.exception.ExistMemberException;
 import kr.co.dondog.member.security.auth.PrincipalDetails;
 import kr.co.dondog.member.service.MemberService;
@@ -45,11 +46,17 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MemberController {
 
+
 	@Autowired
 	private MemberService memberService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private MemberDAO memberDAO;
+	
+	
 
 	@GetMapping("/")
 	public String main(Model model) {
@@ -106,22 +113,25 @@ public class MemberController {
 //		log.info("error : [" + error.toString() + "]");
 		log.info("logout : " + logout);
 		System.out.println("membercontroller.loginform");
-
-		if (error != null && !"".equals(error.toString())) {
+		if(error != null) {
 			model.addAttribute("error", "로그인 실패 아이디비밀번호를 확인하세요");
-		}
-		if (logout != null) {
-			model.addAttribute("logout", "로그아웃");
-		}
+			// 이부분에 로그인 실패시 갈 로직 넣기
+//			int loginCountInc = memberDAO.loginCountInc(MemberVO member);
+
+	        // 다른 데이터를 model에 추가할 수 있음
+//	        model.addAttribute("loginCountInc", loginCountInc);
+	    }
+		
 		return "member/loginForm";
 	}
 
-	@GetMapping("/errorPage")
+	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
-		log.info("access Denied : " + auth);
+		log.info("access Denied : "+ auth);
 		model.addAttribute("msg", "접근권한이 없습니다.");
 	}
 
+	//카카오 로그인 및 회원가입
 	@GetMapping("/auth/kakao/callback")
 	public String kakaoCallback(String code) { // Data를 리턴해주는 컨트롤러 함수
 

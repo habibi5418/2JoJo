@@ -35,4 +35,6 @@ public class DogVO {
 	private String ftype;		// 컨텐츠 타입
 	
 	private List<DogVO> dogProfileList;
+	
+	private int dogCount; // 강아지타입 차트 출력할때 필요한거
 }

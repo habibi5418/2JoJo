@@ -20,21 +20,13 @@ public class MemberService {
 	 @Autowired
 		private PasswordEncoder passwordEncoder;
 	 
-
-	 // 로그인
-//	public MemberVO login(MemberVO member) throws Exception {
-//		System.out.println("MemberService.login()");
-//		return memberDAO.login(member);
-//	}
-	
-	
-
-
+	 //로그인
 	public MemberVO findByEmail(String email) {
 		System.out.println("memberservice.findbyemail");
 		return memberDAO.findByEmail(email);
 	}
 	
+	//회원가입
 	public void insertMember(MemberVO memberVO) throws Exception {
 		try {
 			if (memberVO == null ||
@@ -58,7 +50,9 @@ public class MemberService {
 			throw ex;
 		}
 	}
-
+	
+	
+	//멤버정보수정
 	public boolean updateMember(MemberVO memberVO)  {
 		try {
 			if (memberVO == null || Objects.isNull(memberVO.getEmail())) {
