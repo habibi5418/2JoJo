@@ -43,8 +43,8 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int loginCountInc(MemberVO memberVO) {
 		System.out.println("DAOlmpl.loginCountInc");
+		System.out.println("임플에서확인"+ memberVO);
 		return sqlSession.update("mapper.member.loginCountInc", memberVO);		
-	
 	}
 
 	@Override
