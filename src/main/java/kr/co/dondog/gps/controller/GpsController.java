@@ -72,6 +72,16 @@ public class GpsController {
 		}
 		
 		result.put("totalWalkCnt", totalWalkCnt);
+		
+		return result.toString();
+	}
+
+	@RequestMapping(value = "/getTotalWalkCnt", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String getTotalWalkCnt() {
+		JSONObject result = new JSONObject();
+		result.put("totalWalkCnt", totalWalkCnt);
+		
 		return result.toString();
 	}
 	
