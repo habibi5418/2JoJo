@@ -116,4 +116,28 @@
 		where bnum = #{bnum}
 	</select>
 	
+	<select id="getChatResponse" resultType="ChatRequest">
+		select 
+				req_id as reqId
+		       ,bnum 
+			   ,sender
+			   ,receiver
+			   ,req_status as reqStatus
+			   ,req_send_time as reqSendTime
+		from dondog_chat_request
+		where bnum = #{bnum} and receiver=#{email} 
+	</select>
+	
+	<select id="getChatRequest" resultType="ChatRequest">
+		select 
+				req_id as reqId
+		       ,bnum 
+			   ,sender
+			   ,receiver
+			   ,req_status as reqStatus
+			   ,req_send_time as reqSendTime
+		from dondog_chat_request
+		where bnum = #{bnum} and sender=#{sender} 
+	</select>
+	
 </mapper>

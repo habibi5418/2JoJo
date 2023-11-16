@@ -13,6 +13,7 @@ import kr.co.dondog.board.dao.BoardDAO;
 import kr.co.dondog.board.vo.BoardDogVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
+import kr.co.dondog.chat.vo.ChatRequestVO;
 
 @Service
 public class BoardService {
@@ -99,5 +100,15 @@ public class BoardService {
 		board.setBoardImgList(boardDAO.getBoardImgList(board));
 		return board;
 	}
-
+	
+	// 채팅 요청 가져오기 - 작성자
+	public List<ChatRequestVO> getResponse(BoardVO board){
+		return boardDAO.getResponse(board);
+	} 
+	
+	// 채팅 요청 가져오기 - 작성자 외
+	public List<ChatRequestVO> getRequest(ChatRequestVO reqInfo){
+		return boardDAO.getRequest(reqInfo);
+	} 
+	
 }

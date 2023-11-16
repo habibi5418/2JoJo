@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import kr.co.dondog.board.service.BoardService;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
+import kr.co.dondog.chat.vo.ChatRequestVO;
 import kr.co.dondog.dog.service.DogService;
 import kr.co.dondog.member.security.auth.PrincipalDetails;
 import kr.co.dondog.member.vo.MemberVO;
@@ -138,14 +139,30 @@ public class BoardController {
 	
 	// 게시글 상세보기
 	@RequestMapping(value = "/detail")
-	public String detail(@RequestParam("bnum") int bnum, Model model) throws Exception {
+	public String detail(@RequestParam("bnum") int bnum, Model model,Authentication authentication, HttpServletRequest req) throws Exception {
 		BoardVO board = boardService.getBoard(bnum);
 		model.addAttribute("board", board);
 		model.addAttribute("boardDogInfoList", dogService.getBoardDogList(board));
+		
+		if (authentication.getPrincipal() instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+            MemberVO member= (MemberVO) userDetails.getUser();
+            model.addAttribute("member", member);
+        	// 작성자 resp
+    		if (member.getEmail() == board.getEmail()) {
+    			List<ChatRequestVO> response = boardService.getResponse(board);
+    			model.addAttribute("response", response);
+    		} else {
+    			// 작성자!=유저 request
+    			ChatRequestVO reqInfo = new ChatRequestVO();
+    			reqInfo.setBnum(board.getBnum());
+    			reqInfo.setSender(member.getEmail());
+    			List<ChatRequestVO> request = boardService.getRequest(reqInfo);
+    			model.addAttribute("request", request);
+    		}
+		}
+			
 		return "board/boardDetail";
 	}
-	
-	
-	
 	
 }
