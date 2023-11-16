@@ -549,30 +549,34 @@
 			
 			startFlag = true;
 			modTotalWalkCnt("plus");
-			getWnum();
 			
-			// x초마다 좌표 전송
-			interval = setInterval(() => {
-				const param = {
-						userId: senderEmail,
-						wnum: wnum,
-						lat: currentLat,
-						lng: currentLng
-				}
+			if (senderEmail != "") {
+				console.log("sender 존재")
+				getWnum();
 				
-				fetch("<c:url value='/gps/sendCoord'/>", {
-					method: "POST",
-					headers: {
-					    "Content-Type": "application/json; charset=UTF-8",
-					},
-					body: JSON.stringify(param),
-				})
-				.then((response) => response.json())
-				.then((json) => {
-// 					console.log("위도 : " + currentLat + " / 경도 : " + currentLng);
-				});
+				// x초마다 좌표 전송
+				interval = setInterval(() => {
+					const param = {
+							userId: senderEmail,
+							wnum: wnum,
+							lat: currentLat,
+							lng: currentLng
+					}
+					
+					fetch("<c:url value='/gps/sendCoord'/>", {
+						method: "POST",
+						headers: {
+						    "Content-Type": "application/json; charset=UTF-8",
+						},
+						body: JSON.stringify(param),
+					})
+					.then((response) => response.json())
+					.then((json) => {
+	// 					console.log("위도 : " + currentLat + " / 경도 : " + currentLng);
+					});
+				}
+				, 10000);
 			}
-			, 10000);
 		});
 
 		$("#endBtn").on("click", e => {
@@ -587,6 +591,19 @@
 		
 		function modTotalWalkCnt(pm) {
 			fetch("<c:url value='/gps/modTotalWalkCnt?check=" + pm + "'/>", {
+				method: "GET",
+				headers: {
+				    "Content-Type": "application/json; charset=UTF-8",
+				},
+			})
+			.then((response) => response.json())
+			.then((json) => {
+				console.log("현재 산책 이용자 수 : " + json.totalWalkCnt);
+			});
+		}
+		
+		function getTotalWalkCnt() {
+			fetch("<c:url value='/gps/getTotalWalkCnt'/>", {
 				method: "GET",
 				headers: {
 				    "Content-Type": "application/json; charset=UTF-8",
