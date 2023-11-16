@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.dondog.board.vo.BoardDogVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
+import kr.co.dondog.chat.vo.ChatRequestVO;
 import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.vo.MemberVO;
 
@@ -90,5 +91,15 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO getBoard(int bnum) {
 		return sqlSession.selectOne("mapper.board.getBoard", bnum);
 	}
-
+	
+	// 채팅요청
+	@Override
+	public List<ChatRequestVO> getResponse(BoardVO board) {
+		return sqlSession.selectList("mapper.board.getChatResponse", board);
+	}
+	
+	@Override
+	public List<ChatRequestVO> getRequest(ChatRequestVO reqInfo) {
+		return sqlSession.selectList("mapper.board.getChatRequest", reqInfo);
+	}
 }
