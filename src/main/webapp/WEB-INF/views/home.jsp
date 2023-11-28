@@ -20,23 +20,22 @@
 	<meta name="twitter:card" content="" />
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-<!-- 	<link rel="shortcut icon" href="favicon.ico"> -->
-	<!-- <c:url value='/resources/css/main/favicon.ico'/> -->
+	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- Animate.css -->
-<%-- 	<link rel="stylesheet" href="<c:url value='/resources/css/main/animate.css'/>"> --%>
+	<link rel="stylesheet" href="<c:url value='/resources/css/main/animate.css'/>">
 	
 	<!-- Icomoon Icon Fonts-->
-<%-- 	<link rel="stylesheet" href="<c:url value='/resources/css/main/icomoon.css'/>"> --%>
+	<link rel="stylesheet" href="<c:url value='/resources/css/main/icomoon.css'/>">
 	
 	<!-- Simple Line Icons -->
-<%-- 	<link rel="stylesheet" href="<c:url value='/resources/css/main/simple-line-icons.css'/>"> --%>
+	<link rel="stylesheet" href="<c:url value='/resources/css/main/simple-line-icons.css'/>">
 	
 	<!-- Bootstrap  -->
-<%-- 	<link rel="stylesheet" href="<c:url value='/resources/css/main/bootstrap.css'/>"> --%>
+	<link rel="stylesheet" href="<c:url value='/resources/css/main/bootstrap.css'/>">
 	
 	<!-- Style -->
-<%-- 	 <link rel="stylesheet" href="<c:url value='/resources/css/main/style.css'/>">  --%>
+	 <link rel="stylesheet" href="<c:url value='/resources/css/main/style.css'/>"> 
 	 
 
 	<!-- fonts -->
@@ -45,27 +44,13 @@
 	<!--weight : 200-->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
 	<!--weight : 700 강조-->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;700&display=swap" rel="stylesheet">
-	<style>
-		/* @font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon/icomoon.eot?srf3rx");
-  src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal;
-} */
-
-
-		/*# sourceMappingURL=style.css.map */
-	</style>
+	
 
 
 
 	<!-- Modernizr JS -->
-<%-- 	<script src="<c:url value='js/modernizr-2.6.2.min.js'/>"></script> --%>
-	<!-- <script src="js/modernizr-2.6.2.min.js"></script> -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
 
 
 </head>
@@ -427,34 +412,19 @@
 		</div>
 	</div>
 
-
 	<!-- jQuery -->
-	<!-- <script src="js/jquery.min.js"></script> -->
-<%-- 	<script src="<c:url value='js/jquery.min.js'/>"></script> --%>
-	
+	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<!-- jQuery Easing -->
-<%-- 	<script src="<c:url value='js/jquery.easing.1.3.js'/>"></script> --%>
-	<!-- <script src="js/jquery.easing.1.3.js"></script> -->
-	
+	<script src="<c:url value='/resources/js/jquery.easing.1.3.js'/>"></script>
 	<!-- Bootstrap -->
-<%-- 	<script src="<c:url value='js/bootstrap.min.js'/>"></script> --%>
-	<!-- <script src="js/bootstrap.min.js"></script> -->
-	
+	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 	<!-- Waypoints -->
-<%-- 	<script src="<c:url value='js/jquery.waypoints.min.js'/>"></script> --%>
-	<!-- <script src="js/jquery.waypoints.min.js"></script> -->
-	
+	<script src="<c:url value='/resources/js/jquery.waypoints.min.js'/>"></script>
 	<!-- Stellar Parallax -->
-<%-- 	<script src="<c:url value='js/jquery.stellar.min.js'/>"></script> --%>
-	<!-- <script src="js/jquery.stellar.min.js"></script> -->
-	
+	<script src="<c:url value='/resources/js/jquery.stellar.min.js'/>"></script>
 	<!-- Counters -->
-<%-- 	<script src="<c:url value='js/jquery.countTo.js'/>"></script> --%>
-	<!-- <script src="js/jquery.countTo.js"></script> -->
-	
+	<script src="<c:url value='/resources/js/jquery.countTo.js'/>"></script>
 	<!-- Main JS (Do not remove) -->
-<%-- 	<script src="<c:url value='js/main.js'/>"></script> --%>
-	<!-- <script src="js/main.js"></script> -->
-
+	<script src="<c:url value='/resources/js/main.js'/>"></script>
 </body>
 </html>
