@@ -36,6 +36,87 @@
 		from dondog_board
 		order by bnum desc
 	</select>
+
+	<select id="getAllBoardPageList" resultMap="BoardMap">
+		select * 
+	    from ( 
+	        select rownum nrow, n.* 
+	        from ( 
+				select *
+				from dondog_board 
+				where delete_status = 'N' 
+                order by bnum desc
+			) n 
+			<![CDATA[
+			where rownum <= 10
+			]]>
+		) 
+		where nrow between 1 and 10
+	</select>
+
+	<select id="getMoreBoardPageList" resultMap="BoardMap">
+		select * 
+		from ( 
+			select rownum nrow, n.* 
+			from (
+	            select * 
+				from dondog_board 
+				where delete_status = 'N' 
+			    <![CDATA[
+					and bnum < #{bnum}
+                	order by bnum desc
+		        ) n 
+		        where rownum <= 10
+		        ]]>
+	    ) 
+		where nrow between 1 and 10
+	</select>
+	
+<!-- 	<select id="getTotalCount" resultType="Board"> -->
+<!-- 		select count(*) totalCount -->
+<!-- 	    from dondog_board  -->
+<!-- 	    where delete_status = 'N' -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getAllBoardPageList" resultMap="BoardMap"> -->
+<!-- 		select *  -->
+<!-- 	    from (  -->
+<!-- 	        select rownum nrow, n.*  -->
+<!-- 	        from (  -->
+<!-- 				select * -->
+<!-- 				from dondog_board  -->
+<!-- 				where delete_status = 'N'  -->
+<!-- 				<if test="bnum != 0"> -->
+<!-- 					<![CDATA[ -->
+<!-- 						and bnum < #{bnum} -->
+<!-- 					]]> -->
+<!-- 				</if> -->
+<!--                 order by bnum desc -->
+<!-- 			) n  -->
+<!-- 			<![CDATA[ -->
+<!-- 			where rownum <= #{endNo} -->
+<!-- 			]]> -->
+<!-- 		)  -->
+<!-- 		where nrow between #{startNo} and #{endNo} -->
+<!-- 	</select> -->
+
+<!-- 	<select id="getMoreBoardPageList" resultMap="BoardMap"> -->
+<!-- 		select *  -->
+<!-- 		from (  -->
+<!-- 			select rownum nrow, n.*  -->
+<!-- 			from ( -->
+<!-- 	            select *  -->
+<!-- 				from dondog_board  -->
+<!-- 				where delete_status = 'N'  -->
+<!-- 			    <![CDATA[ -->
+<!-- 					and bnum < #{bnum} -->
+<!--                 	order by bnum desc -->
+<!-- 		        ) n  -->
+<!-- 		        where rownum <= #{endNo} -->
+<!-- 		        ]]> -->
+<!-- 	    )  -->
+<!-- 		where nrow between #{startNo} and #{endNo} -->
+<!-- 	</select> -->
 	
 	<select id="getBoardImgList" resultType="BoardImg">
 		select * 
@@ -115,6 +196,24 @@
 		from dondog_board
 		where bnum = #{bnum}
 	</select>
+	
+	<select id="getHeartStatus" resultType="BoardHeart">
+		select count(*) cnt
+	    from dondog_heart
+	    where bnum = #{bnum} 
+	    and email = #{email}
+	</select>
+	
+	<insert id="addHeart">
+		insert into dondog_heart(hnum, bnum, email) 
+		values(seq_heart.nextval, #{bnum}, #{email})
+	</insert>
+	
+	<delete id="deleteHeart">
+		delete from dondog_heart 
+		where bnum = #{bnum} 
+		and email = #{email}
+	</delete>
 	
 	<select id="getChatResponse" resultType="ChatRequest">
 		select 

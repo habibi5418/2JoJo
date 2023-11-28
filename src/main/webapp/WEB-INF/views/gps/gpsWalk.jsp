@@ -24,37 +24,31 @@
 	<div id='modalCalendar' class="modal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-<!-- 						<div class="modal-header"> -->
-<!-- 							<h5 class="modal-title">날짜 선택</h5> -->
-<!-- 							<button id="closeCal" type="button" class="btn-close" data-bs-dismiss="modal" -->
-<!-- 								aria-label="Close"></button> -->
-<!-- 						</div> -->
 				<div class="modal-body">
 					<div id='calendar'></div>
 				</div>
-<!-- 						<div class="modal-footer"> -->
-<!-- 							<button type="button" class="btn btn-secondary" -->
-<!-- 								data-bs-dismiss="modal">Close</button> -->
-<!-- 							<button type="button" class="btn btn-primary">Save -->
-<!-- 								changes</button> -->
-<!-- 						</div> -->
 			</div>
 		</div>
 	</div>
 	
 	<%@ include file="../header.jsp" %>
 	
-	<div id="container">
-		<div id="gpsWalkMap">
-<%-- 			<img id="img1" src="<c:url value="/resources/img/11kong.jpg"/>" --%>
-<!-- 				alt="" -->
-<!-- 				style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 10px; top: 10px; border-radius: 70%;"> -->
-<%-- 			<img id="img2" src="<c:url value="/resources/img/11siru.jpg"/>" --%>
-<!-- 				alt="" -->
-<!-- 				style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 70px; top: 10px; border-radius: 70%;"> -->
-<%-- 			<img id="img3" src="<c:url value="/resources/img/11hani.jpg"/>" --%>
-<!-- 				alt="" -->
-<!-- 				style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 130px; top: 10px; border-radius: 70%;"> -->
+	<div id="container2">
+		<div id="gpsWalkMap"></div>
+		
+		<div id="townContainer">
+			<div id="searchTownDiv">
+				<div id="inputTownDiv">
+					<input type="text" id="townInput" placeholder="읍/면/동을 검색하세요" value="">
+					<button type="button" id="currentPosBtn">
+			        	<img src="<c:url value='/resources/images/board/gps.png'/>" id='gpsImg'>
+			        	<span>현재위치</span>
+			        </button>
+				</div>
+				<h1 id="searchTown"></h1>
+				<input type="hidden" id="dataTown" value="">
+				<button type="button" id="saveTownBtn">동네설정</button>
+			</div>
 		</div>
 		
 		<div>
@@ -65,11 +59,6 @@
 				<button id="openCal" class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">날짜 선택</button>
 			</div>
 			<div id="walkList">일자별 산책 목록</div>
-<!-- 			<button id="connectBtn" type="button" class="btn btn-secondary connectBtn" data-num="1">mqtt 연결 - 1-1</button> -->
-<!-- 			<button id="connectBtn2" type="button" class="btn btn-secondary connectBtn" data-num="2">mqtt 연결 - 1-2</button> -->
-<!-- 			<br> -->
-<!-- 			<button id="showPosBtn" type="button" class="btn btn-primary">위치보기</button> -->
-<!-- 			<button id="endPosBtn" type="button" class="btn btn-dark">종료</button> -->
 		</div>
 	</div>
 	
@@ -84,6 +73,8 @@
 			height: 600,
 			initialView: 'dayGridMonth',
 		});
+		calendar.render();
+		
 		calendar.on('dateClick', function(info) {
 			$("#walkList").text("");
 	
@@ -93,6 +84,11 @@
 			$("#modalCalendar").modal("hide");
 		});
 	
+// 		function renderCal() {
+// 			console.log("render");
+// 			calendar.render();
+// 		}
+		
 		$("#openCal").on("click", () => {
 			$("#modalCalendar").modal("show");
 			calendar.render();

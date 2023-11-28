@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.dondog.board.service.BoardService;
+import kr.co.dondog.board.vo.BoardHeartVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.chat.vo.ChatRequestVO;
@@ -46,14 +48,21 @@ public class BoardController {
 	private DogService dogService;
 	
 	// 게시판 이동
-	@RequestMapping(value = "/list")
-	public String list(Model model) {
-		model.addAttribute("boardList", boardService.getBoardList());
+	@RequestMapping(value = "/list", produces = "application/text; charset=UTF-8")
+	public String list(Model model, BoardVO board) {
+		model.addAttribute("boardList", boardService.getBoardList(board));
 		return "board/boardList";
+	}
+	
+	// 게시판 더보기
+	@ResponseBody
+	@RequestMapping(value = "/more", produces = "application/text; charset=UTF-8")
+	public String more(@RequestBody BoardVO board) {
+		return boardService.getMoreBoardPageList(board).toString();
 	}
 
 	// 게시글 작성 폼 이동
-	@RequestMapping(value = "/writeForm")
+	@RequestMapping(value = "/writeForm", produces = "application/text; charset=UTF-8")
 	public String writeForm(Model model, Authentication authentication) throws Exception {
 		if (authentication.getPrincipal() instanceof PrincipalDetails) {
 	         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
@@ -138,7 +147,7 @@ public class BoardController {
 	}
 	
 	// 게시글 상세보기
-	@RequestMapping(value = "/detail")
+	@RequestMapping(value = "/detail", produces = "application/text; charset=UTF-8")
 	public String detail(@RequestParam("bnum") int bnum, Model model,Authentication authentication, HttpServletRequest req) throws Exception {
 		BoardVO board = boardService.getBoard(bnum);
 		model.addAttribute("board", board);
@@ -148,6 +157,10 @@ public class BoardController {
             PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
             MemberVO member= (MemberVO) userDetails.getUser();
             model.addAttribute("member", member);
+            
+            // 좋아요 여부 가져오기
+            model.addAttribute("heartStatus", boardService.getHeartStatus(new BoardHeartVO(bnum, member.getEmail())));
+            
         	// 작성자 resp
     		if (member.getEmail() == board.getEmail()) {
     			List<ChatRequestVO> response = boardService.getResponse(board);
@@ -164,5 +177,20 @@ public class BoardController {
 			
 		return "board/boardDetail";
 	}
-	
+
+	// 좋아요 추가
+	@RequestMapping(value = "/addHeart", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String addHeart(@RequestBody BoardHeartVO boardHeart) throws Exception { 
+		boardService.addHeart(boardHeart);
+		return "";
+	}
+
+	// 좋아요 삭제
+	@RequestMapping(value = "/deleteHeart", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String deleteHeart(@RequestBody BoardHeartVO boardHeart) throws Exception { 
+		boardService.deleteHeart(boardHeart);
+		return "";
+	}
 }

@@ -50,7 +50,7 @@
 		        	</ul>
 	        	</div>
 	        	<h3>About</h3>
-	        	<p id="detailModalDogAbout">문제점1<br>문제점2<br>문제점3<br>문제점4<br>~~~~<br>~~~~<br>~~~~<br>~~~~<br>~~~~<br></p>
+	        	<p id="detailModalDogAbout"></p>
         	</div>
 	      </div>
 	      <div id="detailModalFooter" class="modal-footer">
@@ -64,69 +64,64 @@
 	
 	<div id="container">
 		<div id="detailContainer">
-			<button type="button" id="updateFormBtn" class="btn btn-warning">수정</button>
-			<button type="button" id="deletBtn" class="btn btn-danger">삭제</button>
-			<button type="button" id="backBtn" class="btn btn-secondary">뒤로</button>
+			<button type="button" id="updateFormBtn" class="btn-warning">수정</button>
+			<button type="button" id="deletBtn" class="btn-danger">삭제</button>
+			<button type="button" id="backBtn" class="btn-secondary">뒤로</button>
 			<div id="detailImgDiv">
+				<c:set var="existImg" value="true" />
 				<c:choose>
 					<c:when test="${board.boardImgList.size() == 0 }">
+						<c:set var="existImg" value="false" />
    						<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='detailImg0'><br/>
 					</c:when>
 					<c:when test="${board.boardImgList.size() == 1 }">
 						<c:forEach var="boardImg" items="${board.boardImgList }" varStatus="cnt">
-			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" class='detailImg1'><br/>
+			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" id="detailImg1" class='detailImg1 pic'><br/>
 			   			</c:forEach>
 					</c:when>
 					<c:when test="${board.boardImgList.size() == 2 }">
 						<c:forEach var="boardImg" items="${board.boardImgList }" varStatus="cnt">
-			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" class='detailImg2_${cnt.index + 1 }'><br/>
+			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" id="detailImg${cnt.index + 1 }" class='detailImg2_${cnt.index + 1 } pic'><br/>
 			   			</c:forEach>
 					</c:when>
 					<c:when test="${board.boardImgList.size() <= 3 }">
 						<c:forEach var="boardImg" items="${board.boardImgList }" varStatus="cnt">
-			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" class='detailImg3_${cnt.index + 1 }'><br/>
+			   				<img src="<c:url value='/boardImg/download?inum=${boardImg.inum }'/>" id="detailImg${cnt.index + 1 }" class='detailImg3_${cnt.index + 1 } pic'><br/>
 			   			</c:forEach>
 					</c:when>
 				</c:choose>
    			</div>
 			<div id="boardTitleDiv">
-	   			<p>
-	   				${board.loc2} <br>
-					${board.title }  ${board.regDate }
+	   			<p id="boardLocP">
+			        <img src="<c:url value='/resources/images/board/loc2.png'/>" class='loc2Img'>
+	   				${board.loc2}
 				</p>
-				<a href="#" id="heartAnchor">
-       				<img src="<c:url value='/resources/images/board/lightning.png'/>" id='heartImg'>
-				</a>
+   				<div>
+					<span id="boardTitleSpan">${board.title }</span>
+					<span id="boardDateSpan">${board.regDate }</span>
+				</div>
+	            <label id="heartLabel" for="checkHeart">
+	            	<c:if test="${heartStatus}">
+	            		<input id="checkHeart" type="checkbox" checked="checked">
+	            	</c:if>
+	            	<c:if test="${!heartStatus}">
+	            		<input id="checkHeart" type="checkbox">
+	            	</c:if>
+	            </label>
 			</div>
-			<div id="boardDogDiv">
-				<ul id="boardDogUl">
-				<c:forEach var="boardDogInfo" items="${boardDogInfoList }">
-					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
-						<li class="boardDogLi">
-							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
-							<p>${boardDogInfo.dname }</p>
-						</li>
-					</a>
-					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
-						<li class="boardDogLi">
-							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
-							<p>${boardDogInfo.dname }</p>
-						</li>
-					</a>
-					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
-						<li class="boardDogLi">
-							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
-							<p>${boardDogInfo.dname }</p>
-						</li>
-					</a>
-					<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
-						<li class="boardDogLi">
-							<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
-							<p>${boardDogInfo.dname }</p>
-						</li>
-					</a>
-				</c:forEach>
-				</ul>
+			<div id="boardDogWrapper">
+				<div id="boardDogDiv">
+					<ul id="boardDogUl">
+					<c:forEach var="boardDogInfo" items="${boardDogInfoList }">
+						<a href="#myModal1" data-toggle="modal" onclick="setModal('${boardDogInfo.dnum}', '${boardDogInfo.dname}', '${boardDogInfo.dtype}', '${boardDogInfo.age}', '${boardDogInfo.gender}', '${boardDogInfo.weight}', '${boardDogInfo.matter}')">
+							<li class="boardDogLi">
+								<img src="<c:url value='/dogProfile/download?dnum=${boardDogInfo.dnum }'/>" class='detailDogImg'><br>
+								<p>${boardDogInfo.dname }</p>
+							</li>
+						</a>
+					</c:forEach>
+					</ul>
+				</div>
 			</div>
 			<div id="boardContentsDiv">
 				<p>
@@ -139,21 +134,21 @@
 				</div>
 				<div id="detailFooterRight">
 					꼬숩도<br>
-					<div id="btn_chatting">${request}
+					<div id="btn_chatting">
 						<c:if test="${member.email!= board.email}">
 							<c:if test="${request.size() != 0}">
-								<button id="goChat" style="width: 100px; height:20px; font-size:20px; background: red" disabled="disabled">1:1채팅</button>							
+								<button type="button" id="goChat" class="detailDisabledBtn" disabled="disabled">요청보냄</button>							
 							</c:if>
 							<c:if test="${request.size() == 0}">
-								<button id="goChat" style="width: 100px; height:20px; font-size:20px;">1:1채팅</button>
+								<button type="button" id="goChat" class="detailEnabledBtn">채팅요청</button>
 							</c:if>
 						</c:if>
 						<c:if test="${member.email== board.email}">
 							<c:if test= "${response != null}">
-								<button id="goChat" style="width: 100px; height:20px; font-size:20px; background: red"> 채팅 목록 </button>
+								<button type="button" id="goChat" class="detailEnabledBtn">채팅목록</button>
 							</c:if>
 							<c:if test= "${response == null}">
-								<button id="goChat" style="width: 100px; height:20px; font-size:20px;" disabled="disabled"> 채팅목록(0)</button>
+								<button type="button" id="goChat" class="detailDisabledBtn" disabled="disabled">채팅목록(0)</button>
 							</c:if>
 						</c:if>
 					</div>
@@ -162,10 +157,81 @@
 		</div>
 	</div>
     
+	<div id="lightbox1" class="lightbox">
+		<img src="" alt="" id="lightboxImage1">
+	</div>
+    
+	<div id="lightbox2" class="lightbox">
+		<img src="" alt="" id="lightboxImage2">
+	</div>
+    
+	<div id="lightbox3" class="lightbox">
+		<img src="" alt="" id="lightboxImage3">
+	</div>
+	
     <script>
+    
+	 	// 라이트박스
+		if (${existImg}) {
+			const pics = document.getElementsByClassName("pic");
+
+			document.getElementById("lightboxImage1").setAttribute("src", pics[0].getAttribute("src")); 
+			document.getElementById("detailImg1").addEventListener("click", function() {
+				document.getElementById("lightbox1").style.display = "block"; 
+			});
+			document.getElementById("lightbox1").addEventListener("click", function() {  //click 이벤트가 발생했을 때 실행할 함수 선언
+				this.style.display = "none";  // lightbox 요소를 화면에서 감춤
+			});
+			
+			if (pics.length >= 2) {
+				document.getElementById("lightboxImage2").setAttribute("src", pics[1].getAttribute("src")); 
+				document.getElementById("detailImg2").addEventListener("click", function() {
+					document.getElementById("lightbox2").style.display = "block"; 
+				});
+				document.getElementById("lightbox2").addEventListener("click", function() {  //click 이벤트가 발생했을 때 실행할 함수 선언
+					this.style.display = "none";  // lightbox 요소를 화면에서 감춤
+				});
+				
+				if (pics.length >= 3) {
+					document.getElementById("lightboxImage3").setAttribute("src", pics[2].getAttribute("src")); 
+					document.getElementById("detailImg3").addEventListener("click", function() {
+						document.getElementById("lightbox3").style.display = "block"; 
+					});
+					document.getElementById("lightbox3").addEventListener("click", function() {  //click 이벤트가 발생했을 때 실행할 함수 선언
+						this.style.display = "none";  // lightbox 요소를 화면에서 감춤
+					});
+				}
+			}
+		}
+	
 	    $("#backBtn").on("click", () =>{
 			location.href = "<c:url value='/board/list'/>";
 		});
+	    
+	    function updateHeart(param, url) {
+	    	fetch(url, {
+				method: "POST",
+				headers: {
+				    "Content-Type": "application/json; charset=UTF-8",
+				},
+				body: JSON.stringify(param),
+			});
+	    }
+	    
+	    $("#checkHeart").on("click", () => {
+	    	// 눌린 이후 상태임
+	    	const heart = $("#checkHeart").is(":checked");
+    		const param = {
+    			bnum: ${board.bnum},
+    			email: "${member.email}"
+    		}
+    		
+	    	if (heart) {
+	    		updateHeart(param, "<c:url value='/board/addHeart'/>");
+	    	} else {
+	    		updateHeart(param, "<c:url value='/board/deleteHeart'/>");
+	    	}
+	    });
 	    
 	    $("#chatFormBtn").on("click", () =>{
 			location.href = "<c:url value='/chat/roomList?bnum=" + ${board.bnum} + "'/>";
@@ -181,10 +247,10 @@
 			
        		$("#detailModalDogDname").text(dname);
        		$("#detailModalDogDtype").text(dtype);
-       		$("#detailModalDogAge").text(age);
+       		$("#detailModalDogAge").text(age + "살");
        		$("#detailModalDogGender").text(gender);
        		$("#detailModalDogWeight").text(weight);
-//        		$("#detailModalDogAbout").text(matter);
+       		$("#detailModalDogAbout").html(matter);
 	    }
 	    
 		$("#goChat").on("click", function () {
@@ -202,7 +268,7 @@
 	       			sender : sender, 
 		        	receiver : receiver,
 		        	bnum : bnum
-	       		})
+	       		})	
 	    	}).done(resp => {
 	        	localStorage.setItem('chat.sender', sender);
 	        	localStorage.setItem('chat.receiver', receiver);
@@ -212,7 +278,7 @@
 	        	
 	        	alert(resp.message);
 	        });
-		}
+		});
 		
     </script>
     
