@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.dondog.board.dao.BoardDAO;
 import kr.co.dondog.board.vo.BoardDogVO;
+import kr.co.dondog.board.vo.BoardHeartVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.chat.vo.ChatRequestVO;
@@ -22,38 +23,76 @@ public class BoardService {
 	BoardDAO boardDAO;
 	
 	// 전체 게시글 가져오기
-	public List<BoardVO> getBoardList() {
-		List<BoardVO> list = boardDAO.getBoardList();
+	public List<BoardVO> getBoardList(BoardVO board) {
+		List<BoardVO> list = boardDAO.getAllBoardPageList(board);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		list.stream().forEach(board -> {
-			board.setBoardImgList(boardDAO.getBoardImgList(board));
+		list.stream().forEach(b -> {
+			b.setBoardImgList(boardDAO.getBoardImgList(b));
 
 			try {
-				long regDate = formatter.parse(board.getRegDate()).getTime();
+				long regDate = formatter.parse(b.getRegDate()).getTime();
 				long now = Calendar.getInstance().getTime().getTime();
 				long diff = now - regDate;
 				
 				if (diff / (3600000 * 24) == 0) {
 					if (diff / (60000 * 3) == 0) {
-						board.setRegDate("방금 전");
+						b.setRegDate("방금 전");
 					} else if (diff / (3600000) == 0) {
 						long minute = diff / (60000);
-						board.setRegDate(minute + "분 전");
+						b.setRegDate(minute + "분 전");
 					} else {
 						long hour = diff / (3600000);
-						board.setRegDate(hour + "시간 전");
+						b.setRegDate(hour + "시간 전");
 					}
 				} else {
-					String monthDay = board.getRegDate().substring(5, 10);
-					board.setRegDate(monthDay);
+					String monthDay = b.getRegDate().substring(5, 10);
+					b.setRegDate(monthDay);
 				}
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
+		
 		return list;
+	}
+	
+	// 게시물 더보기 
+	public JSONObject getMoreBoardPageList(BoardVO board) {
+		JSONObject result = new JSONObject();
+		List<BoardVO> list = boardDAO.getMoreBoardPageList(board);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		list.stream().forEach(b -> {
+			b.setBoardImgList(boardDAO.getBoardImgList(b));
+
+			try {
+				long regDate = formatter.parse(b.getRegDate()).getTime();
+				long now = Calendar.getInstance().getTime().getTime();
+				long diff = now - regDate;
+				
+				if (diff / (3600000 * 24) == 0) {
+					if (diff / (60000 * 3) == 0) {
+						b.setRegDate("방금 전");
+					} else if (diff / (3600000) == 0) {
+						long minute = diff / (60000);
+						b.setRegDate(minute + "분 전");
+					} else {
+						long hour = diff / (3600000);
+						b.setRegDate(hour + "시간 전");
+					}
+				} else {
+					String monthDay = b.getRegDate().substring(5, 10);
+					b.setRegDate(monthDay);
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		result.put("boardList", list);
+		
+		return result;
 	}
 
 	// 글 작성
@@ -99,6 +138,21 @@ public class BoardService {
 		board.setBoardDogList(boardDAO.getBoardDogList(board));
 		board.setBoardImgList(boardDAO.getBoardImgList(board));
 		return board;
+	}
+	
+	// 좋아요 여부 가져오기
+	public boolean getHeartStatus(BoardHeartVO boardHeart) {
+		return boardDAO.getHeartStatus(boardHeart) > 0;
+	}
+	
+	// 좋아요 추가
+	public void addHeart(BoardHeartVO boardHeart) {
+		boardDAO.addHeart(boardHeart);
+	}
+	
+	// 좋아요 추가
+	public void deleteHeart(BoardHeartVO boardHeart) {
+		boardDAO.deleteHeart(boardHeart);
 	}
 	
 	// 채팅 요청 가져오기 - 작성자

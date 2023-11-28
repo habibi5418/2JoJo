@@ -1,7 +1,5 @@
 package kr.co.dondog.gps.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +21,14 @@ public class GpsController {
 	
 	int totalWalkCnt = 0;
 	
-	// 게시판 이동
 	@RequestMapping(value = "/walk")
 	public String walk(Model model) {
 		return "gps/gpsWalk";
+	}
+	
+	@RequestMapping(value = "/townSet")
+	public String townSet(Model model) {
+		return "gps/townSet";
 	}
 	
 	@RequestMapping(value = "/sendCoord", produces = "application/json; charset=UTF-8")
