@@ -38,27 +38,12 @@
 		
 		<div id="townContainer">
 			<div id="searchTownDiv">
-				<div id="inputTownDiv">
-					<input type="text" id="townInput" placeholder="읍/면/동을 검색하세요" value="">
-					<button type="button" id="currentPosBtn">
-			        	<img src="<c:url value='/resources/images/board/gps.png'/>" id='gpsImg'>
-			        	<span>현재위치</span>
-			        </button>
-				</div>
-				<h1 id="searchTown"></h1>
-				<input type="hidden" id="dataTown" value="">
-				<button type="button" id="saveTownBtn">동네설정</button>
+				<button type="button" id="startBtn" class="walkBtn">출발</button>
+				<button type="button" id="endBtn" class="walkBtn" disabled="disabled">도착</button><br>
+				<button type="button" id="openCal">날짜 선택</button>
+				<h3>일자별 산책 목록</h3>
+				<div id="walkList"></div>
 			</div>
-		</div>
-		
-		<div>
-			<button id="startBtn" type="button" class="btn btn-warning">출발</button>
-			<button id="endBtn" type="button" class="btn btn-secondary" disabled="disabled">도착</button>
-			
-			<div>
-				<button id="openCal" class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false">날짜 선택</button>
-			</div>
-			<div id="walkList">일자별 산책 목록</div>
 		</div>
 	</div>
 	
@@ -84,11 +69,6 @@
 			$("#modalCalendar").modal("hide");
 		});
 	
-// 		function renderCal() {
-// 			console.log("render");
-// 			calendar.render();
-// 		}
-		
 		$("#openCal").on("click", () => {
 			$("#modalCalendar").modal("show");
 			calendar.render();
@@ -102,10 +82,11 @@
 		var map = new naver.maps.Map('gpsWalkMap', mapOptions);
 
 		// ============== mqtt ============== 
+		var partnerImgPath = "<c:url value='/dogProfile/download?dnum=${partnerDog.dnum }'/>";
 		var partnerMarker = new naver.maps.Marker({
 		    icon: {
-	            content: '<img src="<c:url value="/resources/img/go.png"/>" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
-	            anchor: new naver.maps.Point(16, 16)
+		    	content: '<img src="' + partnerImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
+				anchor: new naver.maps.Point(16, 16)
 	        }
 		});
 		
@@ -113,11 +94,6 @@
 		var senderEmail = "${principal.username}";
 		console.log("sender : " + senderEmail);
 		
-// 		interval2 = setInterval(() => {
-// 	        mqttClient.publish(mqtt_topic, JSON.stringify({lat: currentLat, lng: currentLng, sender: senderEmail}))
-// 		}
-// 		, 3000);
-			
 		//MQTT 수신 받을 상태로 초기화를 한다
 	    //MQTT client
 	    const roomId = prompt("번호 입력 (임시)");
@@ -166,16 +142,13 @@
 	    // 구독 메시지 수신 
 	    mqttClient.on('message', function (topic, message) {
 	        // message is Buffer
-// 	        console.log("mqtt message receive :", message.toString());
 	        const latLng = message.toString().split(",");
 	        const lat = latLng[0].substr(7);
 	        const lng = latLng[1].substr(6);
 	        const senderArr = message.toString().split("\"");
 	        const sender = senderArr[7];
 
-// 	        console.log("메세지 보낸 사람 : " + sender + ", 현재 페이지의 사람 : " + senderEmail);
 	        if (!(sender === senderEmail)) {
-// 		        console.log("상대방 마커 세팅 lat, lng, sender : " + lat + ", " + lng + ", " + sender);
 		        partnerMarker.setMap(map);
 	        	partnerMarker.setPosition(new naver.maps.LatLng(lat, lng));
 	        }
@@ -183,7 +156,7 @@
 	      
         $(window).on("beforeunload", e => {
         	  //구독을 해제 한다
-        	  clearInterval(interval2);
+        	clearInterval(interval2);
             unsubscribe();
             disconnect();
             
@@ -210,148 +183,6 @@
 	    	  mqttClient.unsubscribe(mqtt_topic);
 	    }
 		
-		
-		// ============== geocoder ============== 
-// 		var infoWindow = new naver.maps.InfoWindow({
-// 		    anchorSkew: true
-// 		});
-		
-// 		map.setCursor('pointer');
-
-// 		function searchCoordinateToAddress(latlng) {
-
-// 		    infoWindow.close();
-
-// 		    naver.maps.Service.reverseGeocode({
-// 		        coords: latlng,
-// 		        orders: [
-// 		            naver.maps.Service.OrderType.ADDR,
-// 		            naver.maps.Service.OrderType.ROAD_ADDR
-// 		        ].join(',')
-// 		    }, function(status, response) {
-// 		        if (status === naver.maps.Service.Status.ERROR) {
-// 		            return alert('Something Wrong!');
-// 		        }
-
-// 		        var items = response.v2.results,
-// 		            address = '',
-// 		            htmlAddresses = [];
-
-// 		        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
-// 		            item = items[i];
-// 		            address = makeAddress(item) || '';
-// 		            addrType = item.name === 'roadaddr' ? '[도로명 주소]' : '[지번 주소]';
-
-// 		            htmlAddresses.push((i+1) +'. '+ addrType +' '+ address);
-// 		        }
-				
-// 		        infoWindow.setContent([
-// 		            '<div style="padding:10px;min-width:200px;line-height:150%;">',
-// 		            '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
-// 		            htmlAddresses.join('<br />'),
-// 		            '</div>'
-// 		        ].join('\n'));
-
-// 		        infoWindow.open(map, latlng);
-// 		    });
-// 		}
-
-// 		function initGeocoder() {
-// 		    map.addListener('click', function(e) {
-// 		        searchCoordinateToAddress(e.coord);
-// 		    });
-
-// 		    $('#address').on('keydown', function(e) {
-// 		        var keyCode = e.which;
-
-// 		        if (keyCode === 13) { // Enter Key
-// 		            searchAddressToCoordinate($('#address').val());
-// 		        }
-// 		    });
-
-// 		    $('#submit').on('click', function(e) {
-// 		        e.preventDefault();
-
-// 		        searchAddressToCoordinate($('#address').val());
-// 		    });
-// 		}
-		
-// 		function makeAddress(item) {
-// 		    if (!item) {
-// 		        return;
-// 		    }
-
-// 		    var name = item.name,
-// 		        region = item.region,
-// 		        land = item.land,
-// 		        isRoadAddress = name === 'roadaddr';
-
-// 		    var sido = '', sigugun = '', dongmyun = '', ri = '', rest = '';
-
-// 		    if (hasArea(region.area1)) {
-// 		        sido = region.area1.name;
-// 		    }
-
-// 		    if (hasArea(region.area2)) {
-// 		        sigugun = region.area2.name;
-// 		    }
-
-// 		    if (hasArea(region.area3)) {
-// 		        dongmyun = region.area3.name;
-// 		    }
-
-// 		    if (hasArea(region.area4)) {
-// 		        ri = region.area4.name;
-// 		    }
-
-// 		    if (land) {
-// 		        if (hasData(land.number1)) {
-// 		            if (hasData(land.type) && land.type === '2') {
-// 		                rest += '산';
-// 		            }
-
-// 		            rest += land.number1;
-
-// 		            if (hasData(land.number2)) {
-// 		                rest += ('-' + land.number2);
-// 		            }
-// 		        }
-
-// 		        if (isRoadAddress === true) {
-// 		            if (checkLastString(dongmyun, '면')) {
-// 		                ri = land.name;
-// 		            } else {
-// 		                dongmyun = land.name;
-// 		                ri = '';
-// 		            }
-
-// 		            if (hasAddition(land.addition0)) {
-// 		                rest += ' ' + land.addition0.value;
-// 		            }
-// 		        }
-// 		    }
-
-// 		    return [sido, sigugun, dongmyun, ri, rest].join(' ');
-// 		}
-
-// 		function hasArea(area) {
-// 		    return !!(area && area.name && area.name !== '');
-// 		}
-
-// 		function hasData(data) {
-// 		    return !!(data && data !== '');
-// 		}
-
-// 		function checkLastString (word, lastString) {
-// 		    return new RegExp(lastString + '$').test(word);
-// 		}
-
-// 		function hasAddition (addition) {
-// 		    return !!(addition && addition.value);
-// 		}
-
-// 		naver.maps.onJSContentLoaded = initGeocoder;
-		
 		var marker = new naver.maps.Marker();
 		var infoWindows = [];
 		
@@ -373,7 +204,7 @@
 		        });
 		        
 		        const parkInfoWindow = new naver.maps.InfoWindow({
-		          content: '<div style="width:auto; text-align:center; font-size:75%; padding:10px;"><p>' + park.pname + '</p></div>'
+		          content: '<div style="width:auto; text-align:center; font-size:75%; padding:10px;"><p style="margin-bottom:0px;">' + park.pname + '</p></div>'
 		        });
 		        parkMarker.addListener('click', () => {
 		          if (parkInfoWindow.getMap()) {
@@ -391,9 +222,10 @@
 		// gps
 		var currentLat;
 		var currentLng;
-
+		var myImgPath = "<c:url value='/dogProfile/download?dnum=${dog.dnum }'/>";
+		
 		var selectIcon = {
-			content: '<img src="<c:url value="/resources/img/11kong.jpg"/>" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
+			content: '<img src="' + myImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
 			anchor: new naver.maps.Point(16, 16)
 		}
 		
@@ -412,13 +244,11 @@
 		    gpsMarker.setPosition(location);
 
 	        mqttClient.publish(mqtt_topic, JSON.stringify({lat: currentLat, lng: currentLng, sender: senderEmail}));
-// 		    console.log('Coordinates: ' + location.toString());
 		}
 		
 		function onSuccessGeolocation2(position) {
 		    const location = new naver.maps.LatLng(position.coords.latitude,
 		                                         position.coords.longitude);
-// 		    console.log('맵 중심 세팅 : ' + location.toString());
 		    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
 		}
 
@@ -464,9 +294,16 @@
 			.then((json) => {
 				wnum = json.wnum + 1;
 				if (flag == "append") {
-					for (var i = 1; i < wnum; i++) {
-						$("#walkList").append("<input type='text' value='" + selectDate + " - " + i + "'>");
-						$("#walkList").append("<button type='button' onclick='drawRoute(" + i + ")' class='btn btn-secondary'>경로보기</button>");
+					if (wnum > 1) {
+						for (var i = 1; i < wnum; i++) {
+							const walkListHtml = '<div id="walkListDiv">'
+													+ '<input type="text" class="dateList" value="' + selectDate + ' / ' + i + '">' 
+													+ '<button type="button" class="drawBtn" onclick="drawRoute(' + i + ')">경로보기</button>' 
+											   + '</div>';
+							$("#walkList").append(walkListHtml);
+						}
+					} else {
+						$("#walkList").append('<h4>해당 일자에 산책 기록이 없습니다.</h4>');
 					}
 				}
 			});
@@ -509,7 +346,6 @@
 				const path = [];
 				
 				json.routeList.forEach(route => {
-// 					console.log(route);
 					path.push(new naver.maps.LatLng(route.lat, route.lng));
 				});
 				
@@ -517,24 +353,6 @@
 				polyline.setMap(map);
 			});
 		}
-		
-		// 주 산책량
-// 		fetch("<c:url value='/gps/getTotalDistance'/>", {
-// 			method: "POST",
-// 			headers: {
-// 			    "Content-Type": "application/json; charset=UTF-8",
-// 			},
-// 			body: JSON.stringify(),
-// 		})
-// 		.then((response) => response.json())
-// 		.then((json) => {
-// 			const totalDistanceList = json.totalDistanceList;
-
-// 			totalDistanceList.forEach(totalDistance => {
-// 				console.log("날짜 : " + totalDistance.walkDate);
-// 				console.log("총 산책량(미터) : " + totalDistance.totalDistance);
-// 			});
-// 		});
 		
 		var startFlag = false;
 		
@@ -565,13 +383,9 @@
 						    "Content-Type": "application/json; charset=UTF-8",
 						},
 						body: JSON.stringify(param),
-					})
-					.then((response) => response.json())
-					.then((json) => {
-	// 					console.log("위도 : " + currentLat + " / 경도 : " + currentLng);
 					});
 				}
-				, 10000);
+				, 5000);
 			}
 		});
 
