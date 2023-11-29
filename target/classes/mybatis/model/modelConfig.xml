@@ -9,7 +9,7 @@
 		<typeAlias type="kr.co.dondog.board.vo.BoardDogVO"  alias="BoardDog" />
 		<typeAlias type="kr.co.dondog.board.vo.BoardImgVO"  alias="BoardImg" />
 		<typeAlias type="kr.co.dondog.dog.vo.DogVO"  alias="Dog" />
-		
+		<typeAlias type="kr.co.dondog.chat.vo.ChatRequestVO"  alias="ChatRequest" />
 		<typeAlias type="kr.co.dondog.gps.vo.ParkVO"  alias="Park" />
 		<typeAlias type="kr.co.dondog.gps.vo.TestVO"  alias="Test" />
 		

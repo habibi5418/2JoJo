@@ -68,10 +68,10 @@
 					<input type="text" name="dtype" id="addDtype" class="form-control" required>
 					<label for="addGender">성별</label>
 					<input type="text" name="gender" id="addGender" class="form-control" required>
-					<label for="addWeight">무게</label>
+					<label for="addWeight">무게(kg)</label>
 					<input type="text" name="weight" id="addWeight" class="form-control" required>
-<!-- 					<label for="addMatter">특이사항</label> -->
-<!-- 					<input type="text" name="matter" id="addMatter" class="form-control" required> -->
+					<label for="addMatter">특이사항</label>
+					<textarea name="matter" id="addMatter" class="form-control"></textarea>
 				</fieldset>
 				<label>프로필 사진 선택</label>
 				<div id="d_file">
@@ -97,7 +97,7 @@
 		<div id="formContainer">
 			<form id="writeForm" method="post" autocomplete="off" enctype="multipart/form-data">
 	            <div id="lightningDiv">
-		            <label id="lightningLabel" for=checkLightning">
+		            <label id="lightningLabel" for="checkLightning">
 		            	<p>번개</p>
 		            	<input id="checkLightning" type="checkbox">
 		            </label>
@@ -228,7 +228,7 @@
 				alert(json.message);
 				if (json.status) {
 					reloadCurrentDog();
-					$("#newDogAddModal").modal("hide");
+					$("#myModal2").modal("hide");
 				}
 			});
 		});

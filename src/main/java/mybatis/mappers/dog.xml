@@ -39,7 +39,7 @@
 			, dtype 				
 			, gender 
 			, weight 
-<!-- 			, matter 			 -->
+			, matter 			
 			, fname 
 			, sname 
 			, length 
@@ -52,7 +52,7 @@
 			, #{dtype}
 			, #{gender}
 			, #{weight}
-<!-- 			, #{matter} -->
+			, #{matter}
 			, #{fname}
 			, #{sname}
 			, #{length}

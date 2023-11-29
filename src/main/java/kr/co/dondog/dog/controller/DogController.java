@@ -29,7 +29,7 @@ import kr.co.dondog.dog.vo.DogVO;
 @RequestMapping(value = "/dog")
 public class DogController {
 
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\dondog_file";
+	private static final String CURR_IMAGE_REPO_PATH = "/dondog_file";
 	
 	@Autowired
 	private DogService DogService;

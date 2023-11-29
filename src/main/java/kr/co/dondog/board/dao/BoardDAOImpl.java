@@ -6,9 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import kr.co.dondog.board.vo.BoardDogVO;
+import kr.co.dondog.board.vo.BoardHeartVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
+import kr.co.dondog.chat.vo.ChatRequestVO;
 import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.vo.MemberVO;
 
@@ -20,8 +23,27 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 전체 게시물 가져오기
 	@Override
-	public List<BoardVO> getBoardList() {
-		return sqlSession.selectList("mapper.board.getBoardList");
+	public List<BoardVO> getBoardList(BoardVO board) {
+		return sqlSession.selectList("mapper.board.getBoardList", board);
+	}
+	
+	// 전체 게시물 수 구하기
+//	@Override
+//	public int getTotalCount(BoardVO board) {
+//		BoardVO getBoard = sqlSession.selectOne("mapper.board.getTotalCount", board);
+//		return getBoard != null ? getBoard.getTotalCount() : 0;
+//	}
+	
+	// 게시물 가져오기
+	@Override
+	public List<BoardVO> getAllBoardPageList(BoardVO board) {
+		return sqlSession.selectList("mapper.board.getAllBoardPageList", board);
+	}
+	
+	// 게시물 더보기
+	@Override
+	public List<BoardVO> getMoreBoardPageList(BoardVO board) {
+		return sqlSession.selectList("mapper.board.getMoreBoardPageList", board);
 	}
 
 	// 게시글 이미지 리스트 가져오기
@@ -90,5 +112,34 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO getBoard(int bnum) {
 		return sqlSession.selectOne("mapper.board.getBoard", bnum);
 	}
-
+	
+	// 좋아요 여부 가져오기
+	@Override
+	public int getHeartStatus(BoardHeartVO boardHeart) {
+		BoardHeartVO result = sqlSession.selectOne("mapper.board.getHeartStatus", boardHeart);
+		return result != null ? result.getCnt() : 0;
+	}
+	
+	// 좋아요 추가
+	@Override
+	public void addHeart(BoardHeartVO boardHeart) {
+		sqlSession.insert("mapper.board.addHeart", boardHeart);
+	}
+	
+	// 좋아요 삭제
+	@Override
+	public void deleteHeart(BoardHeartVO boardHeart) {
+		sqlSession.delete("mapper.board.deleteHeart", boardHeart);
+	}
+	
+	// 채팅요청
+	@Override
+	public List<ChatRequestVO> getResponse(BoardVO board) {
+		return sqlSession.selectList("mapper.board.getChatResponse", board);
+	}
+	
+	@Override
+	public List<ChatRequestVO> getRequest(ChatRequestVO reqInfo) {
+		return sqlSession.selectList("mapper.board.getChatRequest", reqInfo);
+	}
 }

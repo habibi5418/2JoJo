@@ -24,17 +24,18 @@
 	
 	<section>
 		<div id="container">
+			<input type="hidden" id="lastBnum" value="${boardList[boardList.size() - 1].bnum }" />
 			<div id="listContainer">
 				<div id="listHeader">
-					<h2 id="listLoc2">혜화동</h2>
+					<h1 id="listLoc2">혜화동</h1>
 					<c:if test="${not empty principal}">
 						<button type="button" id="writeFormBtn" class="btn-warning">글작성</button>
 					</c:if>
 				</div>
 				<c:forEach var="board" items="${boardList }">
 					<a href="<c:url value='/board/detail?bnum=${board.bnum }'/>" class="commonAnchor">
-						<div id="boardDiv">
-							<div id="boardBox">
+						<div class="boardDiv">
+							<div class="boardBox">
 								<c:if test="${board.boardImgList[0] == null }">
 				        			<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='boardImg'><br/>
 				        		</c:if>
@@ -42,11 +43,12 @@
 				        			<img src="<c:url value='/boardImg/download?inum=${board.boardImgList[0].inum }'/>" class='boardImg'><br/>
 				        		</c:if>
 								<p class="boardInfo">
+			        				<img src="<c:url value='/resources/images/board/loc2.png'/>" class='loc2Img'>
 									${board.loc2 }<br>
 									<c:if test="${board.category == 'B' }">
 				        				<img src="<c:url value='/resources/images/board/lightning.png'/>" class='lightningImg'>
 									</c:if>
-									${board.title }
+									<span> ${board.title }</span>
 								</p>
 								<p class="boardInfoRight">
 									${board.nickname }<br>
@@ -61,14 +63,90 @@
 	</section>
 	
     <script>
+    	
+    	var moreIng = false;
+    	
+		$(document).ready(function(){
+			//window는 "#searchPopup"등 으로 스크롤 주체로 변경가능
+			$(window).scroll(function(){
+				var scrollTop = $(this).scrollTop();
+				var innerHeight = $(this).innerHeight();
+				var scrollHeight = $(document).height();
+				
+				if ((scrollTop + innerHeight) >= (scrollHeight - 200)) {
+					if (!moreIng) {
+						moreIng = true;
+						moreData();
+					}
+				}
+			});
+		});
+    
     	if (${principal != null}) {
 			$("#writeFormBtn").on("click", () =>{
 				location.href = "<c:url value='/board/writeForm'/>";
 			});
     	}
     	
-	    $(document).ready(function() {	
-	    });
+    	function moreData() {
+			const param = {
+    			bnum: $("#lastBnum").val()
+    		}
+       	    		
+			fetch("<c:url value='/board/more'/>", {
+				method: "POST",
+				headers: {
+				    "Content-Type": "application/json; charset=UTF-8",
+				},
+				body: JSON.stringify(param),
+			})
+			.then((response) => response.json())
+			.then((json) => {
+				const moreList = json.boardList;
+				
+				if (moreList.length != 0) {
+					const path = "<c:url value='/board/detail?bnum='/>";
+					const noImgPath = "<c:url value='/resources/images/board/이미지없음.png'/>";
+					const imgPath = "<c:url value='/boardImg/download?inum='/>";
+					const loc2Path = "<c:url value='/resources/images/board/loc2.png'/>";
+					const isLightning = ${board.category == 'B' };
+					const lightningImgPath = "<c:url value='/resources/images/board/lightning.png'/>";
+					const listContainer = $("#listContainer");
+					
+					moreList.forEach(more => {
+						let moreAnchor = '<a href="' + path + more.bnum + '" class="commonAnchor">' 
+											+ '<div class="boardDiv">' 
+												+ '<div class="boardBox">';
+													if (more.boardImgList.length != 0) {
+														moreAnchor += '<img src="' + imgPath + more.boardImgList[0].inum + '" class="boardImg"><br/>';
+													} else {
+														moreAnchor += '<img src="' + noImgPath + '" class="boardImg"><br/>';
+													}
+						moreAnchor 						+= '<p class="boardInfo">'
+								        				+ '<img src="' + loc2Path + '" class="loc2Img">'
+														+ more.loc2 + '<br>'
+														+ '<c:if test="' + isLightning + '">'
+									        				+ '<img src="' + lightningImgPath + '" class="lightningImg">'
+														+ '</c:if>'
+														+ '<span>' + more.title + '</span>'
+													+ '</p>'
+													+ '<p class="boardInfoRight">'
+														+ more.nickname + '<br>'
+														+ more.regDate 
+													+ '</p>'
+												+ '</div>'
+											+ '</div>'
+										+ '</a>';
+						
+						listContainer.append(moreAnchor);
+					});
+					
+					$("#lastBnum").val(moreList[moreList.length - 1].bnum);
+					moreIng = false;
+				}
+			});
+    	};
+    	
     </script>
     
 </body>

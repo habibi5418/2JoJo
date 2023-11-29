@@ -82,7 +82,14 @@ public class DogService {
 	
 	// 게시글 강아지 가져오기
 	public List<DogVO> getBoardDogList(BoardVO board) throws Exception {
-		return dogDAO.getBoardDogList(board);
+		List<DogVO> list = dogDAO.getBoardDogList(board);
+		
+		list.forEach(dog -> {
+			if (dog.getMatter() != null) dog.setMatter(dog.getMatter().replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
+			else dog.setMatter("특이사항이 없습니다.");
+		});
+		
+		return list;
 	}
 	
 }
