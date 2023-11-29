@@ -5,39 +5,158 @@
 
 <mapper namespace="mapper.admin">
 
+	<!-- 일일 가입자 확인  -->
 	<select id="dayJoinMemberCount" resultType="int">
 		SELECT COUNT(*) AS member_count
-		FROM dondog_member
+			FROM dondog_member
 		WHERE TRUNC(join_date) = TRUNC(SYSDATE)
 	</select>
-
+	
+	<!-- 일일 게시글  -->
 	<select id="dayRegBoerdCount" resultType="int">
 		SELECT COUNT(*) AS board_count
-		FROM dondog_board
+			FROM dondog_board
 		WHERE TRUNC(reg_date) = TRUNC(SYSDATE)
 	</select>
-
+	
+	<!-- 강아지탑4+ 기타  -->	
+	<select id="topDogCounts" resultType="kr.co.dondog.dog.vo.DogVO">
+		SELECT dtype, COUNT(*) AS dogCount
+			FROM dondog_dog
+			GROUP BY dtype
+			ORDER BY dogCount desc
+		FETCH FIRST 4 ROWS ONLY	
+	</select>
+	
+	
+	<!-- 전체 강아지 등록수   -->
 	<select id="totalDogCounts" resultType="int">
 		SELECT COUNT(*) AS total_dog_count
 		FROM dondog_dog
 	</select>
 	
-	<select id="topDogCounts" resultType="kr.co.dondog.dog.vo.DogVO">
-		SELECT dtype, COUNT(*) AS dogCount
-		FROM dondog_dog
-		GROUP BY dtype
-		ORDER BY dogCount desc
-		FETCH FIRST 4 ROWS ONLY	
+	<!-- 신고수  -->
+	<select id="getReportsCount" resultType="int">
+	    SELECT reports
+			FROM dondog_member
+		WHERE email = #{email} 
 	</select>
+
 	
-	
+	<!-- 누적 신고 횟수로 블랙회원 만들기  -->	
 	<update id="reportCountInc">
 	    update dondog_member set 
-	        report = report + 1,
 	        black = CASE
-	            WHEN report > 2 THEN 'Y'
+	            WHEN reports >= 5 THEN 'Y'
 	            ELSE 'N'
 	        END
 	    where email = #{email} 
 	</update>
+		
+	
+	<!-- 전체회원리스트(회원관리)  -->	
+	<select id="getMemberAllList" resultType="kr.co.dondog.member.vo.MemberVO">
+		select
+	        EMAIL,
+	        MNAME,
+	        PWD,
+	        NICKNAME,
+	        ADDRESS,
+	        BIRTH,
+	        JOIN_DATE as joinDate,
+	        GRADE,
+	        REPORTS,
+	        RECENT_LOG as recentLog,
+	        GENDER,
+	        OAUTH,
+	        ACCOUNT_EXPIRED as accountExpired,
+	        ACCOUNT_LOCKED as accountLocked,
+	        LOGIN_COUNT as loginCount,
+	        UPDATE_TIME as updateTime,
+	        CANCELS,
+	        ROLES,
+	        BLACK
+	    from dondog_member
+	    order by JOIN_DATE DESC
+	</select>
+	
+	
+	<!-- 블랙회원비율  -->	
+	<select id="blackCounts" resultType="int">
+		SELECT
+		    NVL(
+		        ROUND((COUNT(CASE WHEN black = 'Y' THEN 1 END) / COUNT(*)) * 100, 2),
+		        0
+		    ) AS black_member_ratio
+		FROM dondog_member
+	</select>
+	
+	
+	<!-- 누적 채팅방   -->
+	<select id="chatRoomCount" resultType="int">
+		SELECT COUNT(*) AS total_chatRoom_count
+		FROM dondog_chat_room
+	</select>
+	
+		
+	<!--  회원관리 -->	
+	<update id="updateMember" parameterType="map">
+	    UPDATE dondog_member
+	    SET
+	    <choose>
+		   <!-- 필드가 'REPORTS'인 경우 -->
+	        <when test="field != null and field.equals('REPORTS')">
+	            REPORTS = #{value}
+	        </when>
+	        <!-- 필드가 'BLACK'인 경우 -->
+	        <when test="field != null and field.equals('BLACK')">
+	            BLACK = #{value}
+	        </when>
+	        <!-- 필드가 'ACCOUNT_LOCKEDS'인 경우 -->
+	        <when test="field != null and field.equals('ACCOUNT_LOCKEDS')">
+	            ACCOUNT_LOCKEDS = #{value}
+	        </when>
+	        <!-- 필드가 'CANCELS'인 경우 -->
+	        <when test="field != null and field.equals('CANCELS')">
+	            CANCELS = #{value}
+	        </when>
+	    </choose>
+	    WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- =========페이징, 검색 등등============================  -->
+	<select id="searchMemberList" resultType="kr.co.dondog.member.vo.MemberVO">
+	   SELECT * 
+		FROM (
+		    SELECT 
+		        ROW_NUMBER() OVER (ORDER BY 
+		            <choose> 
+		                <when test='orderColumn=="0"'> email           ${dir} </when> 
+		                <when test='orderColumn=="1"'> mname           ${dir} </when> 
+		                <when test='orderColumn=="2"'> address         ${dir} </when> 
+		                <when test='orderColumn=="3"'> birth           ${dir} </when> 
+		                <when test='orderColumn=="4"'> gender          ${dir} </when> 
+		                <when test='orderColumn=="5"'> grade           ${dir} </when> 
+		                <when test='orderColumn=="6"'> join_date  as joinDate   ${dir} </when> 
+		                <when test='orderColumn=="7"'> recent_log as recentLog  ${dir} </when> 
+		                <when test='orderColumn=="8"'> reports         ${dir} </when> 
+		                <when test='orderColumn=="9"'> black           ${dir} </when> 
+		                <when test='orderColumn=="10"'> account_locked as accountExpired ${dir} </when> 
+		                <when test='orderColumn=="11"'> cancels        ${dir} </when> 
+		            </choose> 
+		        ) AS rnum, 
+		        m.* 
+		    FROM dondog_member m 
+		) 
+		WHERE rnum BETWEEN #{start} AND #{start + length - 1}
+	</select>
+	
+	<select id="getSearchMemberTotalCount" resultType="int">
+		SELECT  
+        		count(*)
+		FROM  dondog_member 
+              
+	</select>
+	
+	
 </mapper>

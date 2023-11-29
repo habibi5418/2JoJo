@@ -17,21 +17,21 @@ import kr.co.dondog.gps.vo.TestVO;
 @Controller
 @RequestMapping(value = "/gps")
 public class GpsController {
-	
+
 	@Autowired
 	private GpsService gpsService;
-	
+
 	int totalWalkCnt = 0;
-	
+
 	// 게시판 이동
 	@RequestMapping(value = "/walk")
 	public String walk(Model model) {
 		return "gps/gpsWalk";
 	}
-	
+
 	@RequestMapping(value = "/sendCoord", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String sendCoord(@RequestBody TestVO test) { 
+	public String sendCoord(@RequestBody TestVO test) {
 		return gpsService.sendCoord(test).toString();
 	}
 
@@ -63,16 +63,26 @@ public class GpsController {
 	@ResponseBody
 	public String modTotalWalkCnt(@RequestParam("check") String check) {
 		JSONObject result = new JSONObject();
-		
+
 		if (check.equalsIgnoreCase("plus")) {
 			++totalWalkCnt;
+		} else {
+			if (totalWalkCnt > 0)
+				--totalWalkCnt;
 		}
-		else {
-			if (totalWalkCnt > 0) --totalWalkCnt;
-		}
-		
+
 		result.put("totalWalkCnt", totalWalkCnt);
+
 		return result.toString();
 	}
-	
+
+	@RequestMapping(value = "/getTotalWalkCnt", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String getTotalWalkCnt() {
+		JSONObject result = new JSONObject();
+		result.put("totalWalkCnt", totalWalkCnt);
+
+		return result.toString();
+	}
+
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,16 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 		
 		System.out.println("authentication ->" + authentication);
 		
-		setDefaultTargetUrl("/");
+		String url = "";
+	      
+	      for (GrantedAuthority role : authentication.getAuthorities()) {
+	           if (role.getAuthority().contains("ADMIN")) {
+	              url = "/admin/mainDashBoard";
+	           } else if (role.getAuthority().contains("USER")){
+	              url = "/";
+	           }
+	        }
+		setDefaultTargetUrl(url);
         
   	super.onAuthenticationSuccess(request, response, authentication);
         

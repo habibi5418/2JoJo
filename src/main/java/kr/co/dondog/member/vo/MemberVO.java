@@ -33,16 +33,17 @@ private static final long serialVersionUID = 1L;
    private String birth;  			 // 생일 
    private LocalDateTime joinDate; 	 // 가입일
    private String grade; 			 // 회원등급
-   private String report; 			 // 신고누적횟수
+   private String reports; 			 // 신고누적횟수 -> 몇번 이상이면  정지회원으로 돌림!
    private LocalDateTime recentLog;  // 로그인기록
    private String gender;  			 // 성별
    private String oauth;			 // 가입구분(카카오, 구글, 네이버, 자사몰 구분)
-   private String accountExpired;    // 휴먼계정
+   private String accountExpired;    // 
    private String accountLocked; 	 // 로그인 여러번 시도해서 차단
    private int loginCount; 			 // 로그인 횟수
    private LocalDateTime updateTime; // 수정날짜
-   private String cancel; 			 // 탈퇴여부
+   private String cancels; 			 // 탈퇴여부
    private String roles; 			 // 회원, 관리자 구분 user, admin 으로 구분
+   private String black; 			 // 정지회원
 
    
    

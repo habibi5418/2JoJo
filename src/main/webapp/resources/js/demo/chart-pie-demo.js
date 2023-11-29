@@ -12,7 +12,7 @@ var myPieChart;
 var totalDogCounts;
 
 $.ajax({
-	  url: '/totalDogCounts', // 실제 API 엔드포인트로 대체
+	  url: '/admin/totalDogCounts', // 실제 API 엔드포인트로 대체
 	  method: 'GET',
 	  success: function(response) {
 		  totalDogCounts = response;
@@ -20,7 +20,7 @@ $.ajax({
 });
 
 $.ajax({
-  url: '/topDogCounts', // 실제 API 엔드포인트로 대체
+  url: '/admin/topDogCounts', // 실제 API 엔드포인트로 대체
   method: 'GET',
   success: function(response) {
     // 서버에서 받은 데이터를 가공하여 labels와 data 배열에 할당합니다.
