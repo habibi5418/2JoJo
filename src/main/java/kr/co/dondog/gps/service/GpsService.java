@@ -30,6 +30,10 @@ public class GpsService {
 		return result;
 	}
 	
+	public void sendCoord2(String payload) {
+		System.out.println("payload : " + payload);
+	}
+	
 	public JSONObject loadPark() {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("parkList", gpsDAO.loadPark());

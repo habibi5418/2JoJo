@@ -13,5 +13,6 @@ public interface DogDAO {
 	int update(DogVO dog);
 	int delete(DogVO dog);
 	List<DogVO> getBoardDogList(BoardVO board) throws Exception;
+	int getTotalCount();
 
 }

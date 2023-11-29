@@ -48,18 +48,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDAO memberDAO;
-	
-	
-
-	@GetMapping("/")
-	public String main(Model model) {
-		System.out.println("메인페이지 진입");
-		System.out.println("member 비번 : " + passwordEncoder.encode("1234"));
-//		System.out.println("admin 비번 : " + passwordEncoder.encode("1234"));
-//		System.out.println("admin 비번 : " + passwordEncoder.encode("passwd"));
-
-		return "home";
-	}
 
 	// 로그인페이지이동
 //	@RequestMapping(value = "/login", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")

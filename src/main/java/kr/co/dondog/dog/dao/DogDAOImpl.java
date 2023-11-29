@@ -50,4 +50,10 @@ public class DogDAOImpl implements DogDAO {
 		return sqlSession.selectList("mapper.dog.getBoardDogList", board);
 	}
 
+	@Override
+	public int getTotalCount() {
+		DogVO getDog = sqlSession.selectOne("mapper.dog.getTotalCount");
+		return getDog != null ? getDog.getDogCount() : 0;
+	}
+
 }

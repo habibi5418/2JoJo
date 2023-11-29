@@ -28,7 +28,7 @@ public class BoardVO {
 	private List<BoardImgVO> boardImgList;
 	
 //	private int pageNo = 1; // 현재 페이지
-//	private int totalCount; // 총 게시물 수
+	private int totalCount; // 총 게시물 수
 //	private int totalPageSize; // 총 페이지 수
 //	private int pageLength = 10; // 한 페이지당 게시물 수 
 //	private int navSize = 10; // 네비게이터의 페이지 수

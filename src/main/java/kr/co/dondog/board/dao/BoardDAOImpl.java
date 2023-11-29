@@ -20,6 +20,12 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	@Autowired
 	SqlSession sqlSession;
+	
+	// 최근 게시물 가져오기
+	@Override
+	public List<BoardVO> getRecentBoardList() {
+		return sqlSession.selectList("mapper.board.getRecentBoardList");
+	}
 
 	// 전체 게시물 가져오기
 	@Override
@@ -28,11 +34,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	// 전체 게시물 수 구하기
-//	@Override
-//	public int getTotalCount(BoardVO board) {
-//		BoardVO getBoard = sqlSession.selectOne("mapper.board.getTotalCount", board);
-//		return getBoard != null ? getBoard.getTotalCount() : 0;
-//	}
+	@Override
+	public int getTotalCount() {
+		BoardVO getBoard = sqlSession.selectOne("mapper.board.getTotalCount");
+		return getBoard != null ? getBoard.getTotalCount() : 0;
+	}
 	
 	// 게시물 가져오기
 	@Override
@@ -134,8 +140,8 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 채팅요청
 	@Override
-	public List<ChatRequestVO> getResponse(BoardVO board) {
-		return sqlSession.selectList("mapper.board.getChatResponse", board);
+	public List<ChatRequestVO> getResponse(ChatRequestVO reqInfo) {
+		return sqlSession.selectList("mapper.board.getChatResponse", reqInfo);
 	}
 	
 	@Override
