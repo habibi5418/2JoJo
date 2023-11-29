@@ -69,13 +69,13 @@ var ctx2 = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx2, {
   type: 'bar',
   data: {
-    labels: labels,
+    labels: labels2,
     datasets: [{
       label: "산책량",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: data,
+      data: data2,
     }],
   },
   options: {
@@ -104,8 +104,7 @@ var myBarChart = new Chart(ctx2, {
       }],
       yAxes: [{
         ticks: {
-          min: 0,
-          max: 15000,
+    	  beginAtZero: true, // y축 간격을 0부터 시작하도록 설정
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks

@@ -47,9 +47,15 @@
 			<!-- 상단 대시보드 부분 글씨  -->
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="mainDashBoard">
+                <a class="nav-link" href="/admin/mainDashBoard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+            </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-solid fa-solid fa-tag"></i>
+                    <span>dondog</span></a>
             </li>
 
             <!-- Divider -->
@@ -70,9 +76,9 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
+                        <h6 class="collapse-header">Members:</h6>
                         <a class="collapse-item" href="memberData">memberData</a>
-                        <a class="collapse-item" href="#">memberData2</a> <!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
+                        <a class="collapse-item" href="/admin/memberList">memberList</a> <!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
                     </div>
                 </div>
             </li>
@@ -410,30 +416,30 @@
                             </div>
                         </div>
 
-						<!-- 매칭건수 -->
+						<!-- 블랙회원 -->
 <!--                         Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">매칭률(일일)
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">블랙회원(비율)
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${blackCounts}%</div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            style="width: ${blackCounts}%" aria-valuenow="${blackCounts}" aria-valuemin="0"
                                                             aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-hands-helping fa-2x text-gray-300"></i>
+                                            <i class="fas fa-solid fa-user-lock fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -449,8 +455,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                           	     신고(일일)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                           	     채딩(누적)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${chatRoomCount}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -798,6 +804,9 @@
     
 
     <!-- Page level custom scripts -->
+	<script type="text/javascript">
+		var getTotalWalkCntUrl = "<c:url value='/gps/getTotalWalkCnt'/>";
+	</script>
     <script src="<c:url value='/resources/js/demo/chart-area-demo.js'/>"></script>
     <script src="<c:url value='/resources/js/demo/chart-pie-demo.js'/>"></script>
     <script src="<c:url value='/resources/js/demo/chart-bar-demo.js'/>"></script>

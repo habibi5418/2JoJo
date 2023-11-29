@@ -135,6 +135,7 @@ input:not(:placeholder-shown) {
 }
 
 .snslogin {
+/*   font-size: 12px; */
   position: relative;
 }
 
@@ -195,7 +196,7 @@ input:not(:placeholder-shown) {
 	
 	<div class="snslogin">
 	사용중이신 SNS 로 간편하게 로그인하세요!
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id=c7759f219be1e858049e1cbce919f4fe&redirect_uri=http://localhost:8090/auth/kakao/callback&response_type=code">
+	<a href="https://kauth.kakao.com/oauth/authorize?client_id=c7759f219be1e858049e1cbce919f4fe&redirect_uri=https://www.dondog.site/auth/kakao/callback&response_type=code">
 	<img id="kakaoImg" src="${pageContext.request.contextPath}/resources/img/kakao.png" /></a>
 	<!-- 네이버 로그인 이미지  -->
 	<img id="naverImg" src="${pageContext.request.contextPath}/resources/img/naver.png"/>
