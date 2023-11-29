@@ -135,7 +135,6 @@ input:not(:placeholder-shown) {
 }
 
 .snslogin {
-  font-size: 12px;
   position: relative;
 }
 

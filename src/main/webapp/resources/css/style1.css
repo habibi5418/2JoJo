@@ -1254,6 +1254,111 @@ body {
 	font-size: 16px;
 }
 
+#startBtn {
+	margin: 0 2px;
+    color: #fff;
+    background-color: #f0ad4e;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    padding: 10px 20px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    user-select: none;
+}
+
+#endBtn {
+	margin: 0 2px;
+    color: black;
+    background-color: white;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    padding: 10px 20px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    user-select: none;
+}
+
+#openCal {
+	margin: 10px 0px;
+    color: white;
+    background-color: #400000;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    padding: 10px 20px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    user-select: none;
+}
+
+#searchTownDiv > h3 {
+	color: #400000;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+.walkBtn:disabled {
+/* 	background-color: transparent !important; */
+	opacity: 0.5 !important;
+	color: black !important;
+	cursor: default !important;
+}
+
+#walkListDiv {
+	width: 60%;
+	height: 48px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 4px 4px;
+    background-color: white;
+    margin: 10px auto;
+}
+
+.dateList {
+	width: calc(100% - 100px);
+	height: 45px;
+	border: none;
+    border-radius: 20px;
+	font-size: 16px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.drawBtn {
+	width: 90px;
+	height: 45px;
+	border: none;
+    border-radius: 20px;
+	font-size: 16px;
+    padding: 5px;
+    background-color: white;
+}
+
 
 /* 동네 설정 */
 /* 반응형 */
