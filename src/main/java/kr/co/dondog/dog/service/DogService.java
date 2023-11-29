@@ -91,5 +91,9 @@ public class DogService {
 		
 		return list;
 	}
-	
+
+	// 총 강아지 수 구하기
+	public int getTotalCount() {
+		return dogDAO.getTotalCount();
+	}
 }

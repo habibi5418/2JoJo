@@ -160,15 +160,16 @@ public class BoardController {
             
             // 좋아요 여부 가져오기
             model.addAttribute("heartStatus", boardService.getHeartStatus(new BoardHeartVO(bnum, member.getEmail())));
-            
+
+			ChatRequestVO reqInfo = new ChatRequestVO();
+			reqInfo.setBnum(board.getBnum());
         	// 작성자 resp
-    		if (member.getEmail() == board.getEmail()) {
-    			List<ChatRequestVO> response = boardService.getResponse(board);
+    		if (member.getEmail().equals(board.getEmail())) {
+    			reqInfo.setReceiver(member.getEmail());
+    			List<ChatRequestVO> response = boardService.getResponse(reqInfo);
     			model.addAttribute("response", response);
     		} else {
     			// 작성자!=유저 request
-    			ChatRequestVO reqInfo = new ChatRequestVO();
-    			reqInfo.setBnum(board.getBnum());
     			reqInfo.setSender(member.getEmail());
     			List<ChatRequestVO> request = boardService.getRequest(reqInfo);
     			model.addAttribute("request", request);

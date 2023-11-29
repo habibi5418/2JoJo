@@ -20,8 +20,25 @@
 	<meta name="twitter:card" content="" />
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="favicon.ico">
-
+	<link rel="shortcut icon" href="<c:url value='/resources/images/favicon/favicon.ico'/>"> <!--추가-->
+	<link rel="apple-touch-icon" sizes="57x57" href="<c:url value='/resources/images/favicon/apple-icon-57x57.png'/>">
+	<link rel="apple-touch-icon" sizes="60x60" href="<c:url value='/resources/images/favicon/apple-icon-60x60.png'/>">
+	<link rel="apple-touch-icon" sizes="72x72" href="<c:url value='/resources/images/favicon/apple-icon-72x72.png'/>">
+	<link rel="apple-touch-icon" sizes="76x76" href="<c:url value='/resources/images/favicon/apple-icon-76x76.png'/>">
+	<link rel="apple-touch-icon" sizes="114x114" href="<c:url value='/resources/images/favicon/apple-icon-114x114.png'/>">
+	<link rel="apple-touch-icon" sizes="120x120" href="<c:url value='/resources/images/favicon/apple-icon-120x120.png'/>">
+	<link rel="apple-touch-icon" sizes="144x144" href="<c:url value='/resources/images/favicon/apple-icon-144x144.png'/>">
+	<link rel="apple-touch-icon" sizes="152x152" href="<c:url value='/resources/images/favicon/apple-icon-152x152.png'/>">
+	<link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/resources/images/favicon/apple-icon-180x180.png'/>">
+	<link rel="icon" type="image/png" sizes="192x192"  href="<c:url value='/resources/images/favicon/android-icon-192x192.png'/>">
+	<link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/resources/images/favicon/favicon-32x32.png'/>">
+	<link rel="icon" type="image/png" sizes="96x96" href="<c:url value='/resources/images/favicon/favicon-96x96.png'/>">
+	<link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/favicon/favicon-16x16.png'/>">
+	<link rel="manifest" href="<c:url value='/resources/images/favicon/manifest.json'/>">
+	<meta name="msapplication-TileColor" content="#ffffff'/>">
+	<meta name="msapplication-TileImage" content="<c:url value='/resources/images/favicon/ms-icon-144x144.png'/>">
+	<meta name="theme-color" content="#ffffff">
+	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="<c:url value='/resources/css/main/animate.css'/>">
 	
@@ -46,11 +63,18 @@
 	<!--weight : 700 강조-->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;700&display=swap" rel="stylesheet">
 	
-
+	<style type="text/css">
+		.match-entry {
+			cursor: pointer;
+		}
+		.feed-bubble, .author-img, .user {
+			pointer-events: none;
+		}
+	</style>
 
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+<!-- 	<script src="js/modernizr-2.6.2.min.js"></script> -->
 
 
 </head>
@@ -175,60 +199,60 @@
 			<!-- match게시글 연동  -->
 			<div class="row">
 				<div class="col-md-4">
-					<div class="match-entry animate-box">
+					<div class="match-entry animate-box" onclick="goBoardDetail(${recentBoardList[0].bnum})">
 						<div class="feed-bubble">
-							<p> 보드내용 1 - 1 </p>
+							<p>${recentBoardList[0].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(images/user-5.jpg);"></div> <!--작성자프로필사진-->
-						<span class="user"> 보드 작성자<br> <small> 보드작성시간</small></span>
+						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<span class="user">${recentBoardList[0].nickname}<br> <small>${recentBoardList[0].regDate}</small></span>
 					</div>
 
-					<div class="match-entry animate-box">
+					<div class="match-entry animate-box" onclick="goBoardDetail(${recentBoardList[3].bnum})">
 						<div class="feed-bubble">
-							<p>보드내용 2-1</p>
+							<p>${recentBoardList[3].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(images/user-5.jpg);"></div> <!--작성자프로필사진-->
-						<span class="user">보드 작성자 <br> <small> 보드작성시간</small></span>
-					</div>
-
-					
-				</div>
-
-				<div class="col-md-4">
-					<div class="match-entry animate-box">
-						<div class="feed-bubble">
-							<p>게시글 내용 1-2 </p>
-						</div>
-						<div class="author-img" style="background-image: url(images/user-5.jpg);"></div> <!--작성자프로필사진-->
-						<span class="user">작성자<br> <small> 작성시간 </small></span>
-					</div>
-
-					<div class="match-entry animate-box">
-						<div class="feed-bubble">
-							<p>게시글 내용 2-2  </p>
-						</div>
-						<div class="author-img" style="background-image: url(images/user-5.jpg);"></div> <!--작성자프로필사진-->
-						<span class="user">보드 작성자  <br> <small>작성시간</small></span>
+						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<span class="user">${recentBoardList[3].nickname}<br> <small>${recentBoardList[3].regDate}</small></span>
 					</div>
 
 					
 				</div>
 
 				<div class="col-md-4">
-					<div class="match-entry animate-box">
+					<div class="match-entry animate-box" onclick="goBoardDetail(${recentBoardList[1].bnum})">
 						<div class="feed-bubble">
-							<p>보드내용 1-3 </p> 
+							<p>${recentBoardList[1].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(images/user-5.jpg);"></div> <!--작성자프로필사진-->
-						<span class="user">보드 작성자 <br> <small>작성시간</small></span>
+						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<span class="user">${recentBoardList[1].nickname}<br> <small>${recentBoardList[1].regDate}</small></span>
 					</div>
 
-					<div class="match-entry animate-box">
+					<div class="match-entry animate-box" onclick="goBoardDetail(${recentBoardList[4].bnum})">
 						<div class="feed-bubble">
-							<p> 보드내용 2-3</p>
+							<p>${recentBoardList[4].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(images/user-5.jpg);"></div> <!--작성자프로필사진-->
-						<span class="user">보드 작성자  <br> <small>작성시간</small></span>
+						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<span class="user">${recentBoardList[4].nickname}<br> <small>${recentBoardList[4].regDate}</small></span>
+					</div>
+
+					
+				</div>
+
+				<div class="col-md-4">
+					<div class="match-entry animate-box" onclick="goBoardDetail(${recentBoardList[2].bnum})">
+						<div class="feed-bubble">
+							<p>${recentBoardList[2].title}</p> 
+						</div>
+						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<span class="user">${recentBoardList[2].nickname}<br> <small>${recentBoardList[2].regDate}</small></span>
+					</div>
+
+					<div class="match-entry animate-box" onclick="goBoardDetail(${recentBoardList[5].bnum})">
+						<div class="feed-bubble">
+							<p>${recentBoardList[5].title}</p>
+						</div>
+						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<span class="user">${recentBoardList[5].nickname}<br> <small>${recentBoardList[5].regDate}</small></span>
 					</div>
 				</div>
 			</div>
@@ -260,15 +284,15 @@
 
 					<!-- 보드 집계 -->
 					<div class="col-md-3 text-center">
-						<span class="fh5co-counter js-counter" data-from="0" data-to="234" data-speed="5000"
+						<span class="fh5co-counter js-counter" data-from="0" data-to="${boardCnt }" data-speed="5000"
 							data-refresh-interval="50"></span>
 						<span class="fh5co-counter-label">writing</span>
 					</div>
 					<!-- 등록된 강아지  -->
 					<div class="col-md-3 text-center">
-						<span class="fh5co-counter js-counter" data-from="0" data-to="6542" data-speed="5000"
+						<span class="fh5co-counter js-counter" data-from="0" data-to="${dogCnt }" data-speed="5000"
 							data-refresh-interval="50"></span>
-						<span class="fh5co-counter-label">registed dog </span>
+						<span class="fh5co-counter-label">registed dog</span>
 					</div>
 					<!-- 채팅 요청 처리건 집계  -->
 					<div class="col-md-3 text-center">
@@ -426,5 +450,11 @@
 	<script src="<c:url value='/resources/js/jquery.countTo.js'/>"></script>
 	<!-- Main JS (Do not remove) -->
 	<script src="<c:url value='/resources/js/main.js'/>"></script>
+	
+	<script type="text/javascript">
+		function goBoardDetail(bnum) {
+			location.href = "<c:url value='/board/detail?bnum=" + bnum + "'/>";
+		}
+	</script>
 </body>
 </html>

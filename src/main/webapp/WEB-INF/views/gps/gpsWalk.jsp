@@ -85,7 +85,7 @@
 		var partnerImgPath = "<c:url value='/dogProfile/download?dnum=${partnerDog.dnum }'/>";
 		var partnerMarker = new naver.maps.Marker({
 		    icon: {
-		    	content: '<img src="' + partnerImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
+		    	content: '<img src="' + partnerImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 3px solid #770000; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
 				anchor: new naver.maps.Point(16, 16)
 	        }
 		});
@@ -185,6 +185,7 @@
 		
 		var marker = new naver.maps.Marker();
 		var infoWindows = [];
+		const parkImgPath = "<c:url value='/resources/images/board/park.jpg'/>"
 		
 		// 공원 불러오기
 		fetch("<c:url value='/gps/loadPark'/>", {
@@ -199,8 +200,12 @@
 				const position = new naver.maps.LatLng(park.lat, park.lng);
 				
 		        const parkMarker = new naver.maps.Marker({
-		          map: map,
-		          position: position
+				    icon: {
+				    	content: '<img src="' + parkImgPath + '" alt="" style="margin: 0px; padding: 2px; background-color: white; border: 2px solid blue; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 40px; height: 40px; left: 0px; top: 0px; border-radius: 70%;">',
+						anchor: new naver.maps.Point(16, 16)
+			        },
+		        	map: map,
+					position: position
 		        });
 		        
 		        const parkInfoWindow = new naver.maps.InfoWindow({
@@ -225,7 +230,7 @@
 		var myImgPath = "<c:url value='/dogProfile/download?dnum=${dog.dnum }'/>";
 		
 		var selectIcon = {
-			content: '<img src="' + myImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
+			content: '<img src="' + myImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 3px solid #f0ad4e; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',
 			anchor: new naver.maps.Point(16, 16)
 		}
 		
@@ -292,10 +297,13 @@
 			})
 			.then((response) => response.json())
 			.then((json) => {
-				wnum = json.wnum + 1;
-				if (flag == "append") {
-					if (wnum > 1) {
-						for (var i = 1; i < wnum; i++) {
+				if (flag == "load") {
+					wnum = json.wnum + 1;
+				} else if (flag == "append") {
+					const maxWnum = json.wnum;
+					
+					if (maxWnum > 0) {
+						for (var i = 1; i <= maxWnum; i++) {
 							const walkListHtml = '<div id="walkListDiv">'
 													+ '<input type="text" class="dateList" value="' + selectDate + ' / ' + i + '">' 
 													+ '<button type="button" class="drawBtn" onclick="drawRoute(' + i + ')">경로보기</button>' 
@@ -308,13 +316,6 @@
 				}
 			});
 		}
-		
-		$('#date li > a').on('click', function() {
-			$("#walkList").text("");
-
-			selectDate = $(this).text();
-			getWnum("append", selectDate);
-		});
 		
 		var polyline = new naver.maps.Polyline({
 		    map: map,
@@ -354,20 +355,29 @@
 			});
 		}
 		
+		function getToday() {
+		    var date = new Date();
+		    var year = date.getFullYear();
+		    var month = ("0" + (1 + date.getMonth())).slice(-2);
+		    var day = ("0" + date.getDate()).slice(-2);
+
+		    return year + "-" + month + "-" + day;
+		}
+		
 		var startFlag = false;
 		
 		$("#startBtn").on("click", e => {
 			alert("시작");
+			
 			$("#startBtn").attr("disabled", true);
 			$("#endBtn").attr("disabled", false);
+			
+			getWnum("load", getToday());
 			
 			startFlag = true;
 			modTotalWalkCnt("plus");
 			
 			if (senderEmail != "") {
-				console.log("sender 존재")
-				getWnum();
-				
 				// x초마다 좌표 전송
 				interval = setInterval(() => {
 					const param = {
@@ -377,6 +387,7 @@
 							lng: currentLng
 					}
 					
+// 			        mqttClient.publish(mqtt_topic, JSON.stringify(param));
 					fetch("<c:url value='/gps/sendCoord'/>", {
 						method: "POST",
 						headers: {

@@ -55,18 +55,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDAO memberDAO;
-	
-	
-
-	@GetMapping("/")
-	public String main(Model model) {
-		System.out.println("메인페이지 진입");
-		System.out.println("member 비번 : " + passwordEncoder.encode("1234"));
-//		System.out.println("admin 비번 : " + passwordEncoder.encode("1234"));
-//		System.out.println("admin 비번 : " + passwordEncoder.encode("passwd"));
-
-		return "home";
-	}
 
 	// 로그인페이지이동
 //	@RequestMapping(value = "/login", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
@@ -151,7 +139,8 @@ public class MemberController {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "c7759f219be1e858049e1cbce919f4fe");
-		params.add("redirect_uri", "http://localhost:8090/auth/kakao/callback");
+		params.add("redirect_uri", "https://www.dondog.site/auth/kakao/callback");
+//		params.add("redirect_uri", "http://localhost:8090/auth/kakao/callback");
 		params.add("code", code);
 
 		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기

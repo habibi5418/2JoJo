@@ -1323,7 +1323,7 @@ body {
 	margin-bottom: 20px;
 }
 
-.walkBtn:disabled {
+.walkBtn:disabled, .goChatBtn:disabled {
 /* 	background-color: transparent !important; */
 	opacity: 0.5 !important;
 	color: black !important;

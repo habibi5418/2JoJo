@@ -18,6 +18,23 @@
 		<result property="lng" column="y"/>
 	</resultMap>
 	
+
+	<select id="getRecentBoardList" resultMap="BoardMap">
+		select * 
+	    from ( 
+	        select rownum nrow, n.* 
+	        from ( 
+				select *
+				from dondog_board 
+				where delete_status = 'N' 
+                order by bnum desc
+			) n 
+			<![CDATA[
+			where rownum <= 6
+			]]>
+		) 
+		where nrow between 1 and 6
+	</select>
 	
 	<select id="getBoardList" resultMap="BoardMap">
 		select 
@@ -72,52 +89,12 @@
 		where nrow between 1 and 10
 	</select>
 	
-<!-- 	<select id="getTotalCount" resultType="Board"> -->
-<!-- 		select count(*) totalCount -->
-<!-- 	    from dondog_board  -->
-<!-- 	    where delete_status = 'N' -->
-<!-- 	</select> -->
+	<select id="getTotalCount" resultType="Board">
+		select count(*) totalCount
+	    from dondog_board 
+	    where delete_status = 'N'
+	</select>
 
-<!-- 	<select id="getAllBoardPageList" resultMap="BoardMap"> -->
-<!-- 		select *  -->
-<!-- 	    from (  -->
-<!-- 	        select rownum nrow, n.*  -->
-<!-- 	        from (  -->
-<!-- 				select * -->
-<!-- 				from dondog_board  -->
-<!-- 				where delete_status = 'N'  -->
-<!-- 				<if test="bnum != 0"> -->
-<!-- 					<![CDATA[ -->
-<!-- 						and bnum < #{bnum} -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!--                 order by bnum desc -->
-<!-- 			) n  -->
-<!-- 			<![CDATA[ -->
-<!-- 			where rownum <= #{endNo} -->
-<!-- 			]]> -->
-<!-- 		)  -->
-<!-- 		where nrow between #{startNo} and #{endNo} -->
-<!-- 	</select> -->
-
-<!-- 	<select id="getMoreBoardPageList" resultMap="BoardMap"> -->
-<!-- 		select *  -->
-<!-- 		from (  -->
-<!-- 			select rownum nrow, n.*  -->
-<!-- 			from ( -->
-<!-- 	            select *  -->
-<!-- 				from dondog_board  -->
-<!-- 				where delete_status = 'N'  -->
-<!-- 			    <![CDATA[ -->
-<!-- 					and bnum < #{bnum} -->
-<!--                 	order by bnum desc -->
-<!-- 		        ) n  -->
-<!-- 		        where rownum <= #{endNo} -->
-<!-- 		        ]]> -->
-<!-- 	    )  -->
-<!-- 		where nrow between #{startNo} and #{endNo} -->
-<!-- 	</select> -->
-	
 	<select id="getBoardImgList" resultType="BoardImg">
 		select * 
 		from dondog_board_img
@@ -224,7 +201,7 @@
 			   ,req_status as reqStatus
 			   ,req_send_time as reqSendTime
 		from dondog_chat_request
-		where bnum = #{bnum} and receiver=#{email} 
+		where bnum = #{bnum} and receiver=#{receiver} 
 	</select>
 	
 	<select id="getChatRequest" resultType="ChatRequest">

@@ -26,9 +26,6 @@
    <meta name="twitter:url" content="" />
    <meta name="twitter:card" content="" />
 
-   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-   <link rel="shortcut icon" href="<c:url value='/resources/images/main/11kong.jpg'/>">
-
    <!-- Animate.css -->
    <link rel="stylesheet" href="<c:url value='/resources/css/animate.css'/>">
 

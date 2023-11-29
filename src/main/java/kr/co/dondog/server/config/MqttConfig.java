@@ -2,7 +2,9 @@ package kr.co.dondog.server.config;
 
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.MessagingGateway;
@@ -22,6 +24,8 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.Header;
+
+import kr.co.dondog.gps.service.GpsService;
 
 //import kr.co.dondog.board.service.MqttService;
 
@@ -85,6 +89,10 @@ public class MqttConfig {
 
 //  @Autowired
 //  MqttService mqttService;
+  
+//  @Autowired
+//  GpsService gpsService;
+//  private final String gpsTopic = "/kong/gps/";
 
   @Bean
   public MessageChannel mqttInputChannel() {
@@ -100,7 +108,13 @@ public class MqttConfig {
           public void handleMessage(Message<?> message) throws MessagingException {
               MessageHeaders messageHeaders = message.getHeaders();
               String mqtt_receivedTopic = (String) messageHeaders.get("mqtt_receivedTopic");
-
+              
+//              System.out.println("message : " + (String) message.getPayload());
+//              if (gpsService != null && StringUtils.startsWith(mqtt_receivedTopic, gpsTopic)) {
+//            	  System.out.println("if문 안");
+//            	  gpsService.sendCoord2((String) message.getPayload());
+//              }
+              
 //              if (mqttService != null && StringUtils.startsWith(mqtt_receivedTopic, topic)) {
 //              	mqttService.execute(mqtt_receivedTopic, (String) message.getPayload());
 //              }

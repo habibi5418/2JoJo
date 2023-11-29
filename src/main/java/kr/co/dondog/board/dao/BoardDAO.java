@@ -11,8 +11,9 @@ import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.vo.MemberVO;
 
 public interface BoardDAO {
+	List<BoardVO> getRecentBoardList();
 	List<BoardVO> getBoardList(BoardVO board);
-//	int getTotalCount(BoardVO board);
+	int getTotalCount();
 	List<BoardVO> getAllBoardPageList(BoardVO board);
 	List<BoardVO> getMoreBoardPageList(BoardVO board);
 	List<BoardImgVO> getBoardImgList(BoardVO board);
@@ -31,7 +32,7 @@ public interface BoardDAO {
 	void deleteHeart(BoardHeartVO boardHeart);
 	
 	//채팅요청
-	List<ChatRequestVO> getResponse(BoardVO board);
+	List<ChatRequestVO> getResponse(ChatRequestVO reqInfo);
 	List<ChatRequestVO> getRequest(ChatRequestVO reqInfo);
 
 }

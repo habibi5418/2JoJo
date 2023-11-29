@@ -22,9 +22,8 @@ public class BoardService {
 	@Autowired
 	BoardDAO boardDAO;
 	
-	// 전체 게시글 가져오기
-	public List<BoardVO> getBoardList(BoardVO board) {
-		List<BoardVO> list = boardDAO.getAllBoardPageList(board);
+	// 시간 세팅
+	public void setTime(List<BoardVO> list) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		list.stream().forEach(b -> {
@@ -53,6 +52,20 @@ public class BoardService {
 				e.printStackTrace();
 			}
 		});
+	}
+	
+	// 최근 게시글 가져오기
+	public List<BoardVO> getRecentBoardList() {
+		List<BoardVO> list = boardDAO.getRecentBoardList();
+		setTime(list);
+		
+		return list;
+	}
+	
+	// 전체 게시글 가져오기
+	public List<BoardVO> getBoardList(BoardVO board) {
+		List<BoardVO> list = boardDAO.getAllBoardPageList(board);
+		setTime(list);
 		
 		return list;
 	}
@@ -61,38 +74,16 @@ public class BoardService {
 	public JSONObject getMoreBoardPageList(BoardVO board) {
 		JSONObject result = new JSONObject();
 		List<BoardVO> list = boardDAO.getMoreBoardPageList(board);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		list.stream().forEach(b -> {
-			b.setBoardImgList(boardDAO.getBoardImgList(b));
-
-			try {
-				long regDate = formatter.parse(b.getRegDate()).getTime();
-				long now = Calendar.getInstance().getTime().getTime();
-				long diff = now - regDate;
-				
-				if (diff / (3600000 * 24) == 0) {
-					if (diff / (60000 * 3) == 0) {
-						b.setRegDate("방금 전");
-					} else if (diff / (3600000) == 0) {
-						long minute = diff / (60000);
-						b.setRegDate(minute + "분 전");
-					} else {
-						long hour = diff / (3600000);
-						b.setRegDate(hour + "시간 전");
-					}
-				} else {
-					String monthDay = b.getRegDate().substring(5, 10);
-					b.setRegDate(monthDay);
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		});
+		setTime(list);
 		
 		result.put("boardList", list);
 		
 		return result;
+	}
+	
+	// 총 게시물 가져오기
+	public int getTotalCount() {
+		return boardDAO.getTotalCount();
 	}
 
 	// 글 작성
@@ -156,8 +147,8 @@ public class BoardService {
 	}
 	
 	// 채팅 요청 가져오기 - 작성자
-	public List<ChatRequestVO> getResponse(BoardVO board){
-		return boardDAO.getResponse(board);
+	public List<ChatRequestVO> getResponse(ChatRequestVO reqInfo){
+		return boardDAO.getResponse(reqInfo);
 	} 
 	
 	// 채팅 요청 가져오기 - 작성자 외

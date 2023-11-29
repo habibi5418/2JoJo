@@ -137,18 +137,18 @@
 					<div id="btn_chatting">
 						<c:if test="${member.email!= board.email}">
 							<c:if test="${request.size() != 0}">
-								<button type="button" id="goChat" class="detailDisabledBtn" disabled="disabled">요청보냄</button>							
+								<button type="button" id="goChatX" class="detailDisabledBtn" disabled="disabled">요청보냄</button>							
 							</c:if>
 							<c:if test="${request.size() == 0}">
-								<button type="button" id="goChat" class="detailEnabledBtn">채팅요청</button>
+								<button type="button" id="goChat" class="detailEnabledBtn goChatBtn">채팅요청</button>
 							</c:if>
 						</c:if>
 						<c:if test="${member.email== board.email}">
-							<c:if test= "${response != null}">
-								<button type="button" id="goChat" class="detailEnabledBtn">채팅목록</button>
+							<c:if test= "${response.size() != null}">
+								<button type="button" id="goChatList" class="detailEnabledBtn">채팅목록</button>
 							</c:if>
-							<c:if test= "${response == null}">
-								<button type="button" id="goChat" class="detailDisabledBtn" disabled="disabled">채팅목록(0)</button>
+							<c:if test= "${response.size() == null}">
+								<button type="button" id="goChatListX" class="detailDisabledBtn" disabled="disabled">채팅목록(0)</button>
 							</c:if>
 						</c:if>
 					</div>
@@ -270,6 +270,8 @@
 		        	bnum : bnum
 	       		})	
 	    	}).done(resp => {
+				$("#goChat").attr("disabled", true);
+				
 	        	localStorage.setItem('chat.sender', sender);
 	        	localStorage.setItem('chat.receiver', receiver);
 	        	localStorage.setItem('chat.bnum', bnum);
@@ -278,6 +280,35 @@
 	        	
 	        	alert(resp.message);
 	        });
+		});
+		
+		$("#goChatList").on("click", function () {
+	    	
+// 	    	const receiver = "${board.email}";
+// 	    	const sender = "${member.email}";
+// 	    	const bnum = "${board.bnum}";
+	    	
+// 	    	$.ajax({ 
+// 	       		type: "POST",
+// 	       		url: "<c:url value='/chat/senderRequest'/>",
+// 	       		contentType : "application/json; charset=UTF-8",
+// 	       		dataType: "JSON", // 요청을 서버로 해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴게 json이라면) => javascript오브젝트로 변경
+// 	       		data : JSON.stringify({
+// 	       			sender : sender, 
+// 		        	receiver : receiver,
+// 		        	bnum : bnum
+// 	       		})	
+// 	    	}).done(resp => {
+// 				$("#goChat").attr("disabled", true);
+				
+// 	        	localStorage.setItem('chat.sender', sender);
+// 	        	localStorage.setItem('chat.receiver', receiver);
+// 	        	localStorage.setItem('chat.bnum', bnum);
+
+// 	        	console.log("console 확인용!!!!!!!!"+sender + "" + receiver);
+	        	
+// 	        	alert(resp.message);
+// 	        });
 		});
 		
     </script>
