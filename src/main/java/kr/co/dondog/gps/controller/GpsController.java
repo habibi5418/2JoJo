@@ -22,12 +22,13 @@ public class GpsController {
 
 	@Autowired
 	private GpsService gpsService;
-	
+  
 	@Autowired
 	private DogService dogService;
 	
 	int totalWalkCnt = 0;
-	
+
+	// 게시판 이동
 	@RequestMapping(value = "/walk")
 	public String walk(Model model, Authentication authentication) throws Exception {
 		if (authentication.getPrincipal() instanceof PrincipalDetails) {
@@ -38,15 +39,15 @@ public class GpsController {
 		}
 		return "gps/gpsWalk";
 	}
-	
+  
 	@RequestMapping(value = "/townSet")
 	public String townSet(Model model) {
 		return "gps/townSet";
 	}
-	
+  
 	@RequestMapping(value = "/sendCoord", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String sendCoord(@RequestBody TestVO test) { 
+	public String sendCoord(@RequestBody TestVO test) {
 		return gpsService.sendCoord(test).toString();
 	}
 
@@ -78,16 +79,16 @@ public class GpsController {
 	@ResponseBody
 	public String modTotalWalkCnt(@RequestParam("check") String check) {
 		JSONObject result = new JSONObject();
-		
+
 		if (check.equalsIgnoreCase("plus")) {
 			++totalWalkCnt;
+		} else {
+			if (totalWalkCnt > 0)
+				--totalWalkCnt;
 		}
-		else {
-			if (totalWalkCnt > 0) --totalWalkCnt;
-		}
-		
+
 		result.put("totalWalkCnt", totalWalkCnt);
-		
+
 		return result.toString();
 	}
 
@@ -96,8 +97,8 @@ public class GpsController {
 	public String getTotalWalkCnt() {
 		JSONObject result = new JSONObject();
 		result.put("totalWalkCnt", totalWalkCnt);
-		
+    
 		return result.toString();
 	}
-	
+
 }

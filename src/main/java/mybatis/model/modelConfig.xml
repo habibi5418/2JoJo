@@ -13,5 +13,12 @@
 		<typeAlias type="kr.co.dondog.chat.vo.ChatRequestVO"  alias="ChatRequest" />
 		<typeAlias type="kr.co.dondog.gps.vo.ParkVO"  alias="Park" />
 		<typeAlias type="kr.co.dondog.gps.vo.TestVO"  alias="Test" />
+		
 	</typeAliases>
+	
+	<!-- 수진 추가( 가입일, 최근 접속일 ) -->
+	<typeHandlers>
+    	<typeHandler handler="kr.co.dondog.admin.handler.LocalDateTimeTypeHandler"/>
+	</typeHandlers>
+	
 </configuration>
