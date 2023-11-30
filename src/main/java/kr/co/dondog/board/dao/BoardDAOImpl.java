@@ -40,6 +40,13 @@ public class BoardDAOImpl implements BoardDAO {
 		return getBoard != null ? getBoard.getTotalCount() : 0;
 	}
 	
+	// 회원의 게시물 수 구하기
+	@Override
+	public int getCountByMember(MemberVO member) {
+		BoardVO getBoard = sqlSession.selectOne("mapper.board.getCountByMember", member);
+		return getBoard != null ? getBoard.getTotalCount() : 0;
+	}
+	
 	// 게시물 가져오기
 	@Override
 	public List<BoardVO> getAllBoardPageList(BoardVO board) {

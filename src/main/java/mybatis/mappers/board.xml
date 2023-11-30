@@ -94,6 +94,13 @@
 	    from dondog_board 
 	    where delete_status = 'N'
 	</select>
+	
+	<select id="getCountByMember" resultType="Board">
+		select count(*) totalCount
+	    from dondog_board 
+	    where delete_status = 'N' 
+	    and email = #{email}
+	</select>
 
 	<select id="getBoardImgList" resultType="BoardImg">
 		select * 

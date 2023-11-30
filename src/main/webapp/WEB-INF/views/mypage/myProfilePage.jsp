@@ -56,24 +56,24 @@
                             <!-- 출력될 정보 -->
                             <div class="name">
                                 <h2>
-                                    <span>nickname</span>
+                                    <span>${loggedInMember.nickname}</span>
                                 </h2>
                             </div>
                             
                             <div class="info01">
                                 <dl>
                                     <dt>write</dt>
-                                    <dt>31</dt>
+                                    <dt>${boardCnt }</dt>
                                 </dl>
                                 
-                                <dl>
-                                    <dt>follow</dt>
-                                    <dt>491</dt>
-                                </dl>                            
-                                <dl>
-                                    <dt>follower</dt>
-                                    <dt>22</dt>
-                                </dl>                            
+<!--                                 <dl> -->
+<!--                                     <dt>follow</dt> -->
+<!--                                     <dt>491</dt> -->
+<!--                                 </dl>                             -->
+<!--                                 <dl> -->
+<!--                                     <dt>follower</dt> -->
+<!--                                     <dt>22</dt> -->
+<!--                                 </dl>                             -->
                             </div>
                             
                             <div class="info02">
@@ -93,7 +93,10 @@
                             <div class="info03">
                                 <dl>
                                     <dt>성별</dt>
-                                    <dd>여</dd>
+                                    <dd>
+                                    	<c:if test="${loggedInMember.gender.equals('1')}">남</c:if>
+                                    	<c:if test="${loggedInMember.gender.equals('2')}">여</c:if>
+                                    </dd>
                                 </dl>
                                 <dl>
                                     <dt>나이</dt>

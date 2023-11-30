@@ -15,6 +15,7 @@ import kr.co.dondog.board.vo.BoardHeartVO;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.chat.vo.ChatRequestVO;
+import kr.co.dondog.member.vo.MemberVO;
 
 @Service
 public class BoardService {
@@ -84,6 +85,11 @@ public class BoardService {
 	// 총 게시물 가져오기
 	public int getTotalCount() {
 		return boardDAO.getTotalCount();
+	}
+	
+	// 총 게시물 가져오기 (회원 기준)
+	public int getCountByMember(MemberVO member) {
+		return boardDAO.getCountByMember(member);
 	}
 
 	// 글 작성
