@@ -2,22 +2,121 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="mapper.chat">
-
+	<!-- 채팅 요청을 db에 저장 : sender -->
 	<insert id="saveRequest">
-		insert into dondog_chat_request (
-												req_id
-											   ,bnum
-											   ,sender
-											   ,receiver
-											  ) values (
-											  	seq_req_id.nextVal
-											  ,#{bnum}
-											  ,#{sender}
-											  ,#{receiver}
-											  )
-											  
+		INSERT INTO DONDOG_CHAT_REQUEST (
+		REQ_ID
+		,BNUM
+		,SENDER
+		,RECEIVER
+		,REQ_SEND_TIME
+		) VALUES (
+		seq_req_id.nextVal
+		,#{bnum}
+		,#{sender}
+		,#{receiver}
+		, current_timestamp
+		)
 	</insert>
 
+	<!-- 채팅 요청을 불러들임 : receiver -->
+	<select id="getRequestList" resultType="ChatRequest">
+		SELECT *
+		FROM DONDOG_CHAT_REQUEST
+		WHERE REQ_STATUS = 'W' AND RECEIVER = #{receiver}
+		ORDER BY REQ_ID DESC
+	</select>
+
+	<!--채팅요청 승낙에 따른 채팅방 생성   -->
+	<insert id="createChatRoom" parameterType="ChatRoom">
+		INSERT INTO DONDOG_CHAT_ROOM ( 
+										ROOM_ID
+										,BNUM
+										,SENDER
+										,RECEIVER
+										) VALUES( 
+										#{room_id}
+										,#{bnum}
+										,#{sender}
+										,#{receiver}
+										)
+	</insert>
+	
+	<!-- 채팅 요청 승낙 후 상태 업데이트  -->
+	<update id="updateChatRequestAccept" parameterType="ChatRequest">
+		UPDATE DONDOG_CHAT_REQUEST
+    	   SET REQ_STATUS = 'A'
+    	 WHERE REQ_ID = #{req_id}
+	</update>
+
+	<!-- 채팅 요청 거절 -->
+	<update id="rejectRequest" parameterType="ChatRequest">
+    UPDATE DONDOG_CHAT_REQUEST
+    SET REQ_STATUS = 'R'
+    WHERE REQ_ID = #{req_id} AND REQ_STATUS = 'W'
+	</update>
+	
+	
+	<!-- 전체 채팅 목록 -->
+	<select id="getAllChatRooms" resultType="ChatRoom">
+		SELECT room_id , sender, receiver, send_time
+		  FROM DONDOG_CHAT_ROOM
+		  WHERE receiver = #{receiver} or sender = #{receiver}
+		  ORDER BY send_time DESC
+	</select>
+
+	<!-- get room Info  -->
+	<select id="getRoomInfo" resultType="ChatMessage">
+		select *
+		from dondog_chat_message
+		where room_id = #{room_id}
+	</select>
+	
+	<!--메시지 저장 -->
+	<insert id="saveMessage" parameterType="ChatMessage">
+	INSERT INTO DONDOG_CHAT_MESSAGE ( 
+									room_id
+									,sender
+									,message
+								 ) VALUES (
+									#{room_id}
+									,#{sender}
+									,#{message}								 
+								 )
+	
+	
+	</insert>
+	
+<!-- 	 저장된 메시지 불러오기 -->
+<!-- 	<select id="getMessageByRoomId" resultType="ChatMessage"> -->
+<!-- 		select * from dondog_chat_room -->
+<!-- 		where room_id = #{room_id} -->
+<!-- 		order by send_time desc -->
+<!-- 	</select> -->
+
+	
+<!-- 	<select id="getAllChatRooms"> -->
+<!-- 	    SELECT *  -->
+<!-- 	    FROM DONDOG_CHAT_ROOM  -->
+<!-- 	    WHERE receiver = #{receiver} or sender = #{sender}  -->
+<!-- 		ORDER BY send_time DESC -->
+<!-- 	</select> -->
+
+	
 </mapper>
+	
+<!-- 	    SELECT r.room_id -->
+<!-- 	    	  ,r.sender -->
+<!-- 	    	  ,r.receiver -->
+<!-- 	    	  ,r.send_time -->
+<!-- 	    	  ,q.req_id -->
+<!-- 	    	  ,q.sender -->
+<!-- 	    	  ,q.receiver -->
+<!-- 	    	  ,q.req_status -->
+	    	  
+<!-- 		  FROM DONDOG_CHAT_ROOM r -->
+		  
+<!--     INNER JOIN DONDOG_CHAT_REQUEST q ON r.receiver = q.receiver -->
+<!--          WHERE q.req_status = 'A' -->
+<!--       ORDER BY r.send_time DESC -->
