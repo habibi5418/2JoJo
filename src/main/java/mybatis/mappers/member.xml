@@ -84,6 +84,21 @@
       </if>
     where email = #{email}
   </update>
-     
+   
+	<update id="update">
+		update dondog_member set 
+		nickname = #{nickname} 
+		, fname = #{fname}
+		, sname = #{sname}
+		, length = #{length}
+		, ftype = #{ftype}
+		where email = #{email}
+	</update>     
+
+	<select id="getProfile" resultMap="memberResultMap">
+		select * 		 
+		from dondog_member
+		where email = #{email} 
+	</select>
    
 </mapper>

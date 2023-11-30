@@ -1,12 +1,15 @@
 package kr.co.dondog.member.service;
 
+import java.util.List;
 import java.util.Objects;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.dao.MemberDAO;
 import kr.co.dondog.member.exception.ExistMemberException;
 import kr.co.dondog.member.exception.NotExistMemberException;
@@ -89,5 +92,33 @@ public class MemberService {
 			return false;
 		}
 	}
+	
+	
+	// 프로필 수정
+	public JSONObject update(MemberVO member) {
+	JSONObject result = new JSONObject();
+	
+	List<MemberVO> memberProfileList = member.getMemberProfileList();
+	
+	if (memberProfileList.size() != 0) {
+		for (MemberVO memberProfile : memberProfileList) {
+			memberProfile.setEmail(member.getEmail());
+			memberProfile.setNickname(member.getNickname());
+//			memberProfile.setPwd(member.getPwd());
+			if (memberDAO.update(memberProfile) > 0) {
+				result.put("message", "추가가 완료되었습니다.");
+				result.put("status", true);
+			} else {
+				result.put("message", "추가를 실패하였습니다.");
+				result.put("status", false);
+			}
+		}
+	} 
+
+	result.put("newNickname", member.getNickname());
+	result.put("newComments", member.getComments());
+	
+	return result;
+}
 	
 }

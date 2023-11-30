@@ -26,6 +26,12 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> getRecentBoardList() {
 		return sqlSession.selectList("mapper.board.getRecentBoardList");
 	}
+	
+	// 회원 최근 게시물 가져오기
+	@Override
+	public List<BoardVO> getRecentBoardListByMember(MemberVO member) {
+		return sqlSession.selectList("mapper.board.getRecentBoardListByMember", member);
+	}
 
 	// 전체 게시물 가져오기
 	@Override

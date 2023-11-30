@@ -63,6 +63,14 @@ public class BoardService {
 		return list;
 	}
 	
+	// 회원 최근 게시글 가져오기 
+	public List<BoardVO> getRecentBoardListByMember(MemberVO member) {
+		List<BoardVO> list = boardDAO.getRecentBoardListByMember(member);
+		setTime(list);
+		
+		return list;
+	}
+	
 	// 전체 게시글 가져오기
 	public List<BoardVO> getBoardList(BoardVO board) {
 		List<BoardVO> list = boardDAO.getAllBoardPageList(board);

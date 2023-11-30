@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.member.vo.MemberVO;
 
 @Repository("memberDAO")
@@ -68,6 +69,16 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 
+	@Override
+	public int update(MemberVO memberVO) {
+		return sqlSession.update("mapper.member.update", memberVO);		
+
+	}
+
+	@Override
+	public MemberVO getProfile(String email) {
+		return sqlSession.selectOne("mapper.member.getProfile", email);
+	}
 	
 
 }

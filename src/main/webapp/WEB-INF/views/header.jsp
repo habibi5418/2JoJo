@@ -146,7 +146,7 @@
             </div>
             
             <!-- 알림 모달 -->
-		<div id="myModal" class="modal">
+		<div id="myModal" class="modal2">
 			<!-- 탭 선택 버튼 -->
 			<div class="button-style">
 				<button onclick="openTab('activityTab')">활동알림</button>

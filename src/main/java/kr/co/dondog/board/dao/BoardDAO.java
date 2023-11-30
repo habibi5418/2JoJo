@@ -12,6 +12,7 @@ import kr.co.dondog.member.vo.MemberVO;
 
 public interface BoardDAO {
 	List<BoardVO> getRecentBoardList();
+	List<BoardVO> getRecentBoardListByMember(MemberVO member);
 	List<BoardVO> getBoardList(BoardVO board);
 	int getTotalCount();
 	int getCountByMember(MemberVO member);

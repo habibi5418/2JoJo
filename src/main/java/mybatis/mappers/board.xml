@@ -35,6 +35,24 @@
 		) 
 		where nrow between 1 and 6
 	</select>
+
+	<select id="getRecentBoardListByMember" resultMap="BoardMap">
+		select * 
+	    from ( 
+	        select rownum nrow, n.* 
+	        from ( 
+				select *
+				from dondog_board 
+				where delete_status = 'N' 
+				and email = #{email}
+                order by bnum desc
+			) n 
+			<![CDATA[
+			where rownum <= 3
+			]]>
+		) 
+		where nrow between 1 and 3
+	</select>
 	
 	<select id="getBoardList" resultMap="BoardMap">
 		select 
