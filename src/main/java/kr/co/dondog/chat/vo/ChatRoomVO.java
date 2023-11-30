@@ -1,19 +1,37 @@
 package kr.co.dondog.chat.vo;
 import java.security.Timestamp;
+import java.util.UUID;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+//@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class ChatRoomVO {
 	/* *
 	 * * 기능: 1:1 채팅방 페이지 
 	 * */
-	private int cnum; //채팅방 식별
+	private String room_id; //채팅방 식별
 	private int bnum; //게시글 식별 
-	private String senderId; // 송신인(상대)
-	private String receiverId; //수신인(게시글작성자)
-	private int isRead;//default1 안읽음1 읽음0
-	private Timestamp sendTime;
+	private String sender; // 송신인(상대)
+	private String receiver; //수신인(게시글작성자)
+	private int is_read;//default1 안읽음1 읽음0
+	private Timestamp send_time;
+
+//	public ChatRoomVO() {}
+	
+	public String getRoom_id() {
+        return room_id;
+    }
+
+    public String setRoom_id(String room_id) {
+        return this.room_id = room_id;
+    }
+//	
 	
 	/*  이부분은 나중에 합쳐도 될지도
 	 * * 기능: 사용자가 게시글을 보고 채팅을 요청했을 시, 요청여부(승낙/거절)에 따라 채팅방 목록에 새 채팅방 생성
