@@ -48,7 +48,7 @@ public class MqttConfig {
 //	private final String topic = "/team1/sub/";
 //  private static final String USERNAME = "team1";
 //  private static final String PASSWORD = "1004team1";
-	private final String topic = "/test/sub/";
+  private final String topic = "/test/sub/";
   private static final String USERNAME = "kong";
   private static final String PASSWORD = "1234";
 	

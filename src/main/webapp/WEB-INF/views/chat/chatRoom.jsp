@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,63 +15,21 @@
   gtag('config', 'G-CMBGRHC3KW');
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/mqtt/mqtt.min.js"></script>
 <script type="text/javascript">
 
-function ajaxResponse(method, url, params) {
-    return new Promise(function(resolve, reject) {
-        $.ajax({
-            url: url,
-            method: method,
-            data: JSON.stringify(params),
-            contentType: 'application/json',
-            success: function(response) {
-                resolve(response);
-            },
-            error: function(error) {
-                reject(error);
-            }
-        });
-    });
-}
-
-// 웹 스토리지를 사용할 때 위와 같은 문제를 피하기 위해서 많이 사용하는 방법이 JSON 형태로 데이터를 읽고 쓰는 것입니다.
-
-// > localStorage.setItem('json', JSON.stringify({a: 1, b: 2}))
-// undefined
-// > JSON.parse(localStorage.getItem('json'))
-// {a: 1, b: 2}
+const room_id = localStorage.getItem('chat.room_id');
+const receiver = localStorage.getItem('chat.receiver');
+const sender = localStorage.getItem('chat.sender');
 
 
 
-
-// const roomId = ${rnum};
-   //MQTT 수신 받을 상태로 초기화를 한다
-    //MQTT client
-//     const sender = localStorage.getItem('chat.sender');
-// const sender = "test1@gmail.com"; -- 로그인한 사용자 본인
-// const receiver --상대방 이름 
-
-
-
-const sender = '<%=(String)session.getAttribute("email")%>'
-
-console.log(sender);
-// 채팅하기 버튼을 누르면  데이터 셋 -> 룸아이디 > 이걸 토픽으로 줌 
-//  채팅요청 누르면 채팅방이 생성 > 아이디 / 방번호 > 
-
-//MQTT 클라이언트 초기화 및 MQTT 브로커에 연결 (실제 MQTT 브로커 세부 정보로 대체해야 함).
-// dondog
+//MQTT 연결
 const mqtt_host = "www.dondog.site";
 const mqtt_port = 8883; //websocket ssl port : mosquitt.conf 파일에 설정됨  
-const mqtt_topic = "/ws/chat/" + ${cnum};
-// const mqtt_topic = "/ws/chat/"+rnum;
-
-// const mqtt_host = "localhost";
-// const mqtt_port = 8090; //websocket ssl port : mosquitt.conf 파일에 설정됨  
-// const mqtt_topic = "/ws/chat";
-
+const mqtt_topic = "/mqtt/chat/" + room_id;
 
 // sub : 구독, 메시지를 수신할 때 특정 토픽을 구독
 // user_topic = "/sub/${email}"
@@ -79,7 +37,6 @@ const mqtt_topic = "/ws/chat/" + ${cnum};
 // room_topic = "/pub/${rnum}"
 // const mqtt_receiver_topic = "/ws/chat/sub" + rnum;
 
-// 여기에 MQTT 연결 옵션 설정
 const options = {
 				  	protocol : 'wss',
 				  	hostname : mqtt_host,
@@ -106,6 +63,7 @@ mqttClient.on('error', (err) => {
 mqttClient.on('connect', () => {
   console.log('Connected')
   //구독 메시지 등록 
+  
   //메시지 수신 이벤트 핸들러 등록
   subscribe(); //2 
     
@@ -183,17 +141,10 @@ $("#message").on("keydown", e => {
     	  
     	  mqttClient.publish(mqtt_topic, JSON.stringify({
     		  												type:'ENTER', 
-//     		  												roomId : roomId, 
     		  												sender : sender, //로그인한 세션 사용자를 지정  
     		  												message : sender + "님 입장하셨습니다" 
     		  											}));
     	  
-//     	  mqttClient.publish(mqtt_topic, JSON.stringify({
-//     		  												type:'ENTER', 
-// //     		  												roomId : roomId, 
-//     		  												receiver : receiver,
-//     		  												message : receiver + "님 입장하셨습니다" 
-//     		  											}));
     }
     
 
@@ -254,27 +205,29 @@ $("#message").on("keydown", e => {
 </head>
 <body>
 
- <div class="container" id="app">
-        <div>
-            <h2 id="room-name"></h2>
-        </div>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <label class="input-group-text">내용</label>
-            </div>
-            <input type="text" class="form-control" name="message" id="message">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" id="send_message_button">send</button>
-<!--                 <button class="btn btn-primary" type="button" id="leave_button">잠시나가기</button> -->
-<!--                 <button class="btn btn-primary disabled" type="button" id="reenter_button">다시입장</button> -->
-            </div>
-        </div>
-<!--         <div>잠시 나가기는 채팅방에서 수신되는 메시지를 받지 않고 채팅방에 참여한 모든 사람에 메시지는 보낼수 있다</div> -->
-        <ul class="list-group" id="message_list" style="border: 2px solid red;">
-        
-        </ul>
-    </div>	
-	
+	<div class="container" id="app">
+		<div>
+			<h2 id="room-name"></h2>
+		</div>
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<label class="input-group-text">내용</label>
+			</div>
+			<input type="text" class="form-control" name="message" id="message">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="button"
+					id="send_message_button">send</button>
+				<!--                 <button class="btn btn-primary" type="button" id="leave_button">잠시나가기</button> -->
+				<!--                 <button class="btn btn-primary disabled" type="button" id="reenter_button">다시입장</button> -->
+			</div>
+		</div>
+		<!--         <div>잠시 나가기는 채팅방에서 수신되는 메시지를 받지 않고 채팅방에 참여한 모든 사람에 메시지는 보낼수 있다</div> -->
+		<ul class="list-group" id="message_list"
+			style="border: 2px solid red;">
+
+		</ul>
+	</div>
+
 
 </body>
 </html>
