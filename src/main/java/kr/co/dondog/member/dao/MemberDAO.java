@@ -11,7 +11,7 @@ public interface MemberDAO {
 	public int updateMemberLastLogin(String email);
 	public MemberVO findByEmail(String email);
 	public int insert(MemberVO member);
-	public int loginCountInc(MemberVO member);
+	public int loginCountInc(MemberVO memberVO);
 	public int loginCountClear(String email);
 	public int insertMember(MemberVO memberVO);
 	public int updateMember(MemberVO memberVO);

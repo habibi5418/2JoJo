@@ -100,8 +100,28 @@ public class AdminDAOImpl implements AdminDAO {
 
 	    return updatedRows;
 	}
+
+	@Override
+	public int getmemberCount() {
+		System.out.println("AdminDAOImpl.getmemberCount");
+		return sqlSession.selectOne("mapper.admin.getmemberCount");
+	}
 	
-	
+	@Override
+	public int reportCountInc() {
+		System.out.println("AdminDAOImpl.reportCountInc");
+		return sqlSession.selectOne("mapper.admin.reportCountInc");
+	}
+
+	@Override
+	public List<MemberVO> sendEmailMember() {
+		System.out.println("AdminDAOImpl.sendEmailMember");
+		return sqlSession.selectList("mapper.admin.sendEmailMember");
+	}
+
+
+
+
 //	===================페이징, 기타 등등============================
 
 //	@Override
@@ -109,11 +129,13 @@ public class AdminDAOImpl implements AdminDAO {
 //		System.out.println("AdminDAOImpl.searchMemberList");
 //		return sqlSession.selectList("mapper.admin.searchMemberList");
 //	}
-
+//
 //	@Override
 //	public int getSearchMemberTotalCount(SearchVO searchVO) {
 //		System.out.println("AdminDAOImpl.getSearchMemberTotalCount");
 //		return sqlSession.selectOne("mapper.admin.getSearchMemberTotalCount");
 //	}
+
+
 
 }

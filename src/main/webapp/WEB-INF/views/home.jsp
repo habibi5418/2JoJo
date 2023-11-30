@@ -277,7 +277,7 @@
 
 					<!-- 회원수 집계 -->
 					<div class="col-md-3 text-center">
-						<span class="fh5co-counter js-counter" data-from="0" data-to="234" data-speed="5000"
+						<span class="fh5co-counter js-counter" data-from="0" data-to="${memberCnt }" data-speed="5000"
 							data-refresh-interval="50"></span>
 						<span class="fh5co-counter-label">member</span>
 					</div>
@@ -296,7 +296,7 @@
 					</div>
 					<!-- 채팅 요청 처리건 집계  -->
 					<div class="col-md-3 text-center">
-						<span class="fh5co-counter js-counter" data-from="0" data-to="8687" data-speed="5000"
+						<span class="fh5co-counter js-counter" data-from="0" data-to="${chatCnt }" data-speed="5000"
 							data-refresh-interval="50"></span>
 						<span class="fh5co-counter-label">matched</span>
 					</div>

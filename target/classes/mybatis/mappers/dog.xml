@@ -39,7 +39,7 @@
 			, dtype 				
 			, gender 
 			, weight 
-<!-- 			, matter 			 -->
+			, matter 			
 			, fname 
 			, sname 
 			, length 
@@ -52,7 +52,7 @@
 			, #{dtype}
 			, #{gender}
 			, #{weight}
-<!-- 			, #{matter} -->
+			, #{matter}
 			, #{fname}
 			, #{sname}
 			, #{length}
@@ -73,6 +73,11 @@
 			#{item}
 		</foreach>	
 		order by dnum
+	</select>
+	
+	<select id="getTotalCount" resultType="Dog">
+		select count(*) dogCount
+	    from dondog_dog 
 	</select>
 	
 </mapper>

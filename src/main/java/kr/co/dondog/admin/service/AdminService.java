@@ -77,6 +77,21 @@ public class AdminService {
 		System.out.println("AdminService.updateMember");
 		return adminDAO.updateMember(email, field, value);
 	}
+
+	public int getmemberCount() {
+		System.out.println("AdminService.getmemberCount");
+		return adminDAO.getmemberCount();
+	}
+
+	public int reportCountInc() {
+		System.out.println("AdminService.reportCountInc");
+		return adminDAO.reportCountInc();
+	}
+
+	public List<MemberVO> sendEmail() {
+		System.out.println("AdminService.sendEmail");
+		return adminDAO.sendEmailMember();
+	}
 	
 	
 //	===========================페이징, 검색 , 건수 부분==============================
@@ -115,7 +130,7 @@ public class AdminService {
 //		
 //		return result;
 //	}
-//	
+
 
 
 }
