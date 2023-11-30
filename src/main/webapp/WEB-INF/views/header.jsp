@@ -54,7 +54,7 @@
    <script src="<c:url value='/resources/js/modernizr-2.6.2.min.js'/>"></script>
 </head>
 <style>
-.modal {
+.modal2 {
             display: none;
             position: fixed;
             top: 50%;
@@ -69,7 +69,7 @@
             border-radius: 10px;
         }
         
-        .modal button{
+        .modal2 button{
             background-color: transparent;
             border: none;
             outline: none;
@@ -80,7 +80,7 @@
             font-size: 20px;
         }
 
-        .modal button:hover {
+        .modal2 button:hover {
             font-weight: bold;
 /*             color: red; */
         }
@@ -182,7 +182,7 @@
             </div>
             
             <!-- 알림 모달 -->
-		<div id="myModal" class="modal">
+		<div id="myModal" class="modal2">
 			<!-- 탭 선택 버튼 -->
 			<div class="button-style">
 				<button onclick="openTab('activityTab')">활동알림</button>

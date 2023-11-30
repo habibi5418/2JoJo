@@ -15,6 +15,8 @@ public interface MemberDAO {
 	public int loginCountClear(String email);
 	public int insertMember(MemberVO memberVO);
 	public int updateMember(MemberVO memberVO);
+	public int update(MemberVO memberVO);
+	MemberVO getProfile(String email);
 
 
 }

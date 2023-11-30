@@ -18,7 +18,14 @@ public class DogService {
 	
 	// 회원 등록 강아지 가져오기
 	public List<DogVO> getList(String email) throws Exception {
-		return dogDAO.getList(email);
+		List<DogVO> list = dogDAO.getList(email);
+		
+		list.forEach(dog -> {
+			if (dog.getMatter() != null) dog.setMatter(dog.getMatter().replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
+			else dog.setMatter("특이사항이 없습니다.");
+		});
+		
+		return list;
 	}
 	
 	// 방금 등록한 강아지 가져오기
