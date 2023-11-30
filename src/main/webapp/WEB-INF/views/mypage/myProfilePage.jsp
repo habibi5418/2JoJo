@@ -46,7 +46,7 @@
                     <div class="profile-top-left">
                     <!-- 사용자 사진 -->
                         <figure class="thumbnail">
-                            <img alt="" src="<c:url value='/resources/images/mypage/developer1.png'/>"/>
+                            <img alt="" src="<c:url value='/resources/images/profile/developer1.png'/>"/>
                             <!-- 등록안했을 시 기본 썸네일 -->
                             <img alt="" src=""/>
                         </figure>
@@ -124,41 +124,40 @@
                     
                     <!--게시물 목록 영역 -->
                     <div class="grid-wrapper">
-                        <!-- <c:forEach items="${boardList}" var="board"> -->
                             <div class="grid">
                                 <div class="grid-header">
                                     <p>우리강아지</p>
                                 </div>
                                 <!-- 각 이미지 카드를 클릭시 해당 게시글 혹은 정보로 연결 -->
                                 <figure class="feed-item-card" onclick="">
-                                    <img src="<c:url value='/resources/images/mypage/dog1.jpeg'/>" alt="" class="thumbnail-img">
+                                    <img src="<c:url value='/resources/images/profile/dog1.jpeg'/>" alt="" class="thumbnail-img">
                                     
                                     <!-- 마우스 오버시 하트와 메시지 아이콘 표시 -->
-                                    <div class="overlay">
-                                        <div class="overlay-content">
-                                            <dl class="icon-heart-txt">
-                                                <dt>
-                                                    <img src="<c:url value='/resources/images/mypage/임시.png'/>" alt="" class="icon">
-                                                </dt>
-                                                <dd>board.likeCount</dd>
-                                            </dl>
+<!--                                     <div class="overlay"> -->
+<!--                                         <div class="overlay-content"> -->
+<!--                                             <dl class="icon-heart-txt"> -->
+<!--                                                 <dt> -->
+<%--                                                     <img src="<c:url value='/resources/images/profile/임시.png'/>" alt="" class="icon"> --%>
+<!--                                                 </dt> -->
+<!--                                                 <dd>board.likeCount</dd> -->
+<!--                                             </dl> -->
                                             
-                                            <dl class="icon-msg-txt">
-                                                <dt>
-                                                    <img src="<c:url value='/resources/images/mypage/임시.png'/>" alt="" class="icon">
-                                                </dt>
-                                                <dd>board.commentCount</dd>
-                                            </dl>
-                                        </div>
-                                    </div>
+<!--                                             <dl class="icon-msg-txt"> -->
+<!--                                                 <dt> -->
+<%--                                                     <img src="<c:url value='/resources/images/profile/임시.png'/>" alt="" class="icon"> --%>
+<!--                                                 </dt> -->
+<!--                                                 <dd>board.commentCount</dd> -->
+<!--                                             </dl> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
                                 </figure>
 
                                 <figure class="feed-item-card" onclick="">
-                                    <img src="<c:url value='/resources/images/mypage/dog1.jpeg'/>"  alt="" class="thumbnail-img">
+                                    <img src="<c:url value='/resources/images/profile/dog1.jpeg'/>"  alt="" class="thumbnail-img">
                                 </figure>
 
                                 <figure class="feed-item-card" onclick="">
-                                    <img src="<c:url value='/resources/images/mypage/dog1.jpeg'/>"  alt="" class="thumbnail-img">
+                                    <img src="<c:url value='/resources/images/profile/dog1.jpeg'/>"  alt="" class="thumbnail-img">
                                 </figure>
                             </div>
 
@@ -168,15 +167,7 @@
                             </div>
 
                             <figure class="feed-item-card" onclick="">
-                                <img src="<c:url value='/resources/images/mypage/map.jpg'/>"  alt="" class="thumbnail-img">
-                            </figure>
-                            
-                            <figure class="feed-item-card" onclick="">
-                                <img src="<c:url value='/resources/images/mypage/map.jpg'/>" alt="" class="thumbnail-img">
-                            </figure>
-                            
-                            <figure class="feed-item-card" onclick="">
-                                <img "<c:url value='/resources/images/mypage/map.jpg'/>" alt="" class="thumbnail-img">
+                                <img src="<c:url value='/resources/images/profile/map.jpg'/>"  alt="" class="thumbnail-img">
                             </figure>
                           
                           
@@ -185,17 +176,16 @@
                             </div>
 
                             <figure class="feed-item-card" onclick="">
-                                <img src="<c:url value='/resources/images/mypage/board.jpeg'/>" alt="" class="thumbnail-img">
+                                <img src="<c:url value='/resources/images/profile/board.jpeg'/>" alt="" class="thumbnail-img">
                             </figure>
                             
                             <figure class="feed-item-card" onclick="">
-                                <img src="<c:url value='/resources/images/mypage/board.jpeg'/>" alt="" class="thumbnail-img">
+                                <img src="<c:url value='/resources/images/profile/board.jpeg'/>" alt="" class="thumbnail-img">
                             </figure>
                             
                             <figure class="feed-item-card" onclick="">
-                                <img src="<c:url value='/resources/images/mypage/board.jpeg'/>" alt="" class="thumbnail-img">
+                                <img src="<c:url value='/resources/images/profile/board.jpeg'/>" alt="" class="thumbnail-img">
                             </figure>
-                        <!-- </c:forEach> -->
                     </div>
                 </div>
             </div>
