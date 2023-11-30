@@ -125,14 +125,13 @@
 
 <body>
    <header role="banner" id="fh5co-header">
-        <header role="banner" id="fh5co-header">
-            <div class="container">
+       <div class="container">
                 <div class="row">
                     <nav class="navbar navbar-default navbar-fixed-top">
                         <div class="navbar-btn">
                             <ul class="navbar-right-btn">
                                 <li class="navbar-right-li">
-                                   <button onclick="location.href='<c:url value="/chat/roomList"/>' ">
+                                   <button onclick="location.href='<c:url value="/chat/roomList/"/>' ">
                                       <img src="<c:url value='/resources/images/main/chat1.png'/>">
                                    </button>
                                 </li>
@@ -162,8 +161,10 @@
                         </div><!-- navbar-right-btn -->
                         <div class="navbar-header">
                             <!-- Mobile Toggle Menu Button -->
-                          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
-                              data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+<!--                           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" -->
+<!--                               data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a> -->
+                          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar"><i></i></a>
+
                           <a class="navbar-brand" href="<c:url value='/'/>" style="font-weight: 700; font-size: 24px;" > dondog </a> 
                         </div>
 

@@ -1,8 +1,7 @@
-;(function () {
 	
-	'use strict';
+	//'use strict';
 
-
+	
 
 	// iPad and iPod detection	
 	var isiPad = function(){
@@ -23,22 +22,30 @@
 
 
 
-	// Burger Menu
+
 	var burgerMenu = function() {
+    // 네비게이션 바 상태를 저장하는 변수
+    var navbarOpen = false;
 
-		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
+    $('body').on('click', '.js-fh5co-nav-toggle', function(event) {
+        event.preventDefault();
+        // 네비게이션 바의 상태를 확인하고, 그 상태에 따라 열고 닫음
+        var navbar = $('#navbar');
+        if (navbarOpen) {
+            // 네비게이션 바가 열려 있다면 닫음
+           $(this).removeClass('active');
+            navbar.slideUp();
+        } else {
+        	$(this).addClass('active');	
+            // 네비게이션 바가 닫혀 있다면 열림
+            navbar.slideDown(); // 또는 navbar.show();
+        }
+        // 네비게이션 바 상태 업데이트
+        navbarOpen = !navbarOpen;
+    });
+};
 
-			event.preventDefault();
 
-			if ( $('#navbar').is(':visible') ) {
-				$(this).removeClass('active');
-			} else {
-				$(this).addClass('active');	
-			}
-
-		});
-
-	};
 
 
 	// Page Nav
@@ -194,4 +201,4 @@
 	});
 
 
-}());
+//}());

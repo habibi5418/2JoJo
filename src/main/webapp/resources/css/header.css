@@ -205,10 +205,8 @@ pc min-width 769 px
     
     .navbar-right-btn {
       height: 100px;
-      /* border:2px solid salmon; */
-      margin: 0;
-      padding: 0;
-      margin-top: -20px;
+      margin-right: 50px;
+
     }
   
   }
