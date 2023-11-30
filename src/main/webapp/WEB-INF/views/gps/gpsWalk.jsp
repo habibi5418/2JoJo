@@ -142,12 +142,11 @@
 	    // 구독 메시지 수신 
 	    mqttClient.on('message', function (topic, message) {
 	        // message is Buffer
-	        const latLng = message.toString().split(",");
-	        const lat = latLng[0].substr(7);
-	        const lng = latLng[1].substr(6);
-	        const senderArr = message.toString().split("\"");
-	        const sender = senderArr[7];
-
+	        const msg = JSON.parse(message.toString());
+	        const lat = msg.lat;
+	        const lng = msg.lng;
+	        const sender = msg.sender;
+	        
 	        if (!(sender === senderEmail)) {
 		        partnerMarker.setMap(map);
 	        	partnerMarker.setPosition(new naver.maps.LatLng(lat, lng));
