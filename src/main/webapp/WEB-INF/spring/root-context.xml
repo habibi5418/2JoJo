@@ -6,6 +6,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 		
+	<!-- 스케줄러 관련 설정 (수진추가) -->
+	<bean id="ScheduledTasks" class="kr.co.dondog.admin.scheduled.ScheduledTasks"/>
 		
 		
 </beans>

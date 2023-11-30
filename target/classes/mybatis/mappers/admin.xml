@@ -124,39 +124,77 @@
 	    WHERE EMAIL = #{email}
 	</update>
 	
-	<!-- =========페이징, 검색 등등============================  -->
-	<select id="searchMemberList" resultType="kr.co.dondog.member.vo.MemberVO">
-	   SELECT * 
-		FROM (
-		    SELECT 
-		        ROW_NUMBER() OVER (ORDER BY 
-		            <choose> 
-		                <when test='orderColumn=="0"'> email           ${dir} </when> 
-		                <when test='orderColumn=="1"'> mname           ${dir} </when> 
-		                <when test='orderColumn=="2"'> address         ${dir} </when> 
-		                <when test='orderColumn=="3"'> birth           ${dir} </when> 
-		                <when test='orderColumn=="4"'> gender          ${dir} </when> 
-		                <when test='orderColumn=="5"'> grade           ${dir} </when> 
-		                <when test='orderColumn=="6"'> join_date  as joinDate   ${dir} </when> 
-		                <when test='orderColumn=="7"'> recent_log as recentLog  ${dir} </when> 
-		                <when test='orderColumn=="8"'> reports         ${dir} </when> 
-		                <when test='orderColumn=="9"'> black           ${dir} </when> 
-		                <when test='orderColumn=="10"'> account_locked as accountExpired ${dir} </when> 
-		                <when test='orderColumn=="11"'> cancels        ${dir} </when> 
-		            </choose> 
-		        ) AS rnum, 
-		        m.* 
-		    FROM dondog_member m 
-		) 
-		WHERE rnum BETWEEN #{start} AND #{start + length - 1}
+	
+	
+		<!-- 누적 채팅방   -->
+	<select id="getmemberCount" resultType="int">
+		SELECT COUNT(*) AS total_member_count
+		FROM dondog_member
 	</select>
 	
-	<select id="getSearchMemberTotalCount" resultType="int">
-		SELECT  
-        		count(*)
-		FROM  dondog_member 
-              
+	<!-- 휴먼계정 조회 -->
+	<select id="sendEmailMember" resultType="kr.co.dondog.member.vo.MemberVO">
+	 <![CDATA[
+	        SELECT email
+	        FROM your_table
+	        WHERE recent_log < SYSDATE - 3
+	    ]]>
 	</select>
+	
+	<!-- =========페이징, 검색 등등============================  -->
+<!-- 	<select id="searchMemberList" resultType="kr.co.dondog.member.vo.MemberVO"> -->
+<!-- 		SELECT *  -->
+<!-- 		FROM ( -->
+<!-- 		    SELECT  -->
+<!-- 		        ROW_NUMBER() OVER (ORDER BY  -->
+<!-- 		            <choose>  -->
+<!-- 		                <when test='orderColumn=="0"'> email           ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="1"'> mname           ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="2"'> address         ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="3"'> birth           ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="4"'> gender          ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="5"'> grade           ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="6"'> join_date  as joinDate   ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="7"'> recent_log as recentLog  ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="8"'> reports         ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="9"'> black           ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="10"'> account_locked as accountExpired ${dir} </when>  -->
+<!-- 		                <when test='orderColumn=="11"'> cancels        ${dir} </when>  -->
+<!-- 		            </choose>  -->
+<!-- 		        ) AS rnum,  -->
+<!-- 		        m.*  -->
+<!-- 		    FROM dondog_member m  -->
+<!-- 		    WHERE  -->
+<!-- 		        <if test="searchKeyword != null and searchKeyword != ''"> -->
+<!-- 		            ( -->
+<!-- 		                email LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                mname LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                address LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                birth LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                gender LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                grade LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                join_date LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                recent_log LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                reports LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                black LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                account_locked LIKE CONCAT ('%', #{searchKeyword}, '%') OR -->
+<!-- 		                cancels LIKE CONCAT ('%', #{searchKeyword}, '%') -->
+<!-- 		            ) -->
+<!-- 		        </if> -->
+<!-- 		)  -->
+<!-- 		WHERE rnum BETWEEN #{start} AND #{start + length - 1} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getSearchMemberTotalCount" resultType="int"> -->
+<!-- 		SELECT   -->
+<!--         		* -->
+<!-- 		FROM  dondog_member -->
+<!--         <where> -->
+<!--            <if test="searchKeyword != null and searchKeyword != ''"> -->
+<!--                email LIKE CONCAT ('%', #{searchKeyword},'%') -->
+<!--            </if> -->
+<!-- 		</where>     -->
+<!-- 	</select> -->
 	
 	
 </mapper>

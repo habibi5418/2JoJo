@@ -7,16 +7,16 @@
 <head>
 <style>
  .loading-overlay { 
-	position: fixed; 
-	top: 0; 
-	left: 0; 
-	width: 100%; 
-	height: 100%; 
-	background: rgba(255, 255, 255, 0.7); 
-	display: flex; 
-	justify-content: center; 
-	align-items: center; 
-	z-index: 9999; 
+ 	position: fixed;   
+  	top: 0;   
+  	left: 0;   
+  	width: 100%;   
+  	height: 100%;   
+  	background: rgba(255, 255, 255, 0.7);   
+  	display: flex;   
+  	justify-content: center;   
+  	align-items: center;   
+  	z-index: 9999;   
   }
 </style>
 <meta charset="utf-8">
@@ -375,10 +375,9 @@
 						<li class="nav-item dropdown no-arrow"><a
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
-									McGee</span> <img class="img-profile rounded-circle"
-								src="<c:url value='/resources/img/undraw_profile.svg'/>">
+							aria-expanded="false"> 
+							<span class="mr-2 d-none d-lg-inline text-gray-600 small"> 조철민 </span> 
+							<img class="img-profile rounded-circle"	src="<c:url value='/resources/img/undraw_profile.svg'/>">
 
 						</a> <!-- Dropdown - User Information -->
 							<div
@@ -590,6 +589,8 @@
 	<!-- Page level custom scripts -->
 	<script src="<c:url value='/resources/js/demo/datatables-demo.js'/>"></script>
 	<script type="text/javascript">
+	
+	/* =============로딩중====================  */
 	function hideLoadingMessage() {
 	    document.getElementById("loadingOverlay").style.display = "none";
 	}
@@ -598,6 +599,7 @@
 		  document.getElementById("loader").style.display = "none";
 		  document.getElementById("myDiv").style.display = "block";
 		}
+	/*==============로딩중 끝================  */
 	
 		jQuery(function($){
 	        $("#memberTable").DataTable();
@@ -605,79 +607,15 @@
 	    });
 	
 		
-// 		/*나이계산  */
-// 	  $(document).ready(function() {
-//     // 각 행에 대해 나이를 계산하여 "나이" 열에 추가
-//     $("table#memberTable tbody tr").each(function() {
-//       var birthDateString = $(this).find("td:eq(4)").text(); // 4번째 열이 생년월일 열
-//       var age = calculateAge(birthDateString);
-//       $(this).find("td:eq(4)").text(age); // 4번째 열을 "나이"로 변경
-//     });
 
-//     // 생년월일 문자열을 받아서 나이를 계산하는 함수
-//     function calculateAge(birthDateString) {
-//       var birthDate = new Date(birthDateString.replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
-//       var currentDate = new Date();
-//       var age = currentDate.getFullYear() - birthDate.getFullYear();
-
-//       // 생일이 지났는지 체크
-//       if (
-//         currentDate.getMonth() < birthDate.getMonth() ||
-//         (currentDate.getMonth() === birthDate.getMonth() &&
-//           currentDate.getDate() < birthDate.getDate())
-//       ) {
-//         age--;
-//       }
-
-//       return age;
-//     }
-//   });
-	
-//   $(document).ready(function() {
-//     // 페이지 로드시 실행
-//     calculateAndDisplayAge();
-
-//     // 페이징 변경될 때마다 실행
-//     $('#memberTable').on('page.dt', function() {
-//       calculateAndDisplayAge();
-//     });
-
-//     // 생년월일 문자열을 받아서 나이를 계산하는 함수
-//     function calculateAge(birthDateString) {
-//       var birthDate = new Date(birthDateString.replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
-//       var currentDate = new Date();
-//       var age = currentDate.getFullYear() - birthDate.getFullYear();
-
-//       // 생일이 지났는지 체크
-//       if (
-//         currentDate.getMonth() < birthDate.getMonth() ||
-//         (currentDate.getMonth() === birthDate.getMonth() &&
-//           currentDate.getDate() < birthDate.getDate())
-//       ) {
-//         age--;
-//       }
-
-//       return age;
-//     }
-
-//     // 각 행에 대해 나이를 계산하여 "나이" 열에 추가
-//     function calculateAndDisplayAge() {
-//       $("table#memberTable tbody tr").each(function() {
-//         var birthDateString = $(this).find("td:eq(4)").text(); // 4번째 열이 생년월일 열
-//         var age = calculateAge(birthDateString);
-//         $(this).find("td:eq(4)").text(age); // 4번째 열을 "나이"로 변경
-//       });
-//     }
-//   });		
 	
 // 	var $memberTable = $('.memberTable').DataTable({	
 // 	$("#memberTable").DataTable({
 // 	    "processing": true,
 // 	    "serverSide": true,
-	   
 // 	    "pagingType": "full_numbers",
 // 	    "ajax": {
-// 	        "url": "<c:url value='/listJSON'/>",
+// 	        "url": "<c:url value='/admin/listJSON'/>",
 // 	        "type": "POST",
 // 	        "data": function (d) {
 // 	            //추가 검색인자 설정
@@ -784,9 +722,7 @@
 			    });
 			}
 		
-		function jsUpdate(id) {
-			alert(id);
-		}
+
 		
 // 		// 드랍박스 관련 스크립트 작동X
 // 		function updateDropdownMenus(updatedValue) {
@@ -836,6 +772,73 @@
 // 		      dropdownParent.appendChild(newDropdownMenu);
 // 		    }
 // 		  }
+
+
+// 		/*나이계산  */
+// 	  $(document).ready(function() {
+//     // 각 행에 대해 나이를 계산하여 "나이" 열에 추가
+//     $("table#memberTable tbody tr").each(function() {
+//       var birthDateString = $(this).find("td:eq(4)").text(); // 4번째 열이 생년월일 열
+//       var age = calculateAge(birthDateString);
+//       $(this).find("td:eq(4)").text(age); // 4번째 열을 "나이"로 변경
+//     });
+
+//     // 생년월일 문자열을 받아서 나이를 계산하는 함수
+//     function calculateAge(birthDateString) {
+//       var birthDate = new Date(birthDateString.replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
+//       var currentDate = new Date();
+//       var age = currentDate.getFullYear() - birthDate.getFullYear();
+
+//       // 생일이 지났는지 체크
+//       if (
+//         currentDate.getMonth() < birthDate.getMonth() ||
+//         (currentDate.getMonth() === birthDate.getMonth() &&
+//           currentDate.getDate() < birthDate.getDate())
+//       ) {
+//         age--;
+//       }
+
+//       return age;
+//     }
+//   });
+	
+//   $(document).ready(function() {
+//     // 페이지 로드시 실행
+//     calculateAndDisplayAge();
+
+//     // 페이징 변경될 때마다 실행
+//     $('#memberTable').on('page.dt', function() {
+//       calculateAndDisplayAge();
+//     });
+
+//     // 생년월일 문자열을 받아서 나이를 계산하는 함수
+//     function calculateAge(birthDateString) {
+//       var birthDate = new Date(birthDateString.replace(/(\d{2})(\d{2})(\d{2})/, "$1-$2-$3"));
+//       var currentDate = new Date();
+//       var age = currentDate.getFullYear() - birthDate.getFullYear();
+
+//       // 생일이 지났는지 체크
+//       if (
+//         currentDate.getMonth() < birthDate.getMonth() ||
+//         (currentDate.getMonth() === birthDate.getMonth() &&
+//           currentDate.getDate() < birthDate.getDate())
+//       ) {
+//         age--;
+//       }
+
+//       return age;
+//     }
+
+//     // 각 행에 대해 나이를 계산하여 "나이" 열에 추가
+//     function calculateAndDisplayAge() {
+//       $("table#memberTable tbody tr").each(function() {
+//         var birthDateString = $(this).find("td:eq(4)").text(); // 4번째 열이 생년월일 열
+//         var age = calculateAge(birthDateString);
+//         $(this).find("td:eq(4)").text(age); // 4번째 열을 "나이"로 변경
+//       });
+//     }
+//   });		
+
 		
 	</script>
 

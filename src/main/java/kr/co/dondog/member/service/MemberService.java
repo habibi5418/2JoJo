@@ -3,6 +3,7 @@ package kr.co.dondog.member.service;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,15 @@ public class MemberService {
 	public MemberVO findByEmail(String email) {
 		System.out.println("memberservice.findbyemail");
 		return memberDAO.findByEmail(email);
+		
+		
+//		MemberVO member = memberDAO.findByEmail(email);
+//		
+//		if (member == null) throw new UsernameNotFoundException("Not Found account.");
+//		
+//		memberDAO.loginCountInc(member);
+//		
+//		return member;
 	}
 	
 	//회원가입

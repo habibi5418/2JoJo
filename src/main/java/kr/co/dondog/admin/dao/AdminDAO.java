@@ -34,13 +34,26 @@ public interface AdminDAO {
 	
 	// 회원관리
 	int updateMember(String email, String field, String value);
-
 	
+	// 블랙회원 변경
+	int reportCountInc();
+	
+//	int sendEmail();
+
+//	=======================메인 페이지 출력부분=========================
+	
+	// 누적 가입자수 
+	int getmemberCount();
+
+	List<MemberVO> sendEmailMember();
+
+
 	
 //	======================== 페이징 기타 등등 ==================================
 //	List<MemberVO> searchMemberList(SearchVO searchVO);
 //
 //	int getSearchMemberTotalCount(SearchVO searchVO);
+
 	
 
 	

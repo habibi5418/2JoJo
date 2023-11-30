@@ -159,7 +159,10 @@ input:not(:placeholder-shown) {
 	position: absolute;
 	right: 0px;
 }
-
+#errorMessage{
+font-size : 10px;
+ color : red;
+}
 
    
 
@@ -192,6 +195,7 @@ input:not(:placeholder-shown) {
 				<a href="<c:url value='/findUidForm'/>">FORGOT ID / </a>
 				<a href="<c:url value='/findPwdForm'/>">FORGOT PASSWORD</a>
 			</div>		
+			<div id="errorMessage"></div>
 	</div>
 	
 	<div class="snslogin">
@@ -220,6 +224,35 @@ input:not(:placeholder-shown) {
  </div>
 </body>
 
+<script>
+// document.addEventListener('DOMContentLoaded', function() {
+//     var urlParams = new URLSearchParams(window.location.search);
+//     var exception = urlParams.get('exception');
+//     if (error) {
+//                 // 만약 error 파라미터가 존재하면 해당 메시지를 가져옵니다.
+//                 errorMessage = decodeURIComponent(error);
+//             }
+//     console.log(urlParams);
 
+//   /*   if (exception === 'error') {
+//         alert("비밀번호가 틀렸습니다.");
+//     } else if (exception === 'loginLock'){
+//        alert("비밀번호가 틀렸습니다.");
+//     } */
+// });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentURL = window.location.href;
+            var searchString = 'error';
+            
+            if (currentURL.includes(searchString)) {
+                // Get the element where you want to display the message
+                var messageElement = document.getElementById('errorMessage');
+
+                // Set the error message text
+                messageElement.innerText = '아이디 또는 비밀번호를 확인해주세요\n5번이상 오류시 계정이 비활성화됩니다(1/5) ';
+            }
+        });
+</script>
 
 </html>
