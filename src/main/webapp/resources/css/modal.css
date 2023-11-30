@@ -5,7 +5,7 @@ ul li {
 	margin: 0;
 }
 
-.modal {
+.modal2 {
 	display: none;
 	position: fixed;
 	top: 50%;
@@ -21,19 +21,19 @@ ul li {
 	overflow-y: scroll;
 }
 
-.modal::-webkit-scrollbar {
+.modal2::-webkit-scrollbar {
 	width: 15px;
 	height: 4px; /* 스크롤바 높이 */
 }
 
 /* 스크롤바 색 */
-.modal::-webkit-scrollbar-thumb {
+.modal2::-webkit-scrollbar-thumb {
     background-color: #ecede7;
     
 }
 
 
-.modal button {
+.modal2 button {
 	background-color: transparent;
 	border: none;
 	outline: none;
@@ -45,12 +45,12 @@ ul li {
 	
 }
 
-.modal .btn_success {
+.modal2 .btn_success {
 	margin-left: 130px;
 	margin-right: 10px;
 }
 
-.modal button:hover {
+.modal2 button:hover {
 	font-weight: bold;
 	/*             color: red; */
 }
