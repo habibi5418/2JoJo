@@ -39,7 +39,7 @@
 
    <!-- Style -->
     <link rel="stylesheet" href="<c:url value='/resources/css/header.css'/>"> 
-<%-- 	<link rel="stylesheet" href="<c:url value='/resources/css/modal.css'/>"> --%>
+	<link rel="stylesheet" href="<c:url value='/resources/css/modal.css'/>">
 
    <!-- fonts -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,85 +54,47 @@
    <script src="<c:url value='/resources/js/modernizr-2.6.2.min.js'/>"></script>
 </head>
 <style>
-.modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #fff;
-            z-index: 1;
-            width: 800px;
-            height: 300px;
-            border-radius: 10px;
-        }
-        
-        .modal button{
-            background-color: transparent;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            text-decoration: none;
-            font-size: 20px;
-        }
+.confirm_modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #675040;
+    width: 600px;
+    height: 150px;
+    color: white;
+    border-radius: 10px;
+}
 
-        .modal button:hover {
-            font-weight: bold;
-/*             color: red; */
-        }
+.confirm-modal-content{
+    text-align: center;
+    margin-top: 10px auto;
+    
+}
+
+.confirm-modal-content p{
+   margin-top: 8px;
+   margin-bottom: 20;
+}
 
 
-        /* 탭 선택 버튼  */
-        .button-style button {
-            width: 350px;
-        }
-
-        .button-style button:last-child {
-            width: 20px; float: right; display: flex;
-        }
-
-        /* 활동알림 content */
-        .req_content{
-            margin: 0;
-        }
-
-        .resultContainer {
-            margin: 0;
-            float: left;
-            width: 100%;
-            /* border: 2px solid orange; */
-            margin-right: 10px;
-            padding: 0;
-        }
-
-		 #resultPush { 
-			border: 2px solid orange;
-			color: black;
-	        font-size: 18px;
-		 	width:90%;
-		 	height: 100%;
-		 }
-
-        .req_content button:hover{
-            color: red;
-        }
+.confirm-modal-content button:hover {
+	font-weight: bold;
+	
+}
 
 </style>
-
 <body>
    <header role="banner" id="fh5co-header">
-        <header role="banner" id="fh5co-header">
-            <div class="container">
+       <div class="container">
                 <div class="row">
                     <nav class="navbar navbar-default navbar-fixed-top">
                         <div class="navbar-btn">
                             <ul class="navbar-right-btn">
                                 <li class="navbar-right-li">
-                                   <button onclick="location.href='<c:url value="/chat/roomList"/>' ">
+                                   <button onclick="location.href='<c:url value="/chat/roomList/"/>' ">
                                       <img src="<c:url value='/resources/images/main/chat1.png'/>">
                                    </button>
                                 </li>
@@ -162,8 +124,10 @@
                         </div><!-- navbar-right-btn -->
                         <div class="navbar-header">
                             <!-- Mobile Toggle Menu Button -->
-                          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
-                              data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+<!--                           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" -->
+<!--                               data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a> -->
+                          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar"><i></i></a>
+
                           <a class="navbar-brand" href="<c:url value='/'/>" style="font-weight: 700; font-size: 24px;" > dondog </a> 
                         </div>
 
@@ -197,19 +161,24 @@
 				<div class="req_content">
 					<div class="resultContainer" >
 						<ul id="resultPush"></ul>
-						
 					</div>
-<!-- 					<p id="chat_req_comm"></p> -->
-<!-- 					<button id="btn_success">✔</button> -->
-<!-- 					<button id="btn_cancel">✘</button> -->
 				</div>
 			</div>
 
 			<!-- 키워드알림 탭 내용 -->
 			<div id="keywordTab" class="tab">
 				<!-- 키워드알림 내용 -->
-				키워드알림 내용이 여기에 들어갑니다.
 			</div>
+			
+			<div id="confirm" class="confirm_modal">
+			    <div class="confirm-modal-content">
+			        <p style="font-size: 18px;"> 대화를 시작하세요! </p>
+			        <button id="startChatBtn" style="font-size:18px;"> Go chat </button>
+			        <button id="laterBtn" style="font-size:18px;"> Later </button>
+			    </div>
+			</div>
+			
+			
 		</div>
 	</header>
             
@@ -273,22 +242,19 @@
     		const sender = requestList.requestList[i].sender;
     		const req_send_time = requestList.requestList[i].req_send_time;
     		
-    		resultPush.append("<li>"+ sender +"님이 채팅을 요청했습니다." + req_send_time 
+    		resultPush.append("<li class='resultPush-li'>"+ sender +"님이 채팅을 요청했습니다." + req_send_time 
     								+"<button id='btn_success" + req_id + "'>✔</button>"
     							    +"<button id='btn_cancel" + req_id + "'>✘</button></li>"); 
     		
     		// ✔ 버튼
     	    $("#btn_success" + req_id).on("click", function () {
     	    	$("btn_success").empty();
-    	   		alert("btn_success");
     	   		updateRequestStatus(req_id, sender);
     	    }); // btn success 
       } //for
     }); //requestList .ajax  
     	    	
     function updateRequestStatus(req_id, sender) {
-        alert("updateRequestStatus 진입0");
-  
         const updateInfo = {
         		req_id : req_id,
         		sender : sender
@@ -301,7 +267,6 @@
             dataType: "JSON",
             data: JSON.stringify(updateInfo)
 	    	}).done(result => { 
-	    			alert(result.result);
 	    			createChatRoom(sender);
 	    	});
            
@@ -324,114 +289,30 @@
             data: JSON.stringify(roomInfo)
 	    	}).done(result => { 
 // 				alert("room_id 생성: "+result.room_id);
-	    		alert(result.message);
-	    		
 	    		const room_id = result.room_id;
-	    		
 	    		localStorage.setItem('chat.sender', sender);
 	        	localStorage.setItem('chat.receiver', receiver);
 	        	localStorage.setItem('chat.room_id', room_id);
-				
-// 	        	openChatRoomList();
 	        	
-	    		location.href="<c:url value='/chat/room/'/>"+room_id;
+	        	// Show custom modal
+	            $('.confirm_modal').show();
+
+	            // Handle button clicks
+	            $('#startChatBtn').on('click', function() {
+	                // User clicked "Start Chat"
+	                location.href = "<c:url value='/chat/roomList/'/>";
+	            });
+
+	            $('#laterBtn').on('click', function() {
+	                $('.confirm_modal').hide();
+	            });
 	    	});
     		
-    		
 		
-//     	}); //ajax 
     	
     }; //createChatroom
     
     
-    /*
-    function openChatRoomList() {
-    	
-    	
-    	const roomInfo = {
-    			sender: receiver,
-    			receiver : receiver
-    	}
-    	
-    	$.ajax({
-			type: "POST", 
-			url: "<c:url value='/chat/roomList'/>",
-		       contentType: "application/json; charset=UTF-8",
-		       dataType: "JSON",
-		       data: JSON.stringify(roomInfo)
-// 		       success: function (result) {
-// //                 // 성공적으로 처리된 경우
-// 				location.href="<c:url value='/chat/roomList'/>"	
-// 		    } // ajax result 
-	    }); //ajax 
-    	
-    }
-    */
-    
-    
-//     	$.ajax({
-//     		alert("ajax 진입");
-//     		type: "POST", 
-//             url: "<c:url value='/chat/updateRequestStatus'/>",
-//             contentType: "application/json; charset=UTF-8",
-//             dataType: "JSON",
-//             data: JSON.stringify(chatRoomData),
-//             success: function (result.staus) {
-//                 // 성공적으로 처리된 경우
-//                 alert("변경됨!");
-// //					createRoom();
-//             } // ajax result 
-// 	    }); //ajax 
-    	
-	    	    
-// 	    
-	    	    	
-
-// 					$.ajax({
-// 	    	    		type: "POST",
-// 	    	            url: "<c:url value='/chat/createChatRoom'/>",
-// 	    	            contentType: "application/json; charset=UTF-8",
-// 	    	            dataType: "JSON",
-// 	    	            data: JSON.stringify(data),
-// 			            success: function (result.status) {
-// 			            	const room_id = "${result.getRoom_id()}";
-// 			            	const receiver = "${result.receiver}";
-// 			            	const sender = "${result.sender}";
-			            	
-// 			            	const roomInfo = {
-// 			            			room_id : room_id,
-// 			            			receiver : receiver,
-// 			            			sender : sender
-// 			            	}
-// 			            	alert(result.message);
-// 	            		} // ajax result 
-// 	    			}); //ajax 
-// 	    	    }
-	    	    
-
-    	    
-//     	    function createChatRoom(room_id) {
-				
-//     	    	const chatRoomData ={ room_id: room_id};
-    	    	
-//     	    	$.ajax({
-//     	    		type: "POST",
-//     	            url: "<c:url value='/chat/createChatRoom'/>",
-//     	            contentType: "application/json; charset=UTF-8",
-//     	            dataType: "JSON",
-//     	            data: JSON.stringify(chatRoomData),
-// 		            success: function (result) {
-// 		                // 성공적으로 처리된 경우
-// 		                alert(result.message);
-// 		                alert("채팅방: "+room_id);
-		                
-		                
-// // 						location.href='<c:url value="/chat/createChatRoom"/>'+roomId;
-// 		            } // ajax result 
-//     	    	}); //ajax 
-    	    	
-// 			} //createChatRoom end
-    	    
 
 /* ************************************************* */
 /* modal */
@@ -461,7 +342,6 @@
 
     
 
-	    
 </script>
 </body>
 </html>
