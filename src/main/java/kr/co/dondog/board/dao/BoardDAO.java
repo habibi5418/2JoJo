@@ -14,6 +14,7 @@ public interface BoardDAO {
 	List<BoardVO> getRecentBoardList();
 	List<BoardVO> getBoardList(BoardVO board);
 	int getTotalCount();
+	int getCountByMember(MemberVO member);
 	List<BoardVO> getAllBoardPageList(BoardVO board);
 	List<BoardVO> getMoreBoardPageList(BoardVO board);
 	List<BoardImgVO> getBoardImgList(BoardVO board);

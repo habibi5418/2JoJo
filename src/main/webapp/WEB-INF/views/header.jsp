@@ -241,13 +241,9 @@
 	$("#headerGoGps").on("click", () => {
     	location.href = "<c:url value='/gps/walk'/>";
 	});
-	
-	
-	
-
-//             	$("#headerGoProfile").on("click", () => {
-//             		location.href = "<c:url value='/board/list'/>";
-//             	});
+   	$("#headerGoProfile").on("click", () => {
+   		location.href='<c:url value="/profile/myInfo"/>' 
+   	});
 //             	$("#headerGoOur").on("click", () => {
 //             		location.href = "<c:url value='/board/list'/>";
 //             	});
