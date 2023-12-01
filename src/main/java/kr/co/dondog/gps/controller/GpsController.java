@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.dondog.chat.service.ChatRoomService;
+import kr.co.dondog.chat.vo.ChatRoomVO;
 import kr.co.dondog.dog.service.DogService;
 import kr.co.dondog.gps.service.GpsService;
 import kr.co.dondog.gps.vo.TestVO;
@@ -22,6 +24,9 @@ public class GpsController {
 
 	@Autowired
 	private GpsService gpsService;
+	
+	@Autowired
+	private ChatRoomService chatRoomService;
   
 	@Autowired
 	private DogService dogService;
@@ -30,12 +35,22 @@ public class GpsController {
 
 	// 게시판 이동
 	@RequestMapping(value = "/walk")
-	public String walk(Model model, Authentication authentication) throws Exception {
+	public String walk(@RequestParam(value = "room_id") String room_id, Model model, Authentication authentication) throws Exception {
 		if (authentication.getPrincipal() instanceof PrincipalDetails) {
 	         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
 	         MemberVO member= (MemberVO) userDetails.getUser();
+	         ChatRoomVO chatRoom = chatRoomService.getChatRoom(room_id);
+	         String partnerEmail = "";
+	         
+	         if (member.getEmail().equals(chatRoom.getSender())) {
+	        	 partnerEmail = chatRoom.getReceiver();
+	         } else {
+	        	 partnerEmail = chatRoom.getSender();
+	         }
+	         
+	         model.addAttribute("room_id", room_id);
 	         model.addAttribute("dog", dogService.getList(member.getEmail()).get(0));
-	         model.addAttribute("partnerDog", dogService.getList("test2@gmail.com").get(0)); // 임시 
+	         model.addAttribute("partnerDog", dogService.getList(partnerEmail).get(0)); // 임시 
 		}
 		return "gps/gpsWalk";
 	}

@@ -76,8 +76,10 @@ public class ChatRoomService {
 //			return chatRoomDAO.getMessageByRoomId(room_id);
 //		}
 	    
-	    
-	    
+	    // 산책 페이지용 데이터 가져오기
+	    public ChatRoomVO getChatRoom(String room_id) {
+	    	return chatRoomDAO.getChatRoom(room_id);
+	    }
 
 
 }

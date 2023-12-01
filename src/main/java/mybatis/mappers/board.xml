@@ -24,8 +24,9 @@
 	    from ( 
 	        select rownum nrow, n.* 
 	        from ( 
-				select *
-				from dondog_board 
+				select b.bnum, b.title, b.contents, b.nickname, b.reg_date, b.category, b.loc2, b.email, m.fname, m.gender
+		        from dondog_board b left outer join dondog_member m 
+		        on b.email = m.email 
 				where delete_status = 'N' 
                 order by bnum desc
 			) n 
@@ -41,10 +42,11 @@
 	    from ( 
 	        select rownum nrow, n.* 
 	        from ( 
-				select *
-				from dondog_board 
+				select b.bnum, b.title, b.contents, b.nickname, b.reg_date, b.category, b.loc2, b.email, m.fname, m.gender
+		        from dondog_board b left outer join dondog_member m 
+		        on b.email = m.email 
 				where delete_status = 'N' 
-				and email = #{email}
+				and b.email = #{email}
                 order by bnum desc
 			) n 
 			<![CDATA[
@@ -182,21 +184,10 @@
 	</insert>
 	
 	<select id="getBoard" resultMap="BoardMap">
-		select 
-			bnum
-			, title
-			, contents
-			, nickname
-			, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') as reg_date
-			, to_char(mod_date, 'YYYY-MM-DD HH24:MI:SS') as mod_date
-			, category
-			, heart
-			, view_count
-			, delete_status
-			, loc2
-			, email
-		from dondog_board
-		where bnum = #{bnum}
+		select b.bnum, b.title, b.contents, b.nickname, b.reg_date, b.category, b.loc2, b.email, m.fname, m.gender
+        from dondog_board b left outer join dondog_member m 
+        on b.email = m.email 
+		where b.bnum = #{bnum}
 	</select>
 	
 	<select id="getHeartStatus" resultType="BoardHeart">

@@ -17,6 +17,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="<c:url value='/resources/images/favicon/favicon.ico'/>"> <!--추가-->
+	<link rel="apple-touch-icon" sizes="57x57" href="<c:url value='/resources/images/favicon/apple-icon-57x57.png'/>">
+	<link rel="apple-touch-icon" sizes="60x60" href="<c:url value='/resources/images/favicon/apple-icon-60x60.png'/>">
+	<link rel="apple-touch-icon" sizes="72x72" href="<c:url value='/resources/images/favicon/apple-icon-72x72.png'/>">
+	<link rel="apple-touch-icon" sizes="76x76" href="<c:url value='/resources/images/favicon/apple-icon-76x76.png'/>">
+	<link rel="apple-touch-icon" sizes="114x114" href="<c:url value='/resources/images/favicon/apple-icon-114x114.png'/>">
+	<link rel="apple-touch-icon" sizes="120x120" href="<c:url value='/resources/images/favicon/apple-icon-120x120.png'/>">
+	<link rel="apple-touch-icon" sizes="144x144" href="<c:url value='/resources/images/favicon/apple-icon-144x144.png'/>">
+	<link rel="apple-touch-icon" sizes="152x152" href="<c:url value='/resources/images/favicon/apple-icon-152x152.png'/>">
+	<link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/resources/images/favicon/apple-icon-180x180.png'/>">
+	<link rel="icon" type="image/png" sizes="192x192"  href="<c:url value='/resources/images/favicon/android-icon-192x192.png'/>">
+	<link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/resources/images/favicon/favicon-32x32.png'/>">
+	<link rel="icon" type="image/png" sizes="96x96" href="<c:url value='/resources/images/favicon/favicon-96x96.png'/>">
+	<link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/favicon/favicon-16x16.png'/>">
+	<link rel="manifest" href="<c:url value='/resources/images/favicon/manifest.json'/>">
+	<meta name="msapplication-TileColor" content="#ffffff'/>">
+	<meta name="msapplication-TileImage" content="<c:url value='/resources/images/favicon/ms-icon-144x144.png'/>">
+	<meta name="theme-color" content="#ffffff">
+
 </head>
 <link rel="stylesheet" href="<c:url value='/resources/css/style1.css' />">
 <body>
@@ -72,7 +93,7 @@
 				<c:choose>
 					<c:when test="${board.boardImgList.size() == 0 }">
 						<c:set var="existImg" value="false" />
-   						<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='detailImg0'><br/>
+   						<img src="<c:url value='/resources/images/board/no_image.jpg'/>" class='detailImg0'><br/>
 					</c:when>
 					<c:when test="${board.boardImgList.size() == 1 }">
 						<c:forEach var="boardImg" items="${board.boardImgList }" varStatus="cnt">
@@ -130,7 +151,18 @@
 			</div>
 			<div id="detailFooter">
 				<div id="detailMemberProfile">
-					회원 프사 자리
+					<c:if test="${board.fname == null }">
+                   		<c:if test="${board.gender.equals('1')}">
+                       		<img class="detailProfile" alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                       	</c:if>
+                   		<c:if test="${board.gender.equals('2')}">
+                       		<img class="detailProfile" alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                       	</c:if>
+					</c:if>
+					<c:if test="${board.fname != null }">
+						<img class="detailProfile" src="<c:url value='/memberProfile/download?email=${board.email }'/>">
+					</c:if>
+					<p>${board.nickname }</p>
 				</div>
 				<div id="detailFooterRight">
 					꼬숩도<br>

@@ -136,7 +136,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#" id="headerGoHome">home</a></li>
                                 <li><a href="#" id="headerGoBoard">match</a></li>
-                                <li><a href="#" id="headerGoGps">gps</a></li>
+<!--                                 <li><a href="#" id="headerGoGps">gps</a></li> -->
                                 <li><a href="#" id="headerGoProfile">profile</a></li>
                                 <li><a href="#" id="headerGoOur">our</a></li>
                             </ul>
@@ -207,9 +207,9 @@
 	$("#headerGoBoard").on("click", () => {
      	location.href = "<c:url value='/board/list'/>";
 	});
-	$("#headerGoGps").on("click", () => {
-    	location.href = "<c:url value='/gps/walk'/>";
-	});
+// 	$("#headerGoGps").on("click", () => {
+//     	location.href = "<c:url value='/gps/walk'/>";
+// 	});
    	$("#headerGoProfile").on("click", () => {
    		location.href='<c:url value="/profile/myInfo"/>' 
    	});

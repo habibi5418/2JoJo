@@ -22,6 +22,26 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/profile/myProfile.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/css/style1.css' />">
 
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="<c:url value='/resources/images/favicon/favicon.ico'/>"> <!--추가-->
+	<link rel="apple-touch-icon" sizes="57x57" href="<c:url value='/resources/images/favicon/apple-icon-57x57.png'/>">
+	<link rel="apple-touch-icon" sizes="60x60" href="<c:url value='/resources/images/favicon/apple-icon-60x60.png'/>">
+	<link rel="apple-touch-icon" sizes="72x72" href="<c:url value='/resources/images/favicon/apple-icon-72x72.png'/>">
+	<link rel="apple-touch-icon" sizes="76x76" href="<c:url value='/resources/images/favicon/apple-icon-76x76.png'/>">
+	<link rel="apple-touch-icon" sizes="114x114" href="<c:url value='/resources/images/favicon/apple-icon-114x114.png'/>">
+	<link rel="apple-touch-icon" sizes="120x120" href="<c:url value='/resources/images/favicon/apple-icon-120x120.png'/>">
+	<link rel="apple-touch-icon" sizes="144x144" href="<c:url value='/resources/images/favicon/apple-icon-144x144.png'/>">
+	<link rel="apple-touch-icon" sizes="152x152" href="<c:url value='/resources/images/favicon/apple-icon-152x152.png'/>">
+	<link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/resources/images/favicon/apple-icon-180x180.png'/>">
+	<link rel="icon" type="image/png" sizes="192x192"  href="<c:url value='/resources/images/favicon/android-icon-192x192.png'/>">
+	<link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/resources/images/favicon/favicon-32x32.png'/>">
+	<link rel="icon" type="image/png" sizes="96x96" href="<c:url value='/resources/images/favicon/favicon-96x96.png'/>">
+	<link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/favicon/favicon-16x16.png'/>">
+	<link rel="manifest" href="<c:url value='/resources/images/favicon/manifest.json'/>">
+	<meta name="msapplication-TileColor" content="#ffffff'/>">
+	<meta name="msapplication-TileImage" content="<c:url value='/resources/images/favicon/ms-icon-144x144.png'/>">
+	<meta name="theme-color" content="#ffffff">
+	
 </head>
 <body>
 
@@ -177,10 +197,15 @@
                     <!-- 사용자 사진 -->
                         <figure id="memberProfileFigure" class="thumbnail">
                             <!-- 등록안했을 시 기본 썸네일 -->
-                        	<c:if test="${loggedInMember.sname.equals('')}">
-                            	<img alt="" src="<c:url value='/resources/images/profile/developer1.png'/>"/>
+                        	<c:if test="${loggedInMember.sname == null}">
+                        		<c:if test="${loggedInMember.gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${loggedInMember.gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
                             </c:if>
-                        	<c:if test="${!loggedInMember.sname.equals('')}">
+                        	<c:if test="${loggedInMember.sname != null}">
                             	<img src="<c:url value='/memberProfile/download?email=${loggedInMember.email }'/>" alt="" class="">
                             </c:if>
                         </figure>
@@ -216,6 +241,7 @@
 
                             <div class="btn-wrap">
                                <button type="button" class="btn solid-btn gray-btn" data-toggle="modal" data-target="#myModal1">프로필 편집</button>
+                               <button type="button" id="goTownSetBtn" class="btn solid-btn" style="background-color: orange; color: white;">동네 설정</button>
                                <!-- 이미 follow 중일시 언팔로우버튼+빨강 -->
                             </div>
                         </div>
@@ -275,13 +301,15 @@
                                     <p>우리강아지</p>
                                 </div>
                                 <!-- 각 이미지 카드를 클릭시 해당 게시글 혹은 정보로 연결 -->
-                                <c:forEach var="dog" items="${dogList }">
-                                	<a href="#myModal3" data-toggle="modal" onclick="setModal('${dog.dnum}', '${dog.dname}', '${dog.dtype}', '${dog.age}', '${dog.gender}', '${dog.weight}', '${dog.matter}')">	
-		                                <figure class="feed-item-card" onclick="">
-		                                    <img src="<c:url value='/dogProfile/download?dnum=${dog.dnum }'/>" alt="" class="thumbnail-img mypageDogImg">
-		                                </figure>
-	                                </a>
-                                </c:forEach>
+                                <c:if test="${dogList.size() != 0 }">
+	                                <c:forEach var="dog" items="${dogList }">
+	                                	<a href="#myModal3" data-toggle="modal" onclick="setModal('${dog.dnum}', '${dog.dname}', '${dog.dtype}', '${dog.age}', '${dog.gender}', '${dog.weight}', '${dog.matter}')">	
+			                                <figure class="feed-item-card" onclick="">
+			                                    <img src="<c:url value='/dogProfile/download?dnum=${dog.dnum }'/>" alt="" class="thumbnail-img mypageDogImg">
+			                                </figure>
+		                                </a>
+	                                </c:forEach>
+                                </c:if>
                             </div>
 
                             
@@ -335,6 +363,11 @@
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9gy0xhxny4&submodules=geocoder"></script>
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
 	<script type="text/javascript">
+	
+		// 동네 설정 페이지 이동
+		$("#goTownSetBtn").on("click", () => {
+			location.href = "<c:url value='/gps/townSet'/>";
+		});
 		
 		// 강아지 모달 세팅
 		function setModal(dnum, dname, dtype, age, gender, weight, matter) {
@@ -441,10 +474,11 @@
 				const reloadDogList = json.reloadDogList;
 				const file = reloadDogList[0];
 				const path = "<c:url value='/dogProfile/download?dnum='/>" + file.dnum;
-// 				const func = "addDogToForm(this)";
+				const func = "setModal('" + file.dnum + "', '" + file.dname + "', '" + file.dtype + "', '" + file.age + "', '" + file.gender + "', '" + file.weight + "', '" + file.matter + "')";
 				
 				myDogDiv.append(
-                    '<figure class="feed-item-card" onclick="">'
+					'<a href="#myModal3" data-toggle="modal" onclick="' + func + '">'
+                    + '<figure class="feed-item-card" onclick="">'
                     + '<img src="' + path + '" alt="" class="thumbnail-img mypageDogImg">'
                     + '</figure>'
 				);
@@ -487,7 +521,13 @@
 		// gps
 		var currentLat;
 		var currentLng;
-		var myImgPath = "<c:url value='/dogProfile/download?dnum=${dogList[0].dnum }'/>";
+		var myImgPath;
+		if (${dogList.size() != 0}) {
+			myImgPath = "<c:url value='/dogProfile/download?dnum=${dogList[0].dnum }'/>";
+		} else {
+			myImgPath = "<c:url value='/resources/images/main/11kong.jpg'/>";
+		}
+		
 		
 		var selectIcon = {
 			content: '<img src="' + myImgPath + '" alt="" style="margin: 0px; padding: 0px; border: 3px solid #f0ad4e; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 48px; height: 48px; left: 0px; top: 0px; border-radius: 70%;">',

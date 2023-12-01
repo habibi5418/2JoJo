@@ -91,7 +91,11 @@ public class ChatRoomDAOImpl implements ChatRoomDAO {
 //	public List<ChatRoomEntity> findAllRooms() {
 //		return chatRoomMap.values().stream().sorted().collect(Collectors.toList());
 //	}
-
-
+	
+	// 산책 페이지용 데이터 가져오기
+	@Override
+	public ChatRoomVO getChatRoom(String room_id) {
+		return sqlSession.selectOne("mapper.chat.getChatRoom", room_id);
+	}
 
 }

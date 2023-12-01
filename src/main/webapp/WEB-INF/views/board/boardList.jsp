@@ -57,7 +57,7 @@
 						<div class="boardDiv">
 							<div class="boardBox">
 								<c:if test="${board.boardImgList[0] == null }">
-				        			<img src="<c:url value='/resources/images/board/이미지없음.png'/>" class='boardImg'><br/>
+				        			<img src="<c:url value='/resources/images/board/no_image.jpg'/>" class='boardImg'><br/>
 				        		</c:if>
 								<c:if test="${board.boardImgList[0] != null }">
 				        			<img src="<c:url value='/boardImg/download?inum=${board.boardImgList[0].inum }'/>" class='boardImg'><br/>
@@ -126,7 +126,7 @@
 				
 				if (moreList.length != 0) {
 					const path = "<c:url value='/board/detail?bnum='/>";
-					const noImgPath = "<c:url value='/resources/images/board/이미지없음.png'/>";
+					const noImgPath = "<c:url value='/resources/images/board/no_image.jpg'/>";
 					const imgPath = "<c:url value='/boardImg/download?inum='/>";
 					const loc2Path = "<c:url value='/resources/images/board/loc2.png'/>";
 					const isLightning = ${board.category == 'B' };
