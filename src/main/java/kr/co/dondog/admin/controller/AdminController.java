@@ -143,18 +143,19 @@ public class AdminController {
 	
 //	===========================페이징, 검색 , 건수 부분==============================
 	
-//	@RequestMapping(value="/admin/listJSON", method = {RequestMethod.GET, RequestMethod.POST})
-//    @ResponseBody
-//	public Map<String, Object> listJSON (@ModelAttribute("searchVO") SearchVO searchVO, HttpServletRequest request) throws Exception {
-//		System.out.println("listJSON");
-//    	//DataTable 검색인자 설정
-//		searchVO.setOrderColumn(request.getParameter("order[0][column]"));
-//		searchVO.setDir(request.getParameter("order[0][dir]"));
-//    	
-//		//상위 코드 목록 얻기 
-//		return adminservice.searchMemberList(searchVO);
-//
-//	}
+	@RequestMapping(value="/admin/listJSON", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+	public Map<String, Object> listJSON (@ModelAttribute("searchVO") SearchVO searchVO, HttpServletRequest request) throws Exception {
+		System.out.println("listJSON");
+    	//DataTable 검색인자 설정
+		searchVO.setOrderColumn(request.getParameter("order[0][column]"));
+		searchVO.setDir(request.getParameter("order[0][dir]"));
+		
+//		System.out.println("searchVO->"+searchVO);
+		//상위 코드 목록 얻기 
+		return adminservice.searchMemberList(searchVO);
+
+	}
 //	 
 //	@RequestMapping(value="/admin/listJSON2.do", method = RequestMethod.POST)
 //    @ResponseBody

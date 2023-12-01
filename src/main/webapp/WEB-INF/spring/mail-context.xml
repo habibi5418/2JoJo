@@ -8,7 +8,6 @@
   <property name="port" value="587" />
   <property name="username" value="ssj1737@gmail.com" />
   <property name="password" value="rpmqyzzomxrjxbce" />
-
   <!-- 이메일 계정 비번 x 2단계 보안 -> 앱비밀번호 확인 -->
   <property name="javaMailProperties">
     <props>
@@ -23,9 +22,9 @@
  
 <!-- You can have some pre-configured messagess also which are ready to send -->
 	<bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
-	   <property name="to" value="soojin9412@naver.com"></property>
-	   <property name="from" value="ssj1737@gmail.com"></property>
-	   <property name="subject" value="테스트 메일입니다."/>
+   <property name="to" value="soojin9412@naver.com"></property>
+   <property name="from" value="ssj1737@gmail.com"></property>
+   <property name="subject" value="테스트 메일입니다."/>
 	</bean>
 </beans>
 

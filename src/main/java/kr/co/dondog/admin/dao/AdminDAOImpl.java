@@ -114,9 +114,9 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<MemberVO> sendEmailMember() {
-		System.out.println("AdminDAOImpl.sendEmailMember");
-		return sqlSession.selectList("mapper.admin.sendEmailMember");
+	public List<MemberVO> sleepMember() {
+		System.out.println("AdminDAOImpl.sleepMember");
+		return sqlSession.selectList("mapper.admin.sleepMember");
 	}
 
 
@@ -124,17 +124,18 @@ public class AdminDAOImpl implements AdminDAO {
 
 //	===================페이징, 기타 등등============================
 
-//	@Override
-//	public List<MemberVO> searchMemberList(SearchVO searchVO) {
-//		System.out.println("AdminDAOImpl.searchMemberList");
-//		return sqlSession.selectList("mapper.admin.searchMemberList");
-//	}
-//
-//	@Override
-//	public int getSearchMemberTotalCount(SearchVO searchVO) {
-//		System.out.println("AdminDAOImpl.getSearchMemberTotalCount");
-//		return sqlSession.selectOne("mapper.admin.getSearchMemberTotalCount");
-//	}
+	@Override
+	public List<MemberVO> searchMemberList(SearchVO searchVO) {
+		System.out.println("AdminDAOImpl.searchMemberList");
+		List<MemberVO> result = sqlSession.selectList("mapper.admin.searchMemberList", searchVO);
+		return result;
+	}
+
+	@Override
+	public int getSearchMemberTotalCount(SearchVO searchVO) {
+		System.out.println("AdminDAOImpl.getSearchMemberTotalCount");
+		return sqlSession.selectOne("mapper.admin.getSearchMemberTotalCount", searchVO);
+	}
 
 
 

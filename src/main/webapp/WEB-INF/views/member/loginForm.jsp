@@ -164,9 +164,7 @@ font-size : 10px;
  color : red;
 }
 
-   
-
-    </style>
+ </style>
     
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<link rel="shortcut icon" href="<c:url value='/resources/images/favicon/favicon.ico'/>"> <!--추가-->
