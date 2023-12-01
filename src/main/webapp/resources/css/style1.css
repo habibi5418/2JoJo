@@ -1108,7 +1108,6 @@ body {
 	height: 75% !important;
 }
 
-
 /* 반응형 */
 /* .detailModal { */
 /* 	width: 380px !important; */
@@ -1182,7 +1181,7 @@ body {
 }
 
 #boardContentsDiv {
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 
 #detailFooter {
@@ -1192,8 +1191,9 @@ body {
 
 #detailMemberProfile {
 	position: absolute;
-	top: 0;
+	top: -30px;
 	left: 0;
+	text-align: center;
 }
 
 #detailFooterRight {
@@ -1240,6 +1240,14 @@ body {
     line-height: 1.42857;
     border-radius: 4px;
     user-select: none;
+}
+
+.detailProfile {
+	width: 75px;
+	height: 75px;
+	object-fit: cover;
+	border-radius: 70%;
+    border: 3px solid orange;
 }
 
 
@@ -1445,3 +1453,56 @@ body {
 /* 	color: #400000; */
 /* 	font-weight: 600; */
 /* } */
+
+
+/* 마이페이지 */
+#profileForm label, #profileForm input {
+	font-size: 16px;
+}
+
+#saveProfileBtn {
+    padding: 9px 15px;
+    font-size: 16px;
+    line-height: 1.33333;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 5px;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.mypageDogImg {
+	width: 50%;
+    height: 125px;
+	object-fit: cover;
+	border-radius: 70%;
+}
+
+#walkMapContainer {
+	width: 50%;
+	margin: 0 auto;
+}
+
+#mypageWalkMap {
+/* 	display: inline-block; */
+	width: 100%;
+	height: 450px;
+}
+
+#searchMypageDiv {
+/* 	display: inline-block; */
+	width: 100%;
+	margin: 30px auto 60px auto;
+	text-align: center;
+}

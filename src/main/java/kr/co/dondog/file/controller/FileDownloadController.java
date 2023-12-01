@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.dondog.board.vo.BoardImgVO;
 import kr.co.dondog.dog.vo.DogVO;
 import kr.co.dondog.file.service.FileService;
+import kr.co.dondog.member.vo.MemberVO;
 
 
 @Controller
@@ -22,6 +23,29 @@ public class FileDownloadController {
 
 	@Autowired
 	FileService fileService;
+	
+	@RequestMapping("/memberProfile/download")
+	protected void memberProfileDownload(@RequestParam("email") String email,
+			                 HttpServletResponse response) throws Exception {
+		OutputStream out = response.getOutputStream();
+		MemberVO memberProfile = fileService.getMemberProfile(email); 
+		if (memberProfile != null) {
+			String filePath = CURR_IMAGE_REPO_PATH + memberProfile.getSname();  
+			File image = new File(filePath);
+			FileInputStream in = new FileInputStream(image);
+			
+			byte[] buffer = new byte[1024 * 8];
+			while (true) {
+				int count = in.read(buffer); 
+				if (count == -1) 
+					break;
+				out.write(buffer, 0, count);
+			}
+			in.close();
+			
+		}
+		out.close();
+	}
 	
 	@RequestMapping("/dogProfile/download")
 	protected void dogProfileDownload(@RequestParam("dnum") int dnum,

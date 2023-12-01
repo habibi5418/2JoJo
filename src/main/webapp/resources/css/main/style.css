@@ -345,6 +345,13 @@ h6 {
   border-radius: 50%;
 }
 
+.author-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 70%;
+}
+
 .match-entry .user {
   font-size: 18px;
   color: #000;
@@ -408,7 +415,13 @@ h6 {
 .intro_img img{
   margin: 1.15em auto 1em;
   background: none;
+  width: 230px; height: auto;
 } 
+
+.intro_img #jiyeong {
+	width: 260px !important;
+	margin-bottom: 0;
+}
 /* .pricing__item:hover .pricing__price {
   color: #fff;
   background: #3EC483;
@@ -611,7 +624,7 @@ h6 {
   top: 0;
   left: 0;
   font-size: 22px;
-  color: yellow;
+  color: #f5e5a7;
 }
 
 #fh5co-footer .copyright {
@@ -636,7 +649,7 @@ h6 {
 }
 
 #fh5co-footer .social-media li a {
-  color: yellow;
+  color: #743000;
 }
 
 #fh5co-footer .social-media li a:hover,
@@ -706,8 +719,8 @@ h6 {
 
 /* footer button */
 #fh5co-footer #btn-submit {
-  color: rgba(255, 255, 255, 0.9) !important;
-  background: red !important;
+  color: #d07534;
+  background: white;
   /* background: #3EC483 !important; */
 }
 

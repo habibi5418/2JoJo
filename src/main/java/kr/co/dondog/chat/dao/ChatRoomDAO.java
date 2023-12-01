@@ -35,5 +35,8 @@ public interface ChatRoomDAO {
 //	public ChatRoomVO findRoomById(String room_id);
 //	public List<ChatRoomEntity> getOrCreateRoom();
 //	public List<ChatRequestVO> saveRequest(ChatRequestVO chatRequest);
+	
+	// 산책 페이지용 데이터 가져오기
+	ChatRoomVO getChatRoom(String room_id);
 
 }
