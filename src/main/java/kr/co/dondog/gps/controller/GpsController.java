@@ -16,6 +16,7 @@ import kr.co.dondog.dog.service.DogService;
 import kr.co.dondog.gps.service.GpsService;
 import kr.co.dondog.gps.vo.TestVO;
 import kr.co.dondog.member.security.auth.PrincipalDetails;
+import kr.co.dondog.member.service.MemberService;
 import kr.co.dondog.member.vo.MemberVO;
 
 @Controller
@@ -28,6 +29,9 @@ public class GpsController {
 	@Autowired
 	private ChatRoomService chatRoomService;
   
+	@Autowired
+	private MemberService memberService;
+	
 	@Autowired
 	private DogService dogService;
 	
@@ -59,11 +63,11 @@ public class GpsController {
 	public String townSet(Model model) {
 		return "gps/townSet";
 	}
-  
-	@RequestMapping(value = "/sendCoord", produces = "application/json; charset=UTF-8")
+	  
+	@RequestMapping(value = "/setTown", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String sendCoord(@RequestBody TestVO test) {
-		return gpsService.sendCoord(test).toString();
+	public String setTown(@RequestBody MemberVO member) {
+		return memberService.setTown(member).toString();
 	}
 
 	@RequestMapping(value = "/loadPark", produces = "application/json; charset=UTF-8")

@@ -1021,6 +1021,24 @@ body {
 	color: #aaa;
 }
 
+#reportLabel {
+	position: absolute;
+	right: 65px;
+	top: 10px;
+}
+
+#reportLabel > input[type="button"] {
+	width: 40px;
+	height: 40px;
+	background: url("../../resources/images/board/report.png") no-repeat 0 0px / contain;
+	cursor: pointer;
+	outline: none;
+	appearance: none;
+	border-radius: 50%;
+	border: 0px;
+	margin-top: 2px;
+}
+
 #heartLabel {
 	position: absolute;
 	right: 10px;
@@ -1193,6 +1211,13 @@ body {
 	position: absolute;
 	top: -30px;
 	left: 0;
+	text-align: center;
+}
+
+#detailManner {
+	position: absolute;
+	top: -30px;
+	left: 90px;
 	text-align: center;
 }
 

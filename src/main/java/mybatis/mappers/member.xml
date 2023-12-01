@@ -100,5 +100,47 @@
 		from dondog_member
 		where email = #{email} 
 	</select>
+
+	<update id="setTown" >
+		update dondog_member set 
+		address = #{address}
+		where email = #{email}  
+	</update>
+	
+	<select id="getReportStatus" resultType="MemberReport">
+		select *
+	    from dondog_report
+	    where reported = #{reported} 
+	    and reporter = #{reporter}
+	</select>
+
+	<update id="plusReport" >
+		update dondog_member set 
+		reports = reports + 1 
+		where email = #{reported}  
+	</update>
+
+	<insert id="insertReport" >
+		insert into dondog_report(reported, reporter) 
+		values(#{reported}, #{reporter})
+	</insert>
+
+	<update id="plusManner" >
+		update dondog_member set 
+		manner = manner + 1 
+		where email = #{email}  
+	</update>
+
+	<update id="minusManner" >
+		update dondog_member set 
+		manner = manner - 1 
+		where email = #{email}  
+	</update>
+	
+	<select id="getManner" resultType="Member">
+		select manner 
+		from dondog_member
+		where email = #{email}
+	</select>
    
 </mapper>
