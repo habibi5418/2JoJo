@@ -33,6 +33,8 @@ import kr.co.dondog.board.vo.BoardVO;
 import kr.co.dondog.chat.vo.ChatRequestVO;
 import kr.co.dondog.dog.service.DogService;
 import kr.co.dondog.member.security.auth.PrincipalDetails;
+import kr.co.dondog.member.service.MemberService;
+import kr.co.dondog.member.vo.MemberReportVO;
 import kr.co.dondog.member.vo.MemberVO;
 
 @Controller
@@ -40,9 +42,12 @@ import kr.co.dondog.member.vo.MemberVO;
 public class BoardController {
 	
 	private static final String CURR_IMAGE_REPO_PATH = "/dondog_file";
-	
+
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@Autowired
 	private DogService dogService;
@@ -157,10 +162,14 @@ public class BoardController {
             PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
             MemberVO member= (MemberVO) userDetails.getUser();
             model.addAttribute("member", member);
-            
+
+            // 신고 여부 가져오기
+            model.addAttribute("reportStatus", memberService.getReportStatus(new MemberReportVO(board.getEmail(), member.getEmail())));
             // 좋아요 여부 가져오기
             model.addAttribute("heartStatus", boardService.getHeartStatus(new BoardHeartVO(bnum, member.getEmail())));
-
+            // 꼬숩도 가져오기
+            model.addAttribute("manner", memberService.getManner(board));
+            
 			ChatRequestVO reqInfo = new ChatRequestVO();
 			reqInfo.setBnum(board.getBnum());
         	// 작성자 resp
@@ -184,6 +193,7 @@ public class BoardController {
 	@ResponseBody
 	public String addHeart(@RequestBody BoardHeartVO boardHeart) throws Exception { 
 		boardService.addHeart(boardHeart);
+		
 		return "";
 	}
 
@@ -193,5 +203,28 @@ public class BoardController {
 	public String deleteHeart(@RequestBody BoardHeartVO boardHeart) throws Exception { 
 		boardService.deleteHeart(boardHeart);
 		return "";
+	}
+
+	// 꼬숩도 + 1
+	@RequestMapping(value = "/plusManner", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String plusManner(@RequestBody MemberVO member) throws Exception { 
+		memberService.plusManner(member);
+		return "";
+	}
+
+	// 꼬숩도 - 1
+	@RequestMapping(value = "/minusManner", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String minusManner(@RequestBody MemberVO member) throws Exception { 
+		memberService.minusManner(member);
+		return "";
+	}
+	  
+	// 신고
+	@RequestMapping(value = "/report", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String report(@RequestBody MemberReportVO memberReort) {
+		return memberService.report(memberReort).toString();
 	}
 }

@@ -135,7 +135,8 @@
 		        }
 
 		        if (response.v2.meta.totalCount === 0) {
-		            return alert('totalCount' + response.v2.meta.totalCount);
+// 		            return alert('totalCount' + response.v2.meta.totalCount);
+		            return alert("정확한 동을 적어주세요.");
 		        }
 
 		        var htmlAddresses = [],
@@ -334,6 +335,23 @@
 		});
 		
 		$("#saveTownBtn").on("click", () => {
+			fetch("<c:url value='/gps/setTown'/>", {
+				method: "POST",
+				headers: {
+				    "Content-Type": "application/json; charset=UTF-8",
+				},
+				body: JSON.stringify({
+					email: "${principal.username}",
+					address: $("#dataTown").val()
+				}),
+			})
+			.then((response) => response.json())
+			.then((json) => {
+				alert(json.message);
+				if (json.status) {
+					location.href = "<c:url value='/profile/myInfo'/>";
+				}
+			});
 		});
 
 	</script>

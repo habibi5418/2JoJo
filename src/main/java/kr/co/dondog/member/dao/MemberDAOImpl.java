@@ -4,7 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.co.dondog.dog.vo.DogVO;
+import kr.co.dondog.board.vo.BoardVO;
+import kr.co.dondog.member.vo.MemberReportVO;
 import kr.co.dondog.member.vo.MemberVO;
 
 @Repository("memberDAO")
@@ -79,6 +80,42 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO getProfile(String email) {
 		return sqlSession.selectOne("mapper.member.getProfile", email);
 	}
-	
+
+	@Override
+	public int setTown(MemberVO member) {
+		return sqlSession.update("mapper.member.setTown", member);
+	}
+
+	@Override
+	public boolean getReportStatus(MemberReportVO memberReport) {
+		MemberReportVO result = sqlSession.selectOne("mapper.member.getReportStatus", memberReport);
+		return result != null ? true : false;
+	}
+
+	@Override
+	public int plusReport(MemberReportVO memberReort) {
+		return sqlSession.update("mapper.member.plusReport", memberReort);
+	}
+
+	@Override
+	public int insertReport(MemberReportVO memberReort) {
+		return sqlSession.insert("mapper.member.insertReport", memberReort);
+	}
+
+	@Override
+	public void plusManner(MemberVO member) {
+		sqlSession.update("mapper.member.plusManner", member);
+	}
+
+	@Override
+	public void minusManner(MemberVO member) {
+		sqlSession.update("mapper.member.minusManner", member);
+	}
+
+	@Override
+	public int getManner(BoardVO board) {
+		MemberVO result = sqlSession.selectOne("mapper.member.getManner", board);
+		return result != null ? result.getManner() : 0;
+	}
 
 }

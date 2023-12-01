@@ -121,6 +121,9 @@
 					<span id="boardTitleSpan">${board.title }</span>
 					<span id="boardDateSpan">${board.regDate }</span>
 				</div>
+	            <label id="reportLabel" for="checkReport">
+            		<input id="checkReport" type="button">
+	            </label>
 	            <label id="heartLabel" for="checkHeart">
 	            	<c:if test="${heartStatus}">
 	            		<input id="checkHeart" type="checkbox" checked="checked">
@@ -164,8 +167,19 @@
 					</c:if>
 					<p>${board.nickname }</p>
 				</div>
+				<div id="detailManner">
+					<!--퍼센트 부분  -->
+	                <div class="col-auto">
+	                	<div class="h5">꼬숩도</div>
+	                </div>
+	                <div class="col">
+	                	<!-- 막대 바 부분 -->
+	                	<div class="progress" style="width: 100px;">
+							<div class="progress-bar" role="progressbar" style="width: ${manner}%; background-color: orange !important" aria-valuenow="${manner}" aria-valuemin="0" aria-valuemax="100"></div>
+	                    </div>
+	                </div>
+				</div>
 				<div id="detailFooterRight">
-					꼬숩도<br>
 					<div id="btn_chatting">
 						<c:if test="${member.email!= board.email}">
 							<c:if test="${request.size() != 0}">
@@ -202,7 +216,34 @@
 	</div>
 	
     <script>
-    
+    	
+    	// 신고
+    	var isReport = false;
+    	
+    	$("#checkReport").on("click", () => {
+    		if (${reportStatus} || isReport) {
+    			alert("이미 신고한 사용자입니다.");
+    		} else {
+    			fetch("<c:url value='/board/report'/>", {
+    				method: "POST",
+    				headers: {
+    				    "Content-Type": "application/json; charset=UTF-8",
+    				},
+    				body: JSON.stringify({
+    					reporter: "${principal.username}",
+    					reported: "${board.email}"
+    				}),
+    			})
+    			.then((response) => response.json())
+    			.then((json) => {
+    				alert(json.message);
+    				if (json.status) {
+    					isReport = true;
+    				}
+    			});
+    		}
+    	});
+    	
 	 	// 라이트박스
 		if (${existImg}) {
 			const pics = document.getElementsByClassName("pic");
@@ -239,8 +280,8 @@
 	    $("#backBtn").on("click", () =>{
 			location.href = "<c:url value='/board/list'/>";
 		});
-	    
-	    function updateHeart(param, url) {
+
+	    function update(param, url) {
 	    	fetch(url, {
 				method: "POST",
 				headers: {
@@ -257,11 +298,16 @@
     			bnum: ${board.bnum},
     			email: "${member.email}"
     		}
+    		const param2 = {
+       			email: "${board.email}"
+       		}
     		
 	    	if (heart) {
-	    		updateHeart(param, "<c:url value='/board/addHeart'/>");
+	    		update(param, "<c:url value='/board/addHeart'/>");
+	    		update(param2, "<c:url value='/board/plusManner'/>");
 	    	} else {
-	    		updateHeart(param, "<c:url value='/board/deleteHeart'/>");
+	    		update(param, "<c:url value='/board/deleteHeart'/>");
+	    		update(param2, "<c:url value='/board/minusManner'/>");
 	    	}
 	    });
 	    
@@ -315,7 +361,7 @@
 		});
 		
 		$("#goChatList").on("click", function () {
-	    	
+			location.href='<c:url value="/chat/roomList/"/>';
 // 	    	const receiver = "${board.email}";
 // 	    	const sender = "${member.email}";
 // 	    	const bnum = "${board.bnum}";
