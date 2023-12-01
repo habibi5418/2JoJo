@@ -45,14 +45,14 @@ public interface AdminDAO {
 	// 누적 가입자수 
 	int getmemberCount();
 
-	List<MemberVO> sendEmailMember();
+	List<MemberVO> sleepMember();
 
 
 	
 //	======================== 페이징 기타 등등 ==================================
-//	List<MemberVO> searchMemberList(SearchVO searchVO);
-//
-//	int getSearchMemberTotalCount(SearchVO searchVO);
+	List<MemberVO> searchMemberList(SearchVO searchVO);
+
+	int getSearchMemberTotalCount(SearchVO searchVO);
 
 	
 

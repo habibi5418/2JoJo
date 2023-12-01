@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import kr.co.dondog.admin.vo.SearchVO;
 import kr.co.dondog.admin.dao.AdminDAO;
@@ -78,59 +81,83 @@ public class AdminService {
 		return adminDAO.updateMember(email, field, value);
 	}
 
+	//전체회원수
 	public int getmemberCount() {
 		System.out.println("AdminService.getmemberCount");
 		return adminDAO.getmemberCount();
 	}
-
+	
+	//누적신고수
 	public int reportCountInc() {
 		System.out.println("AdminService.reportCountInc");
 		return adminDAO.reportCountInc();
 	}
 
-	public List<MemberVO> sendEmail() {
-		System.out.println("AdminService.sendEmail");
-		return adminDAO.sendEmailMember();
+	// 
+	public List<MemberVO> sleepMember() {
+		System.out.println("AdminService.sleepMember");
+		return adminDAO.sleepMember();
 	}
 	
 	
 //	===========================페이징, 검색 , 건수 부분==============================
-//	public Map<String, Object> searchMemberList(SearchVO searchVO) {
-//		System.out.println("AdminService.searchMemberList");
-//
-//        List<List<Object>> array = new ArrayList<List<Object>>();
-//		int start = searchVO.getStart();
-//        for (MemberVO item : adminDAO.searchMemberList(searchVO)) {
-//        	List<Object> data = new ArrayList<Object>();
-//        	data.add(String.valueOf(++start));
-//        	data.add(item.getEmail());
-//        	data.add(item.getMname());
-//        	data.add(item.getAddress());
-//        	data.add(item.getBirth());
-//        	data.add(item.getGender());
-//        	data.add(item.getGrade());
-//        	data.add(item.getJoinDate());
-//        	data.add(item.getRecentLog());
-//        	data.add(item.getReports());
-//        	data.add(item.getBlack());
-//        	data.add(item.getAccountLocked());
-//        	data.add(item.getCancels());
-//        	
-//        	
-//            System.out.println("Email: " + item.getEmail());
-//            System.out.println("Mname: " + item.getMname());
-//        	array.add(data);
-//		}
-//        
-//        int recordsTotal = adminDAO.getSearchMemberTotalCount(searchVO);
-//		Map<String, Object> result = new HashMap<String, Object>();
-//		result.put("recordsTotal", recordsTotal);
-//		result.put("recordsFiltered", recordsTotal);
-//		result.put("data", array);
-//		
-//		return result;
-//	}
+	public Map<String, Object> searchMemberList(SearchVO searchVO) {
+	    System.out.println("AdminService.searchMemberList");
+	    // 결과를 저장할 List<List<Object>> 배열
+	    List<List<Object>> array = new ArrayList<>();
 
+	    // 현재 페이지의 첫 번째 행 인덱스
+	    int start = searchVO.getStart();
+
+	    // adminDAO를 통해 회원 목록을 가져옴
+	    for (MemberVO item : adminDAO.searchMemberList(searchVO)) {
+	        // 각 회원 정보를 List<Object> 형태로 변환하여 배열에 추가
+	        List<Object> data = new ArrayList<>();
+	        data.add(String.valueOf(++start));  // 일련번호 (페이징에서 사용)
+	        data.add(item.getEmail());
+	        data.add(item.getMname());
+	        data.add(item.getAddress());
+	        data.add(item.getBirth());
+	        data.add(item.getGender());
+	        data.add(item.getGrade());
+	        data.add(formatDate(item.getJoinDate()));
+	        data.add(formatDate(item.getRecentLog()));
+	        data.add(item.getReports());
+	        data.add(item.getBlack());
+	        data.add(item.getAccountLocked());
+	        data.add(item.getCancels());
+
+	        // 각 회원의 이메일과 이름을 콘솔에 출력 (디버깅용)
+//	        System.out.println("RecentLog: " + item.getRecentLog());
+//	        System.out.println("Mname: " + item.getMname());
+//	        System.out.println("service.searchVO ->" + searchVO);
+	        // 배열에 회원 데이터 추가
+	        array.add(data);
+	    }
+
+//	    // 결과를 Map에 담아 반환
+//	    Map<String, Object> result = new HashMap<>();
+//	    result.put("draw", searchVO.getDraw());
+//	    result.put("recordsTotal", array.size());  // 전체 레코드 수 (페이징에서 사용)
+//	    result.put("recordsFiltered", array.size());  // 필터링된 레코드 수 (페이징에서 사용)
+//	    result.put("data", array);  // 실제 데이터 배열
+//
+//	    return result;
+//	}
+        
+        int recordsTotal = adminDAO.getSearchMemberTotalCount(searchVO);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("recordsTotal", recordsTotal);
+		result.put("recordsFiltered", recordsTotal);
+		result.put("data", array);
+		
+		return result;
+	}
+	
+	 public String formatDate(LocalDateTime dateTime) {
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        return dateTime.format(formatter);
+	    }
 
 
 }

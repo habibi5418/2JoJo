@@ -22,7 +22,6 @@ public class PrincipalDetailsService implements UserDetailsService {
 		MemberVO member = memberDAO.findByEmail(username);
 		
 		System.out.println("PrincipalDetailsService : member -> " + member);
-
 		return new PrincipalDetails(member);
 	}
 }

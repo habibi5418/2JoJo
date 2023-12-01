@@ -7,16 +7,16 @@
 <head>
 <style>
  .loading-overlay { 
- 	position: fixed;   
-  	top: 0;   
-  	left: 0;   
-  	width: 100%;   
-  	height: 100%;   
-  	background: rgba(255, 255, 255, 0.7);   
-  	display: flex;   
-  	justify-content: center;   
-  	align-items: center;   
-  	z-index: 9999;   
+/*  	position: fixed;    */
+/*   	top: 0;    */
+/*   	left: 0;    */
+/*   	width: 100%;    */
+/*   	height: 100%;    */
+/*   	background: rgba(255, 255, 255, 0.7);    */
+/*   	display: flex;    */
+/*   	justify-content: center;    */
+/*   	align-items: center;    */
+/*   	z-index: 9999;    */
   }
 </style>
 <meta charset="utf-8">
@@ -376,8 +376,8 @@
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> 
-							<span class="mr-2 d-none d-lg-inline text-gray-600 small"> 조철민 </span> 
-							<img class="img-profile rounded-circle"	src="<c:url value='/resources/img/undraw_profile.svg'/>">
+							<span class="mr-2 d-none d-lg-inline text-gray-600 small"> 조수진 </span> 
+							<img class="img-profile rounded-circle"	src="<c:url value='/resources/img/tnwls.png'/>">
 
 						</a> <!-- Dropdown - User Information -->
 							<div
@@ -414,7 +414,7 @@
 
                    <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">회원관리</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -591,55 +591,59 @@
 	<script type="text/javascript">
 	
 	/* =============로딩중====================  */
-	function hideLoadingMessage() {
-	    document.getElementById("loadingOverlay").style.display = "none";
-	}
+// 	function hideLoadingMessage() {
+// 	    document.getElementById("loadingOverlay").style.display = "none";
+// 	}
 	
-	function showPage() {
-		  document.getElementById("loader").style.display = "none";
-		  document.getElementById("myDiv").style.display = "block";
-		}
+// 	function showPage() {
+// 		  document.getElementById("loader").style.display = "none";
+// 		  document.getElementById("myDiv").style.display = "block";
+// 		}
 	/*==============로딩중 끝================  */
 	
 		jQuery(function($){
 	        $("#memberTable").DataTable();
-	        hideLoadingMessage(); // 로딩 메시지 숨기기
+// 	        hideLoadingMessage(); // 로딩 메시지 숨기기
 	    });
-	
 		
-
 	
-// 	var $memberTable = $('.memberTable').DataTable({	
+	
 // 	$("#memberTable").DataTable({
+// 	    language: {
+// 	        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ko.json',
+// 	    },
 // 	    "processing": true,
 // 	    "serverSide": true,
+	    
 // 	    "pagingType": "full_numbers",
+// 	    "searching": true,
 // 	    "ajax": {
-// 	        "url": "<c:url value='/admin/listJSON'/>",
+// 	        "url": "/admin/listJSON", // Thymeleaf 표현식을 사용하지 않고 경로 직접 명시
 // 	        "type": "POST",
-// 	        "data": function (d) {
-// 	            //추가 검색인자 설정
-// 	            d.searchKeyword = $("#searchKeyword").val();
-// 	        },
-// 	        "success": function (data) {
-// 	            console.log("AJAX Success:", data);
-// 	            // 여기에 추가 동작을 추가하십시오.
-// 	        },
-// 	        "error": function (xhr, status, error) {
-// 	            console.error("AJAX Error:", status, error);
-// 	            console.log(xhr.status);
-// 	            alert("AJAX Error: " + status);
-// 	        }
 // 	    },
 // 	    "select":  {style: 'single'},
 // 	    "columnDefs": [{
-// 	        "targets": 1,
-// 	        "render": function ( data, type, row, meta ) {
-// 	            return '<a onclick="jsUpdate(\''+data+'\')">'+data+'</a>';
+// 	        "targets": [9, 10, 11, 12], // 해당하는 컬럼 번호에 따라 조절
+// 	        "render": function (data, type, row, meta) {
+// 	            let html = '<select class="updateSelect" data-email="' + row[1] + '" data-field="' + meta.col + '">';
+	
+// 	            // 서버에서 전달된 JSON 데이터를 사용
+// 	            let reportsOptions = [0, 1, 2, 3, 4, 5]; // 서버에서 전달된 값으로 변경
+	            
+// 	            for (let i = 0; i < reportsOptions.length; i++) {
+// 	                if (data == reportsOptions[i]) {
+// 	                    html += '<option value="' + reportsOptions[i] + '" selected>' + reportsOptions[i] + '</option>';
+// 	                } else {
+// 	                    html += '<option value="' + reportsOptions[i] + '">' + reportsOptions[i] + '</option>';
+// 	                }
+// 	            }
+	            
+// 	            html += '</select>';
+// 	            return html;
 // 	        }
 // 	    }]
 // 	});
-	
+		
 // 	// DataTable 초기화 후 호출되는 이벤트
 // 	$memberTable.on('init.dt', function () {
 // 	    hideLoadingMessage(); // 로딩 메시지 숨기기
@@ -674,54 +678,58 @@
 // 		});
 		
 		
-		
+	// 셀렉트 박스 변경 이벤트 리스너 등록
+	$('#memberTable').on('change', '.updateSelect', function () {
+	    updateCell(this);
+	});
 
-		// 체크박스 전체선택
-		function selectAllRows() {
-		    var selectAllCheckbox = document.getElementById('check');
-		    if (selectAllCheckbox) {
-		        var checkboxes = document.getElementsByName('selectedMembers');
-		        for (var i = 0; i < checkboxes.length; i++) {
-		            checkboxes[i].checked = selectAllCheckbox.checked;
-		        }
-		    }
-		}
+	// 체크박스 전체선택
+	function selectAllRows() {
+	    var selectAllCheckbox = document.getElementById('check');
+	    if (selectAllCheckbox) {
+	        var checkboxes = document.getElementsByName('selectedMembers');
+	        for (var i = 0; i < checkboxes.length; i++) {
+	            checkboxes[i].checked = selectAllCheckbox.checked;
+	        }
+	    }
+	}
 	
-	
-		// 회원관리 업데이트
-		function updateCell(selectElement, fieldName, email) {
-		    var newValue = selectElement.value;
-	
-		    // Ajax를 사용하여 서버에 업데이트를 전송합니다.
-		    // 예: jQuery Ajax 사용 예시
-			$.ajax({
-			    url: '/admin/updateMember',
-			    type: 'POST',
-			    contentType: 'application/json',
-			    data: JSON.stringify({ email: email, field: fieldName, value: newValue }),
-		        success: function(response) {
-		        	console.log('서버 응답:', response);
-		            // 서버에서 성공적으로 응답을 받았을 때 클라이언트 측에서 표시를 업데이트합니다.
-		            if (response.success) {
-		            	alert("정보가 변경되었습니다");
-// 		                var updatedBlackValue = response.updatedBlack; // 이 부분을 서버에서 전송한 필드명에 맞게 수정
-// 		                console.log('새로운 black 값:', updatedBlackValue);
-		            	
-		                // 셀의 내용을 새 값으로 업데이트합니다.
-// 		                selectElement.parentNode.querySelector('option[selected]').removeAttribute('selected');
-// 						selectElement.querySelector('option[value="' + response.updatedValue + '"]').setAttribute('selected', 'selected');
-// 		                selectElement.parentNode.innerText = newValue;
-// 		                updateDropdownMenus(response.updatedValue);
-		            } else {
-		            	console.log('업데이트 실패: ' + response.message);
-		            }
-		        },
-		        error: function() {
-		            alert('서버 오류');
-			        }
-			    });
-			}
 		
+	
+	// 회원관리 업데이트
+	function updateCell(selectElement, fieldName, email) {
+	    var newValue = selectElement.value;
+
+// 	function updateCell(selectElement) {
+// 	    var email = $(selectElement).data('email');
+// 	    var fieldName = $(selectElement).data('field');
+// 	    var newValue = selectElement.value;
+	
+		$.ajax({
+		    url: '/admin/updateMember',
+		    type: 'POST',
+		    contentType: 'application/json',
+		    data: JSON.stringify({ email: email, field: fieldName, value: newValue }),
+	        success: function(response) {
+	        	console.log('서버 응답:', response);
+	            // 서버에서 성공적으로 응답을 받았을 때 클라이언트 측에서 표시를 업데이트합니다.
+	            if (response.success) {
+	            	alert("정보가 변경되었습니다");
+	            } else {
+	            	console.log('업데이트 실패: ' + response.message);
+	            }
+	        },
+	        error: function() {
+	            alert('서버 오류');
+	        }
+	    });
+	}
+
+	/* 날짜 */	
+	function formatDate(date) {
+		  const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+		  return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+	}
 
 		
 // 		// 드랍박스 관련 스크립트 작동X
