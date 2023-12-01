@@ -1108,7 +1108,6 @@ body {
 	height: 75% !important;
 }
 
-
 /* 반응형 */
 /* .detailModal { */
 /* 	width: 380px !important; */
@@ -1182,7 +1181,7 @@ body {
 }
 
 #boardContentsDiv {
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 
 #detailFooter {
@@ -1192,8 +1191,9 @@ body {
 
 #detailMemberProfile {
 	position: absolute;
-	top: 0;
+	top: -30px;
 	left: 0;
+	text-align: center;
 }
 
 #detailFooterRight {
@@ -1240,6 +1240,14 @@ body {
     line-height: 1.42857;
     border-radius: 4px;
     user-select: none;
+}
+
+.detailProfile {
+	width: 75px;
+	height: 75px;
+	object-fit: cover;
+	border-radius: 70%;
+    border: 3px solid orange;
 }
 
 

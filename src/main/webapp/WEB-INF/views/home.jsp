@@ -203,7 +203,19 @@
 						<div class="feed-bubble">
 							<p>${recentBoardList[0].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<div class="author-img">
+							<c:if test="${recentBoardList[0].fname == null }">
+                        		<c:if test="${recentBoardList[0].gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${recentBoardList[0].gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
+							</c:if>
+							<c:if test="${recentBoardList[0].fname != null }">
+								<img src="<c:url value='/memberProfile/download?email=${recentBoardList[0].email }'/>">
+							</c:if>
+						</div> <!--작성자프로필사진-->
 						<span class="user">${recentBoardList[0].nickname}<br> <small>${recentBoardList[0].regDate}</small></span>
 					</div>
 
@@ -211,7 +223,19 @@
 						<div class="feed-bubble">
 							<p>${recentBoardList[3].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<div class="author-img">
+							<c:if test="${recentBoardList[3].fname == null }">
+                        		<c:if test="${recentBoardList[3].gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${recentBoardList[3].gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
+							</c:if>
+							<c:if test="${recentBoardList[3].fname != null }">
+								<img src="<c:url value='/memberProfile/download?email=${recentBoardList[3].email }'/>">
+							</c:if>
+						</div> <!--작성자프로필사진-->
 						<span class="user">${recentBoardList[3].nickname}<br> <small>${recentBoardList[3].regDate}</small></span>
 					</div>
 
@@ -223,7 +247,19 @@
 						<div class="feed-bubble">
 							<p>${recentBoardList[1].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<div class="author-img">
+							<c:if test="${recentBoardList[1].fname == null }">
+                        		<c:if test="${recentBoardList[1].gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${recentBoardList[1].gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
+							</c:if>
+							<c:if test="${recentBoardList[1].fname != null }">
+								<img src="<c:url value='/memberProfile/download?email=${recentBoardList[1].email }'/>">
+							</c:if>
+						</div> <!--작성자프로필사진-->
 						<span class="user">${recentBoardList[1].nickname}<br> <small>${recentBoardList[1].regDate}</small></span>
 					</div>
 
@@ -231,7 +267,19 @@
 						<div class="feed-bubble">
 							<p>${recentBoardList[4].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<div class="author-img">
+							<c:if test="${recentBoardList[4].fname == null }">
+                        		<c:if test="${recentBoardList[4].gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${recentBoardList[4].gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
+							</c:if>
+							<c:if test="${recentBoardList[4].fname != null }">
+								<img src="<c:url value='/memberProfile/download?email=${recentBoardList[4].email }'/>">
+							</c:if>
+						</div> <!--작성자프로필사진-->
 						<span class="user">${recentBoardList[4].nickname}<br> <small>${recentBoardList[4].regDate}</small></span>
 					</div>
 
@@ -243,7 +291,19 @@
 						<div class="feed-bubble">
 							<p>${recentBoardList[2].title}</p> 
 						</div>
-						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<div class="author-img">
+							<c:if test="${recentBoardList[2].fname == null }">
+                        		<c:if test="${recentBoardList[2].gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${recentBoardList[2].gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
+							</c:if>
+							<c:if test="${recentBoardList[2].fname != null }">
+								<img src="<c:url value='/memberProfile/download?email=${recentBoardList[2].email }'/>">
+							</c:if>
+						</div> <!--작성자프로필사진-->
 						<span class="user">${recentBoardList[2].nickname}<br> <small>${recentBoardList[2].regDate}</small></span>
 					</div>
 
@@ -251,7 +311,19 @@
 						<div class="feed-bubble">
 							<p>${recentBoardList[5].title}</p>
 						</div>
-						<div class="author-img" style="background-image: url(<c:url value='/resources/images/main/user-5.jpg'/>);"></div> <!--작성자프로필사진-->
+						<div class="author-img">
+							<c:if test="${recentBoardList[5].fname == null }">
+                        		<c:if test="${recentBoardList[5].gender.equals('1')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_male.png'/>"/>
+                            	</c:if>
+                        		<c:if test="${recentBoardList[5].gender.equals('2')}">
+                            		<img alt="" src="<c:url value='/resources/images/profile/default_female.png'/>"/>
+                            	</c:if>
+							</c:if>
+							<c:if test="${recentBoardList[5].fname != null }">
+								<img src="<c:url value='/memberProfile/download?email=${recentBoardList[5].email }'/>">
+							</c:if>
+						</div> <!--작성자프로필사진-->
 						<span class="user">${recentBoardList[5].nickname}<br> <small>${recentBoardList[5].regDate}</small></span>
 					</div>
 				</div>

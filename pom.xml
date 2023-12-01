@@ -17,7 +17,7 @@
 <!--  	  <spring.context.version>5.0.6.RELEASE</spring.context.version> -->
    </properties>
    <dependencies>
-
+	
    <!-- webSocket  -->
    <!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
    <dependency>
@@ -380,7 +380,7 @@
 		    <artifactId>log4jdbc-remix</artifactId>
 		    <version>0.2.7</version>
 		</dependency>
-		
+
    </dependencies>
     <build>
         <plugins>

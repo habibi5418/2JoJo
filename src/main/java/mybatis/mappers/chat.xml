@@ -102,7 +102,13 @@
 <!-- 	    WHERE receiver = #{receiver} or sender = #{sender}  -->
 <!-- 		ORDER BY send_time DESC -->
 <!-- 	</select> -->
-
+	
+	<!-- 산책 페이지용 데이터 가져오기 -->
+	<select id="getChatRoom" resultType="ChatRoom">
+		select * 
+		from dondog_chat_room 
+		where room_id = #{room_id}
+	</select>
 	
 </mapper>
 	
