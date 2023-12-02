@@ -25,6 +25,7 @@ h1 {
 	color: black;
 }
 
+
 /* desktop 규격 */
 @media screen and (min-width: 769px){
 	#container {

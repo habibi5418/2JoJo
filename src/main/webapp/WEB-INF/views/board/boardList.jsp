@@ -41,7 +41,6 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/board/style.css' />">
 <body>
 	<%@ include file="../header.jsp" %>
-	
 	<section>
 		<div id="container">
 			<input type="hidden" id="lastBnum" value="${boardList[boardList.size() - 1].bnum }" />

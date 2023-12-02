@@ -111,9 +111,8 @@
 	    </div>
 	  </div>
 	</div>
-	
 	<%@ include file="../header.jsp" %>
-	
+
 	<div id="writeContainer">
 		<div id="formContainer">
 			<form id="writeForm" method="post" autocomplete="off" enctype="multipart/form-data">

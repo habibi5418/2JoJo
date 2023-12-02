@@ -90,7 +90,7 @@
 			<button type="button" id="deletBtn" class="btn-danger">삭제</button>
 			<!-- 이전 -->
 			<button type="button" id="backBtn" class="btn-secondary" style="background: none; border:none;">
-				<img src="<c:url value='/resources/images/board/btn-back2.png'/>">
+				<img src="<c:url value='/resources/images/board/btn-back0.png'/>">
 			</button>
 			<div class="margin-div"></div>
 			<div class="report-heart-div">
@@ -210,6 +210,7 @@
 							</c:if>
 						</c:if>
 					</div>	
+					
 					<div id="detailManner">
 		                <div class="col">
 		                	<!-- 막대 바 부분 -->
