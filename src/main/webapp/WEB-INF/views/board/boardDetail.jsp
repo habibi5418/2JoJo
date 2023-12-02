@@ -70,7 +70,8 @@
 		        		</li>
 		        	</ul>
 	        	</div>
-	        	<h3>About</h3>
+	        	<h3 style="text-align:start; color:#d07534; font-weight: 600;">about. </h3>
+<!-- 	        	<h3>About</h3> -->
 	        	<p id="detailModalDogAbout"></p>
         	</div>
 	      </div>
@@ -87,7 +88,25 @@
 		<div id="detailContainer">
 			<button type="button" id="updateFormBtn" class="btn-warning">수정</button>
 			<button type="button" id="deletBtn" class="btn-danger">삭제</button>
-			<button type="button" id="backBtn" class="btn-secondary">뒤로</button>
+			<!-- 이전 -->
+			<button type="button" id="backBtn" class="btn-secondary" style="background: none; border:none;">
+				<img src="<c:url value='/resources/images/board/btn-back.png'/>">
+			</button>
+			<div class="margin-div"></div>
+			<div class="report-heart-div">
+		            <label id="reportLabel" for="checkReport">
+	            		<input id="checkReport" type="button">
+		            </label>
+		            <label id="heartLabel" for="checkHeart">
+		            	<c:if test="${heartStatus}">
+		            		<input id="checkHeart" type="checkbox" checked="checked">
+		            	</c:if>
+		            	<c:if test="${!heartStatus}">
+		            		<input id="checkHeart" type="checkbox">
+		            	</c:if>
+		            </label>
+				</div>
+			<div class="margin-div" style="height: 30px;"></div>
 			<div id="detailImgDiv">
 				<c:set var="existImg" value="true" />
 				<c:choose>
@@ -117,21 +136,25 @@
 			        <img src="<c:url value='/resources/images/board/loc2.png'/>" class='loc2Img'>
 	   				${board.loc2}
 				</p>
+<!-- 				<div class="report-heart-div"> -->
+<!-- 		            <label id="reportLabel" for="checkReport"> -->
+<!-- 	            		<input id="checkReport" type="button"> -->
+<!-- 		            </label> -->
+<!-- 		            <label id="heartLabel" for="checkHeart"> -->
+<%-- 		            	<c:if test="${heartStatus}"> --%>
+<!-- 		            		<input id="checkHeart" type="checkbox" checked="checked"> -->
+<%-- 		            	</c:if> --%>
+<%-- 		            	<c:if test="${!heartStatus}"> --%>
+<!-- 		            		<input id="checkHeart" type="checkbox"> -->
+<%-- 		            	</c:if> --%>
+<!-- 		            </label> -->
+<!-- 				</div> -->
+				
    				<div>
 					<span id="boardTitleSpan">${board.title }</span>
 					<span id="boardDateSpan">${board.regDate }</span>
 				</div>
-	            <label id="reportLabel" for="checkReport">
-            		<input id="checkReport" type="button">
-	            </label>
-	            <label id="heartLabel" for="checkHeart">
-	            	<c:if test="${heartStatus}">
-	            		<input id="checkHeart" type="checkbox" checked="checked">
-	            	</c:if>
-	            	<c:if test="${!heartStatus}">
-	            		<input id="checkHeart" type="checkbox">
-	            	</c:if>
-	            </label>
+
 			</div>
 			<div id="boardDogWrapper">
 				<div id="boardDogDiv">
@@ -167,18 +190,7 @@
 					</c:if>
 					<p>${board.nickname }</p>
 				</div>
-				<div id="detailManner">
-					<!--퍼센트 부분  -->
-	                <div class="col-auto">
-	                	<div class="h5">꼬숩도</div>
-	                </div>
-	                <div class="col">
-	                	<!-- 막대 바 부분 -->
-	                	<div class="progress" style="width: 100px;">
-							<div class="progress-bar" role="progressbar" style="width: ${manner}%; background-color: orange !important" aria-valuenow="${manner}" aria-valuemin="0" aria-valuemax="100"></div>
-	                    </div>
-	                </div>
-				</div>
+				
 				<div id="detailFooterRight">
 					<div id="btn_chatting">
 						<c:if test="${member.email!= board.email}">
@@ -197,7 +209,20 @@
 								<button type="button" id="goChatListX" class="detailDisabledBtn" disabled="disabled">채팅목록(0)</button>
 							</c:if>
 						</c:if>
+					</div>	
+					<div id="detailManner">
+		                <div class="col">
+		                	<!-- 막대 바 부분 -->
+		                	<div class="progress" style="width: 100px;">
+								<div class="progress-bar" role="progressbar" style="width: ${manner}%; background-color: #f6ce7b !important" aria-valuenow="${manner}" aria-valuemin="0" aria-valuemax="100"></div>
+		                    </div>
+		                </div>
+		                <!--퍼센트 부분  -->
+		                <div class="col-auto">
+		                	<div class="h5" style="float: right; font-size: 12px;">꼬숩도</div>
+	                	</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
