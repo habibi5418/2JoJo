@@ -130,7 +130,6 @@
 			            		<a style="font-size: 17px; color: #d07535;">from. </a>${loggedInMember.nickname}
 			            </p>
 			        </label>
-<%-- 		        <label for="writeTitle">글쓰기 - ${loggedInMember.nickname}</label> --%>
 		            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요." id="writeTitle" required>
 		        </div>
 		        <div class="form-group">

@@ -90,7 +90,7 @@
 			<button type="button" id="deletBtn" class="btn-danger">삭제</button>
 			<!-- 이전 -->
 			<button type="button" id="backBtn" class="btn-secondary" style="background: none; border:none;">
-				<img src="<c:url value='/resources/images/board/btn-back.png'/>">
+				<img src="<c:url value='/resources/images/board/btn-back2.png'/>">
 			</button>
 			<div class="margin-div"></div>
 			<div class="report-heart-div">
@@ -379,39 +379,13 @@
 	        	localStorage.setItem('chat.receiver', receiver);
 	        	localStorage.setItem('chat.bnum', bnum);
 
-	        	console.log("console 확인용!!!!!!!!"+sender + "" + receiver);
-	        	
 	        	alert(resp.message);
 	        });
 		});
 		
 		$("#goChatList").on("click", function () {
 			location.href='<c:url value="/chat/roomList/"/>';
-// 	    	const receiver = "${board.email}";
-// 	    	const sender = "${member.email}";
-// 	    	const bnum = "${board.bnum}";
-	    	
-// 	    	$.ajax({ 
-// 	       		type: "POST",
-// 	       		url: "<c:url value='/chat/senderRequest'/>",
-// 	       		contentType : "application/json; charset=UTF-8",
-// 	       		dataType: "JSON", // 요청을 서버로 해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴게 json이라면) => javascript오브젝트로 변경
-// 	       		data : JSON.stringify({
-// 	       			sender : sender, 
-// 		        	receiver : receiver,
-// 		        	bnum : bnum
-// 	       		})	
-// 	    	}).done(resp => {
-// 				$("#goChat").attr("disabled", true);
-				
-// 	        	localStorage.setItem('chat.sender', sender);
-// 	        	localStorage.setItem('chat.receiver', receiver);
-// 	        	localStorage.setItem('chat.bnum', bnum);
 
-// 	        	console.log("console 확인용!!!!!!!!"+sender + "" + receiver);
-	        	
-// 	        	alert(resp.message);
-// 	        });
 		});
 		
     </script>

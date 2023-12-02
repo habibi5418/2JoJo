@@ -39,7 +39,6 @@
 <title>Insert title here</title>
 </head>
 <link rel="stylesheet" href="<c:url value='/resources/css/board/style.css' />">
-<%-- <link rel="stylesheet" href="<c:url value='/resources/css/style1.css' />"> --%>
 <body>
 	<%@ include file="../header.jsp" %>
 	
