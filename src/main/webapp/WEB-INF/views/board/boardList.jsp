@@ -38,18 +38,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="<c:url value='/resources/css/style1.css' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/board/style.css' />">
 <body>
 	<%@ include file="../header.jsp" %>
-	
 	<section>
 		<div id="container">
 			<input type="hidden" id="lastBnum" value="${boardList[boardList.size() - 1].bnum }" />
 			<div id="listContainer">
 				<div id="listHeader">
-					<h1 id="listLoc2">혜화동</h1>
+					<div id="listLoc2"><h1>서울특별시 종로구 혜화동</h1></div>
+<!-- 					<h1 id="listLoc2">혜화동</h1> -->
 					<c:if test="${not empty principal}">
-						<button type="button" id="writeFormBtn" class="btn-warning">글작성</button>
+						<button type="button" id="writeFormBtn" style="border:none;">글작성</button>
 					</c:if>
 				</div>
 				<c:forEach var="board" items="${boardList }">

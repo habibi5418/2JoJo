@@ -9,49 +9,48 @@
  xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
 
-<!-- 	<bean id="propertyPlaceholderConfigurer" -->
-<!-- 	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
-<!-- 	<property name="locations"> -->
-<!-- 	<value>/WEB-INF/config/jdbc.properties</value> -->
-<!-- 	</property> -->
-<!-- 	</bean> -->
-	
- 	<bean id="dataSourceSpied"
-		class="org.apache.ibatis.datasource.pooled.PooledDataSource">
-		<property name="driver" value="oracle.jdbc.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@kosa_high?TNS_ADMIN=/Wallet_kosa" />
-		<property name="username" value="admin" />
-		<property name="password" value="Kosa1004@alsrl" />
-	</bean>
+<!--    <bean id="propertyPlaceholderConfigurer" -->
+<!--    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!--    <property name="locations"> -->
+<!--    <value>/WEB-INF/config/jdbc.properties</value> -->
+<!--    </property> -->
+<!--    </bean> -->
+   
+    <bean id="dataSourceSpied"
+      class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+      <property name="driver" value="oracle.jdbc.OracleDriver" />
+	  <property name="url" value="jdbc:oracle:thin:@kosa_high?TNS_ADMIN=/Users/yijiyeong/Database/Wallet_kosa" />
+      <property name="username" value="admin" />
+      <property name="password" value="Kosa1004@alsrl" />
+   </bean>
  
-	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
-	    <constructor-arg ref="dataSourceSpied" /> 
-	    <property name="logFormatter"> 
-	        <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
-	            <property name="loggingType" value="MULTI_LINE" /> 
-	            <property name="sqlPrefix" value="SQL : "/> 
-	        </bean> 
-	    </property> 
-	</bean>
+   <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
+       <constructor-arg ref="dataSourceSpied" /> 
+       <property name="logFormatter"> 
+           <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
+               <property name="loggingType" value="MULTI_LINE" /> 
+               <property name="sqlPrefix" value="SQL : "/> 
+           </bean> 
+       </property> 
+   </bean>
  
- 	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSourceSpied" />
-		<property name="configLocation"
-			value="classpath:mybatis/model/modelConfig.xml" />
-		<property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
-	</bean>
+    <bean id="sqlSessionFactory"
+      class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSourceSpied" />
+      <property name="configLocation"
+         value="classpath:mybatis/model/modelConfig.xml" />
+      <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+   </bean>
 
-	<!-- 내가 추가  -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+   <!-- 내가 추가  -->
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
       <property name="basePackage" value="mybatis.mapperes" />
       <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
     </bean>
     
-    
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
-	</bean>
+   <bean id="sqlSession"
+      class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+   </bean>
 
 </beans>

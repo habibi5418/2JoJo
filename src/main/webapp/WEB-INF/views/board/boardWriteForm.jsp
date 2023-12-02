@@ -111,9 +111,8 @@
 	    </div>
 	  </div>
 	</div>
-	
 	<%@ include file="../header.jsp" %>
-	
+
 	<div id="writeContainer">
 		<div id="formContainer">
 			<form id="writeForm" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -124,7 +123,12 @@
 		            </label>
 		        </div>
 				<div class="form-group">
-		            <label for="writeTitle">글쓰기 - ${loggedInMember.nickname}</label>
+					<label for="writeTitle" >
+						<p style="margin-top: -30px; padding: 0; font-size: 30px; color:#8e8c81; margin-bottom: 1em;">write</p>
+			            	<p style="margin-top: -35px; margin-bottom: 0px;">
+			            		<a style="font-size: 17px; color: #d07535;">from. </a>${loggedInMember.nickname}
+			            </p>
+			        </label>
 		            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요." id="writeTitle" required>
 		        </div>
 		        <div class="form-group">
@@ -133,7 +137,7 @@
 		        
 	        	<div id="addDogLabelDiv">
 		            <label id="addDogLabel">산책갈 강아지</label>
-					<button id="writeDogAddBtn" type="button" class="" data-toggle="modal" data-target="#myModal1">+</button>
+					<button id="writeDogAddBtn" type="button" class="" data-toggle="modal" data-target="#myModal1" style="border:none;">+</button>
 	        	</div>
 				<div id="addedDogList">
 					
