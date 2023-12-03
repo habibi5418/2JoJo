@@ -152,7 +152,8 @@ public class ChatRoomController {
 //		List<ChatRoomVO> room= chatRoomService.getAllChatRooms(chatRoom);
 //	    model.addAttribute("roomList", roomList);
 	     
-		return "chat/roomList";
+//		return "chat/roomList";
+		return "chat/chatBoot";
 	}
 	
 	
@@ -179,15 +180,14 @@ public class ChatRoomController {
 		return resultMap;
 	}
 	
+	
+	
 //	// 채팅방 메시지 저장된 내역 불러오기 
 //	public List<ChatMessageVO> getMessageByRoomId(@PathVariable(value = "room_id")String room_id) {
 //		return chatRoomService.getMessageByRoomId(room_id);
 //	}
 	
-	
-	// roomInfo 에 관한 정보 
-	//enter/{roomId}
-	
+
 
 	
 	
