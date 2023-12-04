@@ -129,7 +129,6 @@
 					const noImgPath = "<c:url value='/resources/images/board/no_image.jpg'/>";
 					const imgPath = "<c:url value='/boardImg/download?inum='/>";
 					const loc2Path = "<c:url value='/resources/images/board/loc2.png'/>";
-					const isLightning = ${board.category == 'B' };
 					const lightningImgPath = "<c:url value='/resources/images/board/lightning.png'/>";
 					const listContainer = $("#listContainer");
 					
@@ -142,13 +141,14 @@
 													} else {
 														moreAnchor += '<img src="' + noImgPath + '" class="boardImg"><br/>';
 													}
-						moreAnchor 						+= '<p class="boardInfo">'
-								        				+ '<img src="' + loc2Path + '" class="loc2Img">'
-														+ more.loc2 + '<br>'
-														+ '<c:if test="' + isLightning + '">'
-									        				+ '<img src="' + lightningImgPath + '" class="lightningImg">'
-														+ '</c:if>'
-														+ '<span>' + more.title + '</span>'
+					moreAnchor 						+= '<p class="boardInfo">'
+							        				+ '<img src="' + loc2Path + '" class="loc2Img">'
+													+ more.loc2 + '<br>';
+													if (more.category == 'B') {
+														console.log("check");
+					moreAnchor 						+= '<img src="' + lightningImgPath + '" class="lightningImg">';
+													}
+					moreAnchor 						+= '<span>' + more.title + '</span>'
 													+ '</p>'
 													+ '<p class="boardInfoRight">'
 														+ more.nickname + '<br>'

@@ -31,6 +31,10 @@ label {
 	background-color: #f8f4e4 !important;
 }
 
+.modal {
+	top: -195px !important;
+}
+
 /* desktop 규격 */
 @media screen and (min-width: 769px) {
 	#container {
