@@ -10,13 +10,16 @@ import kr.co.dondog.chat.dao.ChatRoomDAO;
 import kr.co.dondog.chat.vo.ChatMessageVO;
 import kr.co.dondog.chat.vo.ChatRequestVO;
 import kr.co.dondog.chat.vo.ChatRoomVO;
+import kr.co.dondog.member.dao.MemberDAO;
 
 @Service
 public class ChatRoomService {
 
 	 @Autowired
 	    private ChatRoomDAO chatRoomDAO;
-	    
+	 
+	 @Autowired
+	    private MemberDAO memberDAO;
 	    
 	    ///채팅방 전달하는 내용 >> chatRoomVO 
 	    // 메세지 전달하는 내용 >> chatMessageVO 
@@ -45,16 +48,18 @@ public class ChatRoomService {
 		
 		// chatRoomList
 	    public List<ChatRoomVO> getAllChatRooms(ChatRoomVO chatRoom){
-	    	return chatRoomDAO.getAllChatRooms(chatRoom);
+	    	List<ChatRoomVO> allChatRooms = chatRoomDAO.getAllChatRooms(chatRoom);
+	    	
+	    	allChatRooms.forEach(room -> {
+	    		if (room.getSender().equals(chatRoom.getReceiver())) {
+	    			room.setSender_Nickname(memberDAO.findByEmail(room.getReceiver()).getNickname());
+	    		} else {
+	    			room.setSender_Nickname(memberDAO.findByEmail(room.getSender()).getNickname());
+	    		}
+	    	});
+	    	
+	    	return allChatRooms;
 	    }
-//	    public List<ChatRoomVO> getAllChatRooms() {
-//	        return chatRoomDAO.getAllChatRooms();
-//	    }
-//		
-//	    // find Room by Id
-//	    public ChatRoomVO findRoomById (String room_id) {
-//	    	return chatRoomDAO.findRoomById(room_id);
-//	    }
 	    
 	    // 요청에 따른 거절
 	    public boolean rejectRequest(ChatRequestVO chatRequest) {
@@ -71,10 +76,6 @@ public class ChatRoomService {
 			return chatRoomDAO.saveMessage(chatMessage);
 		}
 		
-		// 채팅방 메시지 저장된 내역 가져오기
-//		public List<ChatMessageVO> getMessageByRoomId(String room_id) {
-//			return chatRoomDAO.getMessageByRoomId(room_id);
-//		}
 	    
 	    // 산책 페이지용 데이터 가져오기
 	    public ChatRoomVO getChatRoom(String room_id) {

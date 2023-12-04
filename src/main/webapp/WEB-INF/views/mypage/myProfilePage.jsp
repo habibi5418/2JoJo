@@ -9,8 +9,6 @@
    <sec:authentication property="principal" var="principal"/> <!-- property로 가져와서 var 데이터타입으로 대입하겠다는뜻 -->
 </sec:authorize>
 
-
-<!-- <link rel="stylesheet" as="style""/> -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -18,9 +16,9 @@
 
 <script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
-<link rel="stylesheet" href="<c:url value='/resources/css/profile/myProfileReset.css'/>">
+<%-- <link rel="stylesheet" href="<c:url value='/resources/css/profile/myProfileReset.css'/>"> --%>
 <link rel="stylesheet" href="<c:url value='/resources/css/profile/myProfile.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/css/style1.css' />">
+<%-- <link rel="stylesheet" href="<c:url value='/resources/css/style1.css' />"> --%>
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<link rel="shortcut icon" href="<c:url value='/resources/images/favicon/favicon.ico'/>"> <!--추가-->
@@ -176,15 +174,14 @@
 	<div id="margin" style="height: 150px;"></div>
     <div id="app">
         <!--좌측의 사이드바 -->
-        <div class="sidebar-wrapper">
-            <div class="sidebar">
-                <div class="sidebar-inner">
-                    <div class="sidebar-menu">
-                    ㅎㅇ
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--         <div class="sidebar-wrapper"> -->
+<!--             <div class="sidebar"> -->
+<!--                 <div class="sidebar-inner"> -->
+<!--                     <div class="sidebar-menu"> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
 
 
         <!-- 메인 컨텐츠 영역 -->
@@ -240,8 +237,8 @@
                             </div>
 
                             <div class="btn-wrap">
-                               <button type="button" class="btn solid-btn gray-btn" data-toggle="modal" data-target="#myModal1">프로필 편집</button>
-                               <button type="button" id="goTownSetBtn" class="btn solid-btn" style="background-color: orange; color: white;">동네 설정</button>
+                               <button type="button" class="dondog_btn" data-toggle="modal" data-target="#myModal1" style="margin-left: 10px;">프로필 편집</button>
+                               <button type="button" id="goTownSetBtn" class="dondog_btn" style="background: #f5e5a7">동네 설정</button>
                                <!-- 이미 follow 중일시 언팔로우버튼+빨강 -->
                             </div>
                         </div>
@@ -285,12 +282,8 @@
                 </div>
                 <!-- 프로필 영역 아래 부분 -->
                 <div class="profile-bottom">
-    <!--                 <div class="btn-wrap"> -->
-    <!--                     <button type="button" id="collectionBtn" class="btn txt-btn blue-btn">+ 새 컬렉션</button> -->
-    <!--                     <span style="display: none;"><input id="boardFile" type="file" name="file"></span> -->
-    <!--                 </div> -->
                     <div class="btn-wrap">
-                        <button type="button" id="collectionBtn" class="btn txt-btn blue-btn" data-toggle="modal" data-target="#myModal2">반려견 추가</button>
+                        <button type="button" id="collectionBtn" class="dondog_btn" data-toggle="modal" data-target="#myModal2">반려견 추가</button>
                         <span style="display: none;"><input id="boardFile" type="file" name="file"></span>
                     </div>
                     
@@ -322,8 +315,9 @@
 								
 								<div id="townContainer">
 									<div id="searchMypageDiv">
-										<button type="button" id="openCal">날짜 선택</button>
-										<h3>일자별 산책 목록</h3>
+										<div id="townBtnDiv">
+											<button type="button" id="openCal" style="color:white;">산책 목록</button>
+										</div>
 										<div id="walkList"></div>
 									</div>
 								</div>
@@ -334,12 +328,11 @@
                             </div>
 
                             <c:forEach var="board" items="${boardList }">
-                                <figure class="feed-item-card" style="background-color: orange;" onclick="goBoardDetail(${board.bnum})">
-									<p>
-										${board.title}<br>
-										${board.nickname}<br>
-										<small>${board.regDate}</small>
-									</p> 
+                                <figure class="feed-item-card2" onclick="goBoardDetail(${board.bnum})">
+									<p> ${board.title} </p>
+									<p id="card2-nick" style="font-size: 14px;">${board.nickname} 
+									${board.regDate}
+									</p>  
 								</figure>
 	                        </c:forEach>
                     </div>
@@ -654,100 +647,6 @@
 		}
 		
 	</script>
-<script>
-//   $(function(){
-//     $('#collectionBtn').on('click',function(){
-//       $('#boardFile').trigger('click');
-//     });
-//     $('#boardFile').on('change',function(){
-//       var file = this.files[0];
 
-//       // FormData 객체 생성
-//       var formData = new FormData();
-//       formData.append("file", file);
-
-//       $.ajax({
-//         url: "/boards/upload",  // 원하는 엔드포인트로 수정
-//         type: "POST",
-//         data: formData,
-//         contentType: false,
-//         processData: false,
-//         success: function(response) {
-//           console.log("File uploaded successfully:", response);
-//           location.reload();
-//         },
-//         error: function(error) {
-//           console.error("Failed to upload the file:", error);
-//         }
-//       });
-//     });
-//   })
-
-//     $('textarea[data-autoresize]').each(function () {
-//         var offset = this.offsetHeight - this.clientHeight;
-
-//         var resizeTextarea = function (el) {
-//             $(el).css('height', 'auto').css('height', el.scrollHeight + offset);
-//         };
-
-//         $(this).on('keyup input', function () {
-//             resizeTextarea(this);
-//         }).removeAttr('data-autoresize');
-//     })
-
-//     // <!-- 특정 클래스(toggle-icon-btn)를 가진 요소를 클릭할 때, 해당 요소의 활성/비활성 상태를 전환함. active 클래스를 토글하여 아이콘의 모양이 변경될 수 있음. -->
-//     $('.toggle-icon-btn').on('click', function () {
-//         $(this).toggleClass('active');
-//     })
-//     // <!--댓글의 답글을 펼치고 접기,  -->
-//     $('.toggle-recomment-btn').each(function () {
-//         if ($(this).parent().hasClass('open')) {
-//             $(this).html('답글 모두 숨기기');
-//         } else {
-//             $(this).html('답글 보기(' + $(this).attr('data-count') + '개)');
-//         }
-
-//         $(this).on('click', function () {
-//             $(this).parent().toggleClass('open');
-//             if ($(this).parent().hasClass('open')) {
-//                 $(this).html('답글 모두 숨기기');
-//             } else {
-//                 $(this).html('답글 보기(' + $(this).attr('data-count') + '개)');
-//             }
-//         })
-//     })
-
-//     function openBoardModal(id) {
-//         $('#feed-modal').load("/sns/board/detail/" + id, () => {
-//             $('#feed-modal').addClass('active');
-//         });
-//     }
-
-//     function closeModal(id) {
-//         $('#' + id).removeClass('active');
-//     }
-    
-//     function snsProfileModify() {
-//         // 프로필 편집 페이지로 리다이렉션
-//         location.href = "/sns/profile/modify";
-//     }
-    
-
-//     function requestFriend(id){
-//       $.ajax({
-//         url : '/friend/request/'+id,
-//         method : 'POST',
-//         success : function (data) {
-
-//         }
-//       })
-//       $('#' + id).removeClass('active');
-//     }
-
-//     function fileChange(){
-
-//       //$('#boardFile').
-//     }
-</script>
 </body>
 </html>
