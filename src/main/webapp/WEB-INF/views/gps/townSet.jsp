@@ -123,6 +123,7 @@
 		        infoWindow.open(map, latlng);
 		        
 		        $("#searchTown").text(items[0].region.area1.name + " " + items[0].region.area2.name + " " + items[0].region.area3.name);
+		        $("#dataTown").val(items[0].region.area3.name);
 		    });
 		}
 		

@@ -12,7 +12,7 @@
 <style>
 
 @media screen and (min-width: 769px) {
-	.login{
+	.login{   
 	margin : 20% auto 0 auto;
 	width: 20%;
 	}
@@ -27,6 +27,7 @@
 
 @media screen and (max-width: 480px) {
 	.login{
+	font-size:10px;
 	margin : 20% auto 0 auto;
 	width: 80%;
 	}
