@@ -64,34 +64,22 @@ public class ChatRoomDAOImpl implements ChatRoomDAO {
 	public List<ChatMessageVO> getRoomInfo(String room_id) {
 		return sqlSession.selectList("mapper.chat.getRoomInfo", room_id);
 	}
-
+//
+//	@Override
+//	public int saveMessage(ChatMessageVO chatMessage) {
+//		return sqlSession.insert("mapper.chat.saveMessage",chatMessage);
+//	}
+	
 	@Override
 	public int saveMessage(ChatMessageVO chatMessage) {
+		
+		// 빈 메시지는 저장하지 않는다 
+		if(chatMessage.getMessage() == null || chatMessage.getMessage().trim().isEmpty()) {
+			return 0;
+		}
 		return sqlSession.insert("mapper.chat.saveMessage",chatMessage);
 	}
 
-//	@Override
-//	public List<ChatMessageVO> getMessageByRoomId(String room_id) {
-//		return sqlSession.selectList("mapper.chat.getMessageByRoomId", room_id);
-//	}
-	
-	
-//	@Override
-//	public List<ChatRoomVO> getAllChatRooms() {
-//		return sqlSession.selectList("mapper.chat.getAllChatRooms");
-//	}
-
-//	
-//	@Override
-//	public ChatRoomVO findRoomById(String room_id) {
-//		return sqlSession.selectOne("mapper.chat.findRoomById",room_id);
-//	}
-
-//	@Override
-//	public List<ChatRoomEntity> findAllRooms() {
-//		return chatRoomMap.values().stream().sorted().collect(Collectors.toList());
-//	}
-	
 	// 산책 페이지용 데이터 가져오기
 	@Override
 	public ChatRoomVO getChatRoom(String room_id) {

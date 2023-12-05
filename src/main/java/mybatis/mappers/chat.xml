@@ -71,6 +71,7 @@
 		select *
 		from dondog_chat_message
 		where room_id = #{room_id}
+		ORDER BY send_time 
 	</select>
 	
 	<!--메시지 저장 -->
@@ -79,29 +80,16 @@
 									room_id
 									,sender
 									,message
+									,send_time
 								 ) VALUES (
 									#{room_id}
 									,#{sender}
-									,#{message}								 
+									,#{message}
+									,CURRENT_TIMESTAMP			 
 								 )
 	
 	
 	</insert>
-	
-<!-- 	 저장된 메시지 불러오기 -->
-<!-- 	<select id="getMessageByRoomId" resultType="ChatMessage"> -->
-<!-- 		select * from dondog_chat_room -->
-<!-- 		where room_id = #{room_id} -->
-<!-- 		order by send_time desc -->
-<!-- 	</select> -->
-
-	
-<!-- 	<select id="getAllChatRooms"> -->
-<!-- 	    SELECT *  -->
-<!-- 	    FROM DONDOG_CHAT_ROOM  -->
-<!-- 	    WHERE receiver = #{receiver} or sender = #{sender}  -->
-<!-- 		ORDER BY send_time DESC -->
-<!-- 	</select> -->
 	
 	<!-- 산책 페이지용 데이터 가져오기 -->
 	<select id="getChatRoom" resultType="ChatRoom">
@@ -110,19 +98,7 @@
 		where room_id = #{room_id}
 	</select>
 	
+
+
 </mapper>
 	
-<!-- 	    SELECT r.room_id -->
-<!-- 	    	  ,r.sender -->
-<!-- 	    	  ,r.receiver -->
-<!-- 	    	  ,r.send_time -->
-<!-- 	    	  ,q.req_id -->
-<!-- 	    	  ,q.sender -->
-<!-- 	    	  ,q.receiver -->
-<!-- 	    	  ,q.req_status -->
-	    	  
-<!-- 		  FROM DONDOG_CHAT_ROOM r -->
-		  
-<!--     INNER JOIN DONDOG_CHAT_REQUEST q ON r.receiver = q.receiver -->
-<!--          WHERE q.req_status = 'A' -->
-<!--       ORDER BY r.send_time DESC -->

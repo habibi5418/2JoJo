@@ -13,29 +13,26 @@ public interface ChatRoomDAO {
 
 	// 요청데이터 저장
 	public boolean saveRequest(ChatRequestVO chatRequest);
-	// 요청 목록 출력 
+
+	// 요청 목록 출력
 	public List<ChatRequestVO> getRequestList(ChatRequestVO chatRequest);
-	// 요청 승낙 후 상태 업데이트 
+
+	// 요청 승낙 후 상태 업데이트
 	public boolean updateChatRequestAccept(String req_id);
+
 	// 요청 승낙에 따른 채팅방 생성
 	public boolean acceptRequestAndCreateChatRoom(ChatRoomVO chatRoom);
+
 	// 요청 거절 채팅방 생성되지않음
 	public boolean rejectRequest(ChatRequestVO chatRequestVO);
 
 	public List<ChatRoomVO> getAllChatRooms(ChatRoomVO chatRoom);
 
 	public List<ChatMessageVO> getRoomInfo(String room_id);
-	
-	public int saveMessage(ChatMessageVO chatMessage);
-	
-//	public List<ChatMessageVO> getMessageByRoomId(String room_id);
-	
-//	public List<ChatRoomEntity> findAllRooms(); // 채팅방 이름 순으로 반환
 
-//	public ChatRoomVO findRoomById(String room_id);
-//	public List<ChatRoomEntity> getOrCreateRoom();
-//	public List<ChatRequestVO> saveRequest(ChatRequestVO chatRequest);
-	
+	public int saveMessage(ChatMessageVO chatMessage);
+
+//		
 	// 산책 페이지용 데이터 가져오기
 	ChatRoomVO getChatRoom(String room_id);
 

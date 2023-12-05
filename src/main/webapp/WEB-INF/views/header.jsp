@@ -128,7 +128,7 @@
 <!--                               data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a> -->
                           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar"><i></i></a>
 
-                          <a class="navbar-brand" href="<c:url value='/'/>" style="font-weight: 700; font-size: 24px;" > dondog </a> 
+                         <a href="#" class="navbar-brand" style="font-weight: 700; font-size: 24px;" > dondog </a>
                         </div>
 
                         <!-- PC Toggle  -->
@@ -201,6 +201,11 @@
 <script type="text/javascript">
 /* ************************************************* */
 /* location   */
+
+
+	$(".navbar-brand").on("click", () => {
+		location.href = "<c:url value='/'/>";
+	});
 	$("#headerGoHome").on("click", () => {
 		location.href = "<c:url value='/'/>";
 	});

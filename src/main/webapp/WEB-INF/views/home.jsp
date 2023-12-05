@@ -380,11 +380,23 @@
 	</section>
 
 
-<div style="margin-bottom: 400px;"> </div>
+<div style="margin-bottom: 200px;"> </div>
 
+
+
+	<section id="fh5co-qr" style="height: 1000px; background: #f8e8b1; padding-top: 120px;">
+		<div class="container">
+			<div id="ad">
+				<img alt="" src="<c:url value='/resources/images/main/ad.png'/>" style="background: #f8e8b1; width: 100%;">
+			</div>
+			<div id="qrCode" style="margin-top: -100px; margin-left:100px;">
+				<img alt="" src="<c:url value='/resources/images/main/qrcode.png'/>" style="width: 20%">
+			</div>
+		</div>
+	</section>
 
 	<!-- 소개 -->
-	<section id="fh5co-pricing" data-section="pricing">
+	<section id="fh5co-pricing" data-section="pricing" style="margin-top: 200px;">
 		<section class="pricing-section bg-3">
 			<div class="container">
 

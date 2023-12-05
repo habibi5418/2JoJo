@@ -74,125 +74,138 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
 
 <!-- css -->
-<link rel="stylesheet" href="<c:url value='/resources/css/chat/chatBoot.css'/>">
-	
-	<!-- header	 -->
-	<link rel="stylesheet" href="<c:url value='/resources/css/modal.css'/>">
- 	<!-- Animate.css -->
-   <link rel="stylesheet" href="<c:url value='/resources/css/animate.css'/>">
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/chat/chatBoot.css'/>">
 
-   <!-- Simple Line Icons -->
-   <link rel="stylesheet" href="<c:url value='/resources/css/simple-line-icons.css'/>">
-	
-   <!-- Bootstrap  -->
-   <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
-	
-   <!-- fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	
-	<!-- 200 -->
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
-	<!-- 700 -->
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;700&display=swap" rel="stylesheet">
-  
-	<!-- Modernizr JS -->
-   <script src="<c:url value='/resources/js/modernizr-2.6.2.min.js'/>"></script>
-   
+<!-- header	 -->
+<link rel="stylesheet" href="<c:url value='/resources/css/modal.css'/>">
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/chatHeader.css'/>">
+
+<!-- Animate.css -->
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/animate.css'/>">
+
+<!-- Simple Line Icons -->
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/simple-line-icons.css'/>">
+
+<!-- Bootstrap  -->
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/bootstrap.css'/>">
+
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- 200 -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap"
+	rel="stylesheet">
+<!-- 700 -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;700&display=swap"
+	rel="stylesheet">
+
+<!-- Modernizr JS -->
+<script src="<c:url value='/resources/js/modernizr-2.6.2.min.js'/>"></script>
+
 </head>
 <style>
 .confirm_modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #675040;
-    width: 600px;
-    height: 150px;
-    color: white;
-    border-radius: 10px;
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	background-color: #675040;
+	width: 600px;
+	height: 150px;
+	color: white;
+	border-radius: 10px;
 }
 
-.confirm-modal-content{
-    text-align: center;
-    margin-top: 10px auto;
-    
+.confirm-modal-content {
+	text-align: center;
+	margin-top: 10px auto;
 }
 
-.confirm-modal-content p{
-   margin-top: 8px;
-   margin-bottom: 20;
+.confirm-modal-content p {
+	margin-top: 8px;
+	margin-bottom: 20;
 }
-
 
 .confirm-modal-content button:hover {
 	font-weight: bold;
-	
 }
-
 </style>
 <body>
-   <header role="banner" id="fh5co-header">
-       <div class="container-header">
-                <div class="row">
-                    <nav class="navbar-header-nav navbar-default navbar-fixed-top">
-                        <div class="navbar-btn">
-                            <ul class="navbar-right-btn">
-                                <li class="navbar-right-li">
-                                   <button onclick="location.href='<c:url value="/chat/roomList/"/>' ">
-                                      <img src="<c:url value='/resources/images/main/chat1.png'/>">
-                                   </button>
-                                </li>
-                                <li class="navbar-right-li">
-                                   <button onclick="modalAlram()">
-                                      <img src="<c:url value='/resources/images/main/alram.png'/>">
-                                   </button>
-                                </li>
-                               <c:choose>
-                                  <c:when test="${empty principal}"> 
-                                    <li class="navbar-right-li">
-                                       <button onclick="location.href=' <c:url value='/loginForm' />';">
-                                          <img src="<c:url value='/resources/images/main/login2.png'/>">
-                                       </button>
-                                    </li>
-                                   </c:when>
-                                   <c:otherwise>
-                                      <li class="navbar-right-li">
-                                         <button onclick="location.href=' <c:url value='/logout' />';">
-                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                            <img src="<c:url value='/resources/images/main/logout1.png'/>">
-                                         </button>
-                                      </li>
-                                   </c:otherwise>
-                                 </c:choose>
-                            </ul>
-                        </div><!-- navbar-right-btn -->
-                        <div class="navbar-header">
-                            <!-- Mobile Toggle Menu Button -->
-<!--                           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" -->
-<!--                               data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a> -->
-                          <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar"><i></i></a>
+	<header role="banner" id="fh5co-header">
+		<div class="container-header">
+			<div class="row">
+				<nav class="navbar-header-nav navbar-default navbar-fixed-top">
+					<div class="navbar-btn">
+						<ul class="navbar-right-btn">
+							<li class="navbar-right-li">
+								<button
+									onclick="location.href='<c:url value="/chat/roomList/"/>' ">
+									<img src="<c:url value='/resources/images/main/chat1.png'/>">
+								</button>
+							</li>
+							<li class="navbar-right-li">
+								<button onclick="modalAlram()">
+									<img src="<c:url value='/resources/images/main/alram.png'/>">
+								</button>
+							</li>
+							<c:choose>
+								<c:when test="${empty principal}">
+									<li class="navbar-right-li">
+										<button
+											onclick="location.href=' <c:url value='/loginForm' />';">
+											<img src="<c:url value='/resources/images/main/login2.png'/>">
+										</button>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="navbar-right-li">
+										<button onclick="location.href=' <c:url value='/logout' />';">
+											<input type="hidden" name="${_csrf.parameterName}"
+												value="${_csrf.token}" /> <img
+												src="<c:url value='/resources/images/main/logout1.png'/>">
+										</button>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</div>
+					<!-- navbar-right-btn -->
+					<div class="navbar-header">
+						<!-- Mobile Toggle Menu Button -->
+						<!--                           <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" -->
+						<!--                               data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a> -->
+						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"
+							data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+							aria-controls="navbar"><i></i></a> <a class="navbar-brand"
+							href="<c:url value='/'/>"
+							style="font-weight: 700; font-size: 24px;"> dondog </a>
+					</div>
 
-                          <a class="navbar-brand" href="<c:url value='/'/>" style="font-weight: 700; font-size: 24px;" > dondog </a> 
-                        </div>
+					<!-- PC Toggle  -->
+					<div id=navbar-header-pc class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#" id="headerGoHome">home</a></li>
+							<!--                                 <li><a href="#" id="headerGoBoard">match</a></li> -->
+							<!-- <!--                                 <li><a href="#" id="headerGoGps">gps</a></li> -->
+							<!--                                 <li><a href="#" id="headerGoProfile">profile</a></li> -->
+							<!--                                 <li><a href="#" id="headerGoOur">our</a></li> -->
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
 
-                        <!-- PC Toggle  -->
-                        <div id=navbar-header-pc class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#" id="headerGoHome">home</a></li>
-<!--                                 <li><a href="#" id="headerGoBoard">match</a></li> -->
-<!-- <!--                                 <li><a href="#" id="headerGoGps">gps</a></li> --> 
-<!--                                 <li><a href="#" id="headerGoProfile">profile</a></li> -->
-<!--                                 <li><a href="#" id="headerGoOur">our</a></li> -->
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-            
-            <!-- 알림 모달 -->
+		<!-- 알림 모달 -->
 		<div id="myModal" class="modal2">
 			<!-- 탭 선택 버튼 -->
 			<div class="button-style">
@@ -206,7 +219,7 @@
 			<!-- 활동알림 탭 내용 -->
 			<div id="activityTab" class="tab" style="display: block;">
 				<div class="req_content">
-					<div class="resultContainer" >
+					<div class="resultContainer">
 						<ul id="resultPush"></ul>
 					</div>
 				</div>
@@ -216,27 +229,31 @@
 			<div id="keywordTab" class="tab">
 				<!-- 키워드알림 내용 -->
 			</div>
-			
+
 			<div id="confirm" class="confirm_modal">
-			    <div class="confirm-modal-content">
-			        <p style="font-size: 18px;"> 대화를 시작하세요! </p>
-			        <button id="startChatBtn" style="font-size:18px;"> Go chat </button>
-			        <button id="laterBtn" style="font-size:18px;"> Later </button>
-			    </div>
+				<div class="confirm-modal-content">
+					<p style="font-size: 18px;">대화를 시작하세요!</p>
+					<button id="startChatBtn" style="font-size: 18px;">Go chat
+					</button>
+					<button id="laterBtn" style="font-size: 18px;">Later</button>
+				</div>
 			</div>
 		</div>
 	</header>
 
 
-	<div class="container-fluid h-100" style="background: #f4dc9f;">
-		
-		<div id="backDiv" style="margin-top: 150px !important;">
-			<button id="backBtn" style="border: none; background: none;">
-				<img alt="" src="<c:url value='/resources/images/board/btn-back.png'/>" style="width:30px;">
-			</button>
+
+
+
+	<div class="container-fluid h-100"
+		style="margin-top: 0; font-size: 40px; background: #f4dc9f;">
+		<div style="margin-top:200px;"> 
+			<button id="backBtn" style="background: none; border: none; width:20px; height:auto;">
+				<img alt="" src="<c:url value='/resources/images/board/btn-back0.png'/>" style="width:40px;">	
+			 </button>
 		</div>
 		<div class="row justify-content-center h-100"
-			style="margin-bottom: 200px;">
+			style="margin-bottom: 200px; margin-top: 10px;">
 			<div class="col-md-4 col-xl-3 chat" style="margin-top: 10px;">
 				<div class="card mb-sm-3 mb-md-0 contacts_card"
 					style="overflow-y: scroll;">
@@ -247,9 +264,8 @@
 							<input type="text" placeholder="Search..." name=""
 								class="form-control search" style="width: 235px;">
 							<div class="input-group-prepend">
-								<span class="input-group-text search_btn">
-									<i class="fas fa-search"></i>
-								</span>
+								<span class="input-group-text search_btn"><i
+									class="fas fa-search"></i></span>
 							</div>
 						</div>
 					</div>
@@ -257,15 +273,11 @@
 
 					<!--left 고정-->
 					<c:forEach var="room" items="${roomList}">
-						<div class="card-body contacts_body" style="padding: 0.5px 0 !important; flex:0 !important;">
+						<div class="card-body contacts_body" style="flex: 0 !important;">
 							<ul class="contacts">
 								<li class="active roomList" data-roomId ='${room.room_id}'>
 									<div class="d-flex bd-highlight">
-										<div class="img_cont">
-<%-- 											<c:if test="${room.sender.sname != null}"> --%>
-<%-- 		                            			<img src="<c:url value='/memberProfile/download?email=${sender.email }'/>" alt="" class=""> --%>
-<%-- 		                            		</c:if> --%>
-										</div>
+										<div class="img_cont"></div>
 										<div class="user_info">
 											<span>${room.sender_nickname}</span>
 										</div>
@@ -287,6 +299,9 @@
 			<div class="col-md-8 col-xl-6 right-chat">
 				<div class="card">
 					<div class="card-header msg_head">
+						<!-- right-top header -->
+						<!-- 						<div class="d-flex bd-highlight"> -->
+						<!-- 						</div> -->
 
 						<!-- top - ... 더보기 버튼 -->
 						<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
@@ -314,9 +329,11 @@
 						<div class="input-group">
 							<input type="text" name="message" id="message" class="form-control type_msg" placeholder="Type your message..." />
 							<div class="input-group-append">
-								<button class="input-group-text send_btn" id="messageBtn" style="width: 100px; padding-left:30px; font-size:18px;">
+								<!-- 							<span class="input-group-text send_btn"> -->
+								<button class="input-group-text send_btn" id="messageBtn">
 									send</button>
-								<button class="input-group-text send_btn" id="goGpsBtn" style="width: 100px; padding-left:25px; font-size:18px;"> match</button>
+								<button class="input-group-text send_btn" id="goGpsBtn">
+									match</button>
 							</div>
 						</div>
 					</div>
@@ -327,21 +344,21 @@
 		</div>
 	</div>
 </body>
- <!-- js -->   
-         
-	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
-	<!-- jQuery Easing -->
-	<script src="<c:url value='/resources/js/jquery.easing.1.3.js'/>"></script>
-	<!-- bootstrap -->
-	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-	<!-- Waypoints  -->
-	<script src="<c:url value='/resources/js/jquery.waypoints.min.js'/>"></script>
-	<!-- Stellar Parallax -->
-	<script src="<c:url value='/resources/js/jquery.stellar.min.js'/>"></script>
-	<!-- Counters  -->
-	<script src="<c:url value='/resources/js/jquery.countTo.js'/>"></script>
-	<!-- Main JS (Do not remove)  -->
-	<script src="<c:url value='/resources/js/main.js'/>"></script>
+<!-- js -->
+
+<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+<!-- jQuery Easing -->
+<script src="<c:url value='/resources/js/jquery.easing.1.3.js'/>"></script>
+<!-- bootstrap -->
+<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+<!-- Waypoints  -->
+<script src="<c:url value='/resources/js/jquery.waypoints.min.js'/>"></script>
+<!-- Stellar Parallax -->
+<script src="<c:url value='/resources/js/jquery.stellar.min.js'/>"></script>
+<!-- Counters  -->
+<script src="<c:url value='/resources/js/jquery.countTo.js'/>"></script>
+<!-- Main JS (Do not remove)  -->
+<script src="<c:url value='/resources/js/main.js'/>"></script>
 
 <script>
 
@@ -366,6 +383,7 @@ $(document).ready(function () {
    	$("#headerGoProfile").on("click", () => {
    		location.href='<c:url value="/profile/myInfo"/>' 
    	});
+
    	$("#backBtn").on("click", () => {
    		location.href='<c:url value="/"/>' 
    	});
@@ -388,6 +406,9 @@ $(document).ready(function () {
         dataType: "JSON",
         data: JSON.stringify(chatRoomData)
     }).done(requestList => { 
+    	
+
+    	
       // 받은 requestList를 for문을 사용하여 처리하고 append로 추가
       for (var i = 0; i < requestList.requestList.length; i++) {
     		var resultPush = $("#resultPush"); //ul_list선언
@@ -429,6 +450,7 @@ $(document).ready(function () {
     
     function createChatRoom (sender) {
     
+    	
     	const roomInfo = {
     			receiver: receiver,
     			sender: sender
@@ -497,6 +519,9 @@ $(document).ready(function () {
 		
 		
 /* ************************************************* */		
+		
+
+	
 
 
 	/************ mqtt **********/ 
@@ -504,7 +529,7 @@ $(document).ready(function () {
 	//MQTT info host, port, topic 을 설정.
 	const mqtt_host = "www.dondog.site";
 	const mqtt_port = 8883;
-	const mqtt_topic = "/mqtt/sub/" 
+	const mqtt_topic = "/test/sub/#" 
 
 	const options = {
 		protocol : 'wss',
@@ -534,17 +559,8 @@ $(document).ready(function () {
 
 	// 구독 메시지 수신 
 	mqttClient.on('message', function (topic, message) {
-// 	    console.log("mqtt message receive :", message.toString())
-// 	    recvMessage(JSON.parse(message.toString()))
-
-	   const parsedMessage = JSON.parse(message.toString());
-	  
-	  	if (parsedMessage.message !== "" && parsedMessage.message !== null && parsedMessage.message !== undefined) {
-	        console.log("mqtt message receive :", message.toString());
-	        recvMessage( JSON.parse(message.toString()));
-	    } else {
-	    	console.log("빈 메시지는 출력안됨")
-	    }
+	    console.log("mqtt message receive :", message.toString())
+	    recvMessage(JSON.parse(message.toString()))
 	});
 
 	$("#message").on("keydown", e => {
@@ -563,10 +579,11 @@ $(document).ready(function () {
 		  mqttClient.subscribe(mqtt_topic, err => {
 			  console.log("Subscribe to a topic 생성");
 			  if (!err) {
-				console.log("error", err);
+				  console.log("error", err);
 	      } 
 	    })
 	}
+	
 	
 	
 	const sender = "${principal.getUsername()}"; 
@@ -583,7 +600,14 @@ $(document).ready(function () {
 		
 	    const setTime =  hours + ":" + minutes; 
 		
-// 		console.log("dasdadasd"+currentRoomId);
+	    $('.msg_container_list').append(
+				"<div class='msg_container_send_me'>" + message + "</div>"
+				+"<div class='msg_time_send_me'>"+setTime+"</div>"
+			);
+
+		$(".msg_container_send_me").scrollTop();
+	
+			console.log("dasdadasd"+currentRoomId);
 		// ajax처리
 		$.ajax({ 
 			type: "POST",
@@ -596,11 +620,7 @@ $(document).ready(function () {
 				,message: message
 			}),
 			success: function (result) {
-				if (result.result===0) {
-					alert("메시지를 입력해 주세요,");
-				} else{
-					console.log('메시지 전송-> db 저장');
-				}
+				console.log('메시지 전송-> db 저장');
 			}
 		}) 
 	};
@@ -608,15 +628,17 @@ $(document).ready(function () {
 	
 
 	const recvMessage = recv =>  {
-		
+		console.log(loggedInUser);
 		const sender = recv.sender;
 		let today = new Date();   
 		let hours = today.getHours(); //시
 		let minutes = today.getMinutes(); //분
 		
 		const setTime =  hours + ":" + minutes; 
-	}
 	
+		
+		
+	}
 	
 	/***************************************************************/
 	
@@ -687,6 +709,7 @@ function click_li(currentRoomId) {
 									 "<div class='msg_container_send_you'>" +  message.message + "</div>"
 									+ "<div class='msg_time_send_you' >"+setTime+"</div>"
 							);
+// 							
 						}
 				}
 			}
@@ -698,6 +721,9 @@ function click_li(currentRoomId) {
 
 		
 		
+// 	}
+		
+
 
 </script>
 
