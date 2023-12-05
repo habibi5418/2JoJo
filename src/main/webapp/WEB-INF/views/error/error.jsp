@@ -78,10 +78,9 @@ button:hover{
 		<div class="error"> ERROR </div>
 		<div class="btn" style=" margin-bottom: -25%;">
 			<button id="goHome" class="btn" onclick="location.href=' <c:url value='/' />';"> main. </button>
-		
 		</div>
 		<div class="img">
-			<img alt="" src="<c:url value='/resources/images/error/error.png'/>" style=" margin-left: -40%; margin-top: 20px;">	
+			<img alt="" src="<c:url value='/resources/images/error/error0.png'/>" style=" margin-left: -40%; margin-top: 20px;">	
 		</div>
 		<div class="footer" style="padding: 0; width: 2000px; background: #a88057; height: 300px; margin-left: -100px; margin-top: -10px; ">
 		
