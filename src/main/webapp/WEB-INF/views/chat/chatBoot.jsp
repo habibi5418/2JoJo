@@ -228,7 +228,7 @@
 	</header>
 
 
-	<div class="container-fluid h-100" style="background: #f4dc9f;">
+	<div class="container-fluid h-100" style="background: #f5e5a7;">
 		
 		<div id="backDiv" style="margin-top: 150px !important;">
 			<button id="backBtn" style="border: none; background: none;">
@@ -498,13 +498,27 @@ $(document).ready(function () {
 		
 /* ************************************************* */		
 
-
+    var currentRoomId; 
+	
+	
+    $('.roomList').on('click', function(e){
+    	currentRoomId = $(e.target).closest('li').data('roomid');
+    	click_li(currentRoomId);
+    	
+	// 클릭을 할때섭스크라이브
+    		
+	
+		console.log("ㅇㅇ"+currentRoomId);
+    });
+    
+    
+    
 	/************ mqtt **********/ 
 
 	//MQTT info host, port, topic 을 설정.
 	const mqtt_host = "www.dondog.site";
 	const mqtt_port = 8883;
-	const mqtt_topic = "/mqtt/sub/" 
+	let mqtt_topic = "/mqtt/sub/";
 
 	const options = {
 		protocol : 'wss',
@@ -516,8 +530,11 @@ $(document).ready(function () {
 	}
 
 	console.log('Connecting mqtt client ');
+	
 	console.log('mqtt_topic -> ', mqtt_topic);
-	  
+	
+	
+	
 	const mqttClient = mqtt.connect(options);
 	console.log('mqttClient -> ', mqttClient);
 
@@ -528,15 +545,14 @@ $(document).ready(function () {
 
 	mqttClient.on('connect', () => {
 		  console.log('Connected')
-	  //구독 메시지 등록 : 메시지 수신 이벤트 핸들러 등록
-	  subscribe();
+
 	});
 
 	// 구독 메시지 수신 
 	mqttClient.on('message', function (topic, message) {
 // 	    console.log("mqtt message receive :", message.toString())
 // 	    recvMessage(JSON.parse(message.toString()))
-
+		
 	   const parsedMessage = JSON.parse(message.toString());
 	  
 	  	if (parsedMessage.message !== "" && parsedMessage.message !== null && parsedMessage.message !== undefined) {
@@ -545,6 +561,10 @@ $(document).ready(function () {
 	    } else {
 	    	console.log("빈 메시지는 출력안됨")
 	    }
+	  	
+	  	
+	  	
+	  	
 	});
 
 	$("#message").on("keydown", e => {
@@ -557,11 +577,16 @@ $(document).ready(function () {
 		sendMessage();
 	});	
 
+	
+	
 	//메시지 수신 이벤트 핸들러 등록
 	//구독을 등록한다
 	const subscribe = () => {
 		  mqttClient.subscribe(mqtt_topic, err => {
 			  console.log("Subscribe to a topic 생성");
+			  
+			  console.log(mqtt_topic);
+			  
 			  if (!err) {
 				console.log("error", err);
 	      } 
@@ -615,6 +640,24 @@ $(document).ready(function () {
 		let minutes = today.getMinutes(); //분
 		
 		const setTime =  hours + ":" + minutes; 
+
+		console.log('recv'+recv.message);
+		
+		if (loggedInUser === sender) {	
+			$(".msg_container_list").append(
+					 "<div class='msg_container_send_me'>" +  recv.message + "</div>"
+			+ "<div class='msg_time_send_me' >"+setTime+"</div>"
+			);
+		} else{
+			$(".msg_container_list").append(
+					 "<div class='msg_container_send_you'>" +  recv.message + "</div>"
+			+ "<div class='msg_time_send_you' >"+setTime+"</div>"
+			);
+		}
+		
+		
+		// append 
+		
 	}
 	
 	
@@ -631,22 +674,29 @@ $(document).ready(function () {
 	var loggedInUser = "${principal.username}";
 	var cardFooter = $('.card-footer');
 	
-    var currentRoomId; 
+//     var currentRoomId; 
 	
 	
-    $('.roomList').on('click', function(e){
-    	currentRoomId = $(e.target).closest('li').data('roomid');
-    	click_li(currentRoomId);
-    	//console.log(currentRoomId);
-    });
+//     $('.roomList').on('click', function(e){
+//     	currentRoomId = $(e.target).closest('li').data('roomid');
+//     	click_li(currentRoomId);
+//     	//console.log(currentRoomId);
+//     });
     
     
      
     
     
 function click_li(currentRoomId) {
-
+	
 	getMessageList.text('');
+
+	mqtt_topic = "/mqtt/sub/" +currentRoomId;
+	console.log("토픽 확인"+mqtt_topic);
+	
+	//구독 메시지 등록 : 메시지 수신 이벤트 핸들러 등록
+	subscribe();
+	
 	
 	// 산책 페이지로 이동 클릭이벤트
 	$("#goGpsBtn").on("click", () =>{
