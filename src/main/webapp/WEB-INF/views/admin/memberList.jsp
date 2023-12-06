@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 <style>
  .loading-overlay { 
-/*  	position: fixed;    */
-/*   	top: 0;    */
-/*   	left: 0;    */
-/*   	width: 100%;    */
-/*   	height: 100%;    */
-/*   	background: rgba(255, 255, 255, 0.7);    */
-/*   	display: flex;    */
-/*   	justify-content: center;    */
-/*   	align-items: center;    */
-/*   	z-index: 9999;    */
+   	position: fixed;    
+   	top: 0;    
+   	left: 0;    
+   	width: 100%;    
+   	height: 100%;    
+   	background: rgba(255, 255, 255, 0.7);    
+   	display: flex;    
+   	justify-content: center;    
+   	align-items: center;    
+   	z-index: 9999;    
   }
 </style>
 <meta charset="utf-8">
@@ -106,39 +107,40 @@
 			<div class="sidebar-heading">Interface</div>
 
 			<!-- 회원 데이터 관련 -->
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="memberData" data-toggle="collapse" data-target="#collapseTwo"
-				aria-expanded="true" aria-controls="collapseTwo"> <i
-					class="fas fa-fw fa-cog"></i> <span>회원관리</span>
-			</a>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-					data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Members:</h6>
-						<a class="collapse-item" href="memberData">memberData</a> <a
-							class="collapse-item" href="/admin/memberList">memberList</a>
-						<!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
-					</div>
-				</div></li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="memberData" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>회원</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Members:</h6>
+                        <a class="collapse-item" href="/admin/memberList">회원관리</a> <!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
+                        <a class="collapse-item" href="memberData">블랙회원</a>
+                        <a class="collapse-item" href="memberData">문의확인</a>
+                    </div>
+                </div>
+            </li>
 
 			<!-- 산책 데이터 관련 -->
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="locationData" data-toggle="collapse"
-				data-target="#collapseUtilities" aria-expanded="true"
-				aria-controls="collapseUtilities"> <i
-					class="fas fa-fw fa-wrench"></i> <span>산책</span>
-			</a>
-				<div id="collapseUtilities" class="collapse"
-					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Utilities:</h6>
-						<a class="collapse-item" href="locationData">locationData</a> <a
-							class="collapse-item" href="#">locationData2</a>
-						<!-- 위치 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
-					</div>
-				</div></li>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="locationData" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>게시글</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">board:</h6>
+                        <a class="collapse-item" href="locationData">게시판관리</a> 
+                        <a class="collapse-item" href="#">위치데이터관리</a><!-- 위치 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
+                    </div>
+                </div>
+            </li>
 
 
 			<!-- 일단 사용하지 않을것 같은 부분 -->
@@ -409,8 +411,8 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">DonDog Tables</h1>
-					<p class="mb-4">DonDog</p>
+					<h1 class="h3 mb-2 text-gray-800">전체회원</h1>
+<!-- 					<p class="mb-4">DonDog</p> -->
 
                    <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -439,7 +441,7 @@
                                 <table class="table table-bordered" id="memberTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th><input type="checkbox" id="check" name="selectedMember"	value="{email}" onclick="selectAllRows()"></th>
+                                            <th></th>
 											<th>아이디</th>
 											<th>이름</th>
 											<th>주소</th>
@@ -456,7 +458,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th><input type="checkbox" id="check" name="selectedMember"	value="{email}" onclick="selectAllRows()"></th>
+                                            <th></th>
                                             <th>아이디</th>
 											<th>이름</th>
 											<th>주소</th>
@@ -471,49 +473,49 @@
 											<th>탈퇴회원</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
-									  <c:forEach var="memberVO" items="${memberList}">
-										<tr>
-											<td><input type="checkbox" id="selectedMembers" name="selectedMembers" value="${memberVO.email}"></td>
-											<td>${memberVO.email}</td>
-											<td>${memberVO.mname}</td>
-											<td>${memberVO.address}</td>
-											<td>${memberVO.birth}</td>
-											<td>${memberVO.gender}</td>
-											<td>${memberVO.grade}</td>
-											<td>${memberVO.joinDate}</td>
-											<td>${memberVO.recentLog}</td>
-											<td>
-								                <select class="editable" onchange="updateCell(this, 'REPORTS', '${memberVO.email}')">
-								                    <c:forEach items="${reportsOptions}" var="option">
-								                        <option value="${option}" ${memberVO.reports eq option ? 'selected' : ''}>${option}</option>
-								                    </c:forEach>
-								                </select>
-								            </td>
-								            <td>
-								                <select class="editable" onchange="updateCell(this, 'BLACK', '${memberVO.email}')">
-								                    <c:forEach items="${blackOptions}" var="option">
-								                        <option value="${option}" ${memberVO.black eq option ? 'selected' : ''}>${option}</option>
-								                    </c:forEach>
-								                </select>
-								            </td>
-								            <td>
-								                <select class="editable" onchange="updateCell(this, 'ACCOUNT_LOCKEDS', '${memberVO.email}')">
-								                    <c:forEach items="${accountLockedOptions}" var="option">
-								                        <option value="${option}" ${memberVO.accountLocked eq option ? 'selected' : ''}>${option}</option>
-								                    </c:forEach>
-								                </select>
-								            </td>
-								            <td>
-								                <select class="editable" onchange="updateCell(this, 'CANCELS', '${memberVO.email}')">
-								                    <c:forEach items="${cancelsOptions}" var="option">
-								                        <option value="${option}" ${memberVO.cancels eq option ? 'selected' : ''}>${option}</option>
-								                    </c:forEach>
-								                </select>
-								            </td>
-										</tr>
-									</c:forEach>
-                                    </tbody>
+<!--                                     <tbody> -->
+<%-- 									  <c:forEach var="memberVO" items="${memberList}"  varStatus="loop"> --%>
+<!-- 										<tr> -->
+<%-- 											<td><c:out value="${loop.count}" /></td> --%>
+<%-- 											<td>${memberVO.email}</td> --%>
+<%-- 											<td>${memberVO.mname}</td> --%>
+<%-- 											<td>${memberVO.address}</td> --%>
+<%-- 											<td>${memberVO.birth}</td> --%>
+<%-- 											<td>${memberVO.gender}</td> --%>
+<%-- 											<td>${memberVO.grade}</td> --%>
+<%-- 											<td>${memberVO.joinDate}</td> --%>
+<%-- 											<td>${memberVO.recentLog}</td> --%>
+<!-- 											<td> -->
+<%-- 								                <select class="editable" onchange="updateCell(this, 'REPORTS', '${memberVO.email}')"> --%>
+<%-- 								                    <c:forEach items="${reportsOptions}" var="option"> --%>
+<%-- 								                        <option value="${option}" ${memberVO.reports eq option ? 'selected' : ''}>${option}</option> --%>
+<%-- 								                    </c:forEach> --%>
+<!-- 								                </select> -->
+<!-- 								            </td> -->
+<!-- 								            <td> -->
+<%-- 								                <select class="editable" onchange="updateCell(this, 'BLACK', '${memberVO.email}')"> --%>
+<%-- 								                    <c:forEach items="${blackOptions}" var="option"> --%>
+<%-- 								                        <option value="${option}" ${memberVO.black eq option ? 'selected' : ''}>${option}</option> --%>
+<%-- 								                    </c:forEach> --%>
+<!-- 								                </select> -->
+<!-- 								            </td> -->
+<!-- 								            <td> -->
+<%-- 								                <select class="editable" onchange="updateCell(this, 'ACCOUNT_LOCKEDS', '${memberVO.email}')"> --%>
+<%-- 								                    <c:forEach items="${accountLockedOptions}" var="option"> --%>
+<%-- 								                        <option value="${option}" ${memberVO.accountLocked eq option ? 'selected' : ''}>${option}</option> --%>
+<%-- 								                    </c:forEach> --%>
+<!-- 								                </select> -->
+<!-- 								            </td> -->
+<!-- 								            <td> -->
+<%-- 								                <select class="editable" onchange="updateCell(this, 'CANCELS', '${memberVO.email}')"> --%>
+<%-- 								                    <c:forEach items="${cancelsOptions}" var="option"> --%>
+<%-- 								                        <option value="${option}" ${memberVO.cancels eq option ? 'selected' : ''}>${option}</option> --%>
+<%-- 								                    </c:forEach> --%>
+<!-- 								                </select> -->
+<!-- 								            </td> -->
+<!-- 										</tr> -->
+<%-- 									</c:forEach> --%>
+<!--                                     </tbody> -->
                                 </table>
                             </div>
                         </div>
@@ -591,59 +593,72 @@
 	<script type="text/javascript">
 	
 	/* =============로딩중====================  */
-// 	function hideLoadingMessage() {
-// 	    document.getElementById("loadingOverlay").style.display = "none";
-// 	}
+	function hideLoadingMessage() {
+	    document.getElementById("loadingOverlay").style.display = "none";
+	}
 	
-// 	function showPage() {
-// 		  document.getElementById("loader").style.display = "none";
-// 		  document.getElementById("myDiv").style.display = "block";
-// 		}
+	function showPage() {
+		  document.getElementById("loader").style.display = "none";
+		  document.getElementById("myDiv").style.display = "block";
+		}
 	/*==============로딩중 끝================  */
 	
-		jQuery(function($){
-	        $("#memberTable").DataTable();
-// 	        hideLoadingMessage(); // 로딩 메시지 숨기기
-	    });
-		
+// 		jQuery(function($){
+// 	        $("#memberTable").DataTable();
+//  	        hideLoadingMessage(); // 로딩 메시지 숨기기
+// 	    });
+// jQuery(function($) {
+//     $("#memberTable").DataTable({
+//     	   language: {
+//     	        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ko.json',
+//     	    },
+//     });
+//     hideLoadingMessage(); // 로딩 메시지 숨기기
+// });
 	
-	
-// 	$("#memberTable").DataTable({
-// 	    language: {
-// 	        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ko.json',
-// 	    },
-// 	    "processing": true,
-// 	    "serverSide": true,
-	    
-// 	    "pagingType": "full_numbers",
-// 	    "searching": true,
-// 	    "ajax": {
-// 	        "url": "/admin/listJSON", // Thymeleaf 표현식을 사용하지 않고 경로 직접 명시
-// 	        "type": "POST",
-// 	    },
-// 	    "select":  {style: 'single'},
-// 	    "columnDefs": [{
-// 	        "targets": [9, 10, 11, 12], // 해당하는 컬럼 번호에 따라 조절
-// 	        "render": function (data, type, row, meta) {
-// 	            let html = '<select class="updateSelect" data-email="' + row[1] + '" data-field="' + meta.col + '">';
-	
-// 	            // 서버에서 전달된 JSON 데이터를 사용
-// 	            let reportsOptions = [0, 1, 2, 3, 4, 5]; // 서버에서 전달된 값으로 변경
-	            
-// 	            for (let i = 0; i < reportsOptions.length; i++) {
-// 	                if (data == reportsOptions[i]) {
-// 	                    html += '<option value="' + reportsOptions[i] + '" selected>' + reportsOptions[i] + '</option>';
-// 	                } else {
-// 	                    html += '<option value="' + reportsOptions[i] + '">' + reportsOptions[i] + '</option>';
-// 	                }
-// 	            }
-	            
-// 	            html += '</select>';
-// 	            return html;
-// 	        }
-// 	    }]
-// 	});
-		
+	//서버사이드 ( 부분페이지 구현 )
+$("#memberTable").DataTable({
+		   language: {
+   	        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ko.json',
+   	    },
+    "processing": true,
+    "serverSide": true,
+    "pagingType": "full_numbers",
+    "searching": true,
+    "ajax": {
+        "url": "/admin/listJSON",
+        "type": "POST",
+    },
+    "select": {style: 'single'},
+    "columnDefs": [{
+        "targets": [9, 10, 11, 12],
+        "render": function (data, type, row, meta) {
+            let html = '<select class="updateSelect" data-email="' + row[1] + '" data-field="' + meta.col + '">';
+            let optionsArray;
+
+            if (meta.col === 10) {
+                optionsArray = ['N', 'Y'];
+            } else if (meta.col === 11 || meta.col === 12) {
+                optionsArray = ['N', 'Y'];
+            } else {
+                optionsArray = [0, 1, 2, 3, 4, 5];
+            }
+
+            for (let i = 0; i < optionsArray.length; i++) {
+                if (data == optionsArray[i]) {
+                    html += '<option value="' + optionsArray[i] + '" selected>' + optionsArray[i] + '</option>';
+                } else {
+                    html += '<option value="' + optionsArray[i] + '">' + optionsArray[i] + '</option>';
+                }
+            }
+
+            hideLoadingMessage();
+            html += '</select>';
+            return html;
+        }
+    }]
+});		
+
 // 	// DataTable 초기화 후 호출되는 이벤트
 // 	$memberTable.on('init.dt', function () {
 // 	    hideLoadingMessage(); // 로딩 메시지 숨기기
@@ -683,16 +698,16 @@
 	    updateCell(this);
 	});
 
-	// 체크박스 전체선택
-	function selectAllRows() {
-	    var selectAllCheckbox = document.getElementById('check');
-	    if (selectAllCheckbox) {
-	        var checkboxes = document.getElementsByName('selectedMembers');
-	        for (var i = 0; i < checkboxes.length; i++) {
-	            checkboxes[i].checked = selectAllCheckbox.checked;
-	        }
-	    }
-	}
+// 	// 체크박스 전체선택
+// 	function selectAllRows() {
+// 	    var selectAllCheckbox = document.getElementById('check');
+// 	    if (selectAllCheckbox) {
+// 	        var checkboxes = document.getElementsByName('selectedMembers');
+// 	        for (var i = 0; i < checkboxes.length; i++) {
+// 	            checkboxes[i].checked = selectAllCheckbox.checked;
+// 	        }
+// 	    }
+// 	}
 	
 		
 	

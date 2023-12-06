@@ -93,7 +93,7 @@ public class AdminService {
 		return adminDAO.reportCountInc();
 	}
 
-	// 
+	// 휴먼계정조회
 	public List<MemberVO> sleepMember() {
 		System.out.println("AdminService.sleepMember");
 		return adminDAO.sleepMember();
