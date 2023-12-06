@@ -14,7 +14,7 @@
 @media screen and (min-width: 769px) {
 	.login{
 	margin : 20% auto 0 auto;
-	width: 20%;
+	width: 22%;
 	}
 }
 
@@ -27,8 +27,9 @@
 
 @media screen and (max-width: 480px) {
 	.login{
+	font-size:10px;
 	margin : 20% auto 0 auto;
-	width: 80%;
+	width: 75%;
 	}
 }
 
@@ -267,7 +268,6 @@ font-size : 10px;
             if (currentURL.includes(searchString)) {
                 // Get the element where you want to display the message
                 var messageElement = document.getElementById('errorMessage');
-
                 // Set the error message text
                 messageElement.innerText = '아이디 또는 비밀번호를 확인해주세요\n5번이상 오류시 계정이 비활성화됩니다(1/5) ';
             }

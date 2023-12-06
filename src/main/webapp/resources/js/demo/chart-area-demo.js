@@ -103,7 +103,7 @@ var maxDataLength = 6;
 function updateDataAndChart() {
     // 현재 시간을 labels3에 추가
     var currentDate = new Date();
-    var currentDateTimeString = currentDate.toISOString().slice(0, 19).replace("T", " ");
+    var currentDateTimeString = currentDate.toLocaleString(); // 로컬 시간으로 변환
     labels3.push(currentDateTimeString);
 
     // 내 데이터에서 이용자 수 가져오기
@@ -114,6 +114,21 @@ function updateDataAndChart() {
 }
 
 
+//임의로 데이터 넣기
+//function getTotalWalkCnt() {
+//    // 랜덤한 값을 data3 배열에 추가
+//    var randomWalkCnt = Math.floor(Math.random() * (2000 - 500 + 1)) + 500;
+//    data3.push(randomWalkCnt);
+//
+//    // 데이터 길이가 최대 길이보다 크면 맨 앞 데이터 삭제
+//    if (data3.length > maxDataLength) {
+//        labels3.shift();
+//        data3.shift();
+//    }
+//    
+//    updateChart3(labels3, data3);
+//}
+//updateDataAndChart();
 function getTotalWalkCnt() {
     fetch(getTotalWalkCntUrl, {
        method: "GET",

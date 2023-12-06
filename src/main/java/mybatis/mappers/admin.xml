@@ -50,14 +50,16 @@
 	</select>
 
 	
-	<!-- 누적 신고 횟수로 블랙회원 만들기  -->	
+	<!-- 꼬숩도확인 후  블랙회원 만들기  -->	
 	<update id="reportCountInc">
+	<![CDATA[
 	    update dondog_member set 
 	        black = CASE
-	            WHEN reports >= 5 THEN 'Y'
+	            WHEN manner <= 20 THEN 'Y'
 	            ELSE 'N'
 	        END
 	    where email = #{email} 
+	    ]]>
 	</update>
 		
 	
@@ -84,7 +86,7 @@
 	        ROLES,
 	        BLACK
 	    from dondog_member
-	    order by JOIN_DATE DESC
+	    order by EMAIL asc
 	</select>
 	
 	
@@ -113,7 +115,7 @@
 	    <choose>
 		   <!-- 필드가 'REPORTS'인 경우 -->
 	        <when test="field != null and field.equals('REPORTS')">
-	            REPORTS = #{value}
+	            manner = #{value}
 	        </when>
 	        <!-- 필드가 'BLACK'인 경우 -->
 	        <when test="field != null and field.equals('BLACK')">

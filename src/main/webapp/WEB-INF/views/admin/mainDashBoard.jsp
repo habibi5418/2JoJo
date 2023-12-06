@@ -72,13 +72,14 @@
                 <a class="nav-link collapsed" href="memberData" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>회원관리</span>
+                    <span>회원</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Members:</h6>
-                        <a class="collapse-item" href="memberData">memberData</a>
-                        <a class="collapse-item" href="/admin/memberList">memberList</a> <!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
+                        <a class="collapse-item" href="/admin/memberList">회원관리</a> <!-- 회원 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
+                        <a class="collapse-item" href="memberData">블랙회원</a>
+                        <a class="collapse-item" href="memberData">문의확인</a>
                     </div>
                 </div>
             </li>
@@ -89,14 +90,14 @@
                 <a class="nav-link collapsed" href="locationData" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>산책</span>
+                    <span>게시글</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="locationData">locationData</a> 
-                        <a class="collapse-item" href="#">locationData2</a><!-- 위치 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
+                        <h6 class="collapse-header">boars:</h6>
+                        <a class="collapse-item" href="locationData">게시판관리</a> 
+                        <a class="collapse-item" href="#">위치데이터관리</a><!-- 위치 데이터 파트 나뉘는 부분 탭으로 처리하거나 페이지 추가  -->
                     </div>
                 </div>
             </li>
@@ -335,9 +336,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">조철민</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">조수진</span>
                                 <img class="img-profile rounded-circle"
-                                    src="<c:url value='/resources/img/undraw_profile.svg'/>">
+                                    src="<c:url value='/resources/img/tnwls.png'/>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

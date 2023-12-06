@@ -50,6 +50,7 @@ public interface AdminDAO {
 
 	
 //	======================== 페이징 기타 등등 ==================================
+	     
 	List<MemberVO> searchMemberList(SearchVO searchVO);
 
 	int getSearchMemberTotalCount(SearchVO searchVO);

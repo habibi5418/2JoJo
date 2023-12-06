@@ -44,7 +44,7 @@ private static final long serialVersionUID = 1L;
    private String cancels; 			 // 탈퇴여부
    private String roles; 			 // 회원, 관리자 구분 user, admin 으로 구분
    private String black; 			 // 정지회원
-   private int manner;
+   private int manner;				// 꼬숩도
 
    // 프로필 사진
    private String fname;		// 사용자가 올린 원본 파일명 

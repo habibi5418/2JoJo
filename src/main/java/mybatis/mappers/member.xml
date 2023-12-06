@@ -20,13 +20,14 @@
 <!--     </select> -->
     
 
-
+	<!-- 최근접속일 확인 -->
 	<update id="updateMemberLastLogin" >
 		update dondog_member set 
 			recent_log = sysdate+(9/24)
 		where email = #{email}  
 	</update>
 	
+	<!--이메일 로그인  -->
 	<select id="findByEmail" resultType="Member">
 		select 
 			*
@@ -34,6 +35,7 @@
 		where email = #{email} 
 	</select> 
    
+   <!-- 회원가입 -->
    	<insert id="insert" >
 		insert into dondog_member (
 			email, pwd
@@ -42,6 +44,7 @@
 		) 
 	</insert>
 	
+	<!-- 로그인 오류시 올려주고 비활성화 -->
 	<update id="loginCountInc">
 		update dondog_member set 
 			login_count = login_count + 1
@@ -56,7 +59,7 @@
 		where email = #{email} 
 	</update> 
 
-	 
+	 <!-- 로그인 성공시 오류횟수 초기화 -->
 	<update id="loginCountClear">
 		update dondog_member set 
 			 login_count = 0 
@@ -64,6 +67,7 @@
 		where email = #{email} 
 	</update> 
    
+   <!-- 카카오 회원가입  -->
     <insert id="insertMember" >
     insert into dondog_member (
        email
@@ -75,6 +79,7 @@
       ,#{oauth}
     ) 
   </insert>
+   
    
     <update id="updateMember" >
     update dondog_member set 
